@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -20,8 +21,8 @@ class MainPage extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                //SvgPicture.asset('asset/images/vector.svg'),
-                //SizedBox(width: 12),
+                SvgPicture.asset('asset/images/vector_1.svg'),
+                SizedBox(width: 12),
                 Container(
                   child: Text(
                     'DIMIPAY',
@@ -180,7 +181,8 @@ class MainPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 12),
-                  //SvgPicture.asset('assets/images/vector25.svg',semanticsLabel: 'vector25'),
+                  SvgPicture.asset('asset/images/vector_2.svg',
+                      semanticsLabel: 'vector_2'),
                 ],
               ),
             ),
