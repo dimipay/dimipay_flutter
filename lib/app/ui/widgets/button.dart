@@ -92,3 +92,32 @@ class DPMediumTextButton extends StatelessWidget {
     );
   }
 }
+
+class DPSmallButton extends StatelessWidget {
+  final Widget child;
+  final double? width;
+  const DPSmallButton({Key? key, required this.child, this.width}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DPBaseButton(
+      child: child,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      width: width,
+    );
+  }
+}
+
+class DPSmallTextButton extends StatelessWidget {
+  final String text;
+  final double? width;
+  const DPSmallTextButton({Key? key, required this.text, this.width}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DPSmallButton(
+      child: Text(text, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+      width: width,
+    );
+  }
+}
