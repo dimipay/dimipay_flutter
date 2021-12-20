@@ -8,6 +8,7 @@ void main() {
       initialRoute: Routes.INITIAL,
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: 'Pretendard'),
     ),
   );
 }
