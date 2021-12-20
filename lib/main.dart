@@ -1,5 +1,6 @@
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -8,7 +9,10 @@ void main() {
       initialRoute: Routes.INITIAL,
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Pretendard'),
+      theme: ThemeData(
+        fontFamily: 'Pretendard',
+        appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
+      ),
     ),
   );
 }
