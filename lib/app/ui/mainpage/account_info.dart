@@ -37,7 +37,7 @@ class AccountInfoPage extends StatelessWidget {
                         ),
                         Text(
                           "결제수단",
-                          style: TextStyle(color: MainColor, fontSize: 16),
+                          style: TextStyle(color: mainColor, fontSize: 16),
                         )
                       ],
                     )),
@@ -56,7 +56,7 @@ class AccountInfoPage extends StatelessWidget {
                         ),
                         Text(
                           "문의",
-                          style: TextStyle(color: MainColor, fontSize: 16),
+                          style: TextStyle(color: mainColor, fontSize: 16),
                         )
                       ],
                     )),
@@ -189,13 +189,19 @@ class PayLog extends StatelessWidget {
                   Container(
                     width: 175,
                     height: 44,
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(log![index][0], style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      Text("${log![index][2]}원", style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal)),
-                    ]),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(log![index][0],
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w600)),
+                          SizedBox(
+                            height: 4,
+                          ),
+                          Text("${log![index][2]}원",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.normal)),
+                        ]),
                   ),
                   SizedBox(
                     width: 81,
