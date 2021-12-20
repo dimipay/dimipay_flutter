@@ -24,7 +24,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Route")),
-      body: Column(
+      body: ListView(
         children: [
           TextButton(
               onPressed: () {
