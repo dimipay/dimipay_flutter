@@ -1,4 +1,4 @@
-import 'package:dimipay/app/ui/UiAsset.dart';
+import 'package:dimipay/app/ui/ui_asset.dart';
 import 'package:dimipay/app/ui/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -189,19 +189,13 @@ class PayLog extends StatelessWidget {
                   Container(
                     width: 175,
                     height: 44,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(log![index][0],
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600)),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Text("${log![index][2]}원",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.normal)),
-                        ]),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(log![index][0], style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Text("${log![index][2]}원", style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal)),
+                    ]),
                   ),
                   SizedBox(
                     width: 81,
