@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
-  runApp(GetMaterialApp(
-    initialRoute: Routes.INITIAL,
-    getPages: AppPages.pages,
-  ));
+  runApp(
+    GetMaterialApp(
+      initialRoute: Routes.INITIAL,
+      getPages: AppPages.pages,
+      debugShowCheckedModeBanner: false,
+    ),
+  );
 }
 
 class Home extends StatelessWidget {
@@ -22,7 +25,7 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Get.toNamed(Routes.MAINPAGE);
               },
-              child: Text("MAINPAGE"))
+              child: const Text("MAINPAGE"))
         ],
       ),
     );
