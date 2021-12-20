@@ -161,7 +161,7 @@ class PaymentsContainer extends StatelessWidget {
           const SizedBox(height: 24),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 24),
-            child: DPLargeButton(text: '결제 시작하기', width: double.infinity),
+            child: DPLargeTextButton(text: '결제 시작하기', width: double.infinity),
           ),
         ],
       ),

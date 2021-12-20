@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class DPLargeButton extends StatelessWidget {
-  final String text;
+class DPBaseButton extends StatelessWidget {
+  final Widget child;
   final double? width;
-  const DPLargeButton({Key? key, required this.text, this.width}) : super(key: key);
+  final EdgeInsets padding;
+  const DPBaseButton({Key? key, required this.child, required this.padding, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +21,74 @@ class DPLargeButton extends StatelessWidget {
             onTap: () {},
             child: Container(
               width: width,
-              padding: const EdgeInsets.all(24),
+              padding: padding,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(text, style: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w600)),
-                ],
+                children: [child],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class DPLargeButton extends StatelessWidget {
+  final Widget child;
+  final double? width;
+  const DPLargeButton({Key? key, required this.child, this.width}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DPBaseButton(
+      child: child,
+      padding: const EdgeInsets.all(24),
+      width: width,
+    );
+  }
+}
+
+class DPLargeTextButton extends StatelessWidget {
+  final String text;
+  final double? width;
+  const DPLargeTextButton({Key? key, required this.text, this.width}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DPLargeButton(
+      child: Text(text, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+      width: width,
+    );
+  }
+}
+
+class DPMediumButton extends StatelessWidget {
+  final Widget child;
+  final double? width;
+  const DPMediumButton({Key? key, required this.child, this.width}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DPBaseButton(
+      child: child,
+      padding: const EdgeInsets.all(16),
+      width: width,
+    );
+  }
+}
+
+class DPMediumTextButton extends StatelessWidget {
+  final String text;
+  final double? width;
+  const DPMediumTextButton({Key? key, required this.text, this.width}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DPMediumButton(
+      child: Text(text, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+      width: width,
     );
   }
 }
