@@ -11,7 +11,12 @@ void main() {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Pretendard',
-        appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
+        appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          foregroundColor: Colors.black,
+        ),
       ),
     ),
   );
@@ -24,18 +29,26 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Route")),
-      body: Column(
+      body: ListView(
         children: [
           TextButton(
-              onPressed: () {
-                Get.toNamed(Routes.MAINPAGE);
-              },
-              child: const Text("MAINPAGE")),
+            onPressed: () {
+              Get.toNamed(Routes.MAINPAGE);
+            },
+            child: const Text("MAINPAGE"),
+          ),
           TextButton(
-              onPressed: () {
-                Get.toNamed(Routes.ACCOUNTINFO);
-              },
-              child: const Text("ACCOUNTINFO"))
+            onPressed: () {
+              Get.toNamed(Routes.ACCOUNTINFO);
+            },
+            child: const Text("ACCOUNTINFO"),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.ADDPAYMENT);
+            },
+            child: const Text("ADDPAYMENT"),
+          ),
         ],
       ),
     );
