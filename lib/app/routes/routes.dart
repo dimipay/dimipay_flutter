@@ -1,5 +1,5 @@
 import 'package:dimipay/app/ui/add_payment/add_payment.dart';
-import 'package:dimipay/app/ui/mainpage/accountinfo.dart';
+import 'package:dimipay/app/ui/mainpage/account_info.dart';
 import 'package:dimipay/app/ui/mainpage/mainpage.dart';
 import 'package:dimipay/main.dart';
 import 'package:get/get.dart';
