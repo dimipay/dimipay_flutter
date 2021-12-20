@@ -99,6 +99,14 @@ flutter:
           weight: 800
         - asset: fonts/Pretendard/Pretendard-Black.ttf
           weight: 900
+    - family: NEXON Lv1 Gothic
+      fonts:
+        - asset: fonts/NEXON Lv1 Gothic/NEXONLv1GothicLight.ttf
+          weight: 300
+        - asset: fonts/NEXON Lv1 Gothic/NEXONLv1GothicRegular.ttf
+          weight: 400
+        - asset: fonts/NEXON Lv1 Gothic/NEXONLv1GothicBold.ttf
+          weight: 700
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
