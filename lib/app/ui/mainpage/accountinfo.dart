@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class AccountInfoPage extends StatelessWidget {
   const AccountInfoPage({Key? key}) : super(key: key);
