@@ -11,8 +11,7 @@ void main() {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Pretendard',
-        appBarTheme:
-            const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
+        appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
       ),
     ),
   );
@@ -34,7 +33,7 @@ class Home extends StatelessWidget {
               child: const Text("MAINPAGE")),
           TextButton(
               onPressed: () {
-                Get.toNamed(Routes.ACCONTINFO);
+                Get.toNamed(Routes.ACCOUNTINFO);
               },
               child: const Text("ACCOUNTINFO"))
         ],
