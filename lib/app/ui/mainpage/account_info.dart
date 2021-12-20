@@ -137,7 +137,7 @@ class PaymentHistory extends StatelessWidget {
               SizedBox(
                 width: 246,
               ),
-              SvgPicture.asset("asset/images/vector_2.svg"),
+              SvgPicture.asset("asset/images/arrow_right.svg"),
             ],
           ),
           SizedBox(
