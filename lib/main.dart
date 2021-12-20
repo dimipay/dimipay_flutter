@@ -27,10 +27,11 @@ class Home extends StatelessWidget {
       body: Column(
         children: [
           TextButton(
-              onPressed: () {
-                Get.toNamed(Routes.MAINPAGE);
-              },
-              child: const Text("MAINPAGE"))
+            onPressed: () {
+              Get.toNamed(Routes.MAINPAGE);
+            },
+            child: const Text("MAINPAGE"),
+          ),
         ],
       ),
     );
