@@ -104,7 +104,7 @@ class DPLogo extends StatelessWidget {
       children: <Widget>[
         SvgPicture.asset('asset/images/vector_1.svg'),
         const SizedBox(width: 12),
-        const Text('DIMIPAY', style: TextStyle(color: Color.fromRGBO(45, 163, 171, 1), fontFamily: 'Montserrat', fontSize: 26)),
+        const Text('DIMIPAY', style: TextStyle(color: Color.fromRGBO(46, 164, 171, 1), fontFamily: 'Montserrat', fontSize: 26)),
       ],
     );
   }

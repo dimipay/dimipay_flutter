@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 
-const MainColor = Color.fromRGBO(45, 163, 171, 1);
+const MainColor = Color.fromRGBO(46, 164, 171, 1);
