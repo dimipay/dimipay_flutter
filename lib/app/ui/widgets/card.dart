@@ -21,17 +21,28 @@ class DPCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius),
-        boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.06), offset: Offset(0, 2), blurRadius: 12)],
-        color: backgroundColor,
-        border: isHighlighted ? Border.all(color: const Color.fromRGBO(46, 164, 171, 1), width: 2) : Border.all(color: const Color.fromRGBO(215, 215, 215, 1), width: 1),
-      ),
-      padding: padding,
-      child: child,
+    return Stack(
+      children: [
+        Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadius),
+            boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.06), offset: Offset(0, 2), blurRadius: 12)],
+            color: backgroundColor,
+          ),
+          padding: padding,
+          child: child,
+        ),
+        Positioned.fill(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(borderRadius),
+              border: isHighlighted ? Border.all(color: const Color.fromRGBO(46, 164, 171, 1), width: 2) : Border.all(color: const Color.fromRGBO(215, 215, 215, 1), width: 1),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
