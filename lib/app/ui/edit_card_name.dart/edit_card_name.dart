@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class EditCardNamePage extends StatelessWidget {
-  const EditCardNamePage({Key? key}) : super(key: key);
+  final FocusNode textFieldFocusNode = FocusNode();
+  EditCardNamePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,32 +26,39 @@ class EditCardNamePage extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 12),
-                  DPPaymentCard(
-                    color: const Color(0xFF766C62),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            TextField(
-                              cursorColor: Colors.white,
-                              style: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-                              decoration: InputDecoration(
-                                isDense: true,
-                                contentPadding: EdgeInsets.all(0),
-                                border: InputBorder.none,
-                                hintText: '카드 이름',
-                                hintStyle: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 18, fontWeight: FontWeight.bold, color: Color.fromRGBO(255, 255, 255, 0.4)),
+                  GestureDetector(
+                    onTap: () {
+                      textFieldFocusNode.requestFocus();
+                    },
+                    child: DPPaymentCard(
+                      color: const Color(0xFF766C62),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextField(
+                                autofocus: true,
+                                focusNode: textFieldFocusNode,
+                                cursorColor: Colors.white,
+                                style: const TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                                decoration: const InputDecoration(
+                                  isDense: true,
+                                  contentPadding: EdgeInsets.all(0),
+                                  border: InputBorder.none,
+                                  hintText: '카드 이름',
+                                  hintStyle: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 18, fontWeight: FontWeight.bold, color: Color.fromRGBO(255, 255, 255, 0.4)),
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 4),
-                            Text('2158', style: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 16, color: Color.fromRGBO(255, 255, 255, 0.6))),
-                          ],
-                        ),
-                        SvgPicture.asset('asset/images/kb_logo.svg'),
-                      ],
+                              const SizedBox(height: 4),
+                              const Text('2158', style: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 16, color: Color.fromRGBO(255, 255, 255, 0.6))),
+                            ],
+                          ),
+                          SvgPicture.asset('asset/images/kb_logo.svg'),
+                        ],
+                      ),
                     ),
                   ),
                 ],
