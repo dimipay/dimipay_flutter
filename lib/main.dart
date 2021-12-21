@@ -67,6 +67,12 @@ class Home extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
+              Get.toNamed(Routes.SELECTCHARGINGMETHOD);
+            },
+            child: const Text("SELECTCHARGINGMETHOD"),
+          ),
+          TextButton(
+            onPressed: () {
               Get.toNamed(Routes.EDITCARDNAME);
             },
             child: const Text("EDITCARDNAME"),
