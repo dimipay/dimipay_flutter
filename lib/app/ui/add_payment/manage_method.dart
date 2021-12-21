@@ -18,7 +18,6 @@ class _ManageMethodPageState extends State<ManageMethodPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('결제 수단'),
-        centerTitle: false,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),

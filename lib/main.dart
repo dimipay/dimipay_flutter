@@ -16,6 +16,7 @@ void main() {
           backgroundColor: Colors.transparent,
           elevation: 0,
           foregroundColor: Colors.black,
+          centerTitle: false,
         ),
       ),
     ),
@@ -28,7 +29,10 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Route")),
+      appBar: AppBar(
+        title: const Text("Route"),
+        centerTitle: true,
+      ),
       body: ListView(
         children: [
           TextButton(
@@ -48,6 +52,12 @@ class Home extends StatelessWidget {
               Get.toNamed(Routes.MANAGEMETHOD);
             },
             child: const Text("ADDPAYMENT"),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.REGISTERCARD);
+            },
+            child: const Text("REGISTERCARD"),
           ),
         ],
       ),
