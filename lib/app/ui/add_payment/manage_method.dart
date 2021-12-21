@@ -1,8 +1,10 @@
+import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/ui/widgets/button.dart';
 import 'package:dimipay/app/ui/widgets/card.dart';
 import 'package:dimipay/app/ui/widgets/checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class ManageMethodPage extends StatefulWidget {
   const ManageMethodPage({Key? key}) : super(key: key);
@@ -67,6 +69,9 @@ class _ManageMethodPageState extends State<ManageMethodPage> {
                             ),
                           ],
                         ),
+                        onTap: () {
+                          Get.toNamed(Routes.CHARGINGAMOUNT);
+                        },
                       )
                     ],
                   ),
