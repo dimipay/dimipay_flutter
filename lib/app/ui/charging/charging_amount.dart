@@ -13,7 +13,7 @@ class ChargingAmountPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(
-            height: 70,
+            height: 150,
           ),
           SvgPicture.asset("asset/images/mobile_payment.svg"),
           const SizedBox(
@@ -31,7 +31,7 @@ class ChargingAmountPage extends StatelessWidget {
             child: Text(
               "페이머니가 지정된 잔액 이하로 떨어졌을 때 또는 매월·매주 자동으로 채울 수 있어요",
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 12,
               ),
               textAlign: TextAlign.center,
             ),
