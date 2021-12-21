@@ -51,7 +51,7 @@ class Home extends StatelessWidget {
             onPressed: () {
               Get.toNamed(Routes.MANAGEMETHOD);
             },
-            child: const Text("ADDPAYMENT"),
+            child: const Text("MANAGEMETHOD"),
           ),
           TextButton(
             onPressed: () {
