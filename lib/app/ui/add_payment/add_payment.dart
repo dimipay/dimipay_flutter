@@ -106,14 +106,17 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               padding: const EdgeInsets.all(24),
               child: Row(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text('간편결제 서비스와 연결', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                      SizedBox(height: 6),
-                      Text('카카오페이, 네이버페이, 토스결제와 연결할 수 있어요', style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4))),
-                    ],
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text('간편결제 서비스와 연결', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+                        SizedBox(height: 6),
+                        Text('카카오페이, 네이버페이, 토스결제와 연결할 수 있어요', style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4))),
+                      ],
+                    ),
                   ),
+                  const SizedBox(width: 24),
                   SvgPicture.asset('asset/images/arrow_right.svg'),
                 ],
               ),
