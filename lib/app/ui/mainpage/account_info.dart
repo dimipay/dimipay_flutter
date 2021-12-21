@@ -9,8 +9,7 @@ class AccountInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: // Figma Flutter Generator Frame251Widget - FRAME - HORIZONTAL
-          SafeArea(
+      body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
