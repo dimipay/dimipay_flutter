@@ -21,6 +21,7 @@ class DPCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double borderWidth = isHighlighted ? 2 : 1;
     return Stack(
       children: [
         Positioned.fill(
@@ -33,12 +34,12 @@ class DPCard extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(isHighlighted ? 2 : 1),
+          padding: EdgeInsets.all(borderWidth),
           child: Container(
             width: width,
             height: height,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(borderRadius - (isHighlighted ? 2 : 1)),
+              borderRadius: BorderRadius.circular(borderRadius - borderWidth),
               color: backgroundColor,
             ),
             padding: padding,
