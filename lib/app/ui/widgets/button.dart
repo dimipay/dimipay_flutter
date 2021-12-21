@@ -4,7 +4,8 @@ class DPBaseButton extends StatelessWidget {
   final Widget child;
   final double? width;
   final EdgeInsets padding;
-  const DPBaseButton({Key? key, required this.child, required this.padding, this.width}) : super(key: key);
+  final void Function() onTap;
+  const DPBaseButton({Key? key, required this.child, required this.padding, required this.onTap, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class DPBaseButton extends StatelessWidget {
         child: Material(
           color: const Color.fromRGBO(46, 164, 171, 1),
           child: InkWell(
-            onTap: () {},
+            onTap: onTap,
             child: Container(
               width: width,
               padding: padding,
@@ -38,7 +39,8 @@ class DPBaseButton extends StatelessWidget {
 class DPLargeButton extends StatelessWidget {
   final Widget child;
   final double? width;
-  const DPLargeButton({Key? key, required this.child, this.width}) : super(key: key);
+  final void Function() onTap;
+  const DPLargeButton({Key? key, required this.child, required this.onTap, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,7 @@ class DPLargeButton extends StatelessWidget {
       child: child,
       padding: const EdgeInsets.all(24),
       width: width,
+      onTap: onTap,
     );
   }
 }
@@ -53,13 +56,15 @@ class DPLargeButton extends StatelessWidget {
 class DPLargeTextButton extends StatelessWidget {
   final String text;
   final double? width;
-  const DPLargeTextButton({Key? key, required this.text, this.width}) : super(key: key);
+  final void Function() onTap;
+  const DPLargeTextButton({Key? key, required this.text, required this.onTap, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DPLargeButton(
       child: Text(text, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
       width: width,
+      onTap: onTap,
     );
   }
 }
@@ -67,7 +72,8 @@ class DPLargeTextButton extends StatelessWidget {
 class DPMediumButton extends StatelessWidget {
   final Widget child;
   final double? width;
-  const DPMediumButton({Key? key, required this.child, this.width}) : super(key: key);
+  final void Function() onTap;
+  const DPMediumButton({Key? key, required this.child, required this.onTap, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +81,7 @@ class DPMediumButton extends StatelessWidget {
       child: child,
       padding: const EdgeInsets.all(16),
       width: width,
+      onTap: onTap,
     );
   }
 }
@@ -82,13 +89,15 @@ class DPMediumButton extends StatelessWidget {
 class DPMediumTextButton extends StatelessWidget {
   final String text;
   final double? width;
-  const DPMediumTextButton({Key? key, required this.text, this.width}) : super(key: key);
+  final void Function() onTap;
+  const DPMediumTextButton({Key? key, required this.text, required this.onTap, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DPMediumButton(
       child: Text(text, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
       width: width,
+      onTap: onTap,
     );
   }
 }
@@ -96,7 +105,8 @@ class DPMediumTextButton extends StatelessWidget {
 class DPSmallButton extends StatelessWidget {
   final Widget child;
   final double? width;
-  const DPSmallButton({Key? key, required this.child, this.width}) : super(key: key);
+  final void Function() onTap;
+  const DPSmallButton({Key? key, required this.child, required this.onTap, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +114,7 @@ class DPSmallButton extends StatelessWidget {
       child: child,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       width: width,
+      onTap: onTap,
     );
   }
 }
@@ -111,13 +122,15 @@ class DPSmallButton extends StatelessWidget {
 class DPSmallTextButton extends StatelessWidget {
   final String text;
   final double? width;
-  const DPSmallTextButton({Key? key, required this.text, this.width}) : super(key: key);
+  final void Function() onTap;
+  const DPSmallTextButton({Key? key, required this.text, required this.onTap, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DPSmallButton(
       child: Text(text, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
       width: width,
+      onTap: onTap,
     );
   }
 }
