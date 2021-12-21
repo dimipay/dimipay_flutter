@@ -6,7 +6,7 @@ class RegisterCardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('RegisterCardPage')),
+      appBar: AppBar(title: const Text('Register Card Page')),
       body: Container(),
     );
   }
