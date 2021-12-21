@@ -53,21 +53,21 @@ class EditCardNamePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        '다음에 설정에서 바꿀게요',
-                        style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
-                      ),
-                      const SizedBox(width: 6),
-                      SvgPicture.asset('asset/images/arrow_right_small.svg'),
-                    ],
-                  )
                 ],
               ),
             ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  '다음에 설정에서 바꿀게요',
+                  style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
+                ),
+                const SizedBox(width: 6),
+                SvgPicture.asset('asset/images/arrow_right_small.svg'),
+              ],
+            ),
+            const SizedBox(height: 24),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 24),
               child: DPMediumTextButton(text: '다음', width: double.infinity),
