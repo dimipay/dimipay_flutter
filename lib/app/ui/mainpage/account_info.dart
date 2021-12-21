@@ -9,6 +9,7 @@ class AccountInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNav(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -28,7 +29,11 @@ class AccountInfoPage extends StatelessWidget {
                         children: [
                           SvgPicture.asset("asset/images/card.svg"),
                           const SizedBox(width: 8),
-                          const Text("결제수단", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
+                          const Text("결제수단",
+                              style: TextStyle(
+                                  color: mainColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600)),
                         ],
                       ),
                     ),
@@ -42,7 +47,11 @@ class AccountInfoPage extends StatelessWidget {
                         children: [
                           SvgPicture.asset("asset/images/inquiry.svg"),
                           const SizedBox(width: 8),
-                          const Text("문의", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
+                          const Text("문의",
+                              style: TextStyle(
+                                  color: mainColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600)),
                         ],
                       ),
                     ),
@@ -67,14 +76,18 @@ class Profile extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const CircleAvatar(backgroundImage: AssetImage('asset/images/Image11.png'), radius: 24),
+        const CircleAvatar(
+            backgroundImage: AssetImage('asset/images/Image11.png'),
+            radius: 24),
         const SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text("박정한", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            Text("박정한",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             SizedBox(height: 4),
-            Text("디미고 계정으로 로그인 됨", style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4))),
+            Text("디미고 계정으로 로그인 됨",
+                style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4))),
           ],
         ),
       ],
@@ -94,7 +107,8 @@ class PaymentHistory extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("결제 내역", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+              const Text("결제 내역",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
               SvgPicture.asset("asset/images/vector_2.svg"),
             ],
           ),
@@ -119,7 +133,8 @@ class PaymentHistory extends StatelessWidget {
 class PayLog extends StatelessWidget {
   final String date;
   final List<List<String>> log;
-  const PayLog({Key? key, required this.date, required this.log}) : super(key: key);
+  const PayLog({Key? key, required this.date, required this.log})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +143,8 @@ class PayLog extends StatelessWidget {
       children: [
         Text(
           date,
-          style: const TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4)),
+          style: const TextStyle(
+              fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4)),
         ),
         const SizedBox(height: 12),
         Builder(
@@ -142,12 +158,17 @@ class PayLog extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(log[index][0], style: const TextStyle(fontSize: 16)),
+                        Text(log[index][0],
+                            style: const TextStyle(fontSize: 16)),
                         const SizedBox(height: 4),
-                        Text("${log[index][2]}원", style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.6))),
+                        Text("${log[index][2]}원",
+                            style: const TextStyle(
+                                color: Color.fromRGBO(0, 0, 0, 0.6))),
                       ],
                     ),
-                    Text(log[index][1], style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4))),
+                    Text(log[index][1],
+                        style: const TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 0.4))),
                   ],
                 ),
               );
@@ -158,6 +179,69 @@ class PayLog extends StatelessWidget {
             return Column(children: children);
           },
         ),
+      ],
+    );
+  }
+}
+
+class BottomNav extends StatelessWidget {
+  const BottomNav({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      items: [
+        BottomNavigationBarItem(
+            label: "",
+            icon: Container(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset("asset/images/qrcode.svg"),
+                SizedBox(
+                  width: 6,
+                ),
+                Text("결제",
+                    style: TextStyle(
+                        color: mainColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600)),
+              ],
+            ))),
+        BottomNavigationBarItem(
+            label: "",
+            icon: Container(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset("asset/images/coupon.svg"),
+                SizedBox(
+                  width: 6,
+                ),
+                Text("쿠폰",
+                    style: TextStyle(
+                        color: mainColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600)),
+              ],
+            ))),
+        BottomNavigationBarItem(
+            label: "",
+            icon: Container(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset("asset/images/profile.svg"),
+                SizedBox(
+                  width: 6,
+                ),
+                Text("정보",
+                    style: TextStyle(
+                        color: mainColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600)),
+              ],
+            ))),
       ],
     );
   }
