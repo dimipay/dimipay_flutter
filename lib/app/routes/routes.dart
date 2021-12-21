@@ -22,7 +22,6 @@ class AppPages {
     GetPage(name: Routes.ACCOUNTINFO, page: () => const AccountInfoPage()),
     GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage()),
     GetPage(name: Routes.REGISTERCARD, page: () => RegisterCardPage()),
-    GetPage(name: Routes.CHARGINGAMOUNT page: () => ChargingAmountPage()),
-
+    GetPage(name: Routes.CHARGINGAMOUNT, page: () => ChargingAmountPage()),
   ];
 }
