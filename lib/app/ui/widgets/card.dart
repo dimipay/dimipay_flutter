@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class DPCard extends StatelessWidget {
@@ -22,31 +24,25 @@ class DPCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double borderWidth = isHighlighted ? 2 : 1;
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(borderRadius),
-              color: isHighlighted ? const Color.fromRGBO(46, 164, 171, 1) : const Color.fromRGBO(216, 216, 216, 1),
-              boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.06), offset: Offset(0, 2), blurRadius: 12)],
-            ),
-          ),
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: backgroundColor,
+        boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.06), offset: Offset(0, 2), blurRadius: 12)],
+        border: Border.all(
+          color: isHighlighted ? const Color.fromRGBO(46, 164, 171, 1) : const Color.fromRGBO(216, 216, 216, 1),
+          width: borderWidth,
         ),
-        Padding(
-          padding: EdgeInsets.all(borderWidth),
-          child: Container(
-            width: width,
-            height: height,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(borderRadius - borderWidth),
-              color: backgroundColor,
-            ),
-            padding: padding,
-            child: child,
-          ),
-        ),
-      ],
+      ),
+      padding: EdgeInsets.only(
+        top: max(padding.top - borderWidth, 0),
+        bottom: max(padding.bottom - borderWidth, 0),
+        left: max(padding.left - borderWidth, 0),
+        right: max(padding.right - borderWidth, 0),
+      ),
+      child: child,
     );
   }
 }
