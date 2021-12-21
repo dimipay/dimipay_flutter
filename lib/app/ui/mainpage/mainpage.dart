@@ -1,7 +1,9 @@
+import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/ui/widgets/button.dart';
 import 'package:dimipay/app/ui/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -30,9 +32,7 @@ class MainPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
-                        Text('7월 3일 점검 예정',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 16)),
+                        Text('7월 3일 점검 예정', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
                         SizedBox(height: 4),
                         Text(
                           '17시부터 19시까지는 매점을 이용하실 수 없습니다',
@@ -53,22 +53,18 @@ class MainPage extends StatelessWidget {
                           Text(
                             '진행중인 이벤트',
                             textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600),
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                           ),
                           SizedBox(width: 12),
                           Text(
                             '3개',
                             textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Color.fromRGBO(0, 0, 0, 0.4)),
+                            style: TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4)),
                           ),
                         ],
                       ),
                       const SizedBox(width: 12),
-                      SvgPicture.asset('asset/images/arrow_right.svg',
-                          semanticsLabel: 'arrow_right'),
+                      SvgPicture.asset('asset/images/arrow_right.svg', semanticsLabel: 'arrow_right'),
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -77,9 +73,7 @@ class MainPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
-                        Text('세기말 아이스크림 할인',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 16)),
+                        Text('세기말 아이스크림 할인', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
                         SizedBox(height: 4),
                         Text(
                           '아이스크림 전 품목 100원 할인',
@@ -112,11 +106,7 @@ class DPLogo extends StatelessWidget {
       children: <Widget>[
         SvgPicture.asset('asset/images/logo.svg'),
         const SizedBox(width: 12),
-        const Text('DIMIPAY',
-            style: TextStyle(
-                color: Color.fromRGBO(46, 164, 171, 1),
-                fontFamily: 'Montserrat',
-                fontSize: 26)),
+        const Text('DIMIPAY', style: TextStyle(color: Color.fromRGBO(46, 164, 171, 1), fontFamily: 'Montserrat', fontSize: 26)),
       ],
     );
   }
@@ -143,19 +133,21 @@ class PaymentsContainer extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   '매점 오프라인 결제',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(width: 24),
-                Text(
-                  '결제수단 설정',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: Color.fromRGBO(0, 0, 0, 0.4),
-                      fontWeight: FontWeight.normal,
-                      decoration: TextDecoration.underline),
+                const SizedBox(width: 24),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(Routes.MANAGEMETHOD);
+                  },
+                  child: const Text(
+                    '결제수단 설정',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4), fontWeight: FontWeight.normal, decoration: TextDecoration.underline),
+                  ),
                 ),
               ],
             ),
@@ -166,13 +158,9 @@ class PaymentsContainer extends StatelessWidget {
             child: Row(
               children: const [
                 SizedBox(width: 24),
-                DPSmallCardPayment(
-                    title: '국민카드',
-                    subtitle: '카드결제',
-                    color: Color.fromRGBO(118, 108, 98, 1)),
+                DPSmallCardPayment(title: '국민카드', subtitle: '카드결제', color: Color.fromRGBO(118, 108, 98, 1)),
                 SizedBox(width: 12),
-                DPSmallCardPayment(
-                    title: '쿠폰만 쓰기', color: Color.fromRGBO(106, 106, 106, 0.4)),
+                DPSmallCardPayment(title: '쿠폰만 쓰기', color: Color.fromRGBO(106, 106, 106, 0.4)),
                 SizedBox(width: 24),
               ],
             ),
@@ -192,9 +180,7 @@ class DPSmallCardPayment extends StatelessWidget {
   final String title;
   final String? subtitle;
   final Color color;
-  const DPSmallCardPayment(
-      {Key? key, required this.title, required this.color, this.subtitle})
-      : super(key: key);
+  const DPSmallCardPayment({Key? key, required this.title, required this.color, this.subtitle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -215,20 +201,14 @@ class DPSmallCardPayment extends StatelessWidget {
                   children: const [
                     Text(
                       '카드결제',
-                      style: TextStyle(
-                          color: Color.fromRGBO(255, 255, 255, 0.4),
-                          fontSize: 16),
+                      style: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.4), fontSize: 16),
                     ),
                     SizedBox(height: 4),
                   ],
                 ),
           Text(
             title,
-            style: const TextStyle(
-                color: Colors.white,
-                fontFamily: 'NEXON Lv1 Gothic',
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
+            style: const TextStyle(color: Colors.white, fontFamily: 'NEXON Lv1 Gothic', fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ],
       ),

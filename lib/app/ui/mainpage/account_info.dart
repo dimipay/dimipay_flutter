@@ -9,7 +9,7 @@ class AccountInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNav(),
+      bottomNavigationBar: const BottomNav(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -173,43 +173,35 @@ class BottomNav extends StatelessWidget {
       items: [
         BottomNavigationBarItem(
             label: "",
-            icon: Container(
-                child: Row(
+            icon: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SvgPicture.asset("asset/images/qrcode.svg"),
-                SizedBox(
-                  width: 6,
-                ),
-                Text("결제", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
+                const SizedBox(width: 6),
+                const Text("결제", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
               ],
-            ))),
+            )),
         BottomNavigationBarItem(
             label: "",
-            icon: Container(
-                child: Row(
+            icon: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SvgPicture.asset("asset/images/coupon.svg"),
-                SizedBox(
-                  width: 6,
-                ),
-                Text("쿠폰", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
+                const SizedBox(width: 6),
+                const Text("쿠폰", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
               ],
-            ))),
+            )),
         BottomNavigationBarItem(
-            label: "",
-            icon: Container(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset("asset/images/profile.svg"),
-                SizedBox(
-                  width: 6,
-                ),
-                Text("정보", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
-              ],
-            ))),
+          label: "",
+          icon: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset("asset/images/profile.svg"),
+              const SizedBox(width: 6),
+              const Text("정보", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
+            ],
+          ),
+        ),
       ],
     );
   }
