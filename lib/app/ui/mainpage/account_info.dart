@@ -13,46 +13,49 @@ class AccountInfoPage extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 70),
-              const Profile(),
-              const SizedBox(height: 36),
-              Row(
-                children: [
-                  Flexible(
-                    child: DPCard(
-                      padding: const EdgeInsets.symmetric(vertical: 24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset("asset/images/card.svg"),
-                          const SizedBox(width: 8),
-                          const Text("결제수단", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
-                        ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 70),
+                const Profile(),
+                const SizedBox(height: 36),
+                Row(
+                  children: [
+                    Flexible(
+                      child: DPCard(
+                        padding: const EdgeInsets.symmetric(vertical: 24),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset("asset/images/card.svg"),
+                            const SizedBox(width: 8),
+                            const Text("결제수단", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 12),
-                  Flexible(
-                    child: DPCard(
-                      padding: const EdgeInsets.symmetric(vertical: 24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset("asset/images/inquiry.svg"),
-                          const SizedBox(width: 8),
-                          const Text("문의", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
-                        ],
+                    const SizedBox(width: 12),
+                    Flexible(
+                      child: DPCard(
+                        padding: const EdgeInsets.symmetric(vertical: 24),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset("asset/images/inquiry.svg"),
+                            const SizedBox(width: 8),
+                            const Text("문의", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 24),
-              const DPCard(child: PaymentHistory())
-            ],
+                  ],
+                ),
+                const SizedBox(height: 24),
+                const DPCard(child: PaymentHistory()),
+                const SizedBox(height: 72),
+              ],
+            ),
           ),
         ),
       ),
