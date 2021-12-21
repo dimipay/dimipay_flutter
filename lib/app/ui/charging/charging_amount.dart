@@ -1,6 +1,8 @@
+import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/ui/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class ChargingAmountPage extends StatelessWidget {
   const ChargingAmountPage({Key? key}) : super(key: key);
@@ -44,9 +46,15 @@ class ChargingAmountPage extends StatelessWidget {
               style: TextStyle(decoration: TextDecoration.underline, color: Color.fromRGBO(0, 0, 0, 0.4)),
             ),
             const SizedBox(height: 24),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
-              child: DPMediumTextButton(text: '다음', width: double.infinity),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: DPMediumTextButton(
+                text: '다음',
+                width: double.infinity,
+                onTap: () {
+                  Get.toNamed(Routes.SELECTCHARGINGMETHOD);
+                },
+              ),
             ),
             const SizedBox(height: 24),
           ],
