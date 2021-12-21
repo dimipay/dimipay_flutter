@@ -4,14 +4,14 @@ import 'package:dimipay/app/ui/widgets/checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class AddPaymentPage extends StatefulWidget {
-  const AddPaymentPage({Key? key}) : super(key: key);
+class ManageMethodPage extends StatefulWidget {
+  const ManageMethodPage({Key? key}) : super(key: key);
 
   @override
-  State<AddPaymentPage> createState() => _AddPaymentPageState();
+  State<ManageMethodPage> createState() => _ManageMethodPageState();
 }
 
-class _AddPaymentPageState extends State<AddPaymentPage> {
+class _ManageMethodPageState extends State<ManageMethodPage> {
   bool ischecked = false;
   @override
   Widget build(BuildContext context) {
