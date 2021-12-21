@@ -77,6 +77,12 @@ class Home extends StatelessWidget {
             },
             child: const Text("EDITCARDNAME"),
           ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.CARDFIN);
+            },
+            child: const Text("CARDFIN"),
+          ),
         ],
       ),
     );
