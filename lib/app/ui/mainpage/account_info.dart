@@ -9,71 +9,54 @@ class AccountInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: // Figma Flutter Generator Frame251Widget - FRAME - HORIZONTAL
-            SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 70,
-            ),
-            Profile(),
-            SizedBox(
-              height: 36,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DPCard(
-                    width: 174,
-                    height: 70,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset("asset/images/card.svg"),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          "결제수단",
-                          style: TextStyle(color: MainColor, fontSize: 16),
-                        )
-                      ],
-                    )),
-                SizedBox(
-                  width: 12,
-                ),
-                DPCard(
-                    width: 174,
-                    height: 70,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset("asset/images/inquiry.svg"),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          "문의",
-                          style: TextStyle(color: MainColor, fontSize: 16),
-                        )
-                      ],
-                    )),
-              ],
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            DPCard(
-              child: PaymentHistory(),
-              width: 361,
-              height: 364,
-            )
-          ],
+      body: // Figma Flutter Generator Frame251Widget - FRAME - HORIZONTAL
+          SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 70),
+              const Profile(),
+              const SizedBox(height: 36),
+              Row(
+                children: [
+                  Flexible(
+                    child: DPCard(
+                      padding: const EdgeInsets.symmetric(vertical: 24),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset("asset/images/card.svg"),
+                          const SizedBox(width: 8),
+                          const Text("결제수단", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Flexible(
+                    child: DPCard(
+                      padding: const EdgeInsets.symmetric(vertical: 24),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset("asset/images/inquiry.svg"),
+                          const SizedBox(width: 8),
+                          const Text("문의", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
+              const DPCard(child: PaymentHistory())
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }
 
@@ -83,33 +66,18 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          height: 48,
-          width: 48,
-          child: Image.asset('asset/images/Image11.png'),
-        ),
-        SizedBox(
-          width: 12,
-        ),
+        const CircleAvatar(backgroundImage: AssetImage('asset/images/Image11.png'), radius: 24),
+        const SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "박정한",
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-            SizedBox(
-              height: 4,
-            ),
-            Text(
-              "디미고 계정으로 로그인 됨",
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 14),
-            ),
+          children: const [
+            Text("박정한", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            SizedBox(height: 4),
+            Text("디미고 계정으로 로그인 됨", style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4))),
           ],
-        )
+        ),
       ],
     );
   }
@@ -121,38 +89,27 @@ class PaymentHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.all(24),
       child: Column(
         children: [
-          SizedBox(
-            height: 24,
-          ),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "결제 내역",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              ),
-              SizedBox(
-                width: 246,
-              ),
+              const Text("결제 내역", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
               SvgPicture.asset("asset/images/vector_2.svg"),
             ],
           ),
-          SizedBox(
-            height: 24,
-          ),
-          PayLog(date: "3월 14일", log: [
-            ["빨간 돼지바", "17시 40분", "3,500"],
-            ["빨간 돼지바", "17시 40분", "3,500"]
+          const SizedBox(height: 24),
+          const PayLog(date: "3월 14일", log: [
+            ["빨간 돼지바", "17시 40분", "￦3,500"],
+            ["빨간 돼지바", "17시 40분", "￦3,500"]
           ]),
-          SizedBox(
+          const SizedBox(
             height: 24,
           ),
-          PayLog(date: "3월 14일", log: [
-            ["빨간 돼지바", "17시 40분", "3,500"],
-            ["빨간 돼지바", "17시 40분", "3,500"]
+          const PayLog(date: "3월 14일", log: [
+            ["빨간 돼지바", "17시 40분", "￦3,500"],
+            ["빨간 돼지바", "17시 40분", "￦3,500"]
           ]),
         ],
       ),
@@ -161,9 +118,9 @@ class PaymentHistory extends StatelessWidget {
 }
 
 class PayLog extends StatelessWidget {
-  final String? date;
-  final List<List<String>>? log;
-  const PayLog({Key? key, this.date, this.log}) : super(key: key);
+  final String date;
+  final List<List<String>> log;
+  const PayLog({Key? key, required this.date, required this.log}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -171,41 +128,37 @@ class PayLog extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          date!,
-          style: TextStyle(
-            fontSize: 16,
-          ),
+          date,
+          style: const TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4)),
         ),
-        SizedBox(
-          height: 12,
-        ),
-        Container(
-          height: 47.0 * log!.length,
-          child: ListView.builder(
-            itemCount: log!.length,
-            itemBuilder: (context, int index) {
-              return Row(
-                children: [
-                  Container(
-                    width: 175,
-                    height: 44,
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(log![index][0], style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      Text("${log![index][2]}원", style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal)),
-                    ]),
-                  ),
-                  SizedBox(
-                    width: 81,
-                  ),
-                  Text(log![index][1], style: TextStyle(fontSize: 14)),
-                ],
+        const SizedBox(height: 12),
+        Builder(
+          builder: (context) {
+            List<Widget> children = [];
+            for (int index = 0; index < log.length; index++) {
+              children.add(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(log[index][0], style: const TextStyle(fontSize: 16)),
+                        const SizedBox(height: 4),
+                        Text("${log[index][2]}원", style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.6))),
+                      ],
+                    ),
+                    Text(log[index][1], style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4))),
+                  ],
+                ),
               );
-            },
-          ),
-        )
+              if (index != log.length - 1) {
+                children.add(const SizedBox(height: 12));
+              }
+            }
+            return Column(children: children);
+          },
+        ),
       ],
     );
   }
