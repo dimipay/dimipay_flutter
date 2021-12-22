@@ -2,6 +2,7 @@ import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/ui/widgets/button.dart';
 import 'package:dimipay/app/ui/widgets/card.dart';
 import 'package:dimipay/app/ui/widgets/payment.dart';
+import 'package:dimipay/app/ui/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -44,7 +45,9 @@ class ChargingAmountPage extends StatelessWidget {
                       onTap: () {
                         textFieldFocusNode.requestFocus();
                       },
-                      child: Container(),
+                      child: const DPTextField(
+                        label: "충전 금액",
+                      ),
                     ),
                   ],
                 ),
