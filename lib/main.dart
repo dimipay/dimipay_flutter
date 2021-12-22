@@ -94,6 +94,12 @@ class Home extends StatelessWidget {
               Get.toNamed(Routes.CHARGINGAMOUNT);
             },
             child: const Text("CHARGINGAMOUNT"),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.COUPONLIST);
+            },
+            child: const Text('COUPONLIST'),
           )
         ],
       ),
