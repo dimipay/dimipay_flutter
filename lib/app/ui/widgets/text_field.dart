@@ -12,7 +12,7 @@ class DPTextField extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       child: TextField(
         autofocus: autofocus,
-        style: const TextStyle(fontSize: 18),
+        style: const TextStyle(fontSize: 16),
         cursorColor: Colors.black,
         decoration: InputDecoration(
           hintText: hintText,
@@ -20,7 +20,7 @@ class DPTextField extends StatelessWidget {
           border: InputBorder.none,
           fillColor: const Color(0xFFF6F6F6),
           filled: true,
-          hintStyle: const TextStyle(fontSize: 18, color: Color.fromRGBO(0, 0, 0, 0.4)),
+          hintStyle: const TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4)),
           floatingLabelStyle: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.6), fontWeight: FontWeight.w500, fontSize: 12),
         ),
       ),
