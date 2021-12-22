@@ -61,9 +61,9 @@ class Home extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.CHARGINGAMOUNT);
+              Get.toNamed(Routes.ASKAUTOCHARGE);
             },
-            child: const Text("CHARGINGAMOUNT"),
+            child: const Text("ASKAUTOCHARGE"),
           ),
           TextButton(
             onPressed: () {
