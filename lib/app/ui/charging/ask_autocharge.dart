@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class ChargingAmountPage extends StatelessWidget {
-  const ChargingAmountPage({Key? key}) : super(key: key);
+class AskAutoChargePage extends StatelessWidget {
+  const AskAutoChargePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class ChargingAmountPage extends StatelessWidget {
                 text: '다음',
                 width: double.infinity,
                 onTap: () {
-                  Get.toNamed(Routes.SELECTCHARGINGMETHOD);
+                  Get.offNamed(Routes.SELECTCHARGINGMETHOD);
                 },
               ),
             ),

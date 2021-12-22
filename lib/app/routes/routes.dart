@@ -30,7 +30,7 @@ class AppPages {
     GetPage(name: Routes.ACCOUNTINFO, page: () => const AccountInfoPage()),
     GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage()),
     GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage()),
-    GetPage(name: Routes.ASKAUTOCHARGE, page: () => const ChargingAmountPage()),
+    GetPage(name: Routes.ASKAUTOCHARGE, page: () => const AskAutoChargePage()),
     GetPage(name: Routes.SELECTCHARGINGMETHOD, page: () => const SelectChargingMethodPage()),
     GetPage(name: Routes.EDITCARDNAME, page: () => EditCardNamePage()),
     GetPage(name: Routes.CARDFIN, page: () => const CardFinPage()),
