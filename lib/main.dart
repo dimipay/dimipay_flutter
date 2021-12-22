@@ -100,7 +100,13 @@ class Home extends StatelessWidget {
               Get.toNamed(Routes.COUPONLIST);
             },
             child: const Text('COUPONLIST'),
-          )
+          ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.TRANSACTIONHISTORY);
+            },
+            child: const Text('TRANSACTIONHISTORY'),
+          ),
         ],
       ),
     );

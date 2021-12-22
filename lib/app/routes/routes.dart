@@ -9,6 +9,7 @@ import 'package:dimipay/app/ui/edit_card_name.dart/edit_card_name.dart';
 import 'package:dimipay/app/ui/mainpage/account_info.dart';
 import 'package:dimipay/app/ui/mainpage/mainpage.dart';
 import 'package:dimipay/app/ui/register_card/register_card.dart';
+import 'package:dimipay/app/ui/transaction_history/transaction_history.dart';
 import 'package:dimipay/main.dart';
 import 'package:get/get.dart';
 
@@ -25,6 +26,7 @@ abstract class Routes {
   static const CHARGINGFIN = '/ChargingFin';
   static const CHARGINGAMOUNT = "/ChargingFin/ChargingAmount";
   static const COUPONLIST = "/CouponList";
+	static const TRANSACTIONHISTORY = '/TransactionHistory';
 }
 
 class AppPages {
@@ -41,5 +43,6 @@ class AppPages {
     GetPage(name: Routes.CHARGINGFIN, page: () => const ChargingFinPage()),
     GetPage(name: Routes.CHARGINGAMOUNT, page: () => ChargingAmountPage()),
     GetPage(name: Routes.COUPONLIST, page: () => const CouponListPage()),
+		GetPage(name: Routes.TRANSACTIONHISTORY, page:()=> const TransactionHistoryPage()),
   ];
 }
