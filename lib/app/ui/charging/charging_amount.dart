@@ -47,6 +47,7 @@ class ChargingAmountPage extends StatelessWidget {
                       },
                       child: const DPTextField(
                         label: "충전 금액",
+                        autofocus: true,
                       ),
                     ),
                   ],
