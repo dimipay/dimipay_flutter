@@ -83,6 +83,12 @@ class Home extends StatelessWidget {
             },
             child: const Text("CARDFIN"),
           ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.CHARGINGFIN);
+            },
+            child: const Text("CHARGINGFIN"),
+          )
         ],
       ),
     );

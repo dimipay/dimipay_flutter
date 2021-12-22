@@ -1,6 +1,7 @@
 import 'package:dimipay/app/ui/add_payment/manage_method.dart';
 import 'package:dimipay/app/ui/card_fin/card_fin.dart';
 import 'package:dimipay/app/ui/charging/charging_amount.dart';
+import 'package:dimipay/app/ui/charging/charging_fin.dart';
 import 'package:dimipay/app/ui/charging/select_charging_method.dart';
 import 'package:dimipay/app/ui/edit_card_name.dart/edit_card_name.dart';
 import 'package:dimipay/app/ui/mainpage/account_info.dart';
@@ -19,6 +20,7 @@ abstract class Routes {
   static const SELECTCHARGINGMETHOD = '/ChargingAmount/SelectChargingMethod';
   static const EDITCARDNAME = '/EditCardName';
   static const CARDFIN = '/CardFin';
+  static const CHARGINGFIN = '/ChargingFin';
 }
 
 class AppPages {
@@ -32,5 +34,6 @@ class AppPages {
     GetPage(name: Routes.SELECTCHARGINGMETHOD, page: () => const SelectChargingMethodPage()),
     GetPage(name: Routes.EDITCARDNAME, page: () => EditCardNamePage()),
     GetPage(name: Routes.CARDFIN, page: () => const CardFinPage()),
+    GetPage(name: Routes.CHARGINGFIN, page: () => const ChargingFinPage()),
   ];
 }
