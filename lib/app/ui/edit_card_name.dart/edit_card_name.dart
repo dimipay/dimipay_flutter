@@ -74,7 +74,7 @@ class EditCardNamePage extends StatelessWidget {
                   style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
                 ),
                 const SizedBox(width: 6),
-                SvgPicture.asset('asset/images/arrow_right_small.svg'),
+                SvgPicture.asset('asset/images/arrow_right_6.svg'),
               ],
             ),
             const SizedBox(height: 24),

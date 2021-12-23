@@ -32,10 +32,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('페이머니',
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Color.fromRGBO(0, 0, 0, 0.4))),
+                      const Text('페이머니', style: TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4))),
                       DPCheckbox(
                         label: '기본 결제수단으로 설정',
                         value: ischecked,
@@ -67,10 +64,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                             const SizedBox(width: 6),
                             const Text(
                               '충전',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
                             ),
                           ],
                         ),
@@ -88,9 +82,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('실물 카드',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600)),
+                      const Text('실물 카드', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
                       DPCheckbox(
                         label: '기본 결제수단으로 설정',
                         value: ischecked,
@@ -105,8 +97,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                   const SizedBox(height: 12),
                   const DPRealCard(),
                   const SizedBox(height: 12),
-                  const Text('기존에 등록된 카드를 지워야 다른 카드를 등록할 수 있어요',
-                      style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4))),
+                  const Text('기존에 등록된 카드를 지워야 다른 카드를 등록할 수 있어요', style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4))),
                 ],
               ),
             ),
@@ -118,16 +109,12 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      Text('간편결제 서비스와 연결',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600)),
+                      Text('간편결제 서비스와 연결', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
                       SizedBox(height: 6),
-                      Text('카카오페이, 네이버페이, 토스결제와 연결할 수 있어요',
-                          style:
-                              TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4))),
+                      Text('카카오페이, 네이버페이, 토스결제와 연결할 수 있어요', style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4))),
                     ],
                   ),
-                  SvgPicture.asset('asset/images/arrow_right.svg'),
+                  SvgPicture.asset('asset/images/arrow_right_8.svg'),
                 ],
               ),
             ),
@@ -156,20 +143,13 @@ class DPRealCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('카드결제',
-                  style: TextStyle(
-                      fontSize: 16, color: Color.fromRGBO(255, 255, 255, 0.4))),
+              const Text('카드결제', style: TextStyle(fontSize: 16, color: Color.fromRGBO(255, 255, 255, 0.4))),
               const SizedBox(height: 4),
               Row(
                 children: [
                   SvgPicture.asset('asset/images/edit.svg'),
                   const SizedBox(width: 4),
-                  const Text('국민카드',
-                      style: TextStyle(
-                          fontFamily: 'NEXON Lv1 Gothic',
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold)),
+                  const Text('국민카드', style: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
                 ],
               )
             ],
