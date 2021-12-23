@@ -24,7 +24,7 @@ class AskAutoChargePage extends StatelessWidget {
                     height: 12,
                   ),
                   const Text(
-                    "자동충전을 사용할까요?",
+                    "자동 충전을 사용할까요?",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
@@ -42,7 +42,7 @@ class AskAutoChargePage extends StatelessWidget {
               ),
             ),
             const Text(
-              "다음부터 보지 않기",
+              "자동 충전은 안할게요",
               style: TextStyle(decoration: TextDecoration.underline, color: Color.fromRGBO(0, 0, 0, 0.4)),
             ),
             const SizedBox(height: 24),
