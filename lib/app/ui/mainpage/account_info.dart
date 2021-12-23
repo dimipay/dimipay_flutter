@@ -18,7 +18,7 @@ class AccountInfoPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 24),
+                const SizedBox(height: 36),
                 const Profile(),
                 const SizedBox(height: 36),
                 Row(
