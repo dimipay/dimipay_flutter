@@ -66,7 +66,7 @@ class MainPage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(width: 12),
-                      SvgPicture.asset('asset/images/arrow_right.svg', semanticsLabel: 'arrow_right'),
+                      SvgPicture.asset('asset/images/arrow_right_8.svg', semanticsLabel: 'arrow_right'),
                     ],
                   ),
                   const SizedBox(height: 16),

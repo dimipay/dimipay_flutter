@@ -121,7 +121,7 @@ class _ManageMethodPageState extends State<ManageMethodPage> {
                     ),
                   ),
                   const SizedBox(width: 24),
-                  SvgPicture.asset('asset/images/arrow_right.svg'),
+                  SvgPicture.asset('asset/images/arrow_right_8.svg'),
                 ],
               ),
             ),

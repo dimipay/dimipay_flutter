@@ -106,7 +106,7 @@ class PaymentHistory extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text("결제 내역", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-              SvgPicture.asset("asset/images/arrow_right.svg"),
+              SvgPicture.asset("asset/images/arrow_right_8.svg"),
             ],
           ),
           const SizedBox(height: 24),
