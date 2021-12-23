@@ -41,9 +41,14 @@ class AskAutoChargePage extends StatelessWidget {
                 ],
               ),
             ),
-            const Text(
-              "자동 충전은 안할게요",
-              style: TextStyle(decoration: TextDecoration.underline, color: Color.fromRGBO(0, 0, 0, 0.4)),
+            GestureDetector(
+              onTap: () {
+                Get.toNamed(Routes.CHARGINGAMOUNT);
+              },
+              child: const Text(
+                "자동 충전은 안할게요",
+                style: TextStyle(decoration: TextDecoration.underline, color: Color.fromRGBO(0, 0, 0, 0.4)),
+              ),
             ),
             const SizedBox(height: 24),
             Padding(
@@ -52,7 +57,7 @@ class AskAutoChargePage extends StatelessWidget {
                 text: '다음',
                 width: double.infinity,
                 onTap: () {
-                  Get.offNamed(Routes.SELECTCHARGINGMETHOD);
+                  Get.toNamed(Routes.CHARGINGAMOUNT);
                 },
               ),
             ),
