@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:dimipay/app/ui/add_payment/manage_method.dart';
 import 'package:dimipay/app/ui/card_fin/card_fin.dart';
 import 'package:dimipay/app/ui/charging/ask_autocharge.dart';
@@ -26,7 +28,7 @@ abstract class Routes {
   static const CHARGINGFIN = '/ChargingFin';
   static const CHARGINGAMOUNT = "/ChargingFin/ChargingAmount";
   static const COUPONLIST = "/CouponList";
-	static const TRANSACTIONHISTORY = '/TransactionHistory';
+  static const TRANSACTIONHISTORY = '/TransactionHistory';
 }
 
 class AppPages {
@@ -43,6 +45,6 @@ class AppPages {
     GetPage(name: Routes.CHARGINGFIN, page: () => const ChargingFinPage()),
     GetPage(name: Routes.CHARGINGAMOUNT, page: () => ChargingAmountPage()),
     GetPage(name: Routes.COUPONLIST, page: () => const CouponListPage()),
-		GetPage(name: Routes.TRANSACTIONHISTORY, page:()=> const TransactionHistoryPage()),
+    GetPage(name: Routes.TRANSACTIONHISTORY, page: () => const TransactionHistoryPage()),
   ];
 }
