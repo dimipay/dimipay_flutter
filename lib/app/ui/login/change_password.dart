@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ChangePasswordPage extends StatelessWidget {
-  final FocusNode textFieldFocusNode = FocusNode();
-  static TextEditingController current = TextEditingController();
-  ChangePasswordPage({Key? key}) : super(key: key);
+  const ChangePasswordPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
