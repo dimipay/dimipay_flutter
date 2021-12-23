@@ -31,6 +31,7 @@ class ChangePasswordPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
+                      SizedBox(height: 24),
                       Text(
                         '보안을 위해 비밀번호를 변경해주세요',
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
