@@ -113,6 +113,12 @@ class Home extends StatelessWidget {
             },
             child: const Text('LOGIN'),
           ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.CHANGEPASSWORD);
+            },
+            child: const Text('CHANGEPASSWORD'),
+          ),
         ],
       ),
     );
