@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:dimipay/app/ui/add_payment/manage_method.dart';
 import 'package:dimipay/app/ui/card_fin/card_fin.dart';
 import 'package:dimipay/app/ui/charging/ask_autocharge.dart';
