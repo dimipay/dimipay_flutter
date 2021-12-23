@@ -18,74 +18,79 @@ class MainPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const DPLogo(),
-                  const SizedBox(height: 24),
-                  DPCard(
-                    isHighlighted: true,
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          '7월 3일 점검 예정',
-                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+            Flexible(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 70),
+                      const DPLogo(),
+                      const SizedBox(height: 24),
+                      DPCard(
+                        isHighlighted: true,
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              '7월 3일 점검 예정',
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              '17시부터 19시까지는 매점을 이용하실 수 없습니다',
+                              style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 4),
-                        Text(
-                          '17시부터 19시까지는 매점을 이용하실 수 없습니다',
-                          style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
-                        ),
-                      ],
-                    ),
-                    padding: const EdgeInsets.all(24),
-                  ),
-                  const SizedBox(height: 36),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
+                        padding: const EdgeInsets.all(24),
+                      ),
+                      const SizedBox(height: 36),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: const [
-                          Text(
-                            '진행중인 이벤트',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                        children: <Widget>[
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: const [
+                              Text(
+                                '진행중인 이벤트',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(width: 12),
+                              Text(
+                                '3개',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4)),
+                              ),
+                            ],
                           ),
-                          SizedBox(width: 12),
-                          Text(
-                            '3개',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4)),
-                          ),
+                          const SizedBox(width: 12),
+                          SvgPicture.asset('asset/images/arrow_right_8.svg', semanticsLabel: 'arrow_right'),
                         ],
                       ),
-                      const SizedBox(width: 12),
-                      SvgPicture.asset('asset/images/arrow_right_8.svg', semanticsLabel: 'arrow_right'),
+                      const SizedBox(height: 16),
+                      DPCard(
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text('세기말 아이스크림 할인', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+                            SizedBox(height: 4),
+                            Text(
+                              '아이스크림 전 품목 100원 할인',
+                              style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
+                            ),
+                          ],
+                        ),
+                        padding: const EdgeInsets.all(24),
+                      ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  DPCard(
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text('세기말 아이스크림 할인', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
-                        SizedBox(height: 4),
-                        Text(
-                          '아이스크림 전 품목 100원 할인',
-                          style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
-                        ),
-                      ],
-                    ),
-                    padding: const EdgeInsets.all(24),
-                  ),
-                ],
+                ),
               ),
             ),
             const PaymentsContainer(),
