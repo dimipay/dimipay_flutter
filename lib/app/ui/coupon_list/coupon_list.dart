@@ -1,4 +1,5 @@
 import 'package:dimipay/app/ui/ui_asset.dart';
+import 'package:dimipay/app/ui/widgets/bottom_navigation.dart';
 import 'package:dimipay/app/ui/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,15 +11,41 @@ class CouponListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('쿠폰')),
+      bottomNavigationBar: const BottomNav(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: 24),
-              DPCouponCard(title: '공업수학', subtitle: '이병혁 선생님 발행', price: 500, expireAt: DateTime(2021, 10, 12)),
+              DPCard(
+                  padding: const EdgeInsets.all(24),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset("asset/images/question.svg"),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      const Text(
+                        "쿠폰은 어떻게 사용하나요?",
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Color.fromRGBO(0, 0, 0, 0.4)),
+                      ),
+                    ],
+                  )),
               const SizedBox(height: 16),
-              DPCouponCard(title: '이병혁 선생님의 쿠폰', subtitle: '이병혁 선생님 발행', price: 500, expireAt: DateTime(2021, 10, 12)),
+              DPCouponCard(
+                  title: '공업수학',
+                  subtitle: '이병혁 선생님 발행',
+                  price: 500,
+                  expireAt: DateTime(2021, 10, 12)),
+              const SizedBox(height: 16),
+              DPCouponCard(
+                  title: '이병혁 선생님의 쿠폰',
+                  subtitle: '이병혁 선생님 발행',
+                  price: 500,
+                  expireAt: DateTime(2021, 10, 12)),
               const SizedBox(height: 24),
               Row(
                 mainAxisSize: MainAxisSize.min,
@@ -28,7 +55,8 @@ class CouponListPage extends StatelessWidget {
                     style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
                   ),
                   const SizedBox(width: 12),
-                  SvgPicture.asset('asset/images/arrow_down.svg', color: const Color.fromRGBO(0, 0, 0, 0.4)),
+                  SvgPicture.asset('asset/images/arrow_down.svg',
+                      color: const Color.fromRGBO(0, 0, 0, 0.4)),
                 ],
               )
             ],
@@ -44,7 +72,13 @@ class DPCouponCard extends StatelessWidget {
   final String subtitle;
   final int price;
   final DateTime expireAt;
-  const DPCouponCard({Key? key, required this.title, required this.subtitle, required this.price, required this.expireAt}) : super(key: key);
+  const DPCouponCard(
+      {Key? key,
+      required this.title,
+      required this.subtitle,
+      required this.price,
+      required this.expireAt})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +92,8 @@ class DPCouponCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 6),
               Text(
@@ -72,7 +107,10 @@ class DPCouponCard extends StatelessWidget {
             children: [
               Text(
                 '$price원',
-                style: const TextStyle(color: mainColor, fontWeight: FontWeight.w600, fontSize: 16),
+                style: const TextStyle(
+                    color: mainColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16),
               ),
               const SizedBox(height: 6),
               Text(
