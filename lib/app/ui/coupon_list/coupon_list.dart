@@ -16,6 +16,20 @@ class CouponListPage extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 24),
+              DPCard(
+                padding: const EdgeInsets.all(24),
+                child: Row(
+                  children: [
+                    SvgPicture.asset('asset/images/question_circular.svg'),
+                    const SizedBox(width: 12),
+                    const Text(
+                      '쿠폰은 어떻게 사용하나요?',
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4), decoration: TextDecoration.underline),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
               DPCouponCard(title: '공업수학', subtitle: '이병혁 선생님 발행', price: 500, expireAt: DateTime(2021, 10, 12)),
               const SizedBox(height: 16),
               DPCouponCard(title: '이병혁 선생님의 쿠폰', subtitle: '이병혁 선생님 발행', price: 500, expireAt: DateTime(2021, 10, 12)),
