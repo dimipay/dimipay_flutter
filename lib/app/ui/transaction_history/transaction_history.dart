@@ -52,6 +52,7 @@ class TransactionHistoryPage extends StatelessWidget {
                               '3월 결제 기록 보기',
                               style: TextStyle(color: mainColor, decoration: TextDecoration.underline),
                             ),
+                            const SizedBox(height: 36),
                           ],
                         ),
                       ),
