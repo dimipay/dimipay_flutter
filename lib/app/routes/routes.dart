@@ -41,17 +41,13 @@ class AppPages {
     GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage()),
     GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage()),
     GetPage(name: Routes.ASKAUTOCHARGE, page: () => const AskAutoChargePage()),
-    GetPage(
-        name: Routes.SELECTCHARGINGMETHOD,
-        page: () => const SelectChargingMethodPage()),
+    GetPage(name: Routes.SELECTCHARGINGMETHOD, page: () => const SelectChargingMethodPage()),
     GetPage(name: Routes.EDITCARDNAME, page: () => EditCardNamePage()),
     GetPage(name: Routes.CARDFIN, page: () => const CardFinPage()),
     GetPage(name: Routes.CHARGINGFIN, page: () => const ChargingFinPage()),
     GetPage(name: Routes.CHARGINGAMOUNT, page: () => ChargingAmountPage()),
     GetPage(name: Routes.COUPONLIST, page: () => const CouponListPage()),
-    GetPage(
-        name: Routes.TRANSACTIONHISTORY,
-        page: () => const TransactionHistoryPage()),
+    GetPage(name: Routes.TRANSACTIONHISTORY, page: () => const TransactionHistoryPage()),
     GetPage(name: Routes.LOGIN, page: () => LoginPage()),
   ];
 }
