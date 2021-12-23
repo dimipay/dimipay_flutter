@@ -44,6 +44,7 @@ class LoginPage extends StatelessWidget {
                         textFieldFocusNode.requestFocus();
                       },
                       child: const DPTextField(
+                        isPassword: true,
                         label: "비밀번호",
                       ),
                     ),

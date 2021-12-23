@@ -4,13 +4,17 @@ class DPTextField extends StatelessWidget {
   final String? label;
   final String? hintText;
   final bool autofocus;
-  const DPTextField({Key? key, this.label, this.hintText, this.autofocus = false}) : super(key: key);
+  final bool isPassword;
+  const DPTextField({Key? key, this.label, this.hintText, this.autofocus = false, this.isPassword = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: TextField(
+        obscureText: isPassword,
+        enableSuggestions: !isPassword,
+        autocorrect: !isPassword,
         autofocus: autofocus,
         style: const TextStyle(fontSize: 16),
         cursorColor: Colors.black,

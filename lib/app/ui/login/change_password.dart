@@ -50,14 +50,17 @@ class ChangePasswordPage extends StatelessWidget {
                       SizedBox(height: 12),
                       SizedBox(height: 24),
                       DPTextField(
+                        isPassword: true,
                         label: "현재 비밀번호",
                       ),
                       SizedBox(height: 16),
                       DPTextField(
+                        isPassword: true,
                         label: "변경할 비밀번호",
                       ),
                       SizedBox(height: 16),
                       DPTextField(
+                        isPassword: true,
                         label: "한번 더 입력해주세요",
                       ),
                     ],
