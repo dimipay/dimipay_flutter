@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class ChangePasswordPage extends StatelessWidget {
   final FocusNode textFieldFocusNode = FocusNode();
+  static TextEditingController current = TextEditingController();
   ChangePasswordPage({Key? key}) : super(key: key);
 
   @override
@@ -19,42 +20,47 @@ class ChangePasswordPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      '보안을 위해 비밀번호를 변경해주세요',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                    ),
-                    const SizedBox(height: 18),
-                    const Text(
-                      '비밀번호가 초기 설정 이후 변경되지 않았거나 아이디와 똑같이 설정되어 있어요.',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(height: 18),
-                    const CheckPassword(title: "숫자가 포함되어있어요", checked: false),
-                    const SizedBox(height: 12),
-                    const CheckPassword(title: "7자 이상이예요", checked: false),
-                    const SizedBox(height: 12),
-                    const CheckPassword(title: "아이디와 동일하지 않아요", checked: false),
-                    const SizedBox(height: 12),
-                    const SizedBox(height: 24),
-                    GestureDetector(
-                      onTap: () {
-                        textFieldFocusNode.requestFocus();
-                      },
-                      child: const DPTextField(
+            Flexible(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        '보안을 위해 비밀번호를 변경해주세요',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(height: 18),
+                      Text(
+                        '비밀번호가 초기 설정 이후 변경되지 않았거나 아이디와 똑같이 설정되어 있어요.',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      SizedBox(height: 18),
+                      CheckPassword(title: "숫자가 포함되어있어요", checked: true),
+                      SizedBox(height: 12),
+                      CheckPassword(title: "7자 이상이예요", checked: false),
+                      SizedBox(height: 12),
+                      CheckPassword(title: "아이디와 동일하지 않아요", checked: false),
+                      SizedBox(height: 12),
+                      SizedBox(height: 24),
+                      DPTextField(
                         label: "현재 비밀번호",
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 16),
+                      DPTextField(
+                        label: "변경할 비밀번호",
+                      ),
+                      SizedBox(height: 16),
+                      DPTextField(
+                        label: "한번 더 입력해주세요",
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
