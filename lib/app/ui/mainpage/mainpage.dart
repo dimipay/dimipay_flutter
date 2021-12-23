@@ -1,4 +1,5 @@
 import 'package:dimipay/app/routes/routes.dart';
+import 'package:dimipay/app/ui/widgets/bottom_navigation.dart';
 import 'package:dimipay/app/ui/widgets/button.dart';
 import 'package:dimipay/app/ui/widgets/card.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(249, 249, 249, 1),
+      bottomNavigationBar: const BottomNav(),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -21,9 +23,6 @@ class MainPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 40,
-                  ),
                   const DPLogo(),
                   const SizedBox(height: 24),
                   DPCard(
@@ -32,7 +31,10 @@ class MainPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
-                        Text('7월 3일 점검 예정', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+                        Text(
+                          '7월 3일 점검 예정',
+                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                        ),
                         SizedBox(height: 4),
                         Text(
                           '17시부터 19시까지는 매점을 이용하실 수 없습니다',
