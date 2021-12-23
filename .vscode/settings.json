@@ -1,0 +1,9 @@
+{
+	"[dart]": {
+		"editor.tabSize": 2,
+		"editor.insertSpaces": false,
+		"editor.detectIndentation": false,
+		"editor.wordWrap": "off"
+	},
+	"dart.lineLength": 9999,
+}
