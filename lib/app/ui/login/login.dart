@@ -38,9 +38,7 @@ class LoginPage extends StatelessWidget {
                         label: "ID",
                       ),
                     ),
-                    SizedBox(
-                      height: 18,
-                    ),
+                    const SizedBox(height: 18),
                     GestureDetector(
                       onTap: () {
                         textFieldFocusNode.requestFocus();

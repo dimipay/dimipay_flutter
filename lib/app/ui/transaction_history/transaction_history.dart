@@ -181,7 +181,7 @@ class TransactionCalendarViewer extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 450),
+            constraints: const BoxConstraints(maxWidth: 450),
             child: Row(
               children: [
                 TransactionCalendarViewerDateItem(date: DateTime(2021, 12, 19)),
