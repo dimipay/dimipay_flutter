@@ -119,6 +119,12 @@ class Home extends StatelessWidget {
             },
             child: const Text('CHANGEPASSWORD'),
           ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.UNTITLED);
+            },
+            child: const Text('UNTITLED'),
+          ),
         ],
       ),
     );
