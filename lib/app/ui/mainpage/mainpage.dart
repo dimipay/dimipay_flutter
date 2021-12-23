@@ -50,10 +50,8 @@ class MainPage extends StatelessWidget {
                       const SizedBox(height: 36),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: const [
                               Text(
                                 '진행중인 이벤트',
@@ -138,7 +136,6 @@ class PaymentsContainer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(

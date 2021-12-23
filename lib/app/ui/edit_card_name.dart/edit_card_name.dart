@@ -15,13 +15,11 @@ class EditCardNamePage extends StatelessWidget {
       appBar: AppBar(),
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text(
                     '카드의 이름을 입력해주세요',

@@ -16,15 +16,10 @@ class BottomNav extends StatelessWidget {
             label: "",
             icon: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SvgPicture.asset("asset/images/qrcode.svg"),
                 const SizedBox(width: 6),
-                const Text("결제",
-                    style: TextStyle(
-                        color: mainColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600)),
+                const Text("결제", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
               ],
             )),
         BottomNavigationBarItem(
@@ -34,11 +29,7 @@ class BottomNav extends StatelessWidget {
               children: [
                 SvgPicture.asset("asset/images/coupon.svg"),
                 const SizedBox(width: 6),
-                const Text("쿠폰",
-                    style: TextStyle(
-                        color: mainColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600)),
+                const Text("쿠폰", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
               ],
             )),
         BottomNavigationBarItem(
@@ -48,11 +39,7 @@ class BottomNav extends StatelessWidget {
             children: [
               SvgPicture.asset("asset/images/profile.svg"),
               const SizedBox(width: 6),
-              const Text("정보",
-                  style: TextStyle(
-                      color: mainColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600)),
+              const Text("정보", style: TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
             ],
           ),
         ),

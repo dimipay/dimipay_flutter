@@ -12,7 +12,6 @@ class ChargingAmountPage extends StatelessWidget {
       appBar: AppBar(),
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(

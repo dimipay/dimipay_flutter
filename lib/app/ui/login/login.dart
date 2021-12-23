@@ -14,7 +14,6 @@ class LoginPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
