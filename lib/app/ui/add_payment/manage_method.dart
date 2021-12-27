@@ -69,9 +69,7 @@ class _ManageMethodPageState extends State<ManageMethodPage> {
                             ),
                           ],
                         ),
-                        onTap: () {
-                          Get.toNamed(Routes.ASKAUTOCHARGE);
-                        },
+                        onTap: () {},
                       )
                     ],
                   ),

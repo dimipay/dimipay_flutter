@@ -43,7 +43,6 @@ class AskAutoChargePage extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Get.offNamed(Routes.CHARGINGAMOUNT);
               },
               child: const Text(
                 "자동 충전은 안할게요",
@@ -57,7 +56,6 @@ class AskAutoChargePage extends StatelessWidget {
                 text: '다음',
                 width: double.infinity,
                 onTap: () {
-                  Get.offNamed(Routes.CHARGINGAMOUNT);
                 },
               ),
             ),
