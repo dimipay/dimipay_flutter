@@ -29,6 +29,5 @@ class AppPages {
     GetPage(name: Routes.ASKSCAN, page: () => const AskScanPage()),
     GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage()),
     GetPage(name: Routes.CARDFIN, page: () => const CardFinPage()),
-    GetPage(name: Routes.COUPONLIST, page: () => const CouponListPage()),
   ];
 }

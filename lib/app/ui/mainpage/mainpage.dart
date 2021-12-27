@@ -129,9 +129,7 @@ class Coupon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Get.toNamed(Routes.COUPONLIST);
-      },
+      onTap: () {},
       child: Stack(
         alignment: Alignment.center,
         children: [
