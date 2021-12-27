@@ -1,5 +1,4 @@
 import 'package:dimipay/app/routes/routes.dart';
-import 'package:dimipay/app/ui/dialog/payment_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
