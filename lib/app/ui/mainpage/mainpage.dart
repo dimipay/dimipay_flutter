@@ -61,9 +61,8 @@ class MainPage extends StatelessWidget {
             const SizedBox(
               height: 80,
             ),
-            const CardPage(
-              hasCard: true,
-            )
+            //const CardPage(hasCard: true)
+            Coupon()
           ],
         ),
       ),
@@ -120,6 +119,29 @@ class CardPage extends StatelessWidget {
           style: TextStyle(color: Colors.grey),
         )
       ],
+    );
+  }
+}
+
+class Coupon extends StatelessWidget {
+  const Coupon({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Get.toNamed(Routes.COUPONLIST);
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          SvgPicture.asset("asset/images/coupon_vertical.svg"),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [Text("Coupon", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)), Text("쿠폰이 5개 있어요?")],
+          )
+        ],
+      ),
     );
   }
 }
