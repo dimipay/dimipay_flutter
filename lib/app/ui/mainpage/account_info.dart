@@ -62,11 +62,11 @@ class TransactionGroup extends StatelessWidget {
     List<List<Transaction>> temp = [];
     List<int> day = [];
 
-    int last = this.tranactions[0].date.day;
-    temp.add([this.tranactions[0]]);
-    day.add(this.tranactions[0].date.day);
+    int last = tranactions[0].date.day;
+    temp.add([tranactions[0]]);
+    day.add(tranactions[0].date.day);
 
-    for (int i = 1; i < this.tranactions.length; i++) {}
+    for (int i = 1; i < tranactions.length; i++) {}
     return Container();
   }
 }
