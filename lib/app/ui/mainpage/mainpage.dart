@@ -5,6 +5,7 @@ import 'package:dimipay/app/ui/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -13,85 +14,56 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(249, 249, 249, 1),
-      bottomNavigationBar: const BottomNav(),
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Flexible(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 24),
-                      const DPLogo(),
-                      const SizedBox(height: 24),
-                      DPCard(
-                        isHighlighted: true,
-                        width: double.infinity,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              '7월 3일 점검 예정',
-                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              '17시부터 19시까지는 매점을 이용하실 수 없습니다',
-                              style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
-                            ),
-                          ],
-                        ),
-                        padding: const EdgeInsets.all(24),
-                      ),
-                      const SizedBox(height: 36),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Row(
-                            children: const [
-                              Text(
-                                '진행중인 이벤트',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(width: 12),
-                              Text(
-                                '3개',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4)),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(width: 12),
-                          SvgPicture.asset('asset/images/arrow_right_8.svg', semanticsLabel: 'arrow_right'),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      DPCard(
-                        width: double.infinity,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text('세기말 아이스크림 할인', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
-                            SizedBox(height: 4),
-                            Text(
-                              '아이스크림 전 품목 100원 할인',
-                              style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
-                            ),
-                          ],
-                        ),
-                        padding: const EdgeInsets.all(24),
-                      ),
-                    ],
+            Padding(
+              padding: const EdgeInsets.all(32),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Expanded(
+                    child: Text(
+                      "Dimi Pay",
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.NOTIFICATION);
+                    },
+                    child: const CircleAvatar(
+                      radius: 24,
+                      backgroundColor: Color(0xffe0e0e0),
+                      child: Icon(
+                        FeatherIcons.bell,
+                        color: Color(0xff404040),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.ACCOUNTINFO);
+                    },
+                    child: const CircleAvatar(
+                      radius: 24,
+                      //backgroundImage: AssetImage("asset/images/Image11.png"),
+                      backgroundImage: NetworkImage("https://flyclipart.com/thumb2/boss-circle-man-person-profile-staff-user-icon-133441.png"),
+                    ),
+                  ),
+                ],
               ),
             ),
-            const PaymentsContainer(),
+            const SizedBox(
+              height: 80,
+            ),
+            const CardPage(
+              hasCard: true,
+            )
           ],
         ),
       ),
@@ -99,123 +71,119 @@ class MainPage extends StatelessWidget {
   }
 }
 
-class DPLogo extends StatelessWidget {
-  const DPLogo({
-    Key? key,
-  }) : super(key: key);
+class CardPage extends StatelessWidget {
+  final bool hasCard;
+  final String text;
+  const CardPage({Key? key, this.hasCard = false, this.text = ""}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        SvgPicture.asset('asset/images/logo.svg'),
-        const SizedBox(width: 12),
-        const Text('DIMIPAY', style: TextStyle(color: Color.fromRGBO(46, 164, 171, 1), fontFamily: 'Montserrat', fontSize: 26)),
+    Size size = MediaQuery.of(context).size;
+
+    if (hasCard == false) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(
+            height: size.height * (400 / 844),
+            width: size.width * (250 / 390),
+            child: const Center(
+              child: CircleAvatar(
+                radius: 50,
+                backgroundColor: Color(0xffe0e0e0),
+                child: Icon(
+                  FeatherIcons.plus,
+                  color: Color(0xff404040),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Text(
+            "카드를 추가하세요",
+            style: TextStyle(color: Colors.grey),
+          )
+        ],
+      );
+    }
+
+    return Column(
+      children: const [
+        DPRealCard(),
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          "두번 탭 하여 결제",
+          style: TextStyle(color: Colors.grey),
+        )
       ],
     );
   }
 }
 
-class PaymentsContainer extends StatelessWidget {
-  const PaymentsContainer({Key? key}) : super(key: key);
+class DPRealCard extends StatelessWidget {
+  const DPRealCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(12),
-          topRight: Radius.circular(12),
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(30),
+
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.grey,
+            offset: Offset(3, 2),
+            blurRadius: 22,
+          )
+        ], // 수정 필요
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            RotatedBox(
+              quarterTurns: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text("국민카드", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                  Text("10/26", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: size.width * (25 / 390),
+            ),
+            RotatedBox(
+              quarterTurns: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text("1234", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                  Text("1234", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                  Text("1234", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                  Text("1234", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: size.width * (57 / 390),
+            ),
+            Expanded(child: SvgPicture.asset("asset/images/ic_chip.svg")),
+          ],
         ),
       ),
-      padding: const EdgeInsets.symmetric(vertical: 24),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  '매점 오프라인 결제',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(width: 24),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(Routes.MANAGEMETHOD);
-                  },
-                  child: const Text(
-                    '결제수단 설정',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4), fontWeight: FontWeight.normal, decoration: TextDecoration.underline),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: const [
-                SizedBox(width: 24),
-                DPSmallCardPayment(title: '국민카드', subtitle: '카드결제', color: Color.fromRGBO(118, 108, 98, 1)),
-                SizedBox(width: 12),
-                DPSmallCardPayment(title: '쿠폰만 쓰기', color: Color.fromRGBO(106, 106, 106, 0.4)),
-                SizedBox(width: 24),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
-            child: DPLargeTextButton(text: '결제 시작하기', width: double.infinity),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class DPSmallCardPayment extends StatelessWidget {
-  final String title;
-  final String? subtitle;
-  final Color color;
-  const DPSmallCardPayment({Key? key, required this.title, required this.color, this.subtitle}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      height: 120,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-        color: color,
-      ),
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          subtitle == null
-              ? Container()
-              : Column(
-                  children: const [
-                    Text(
-                      '카드결제',
-                      style: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.4), fontSize: 16),
-                    ),
-                    SizedBox(height: 4),
-                  ],
-                ),
-          Text(
-            title,
-            style: const TextStyle(color: Colors.white, fontFamily: 'NEXON Lv1 Gothic', fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
+      height: size.height * (400 / 844),
+      width: size.width * (250 / 390),
     );
   }
 }

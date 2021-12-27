@@ -44,94 +44,10 @@ class Home extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.ACCOUNTINFO);
+              Get.toNamed(Routes.ASKSCAN);
             },
-            child: const Text("ACCOUNTINFO"),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.MANAGEMETHOD);
-            },
-            child: const Text("MANAGEMETHOD"),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.REGISTERCARD);
-            },
-            child: const Text("REGISTERCARD"),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.ASKAUTOCHARGE);
-            },
-            child: const Text("ASKAUTOCHARGE"),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.SELECTCHARGINGMETHOD);
-            },
-            child: const Text("SELECTCHARGINGMETHOD"),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.EDITCARDNAME);
-            },
-            child: const Text("EDITCARDNAME"),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.CARDFIN);
-            },
-            child: const Text("CARDFIN"),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.CHARGINGFIN);
-            },
-            child: const Text("CHARGINGFIN"),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.CHARGINGAMOUNT);
-            },
-            child: const Text("CHARGINGAMOUNT"),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.COUPONLIST);
-            },
-            child: const Text('COUPONLIST'),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.TRANSACTIONHISTORY);
-            },
-            child: const Text('TRANSACTIONHISTORY'),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.LOGIN);
-            },
-            child: const Text('LOGIN'),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.dialog(const PaymentDialog());
-            },
-            child: const Text('PAYMENTDIALOG'),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.CHANGEPASSWORD);
-            },
-            child: const Text('CHANGEPASSWORD'),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.UNTITLED);
-            },
-            child: const Text('UNTITLED'),
-          ),
+            child: const Text("ASKSCAN"),
+          )
         ],
       ),
     );

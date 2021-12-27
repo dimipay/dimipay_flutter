@@ -1,27 +1,18 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:dimipay/app/ui/add_payment/manage_method.dart';
 import 'package:dimipay/app/ui/card_fin/card_fin.dart';
-import 'package:dimipay/app/ui/charging/ask_autocharge.dart';
-import 'package:dimipay/app/ui/charging/charging_amount.dart';
-import 'package:dimipay/app/ui/charging/charging_fin.dart';
-import 'package:dimipay/app/ui/charging/select_charging_method.dart';
-import 'package:dimipay/app/ui/coupon_list/coupon_list.dart';
-import 'package:dimipay/app/ui/edit_card_name.dart/edit_card_name.dart';
-import 'package:dimipay/app/ui/login/change_password.dart';
-import 'package:dimipay/app/ui/login/login.dart';
-import 'package:dimipay/app/ui/login/untitled.dart';
 import 'package:dimipay/app/ui/mainpage/account_info.dart';
 import 'package:dimipay/app/ui/mainpage/mainpage.dart';
+import 'package:dimipay/app/ui/notification/notifications.dart';
+import 'package:dimipay/app/ui/register_card/ask_scan.dart';
 import 'package:dimipay/app/ui/register_card/register_card.dart';
-import 'package:dimipay/app/ui/transaction_history/transaction_history.dart';
 import 'package:dimipay/main.dart';
 import 'package:get/get.dart';
 
 abstract class Routes {
   static const INITIAL = '/';
   static const MAINPAGE = '/MainPage';
-  static const ACCOUNTINFO = '/AccountInfo';
+  static const ACCOUNTINFO = '/MainPage/AccountInfo';
   static const MANAGEMETHOD = '/MainPage/ManageMethod';
   static const REGISTERCARD = '/RegisterCard';
   static const ASKAUTOCHARGE = '/AskAutoCharge';
@@ -35,8 +26,18 @@ abstract class Routes {
   static const LOGIN = "/login";
   static const CHANGEPASSWORD = "/ChangePassword";
   static const UNTITLED = "/Untitled";
+  static const NOTIFICATION = "/MainPage/Notification";
+  static const ASKSCAN = "/AskScan";
 }
 
 class AppPages {
-  static final pages = [GetPage(name: Routes.INITIAL, page: () => const Home()), GetPage(name: Routes.MAINPAGE, page: () => const MainPage()), GetPage(name: Routes.ACCOUNTINFO, page: () => const AccountInfoPage()), GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage()), GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage()), GetPage(name: Routes.ASKAUTOCHARGE, page: () => const AskAutoChargePage()), GetPage(name: Routes.SELECTCHARGINGMETHOD, page: () => const SelectChargingMethodPage()), GetPage(name: Routes.EDITCARDNAME, page: () => EditCardNamePage()), GetPage(name: Routes.CARDFIN, page: () => const CardFinPage()), GetPage(name: Routes.CHARGINGFIN, page: () => const ChargingFinPage()), GetPage(name: Routes.CHARGINGAMOUNT, page: () => ChargingAmountPage()), GetPage(name: Routes.COUPONLIST, page: () => const CouponListPage()), GetPage(name: Routes.TRANSACTIONHISTORY, page: () => const TransactionHistoryPage()), GetPage(name: Routes.LOGIN, page: () => LoginPage()), GetPage(name: Routes.CHANGEPASSWORD, page: () => ChangePasswordPage()), GetPage(name: Routes.UNTITLED, page: () => const Untitled())];
+  static final pages = [
+    GetPage(name: Routes.INITIAL, page: () => const Home()),
+    GetPage(name: Routes.MAINPAGE, page: () => const MainPage()),
+    GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage()),
+    GetPage(name: Routes.ACCOUNTINFO, page: () => const AccountInfoPage()),
+    GetPage(name: Routes.ASKSCAN, page: () => const AskScanPage()),
+    GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage()),
+    GetPage(name: Routes.CARDFIN, page: () => const CardFinPage()),
+  ];
 }

@@ -134,3 +134,14 @@ class DPSmallTextButton extends StatelessWidget {
     );
   }
 }
+
+class DPBlackButton extends StatelessWidget {
+  final String text;
+  final Function()? onTap;
+  const DPBlackButton({Key? key, required this.text, this.onTap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(onTap: onTap, child: Container(padding: const EdgeInsets.all(18), width: double.infinity, decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: Colors.black), child: Text(text, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold))));
+  }
+}

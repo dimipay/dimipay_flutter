@@ -1,6 +1,8 @@
+import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/ui/widgets/button.dart';
 import 'package:dimipay/app/ui/widgets/text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RegisterCardPage extends StatelessWidget {
   const RegisterCardPage({Key? key}) : super(key: key);
@@ -9,10 +11,10 @@ class RegisterCardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text('Register Card Page')),
+      appBar: AppBar(title: const Text('카드 정보 입력')),
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Flexible(
               child: SingleChildScrollView(
@@ -20,9 +22,6 @@ class RegisterCardPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
                     children: [
-                      const SizedBox(height: 24),
-                      Container(height: 322, color: Colors.black),
-                      const SizedBox(height: 32),
                       const DPTextField(
                         label: '카드 번호',
                         hintText: '카드 번호 16자리를 입력해주세요',
@@ -58,7 +57,12 @@ class RegisterCardPage extends StatelessWidget {
             Container(
               color: Colors.white,
               padding: const EdgeInsets.all(24),
-              child: const DPMediumTextButton(text: '다음', width: double.infinity),
+              child: DPBlackButton(
+                text: "다음",
+                onTap: () {
+                  Get.toNamed(Routes.CARDFIN);
+                },
+              ),
             )
           ],
         ),
