@@ -1,3 +1,4 @@
+import 'package:dimipay/app/ui/ui_asset.dart';
 import 'package:flutter/material.dart';
 
 class DPBaseButton extends StatelessWidget {
@@ -143,5 +144,23 @@ class DPBlackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(onTap: onTap, child: Container(padding: const EdgeInsets.all(18), width: double.infinity, decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: Colors.black), child: Text(text, textAlign: TextAlign.center, style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold))));
+  }
+}
+
+class DPCircularButton extends StatelessWidget {
+  final Icon icon;
+  const DPCircularButton({Key? key, required this.icon}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 48,
+      height: 48,
+      decoration: BoxDecoration(
+        color: DPColors.lightGray,
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Center(child: icon),
+    );
   }
 }

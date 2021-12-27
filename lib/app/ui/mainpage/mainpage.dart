@@ -1,4 +1,5 @@
 import 'package:dimipay/app/routes/routes.dart';
+import 'package:dimipay/app/ui/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -19,37 +20,31 @@ class MainPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(
-                    child: Text(
-                      "Dimi Pay",
-                      style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                    ),
+                  const Text(
+                    "Dimi Pay",
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed(Routes.NOTIFICATION);
-                    },
-                    child: const CircleAvatar(
-                      radius: 24,
-                      backgroundColor: Color(0xffe0e0e0),
-                      child: Icon(
-                        FeatherIcons.bell,
-                        color: Color(0xff404040),
+                  Row(
+                    children: [
+                      InkWell(
+                          onTap: () {
+                            Get.toNamed(Routes.NOTIFICATION);
+                          },
+                          child: const DPCircularButton(icon: Icon(FeatherIcons.bell))),
+                      const SizedBox(
+                        width: 12,
                       ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed(Routes.ACCOUNTINFO);
-                    },
-                    child: const CircleAvatar(
-                      radius: 24,
-                      //backgroundImage: AssetImage("asset/images/Image11.png"),
-                      backgroundImage: NetworkImage("https://flyclipart.com/thumb2/boss-circle-man-person-profile-staff-user-icon-133441.png"),
-                    ),
+                      InkWell(
+                        onTap: () {
+                          Get.toNamed(Routes.ACCOUNTINFO);
+                        },
+                        child: const CircleAvatar(
+                          radius: 24,
+                          //backgroundImage: AssetImage("asset/images/Image11.png"),
+                          backgroundImage: NetworkImage("https://flyclipart.com/thumb2/boss-circle-man-person-profile-staff-user-icon-133441.png"),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
