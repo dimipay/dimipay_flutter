@@ -1,7 +1,4 @@
 import 'package:dimipay/app/routes/routes.dart';
-import 'package:dimipay/app/ui/widgets/bottom_navigation.dart';
-import 'package:dimipay/app/ui/widgets/button.dart';
-import 'package:dimipay/app/ui/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -13,7 +10,6 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(249, 249, 249, 1),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -26,7 +22,7 @@ class MainPage extends StatelessWidget {
                   const Expanded(
                     child: Text(
                       "Dimi Pay",
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                     ),
                   ),
                   InkWell(

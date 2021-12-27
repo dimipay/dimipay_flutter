@@ -1,7 +1,5 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:dimipay/app/ui/card_fin/card_fin.dart';
-import 'package:dimipay/app/ui/coupon_list/coupon_list.dart';
 import 'package:dimipay/app/ui/mainpage/account_info.dart';
 import 'package:dimipay/app/ui/mainpage/mainpage.dart';
 import 'package:dimipay/app/ui/notification/notifications.dart';
@@ -28,6 +26,5 @@ class AppPages {
     GetPage(name: Routes.ACCOUNTINFO, page: () => const AccountInfoPage()),
     GetPage(name: Routes.ASKSCAN, page: () => const AskScanPage()),
     GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage()),
-    GetPage(name: Routes.CARDFIN, page: () => const CardFinPage()),
   ];
 }
