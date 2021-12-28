@@ -36,6 +36,7 @@ dependencies:
   get: ^4.6.1
   flutter_svg: ^1.0.0
   flutter_feather_icons: ^2.0.0+1
+  carousel_slider: ^4.0.0
 
 dev_dependencies:
   flutter_test:

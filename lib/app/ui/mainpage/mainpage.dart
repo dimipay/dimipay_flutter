@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class MainPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    "Dimi Pay",
+                    "Pay",
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                   Row(
@@ -53,7 +54,15 @@ class MainPage extends StatelessWidget {
               height: 80,
             ),
             //const CardPage(hasCard: true)
-            Coupon()
+            CarouselSlider(items: [
+              CardPage(
+                hasCard: false,
+              ),
+              CardPage(
+                hasCard: true,
+              ),
+              Coupon()
+            ], options: CarouselOptions(height: 465, enableInfiniteScroll: false, enlargeCenterPage: true))
           ],
         ),
       ),
@@ -72,19 +81,15 @@ class CardPage extends StatelessWidget {
 
     if (hasCard == false) {
       return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: size.height * (400 / 844),
-            width: size.width * (250 / 390),
-            child: const Center(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundColor: Color(0xffe0e0e0),
-                child: Icon(
-                  FeatherIcons.plus,
-                  color: Color(0xff404040),
-                ),
+          const Center(
+            child: CircleAvatar(
+              radius: 50,
+              backgroundColor: Color(0xffe0e0e0),
+              child: Icon(
+                FeatherIcons.plus,
+                color: Color(0xff404040),
               ),
             ),
           ),
@@ -119,17 +124,24 @@ class Coupon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return InkWell(
       onTap: () {},
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          SvgPicture.asset("asset/images/coupon_vertical.svg"),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text("Coupon", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)), Text("쿠폰이 5개 있어요?")],
-          )
-        ],
+      child: Container(
+        height: size.height * (400 / 844),
+        width: size.width * (250 / 390),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            SvgPicture.asset("asset/images/coupon_vertical.svg"),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [Text("Coupon", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)), Text("쿠폰이 5개 있어요?")],
+            )
+          ],
+        ),
       ),
     );
   }
