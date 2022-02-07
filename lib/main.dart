@@ -1,3 +1,4 @@
+import 'package:dimipay/app/routes/pages.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/ui/dialog/payment_dialog.dart';
 import 'package:flutter/material.dart';
@@ -38,9 +39,9 @@ class Home extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.MAINPAGE);
+              Get.toNamed(Routes.HOME);
             },
-            child: const Text("MAINPAGE"),
+            child: const Text("HOME"),
           ),
           TextButton(
             onPressed: () {
@@ -131,6 +132,12 @@ class Home extends StatelessWidget {
               Get.toNamed(Routes.UNTITLED);
             },
             child: const Text('UNTITLED'),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.ADDPAYMENT);
+            },
+            child: const Text('ADDPAYMENT'),
           ),
         ],
       ),
