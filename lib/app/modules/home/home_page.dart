@@ -5,8 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
-class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
