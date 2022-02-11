@@ -1,7 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 abstract class Routes {
-  static const INITIAL = '/';
+  static const TEST = '/Test';
+  static const MAIN = '/';
   static const HOME = '/Home';
   static const ACCOUNTINFO = '/AccountInfo';
   static const MANAGEMETHOD = '/MainPage/ManageMethod';

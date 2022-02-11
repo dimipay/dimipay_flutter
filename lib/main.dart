@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 void main() {
   runApp(
     GetMaterialApp(
-      initialRoute: Routes.INITIAL,
+      initialRoute: Routes.TEST,
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -37,6 +37,12 @@ class Home extends StatelessWidget {
       ),
       body: ListView(
         children: [
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.MAIN);
+            },
+            child: const Text("MAIN"),
+          ),
           TextButton(
             onPressed: () {
               Get.toNamed(Routes.HOME);

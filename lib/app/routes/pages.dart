@@ -1,26 +1,28 @@
-import 'package:dimipay/app/modules/card_fin/card_fin.dart';
-import 'package:dimipay/app/modules/charging_amount/charging_amount.dart';
-import 'package:dimipay/app/modules/coupon_list/coupon_list.dart';
-import 'package:dimipay/app/modules/login/login.dart';
-import 'package:dimipay/app/modules/register_card/register_card.dart';
-import 'package:dimipay/app/modules/transaction_history/transaction_history.dart';
+import 'package:dimipay/app/modules/card_fin/page.dart';
+import 'package:dimipay/app/modules/charging_amount/page.dart';
+import 'package:dimipay/app/modules/coupon_list/page.dart';
+import 'package:dimipay/app/modules/login/page.dart';
+import 'package:dimipay/app/modules/main/page.dart';
+import 'package:dimipay/app/modules/register_card/page.dart';
+import 'package:dimipay/app/modules/transaction_history/page.dart';
 import 'package:dimipay/app/routes/routes.dart';
-import 'package:dimipay/app/modules/manage_method/manage_method.dart';
-import 'package:dimipay/app/modules/ask_auto_charge/ask_autocharge.dart';
-import 'package:dimipay/app/modules/charging_fin/charging_fin.dart';
-import 'package:dimipay/app/modules/select_charging_method/select_charging_method.dart';
-import 'package:dimipay/app/modules/edit_card_name/edit_card_name.dart';
-import 'package:dimipay/app/modules/change_password/change_password.dart';
-import 'package:dimipay/app/modules/untitled/untitled.dart';
-import 'package:dimipay/app/modules/account_info/account_info.dart';
-import 'package:dimipay/app/modules/home/home_page.dart';
-import 'package:dimipay/app/modules/add_payment/add_payment.dart';
+import 'package:dimipay/app/modules/manage_method/page.dart';
+import 'package:dimipay/app/modules/ask_auto_charge/page.dart';
+import 'package:dimipay/app/modules/charging_fin/page.dart';
+import 'package:dimipay/app/modules/select_charging_method/page.dart';
+import 'package:dimipay/app/modules/edit_card_name/page.dart';
+import 'package:dimipay/app/modules/change_password/page.dart';
+import 'package:dimipay/app/modules/untitled/page.dart';
+import 'package:dimipay/app/modules/account_info/page.dart';
+import 'package:dimipay/app/modules/home/page.dart';
+import 'package:dimipay/app/modules/add_payment/page.dart';
 import 'package:dimipay/main.dart';
 import 'package:get/get.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(name: Routes.INITIAL, page: () => const Home()),
+    GetPage(name: Routes.TEST, page: () => const Home()),
+    GetPage(name: Routes.MAIN, page: () => MainPage()),
     GetPage(name: Routes.HOME, page: () => const HomePage()),
     GetPage(name: Routes.ACCOUNTINFO, page: () => const AccountInfoPage()),
     GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage()),
