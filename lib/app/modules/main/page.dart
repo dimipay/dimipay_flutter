@@ -1,4 +1,4 @@
-import 'package:dimipay/app/core/values/colors.dart';
+import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/modules/account_info/page.dart';
 import 'package:dimipay/app/modules/coupon_list/page.dart';
 import 'package:dimipay/app/modules/home/page.dart';
@@ -38,7 +38,7 @@ class MainPage extends GetView<MainPageController> {
         return Container();
       }),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
+        backgroundColor: DPColors.DARK6,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         onTap: (index) {
