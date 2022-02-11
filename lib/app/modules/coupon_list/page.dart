@@ -1,5 +1,4 @@
 import 'package:dimipay/app/core/values/colors.dart';
-import 'package:dimipay/app/modules/home/widgets/bottom_navigation.dart';
 import 'package:dimipay/app/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,7 +10,6 @@ class CouponListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('쿠폰')),
-      bottomNavigationBar: const BottomNav(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),

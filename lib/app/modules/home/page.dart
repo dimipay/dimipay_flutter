@@ -1,5 +1,4 @@
 import 'package:dimipay/app/routes/routes.dart';
-import 'package:dimipay/app/modules/home/widgets/bottom_navigation.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/card.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(249, 249, 249, 1),
-      bottomNavigationBar: const BottomNav(),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
