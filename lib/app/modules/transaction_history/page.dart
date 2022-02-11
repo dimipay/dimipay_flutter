@@ -50,7 +50,7 @@ class TransactionHistoryPage extends StatelessWidget {
                             const SizedBox(height: 36),
                             const Text(
                               '3월 결제 기록 보기',
-                              style: TextStyle(color: mainColor, decoration: TextDecoration.underline),
+                              style: TextStyle(color: DPColors.MAIN_THEME, decoration: TextDecoration.underline),
                             ),
                             const SizedBox(height: 36),
                           ],
@@ -144,7 +144,7 @@ class TransactionWidget extends StatelessWidget {
         const SizedBox(width: 53),
         Text(
           '${transaction.price}원',
-          style: const TextStyle(fontSize: 16, color: mainColor, fontWeight: FontWeight.w600),
+          style: const TextStyle(fontSize: 16, color: DPColors.MAIN_THEME, fontWeight: FontWeight.w600),
         ),
       ],
     );
@@ -225,7 +225,7 @@ class TransactionCalendarViewerDateItem extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: isHighlighted ? mainColor : const Color(0xFFF9F9F9),
+                color: isHighlighted ? DPColors.MAIN_THEME : const Color(0xFFF9F9F9),
               ),
               child: Center(
                 child: Text(

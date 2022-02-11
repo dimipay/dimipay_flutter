@@ -86,7 +86,7 @@ class _CheckPasswordState extends State<CheckPassword> {
         const SizedBox(width: 4),
         Text(
           widget.title,
-          style: widget.checked ? const TextStyle(color: mainColor, decoration: TextDecoration.underline, fontWeight: FontWeight.w600) : const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
+          style: widget.checked ? const TextStyle(color: DPColors.MAIN_THEME, decoration: TextDecoration.underline, fontWeight: FontWeight.w600) : const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
         )
       ],
     );

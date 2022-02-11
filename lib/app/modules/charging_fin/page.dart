@@ -26,7 +26,7 @@ class ChargingFinPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 36),
                     DPPaymentCard(
-                      color: mainColor,
+                      color: DPColors.MAIN_THEME,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

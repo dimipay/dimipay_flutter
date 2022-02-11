@@ -86,7 +86,7 @@ class DPCouponCard extends StatelessWidget {
             children: [
               Text(
                 '$price원',
-                style: const TextStyle(color: mainColor, fontWeight: FontWeight.w600, fontSize: 16),
+                style: const TextStyle(color: DPColors.MAIN_THEME, fontWeight: FontWeight.w600, fontSize: 16),
               ),
               const SizedBox(height: 6),
               Text(

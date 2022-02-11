@@ -18,7 +18,7 @@ class MainPage extends GetView<MainPageController> {
         children: [
           SvgPicture.asset(iconPath),
           const SizedBox(width: 6),
-          Text(text, style: const TextStyle(color: mainColor, fontSize: 16, fontWeight: FontWeight.w600)),
+          Text(text, style: const TextStyle(color: DPColors.MAIN_THEME, fontSize: 16, fontWeight: FontWeight.w600)),
         ],
       ),
     );

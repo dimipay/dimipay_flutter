@@ -35,7 +35,7 @@ class PaymentDialog extends StatelessWidget {
                     ),
                     const SizedBox(height: 32),
                     DPPaymentCard(
-                      color: mainColor,
+                      color: DPColors.MAIN_THEME,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,7 +66,7 @@ class PaymentDialog extends StatelessWidget {
                     const SizedBox(height: 4),
                     const Text(
                       'NFC를 태그할 수 없나요?',
-                      style: TextStyle(color: mainColor),
+                      style: TextStyle(color: DPColors.MAIN_THEME),
                     )
                   ],
                 ),
