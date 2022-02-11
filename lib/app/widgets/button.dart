@@ -1,4 +1,66 @@
+import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+class DPIconButton extends StatelessWidget {
+  final String iconPath;
+  final int? badgeNumber;
+  const DPIconButton(this.iconPath, {this.badgeNumber, Key? key}) : super(key: key);
+
+  Widget _badge() {
+    if (badgeNumber != null) {
+      return Positioned(
+        top: 6,
+        right: 6,
+        child: Container(
+          width: 16,
+          height: 16,
+          decoration: BoxDecoration(
+            color: DPColors.MAIN_THEME,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Center(
+            child: Text(
+              badgeNumber.toString(),
+              style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+          ),
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Container(
+        width: 48,
+        height: 48,
+        decoration: BoxDecoration(
+          color: DPColors.DARK6,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: SvgPicture.asset(iconPath, color: DPColors.MAIN_THEME),
+                ),
+              ),
+            ),
+            _badge(),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class DPBaseButton extends StatelessWidget {
   final Widget child;
@@ -134,4 +196,3 @@ class DPSmallTextButton extends StatelessWidget {
     );
   }
 }
-

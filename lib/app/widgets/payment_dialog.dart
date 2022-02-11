@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:dimipay/app/core/values/colors.dart';
+import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/widgets/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

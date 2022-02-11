@@ -1,4 +1,4 @@
-import 'package:dimipay/app/core/values/colors.dart';
+import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

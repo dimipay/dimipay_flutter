@@ -1,4 +1,4 @@
-import 'package:dimipay/app/core/values/colors.dart';
+import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
