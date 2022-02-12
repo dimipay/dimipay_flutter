@@ -30,6 +30,7 @@ class DPTextField extends StatelessWidget {
           hintText: hintText,
           labelText: label,
           border: InputBorder.none,
+          counterText: "",
           fillColor: DPColors.DARK6,
           filled: true,
           hintStyle: DPTextTheme.DESCRIPTION,
