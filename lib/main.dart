@@ -1,6 +1,5 @@
 import 'package:dimipay/app/routes/pages.dart';
 import 'package:dimipay/app/routes/routes.dart';
-import 'package:dimipay/app/widgets/payment_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -109,12 +108,6 @@ class Home extends StatelessWidget {
               Get.toNamed(Routes.LOGIN);
             },
             child: const Text('LOGIN'),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.dialog(const PaymentDialog());
-            },
-            child: const Text('PAYMENTDIALOG'),
           ),
           TextButton(
             onPressed: () {
