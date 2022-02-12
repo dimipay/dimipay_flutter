@@ -7,8 +7,8 @@ class DPTextField extends StatelessWidget {
   final String? hintText;
   final bool autofocus;
   final bool isPassword;
-  final TextEditingController controller = TextEditingController();
-  DPTextField({Key? key, this.label, this.hintText, this.autofocus = false, this.isPassword = false}) : super(key: key);
+  final TextEditingController? controller;
+  DPTextField({Key? key, this.label, this.hintText, this.controller, this.autofocus = false, this.isPassword = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
