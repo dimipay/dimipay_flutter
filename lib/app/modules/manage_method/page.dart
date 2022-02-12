@@ -1,6 +1,7 @@
+import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
-import 'package:dimipay/app/widgets/card.dart';
 import 'package:dimipay/app/widgets/checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,108 +23,96 @@ class _ManageMethodPageState extends State<ManageMethodPage> {
         title: const Text('결제 수단'),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 32),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 32),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('실물카드', style: DPTextTheme.SECTION_HEADER),
+                Row(
+                  children: [
+                    DPCheckbox(
+                      value: false,
+                      onChanged: (value) {},
+                      label: '기본 결제수단',
+                    )
+                  ],
+                )
+              ],
+            ),
             const SizedBox(height: 24),
-            DPCard(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            const DPRealCard(),
+            const SizedBox(height: 24),
+            Row(
+              children: [
+                GestureDetector(
+                  child: Row(
                     children: [
-                      const Text('페이머니', style: TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4))),
-                      DPCheckbox(
-                        label: '기본 결제수단으로 설정',
-                        value: ischecked,
-                        onChanged: (value) {
-                          setState(() {
-                            ischecked = !ischecked;
-                          });
-                        },
-                      ),
+                      SvgPicture.asset('asset/images/change_card.svg'),
+                      const SizedBox(width: 6),
+                      const Text('카드 변경', style: DPTextTheme.REGULAR),
                     ],
                   ),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ),
+                const SizedBox(width: 24),
+                GestureDetector(
+                  child: Row(
                     children: [
+                      SvgPicture.asset('asset/images/delete_card.svg'),
+                      const SizedBox(width: 6),
+                      const Text('카드 삭제', style: DPTextTheme.REGULAR),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 36),
+            const Divider(height: 1, thickness: 1, color: DPColors.DARK6),
+            const SizedBox(height: 36),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('페이머니', style: DPTextTheme.SECTION_HEADER),
+                Row(
+                  children: [
+                    DPCheckbox(
+                      value: false,
+                      onChanged: (value) {},
+                      label: '기본 결제수단',
+                    )
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('2,300원', style: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontWeight: FontWeight.bold, fontSize: 20, color: DPColors.MAIN_THEME)),
+                DPSmallButton(
+                  child: Row(
+                    children: [
+                      SvgPicture.asset('asset/images/charge.svg'),
+                      const SizedBox(width: 6),
                       const Text(
-                        '2,300원',
-                        style: TextStyle(
-                          fontFamily: 'NEXON Lv1 Gothic',
-                          fontSize: 20,
-                          color: Color.fromRGBO(46, 164, 171, 1),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      DPSmallButton(
-                        child: Row(
-                          children: [
-                            SvgPicture.asset('asset/images/charge.svg'),
-                            const SizedBox(width: 6),
-                            const Text(
-                              '충전',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
-                            ),
-                          ],
-                        ),
-                        onTap: () {
-                          Get.toNamed(Routes.ASKAUTOCHARGE);
-                        },
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            DPCard(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text('실물 카드', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                      DPCheckbox(
-                        label: '기본 결제수단으로 설정',
-                        value: ischecked,
-                        onChanged: (value) {
-                          setState(() {
-                            ischecked = !ischecked;
-                          });
-                        },
+                        '충전',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
-                  const DPRealCard(),
-                  const SizedBox(height: 12),
-                  const Text('기존에 등록된 카드를 지워야 다른 카드를 등록할 수 있어요', style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4))),
-                ],
-              ),
+                  onTap: () {
+                    Get.toNamed(Routes.SELECTCHARGINGMETHOD);
+                  },
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            DPCard(
-              padding: const EdgeInsets.all(24),
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text('간편결제 서비스와 연결', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                        SizedBox(height: 6),
-                        Text('카카오페이, 네이버페이, 토스결제와 연결할 수 있어요', style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4))),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 24),
-                  SvgPicture.asset('asset/images/arrow_right_8.svg'),
-                ],
-              ),
+            const SizedBox(height: 24),
+            const Text(
+              '충전해둔 페이머니는 매점에서 현금처럼 사용할 수 있어요',
+              style: DPTextTheme.DESCRIPTION,
             ),
           ],
         ),
@@ -143,25 +132,13 @@ class DPRealCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('카드결제', style: TextStyle(fontSize: 16, color: Color.fromRGBO(255, 255, 255, 0.4))),
-              const SizedBox(height: 4),
-              Row(
-                children: [
-                  SvgPicture.asset('asset/images/edit.svg'),
-                  const SizedBox(width: 4),
-                  const Text('국민카드', style: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
-                ],
-              )
-            ],
-          ),
-          SvgPicture.asset('asset/images/delete.svg'),
+      padding: const EdgeInsets.all(18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text('카드결제', style: DPTextTheme.DESCRIPTION),
+          SizedBox(height: 4),
+          Text('국민카드', style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
         ],
       ),
     );
