@@ -20,8 +20,6 @@ class RegisterCardPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
                     children: [
-                      const SizedBox(height: 24),
-                      Container(height: 322, color: Colors.black),
                       const SizedBox(height: 32),
                       const DPTextField(
                         label: '카드 번호',
