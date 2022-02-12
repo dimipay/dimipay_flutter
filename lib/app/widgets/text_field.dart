@@ -1,3 +1,5 @@
+import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class DPTextField extends StatelessWidget {
@@ -16,16 +18,16 @@ class DPTextField extends StatelessWidget {
         enableSuggestions: !isPassword,
         autocorrect: !isPassword,
         autofocus: autofocus,
-        style: const TextStyle(fontSize: 16),
+        style: DPTextTheme.REGULAR,
         cursorColor: Colors.black,
         decoration: InputDecoration(
           hintText: hintText,
           labelText: label,
           border: InputBorder.none,
-          fillColor: const Color(0xFFF6F6F6),
+          fillColor: DPColors.DARK6,
           filled: true,
-          hintStyle: const TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4)),
-          floatingLabelStyle: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.6), fontWeight: FontWeight.w500, fontSize: 12),
+          hintStyle: DPTextTheme.DESCRIPTION,
+          floatingLabelStyle: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4), fontWeight: FontWeight.w500, fontSize: 12),
         ),
       ),
     );
