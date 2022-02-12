@@ -61,7 +61,7 @@ class SelectChargingMethodPage extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: 64),
+          const SizedBox(width: 64),
           SvgPicture.asset('asset/images/arrow_right_6.svg'),
         ],
       ),
@@ -116,7 +116,7 @@ class SelectChargingMethodPage extends StatelessWidget {
                     children: [
                       const Text(
                         '이전에 사용했던 결제수단이예요',
-                        style: TextStyle(fontSize: 14, color: Color.fromRGBO(0, 0, 0, 0.4)),
+                        style: DPTextTheme.DESCRIPTION,
                       ),
                       const SizedBox(height: 6),
                       Row(
@@ -125,7 +125,7 @@ class SelectChargingMethodPage extends StatelessWidget {
                           const SizedBox(width: 6),
                           const Text(
                             "네이버페이로 충전하기",
-                            style: TextStyle(fontSize: 16),
+                            style: DPTextTheme.REGULAR,
                           )
                         ],
                       )
