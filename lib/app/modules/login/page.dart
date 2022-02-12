@@ -22,14 +22,14 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       '디미고라이프, 디미고인에서 사용하는 계정으로 로그인 해주세요',
                       style: TextStyle(fontSize: 16),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     DPTextField(label: "ID"),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     DPTextField(label: "비밀번호", isPassword: true),
                   ],
                 ),

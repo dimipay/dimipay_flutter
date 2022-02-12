@@ -38,7 +38,7 @@ class ChargingAmountPage extends StatelessWidget {
                       onTap: () {
                         textFieldFocusNode.requestFocus();
                       },
-                      child: const DPTextField(
+                      child: DPTextField(
                         label: "충전 금액",
                         autofocus: true,
                       ),
