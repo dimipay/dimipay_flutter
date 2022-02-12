@@ -1,4 +1,3 @@
-import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class DPPaymentCard extends StatelessWidget {
