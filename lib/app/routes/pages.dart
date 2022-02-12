@@ -8,7 +8,6 @@ import 'package:dimipay/app/modules/register_card/page.dart';
 import 'package:dimipay/app/modules/transaction_history/page.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/modules/manage_method/page.dart';
-import 'package:dimipay/app/modules/ask_auto_charge/page.dart';
 import 'package:dimipay/app/modules/charging_fin/page.dart';
 import 'package:dimipay/app/modules/select_charging_method/page.dart';
 import 'package:dimipay/app/modules/edit_card_name/page.dart';
@@ -16,7 +15,6 @@ import 'package:dimipay/app/modules/change_password/page.dart';
 import 'package:dimipay/app/modules/untitled/page.dart';
 import 'package:dimipay/app/modules/account_info/page.dart';
 import 'package:dimipay/app/modules/home/page.dart';
-import 'package:dimipay/app/modules/add_payment/page.dart';
 import 'package:dimipay/main.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +26,6 @@ class AppPages {
     GetPage(name: Routes.ACCOUNTINFO, page: () => const AccountInfoPage()),
     GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage()),
     GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage()),
-    GetPage(name: Routes.ASKAUTOCHARGE, page: () => const AskAutoChargePage()),
     GetPage(name: Routes.SELECTCHARGINGMETHOD, page: () => const SelectChargingMethodPage()),
     GetPage(name: Routes.EDITCARDNAME, page: () => EditCardNamePage()),
     GetPage(name: Routes.CARDFIN, page: () => const CardFinPage()),
@@ -39,6 +36,5 @@ class AppPages {
     GetPage(name: Routes.LOGIN, page: () => LoginPage()),
     GetPage(name: Routes.CHANGEPASSWORD, page: () => const ChangePasswordPage()),
     GetPage(name: Routes.UNTITLED, page: () => const Untitled()),
-    GetPage(name: Routes.ADDPAYMENT, page: () => const AddPaymentPage()),
   ];
 }

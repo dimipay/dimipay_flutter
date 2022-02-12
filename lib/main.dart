@@ -63,12 +63,6 @@ class Home extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.ASKAUTOCHARGE);
-            },
-            child: const Text("ASKAUTOCHARGE"),
-          ),
-          TextButton(
-            onPressed: () {
               Get.toNamed(Routes.SELECTCHARGINGMETHOD);
             },
             child: const Text("SELECTCHARGINGMETHOD"),
@@ -132,12 +126,6 @@ class Home extends StatelessWidget {
               Get.toNamed(Routes.UNTITLED);
             },
             child: const Text('UNTITLED'),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.ADDPAYMENT);
-            },
-            child: const Text('ADDPAYMENT'),
           ),
         ],
       ),

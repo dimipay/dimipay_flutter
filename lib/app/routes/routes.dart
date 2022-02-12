@@ -7,7 +7,6 @@ abstract class Routes {
   static const ACCOUNTINFO = '/AccountInfo';
   static const MANAGEMETHOD = '/MainPage/ManageMethod';
   static const REGISTERCARD = '/RegisterCard';
-  static const ASKAUTOCHARGE = '/AskAutoCharge';
   static const SELECTCHARGINGMETHOD = '/SelectChargingMethod';
   static const EDITCARDNAME = '/EditCardName';
   static const CARDFIN = '/CardFin';
@@ -18,5 +17,4 @@ abstract class Routes {
   static const LOGIN = "/login";
   static const CHANGEPASSWORD = "/ChangePassword";
   static const UNTITLED = "/Untitled";
-  static const ADDPAYMENT = "/AddPayment";
 }
