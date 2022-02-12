@@ -27,6 +27,7 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                         controller: controller.cardNumberFieldController,
                         label: '카드 번호',
                         textInputType: TextInputType.number,
+                        maxLength: 16,
                         hintText: '카드 번호 16자리를 입력해주세요',
                       ),
                       const SizedBox(height: 18),
@@ -36,6 +37,7 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                             child: DPTextField(
                               controller: controller.expireDateFieldController,
                               label: '유효기간',
+                              maxLength: 4,
                               textInputType: TextInputType.number,
                               hintText: 'MM/YY',
                             ),
@@ -45,6 +47,7 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                             child: DPTextField(
                               controller: controller.birthdayFieldController,
                               label: '생년 월일',
+                              maxLength: 4,
                               textInputType: TextInputType.number,
                               hintText: '4자리로 입력',
                             ),
