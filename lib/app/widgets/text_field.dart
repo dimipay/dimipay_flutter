@@ -7,8 +7,10 @@ class DPTextField extends StatelessWidget {
   final String? hintText;
   final bool autofocus;
   final bool isPassword;
+  final int? maxLength;
+  final TextInputType? textInputType;
   final TextEditingController? controller;
-  const DPTextField({Key? key, this.label, this.hintText, this.controller, this.autofocus = false, this.isPassword = false}) : super(key: key);
+  const DPTextField({Key? key, this.label, this.hintText, this.controller, this.maxLength, this.textInputType, this.autofocus = false, this.isPassword = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,8 @@ class DPTextField extends StatelessWidget {
         autofocus: autofocus,
         style: DPTextTheme.REGULAR,
         cursorColor: Colors.black,
+        keyboardType: textInputType,
+        maxLength: maxLength,
         controller: controller,
         decoration: InputDecoration(
           hintText: hintText,
