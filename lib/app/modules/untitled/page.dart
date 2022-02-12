@@ -20,7 +20,11 @@ class Untitled extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    DPPaymentCard(color: Color(0xff757575), child: null),
+                    DPPaymentCard(
+                      color: Color(0xFF766C62),
+                      cardName: '개돼지',
+                      cardNumber: '2158',
+                    ),
                     SizedBox(
                       height: 25,
                     ),

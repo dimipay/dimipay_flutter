@@ -1,4 +1,3 @@
-import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/payment.dart';
 import 'package:flutter/material.dart';
@@ -19,35 +18,16 @@ class ChargingFinPage extends StatelessWidget {
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
+                  children: const [
+                    Text(
                       '카드를 성공적으로 등록했어요',
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                     ),
-                    const SizedBox(height: 36),
+                    SizedBox(height: 36),
                     DPPaymentCard(
-                      color: DPColors.MAIN_THEME,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                '개돼지',
-                                style: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-                              ),
-                              SizedBox(height: 4),
-                              Text('2158', style: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 16, color: Color.fromRGBO(255, 255, 255, 0.6))),
-                            ],
-                          ),
-                          const Text(
-                            '21,300 P',
-                            style: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-                          ),
-                        ],
-                      ),
+                      color: Color(0xFF766C62),
+                      cardName: '개돼지',
+                      cardNumber: '2158',
                     ),
                   ],
                 ),

@@ -30,35 +30,10 @@ class EditCardNamePage extends StatelessWidget {
                     onTap: () {
                       textFieldFocusNode.requestFocus();
                     },
-                    child: DPPaymentCard(
-                      color: const Color(0xFF766C62),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextField(
-                                autofocus: true,
-                                focusNode: textFieldFocusNode,
-                                cursorColor: Colors.white,
-                                style: const TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-                                decoration: const InputDecoration(
-                                  isDense: true,
-                                  contentPadding: EdgeInsets.all(0),
-                                  border: InputBorder.none,
-                                  hintText: '카드 이름',
-                                  hintStyle: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 18, fontWeight: FontWeight.bold, color: Color.fromRGBO(255, 255, 255, 0.4)),
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              const Text('2158', style: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontSize: 16, color: Color.fromRGBO(255, 255, 255, 0.6))),
-                            ],
-                          ),
-                          SvgPicture.asset('asset/images/kb_logo.svg'),
-                        ],
-                      ),
+                    child: const DPPaymentCard(
+                      color: Color(0xFF766C62),
+                      cardName: '개돼지',
+                      cardNumber: '2158',
                     ),
                   ),
                 ],
