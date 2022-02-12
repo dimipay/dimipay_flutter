@@ -20,6 +20,7 @@ void main() {
           foregroundColor: Colors.black,
           centerTitle: false,
         ),
+        scaffoldBackgroundColor: Colors.white,
       ),
     ),
   );
