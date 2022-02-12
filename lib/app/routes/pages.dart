@@ -4,6 +4,7 @@ import 'package:dimipay/app/modules/coupon_list/page.dart';
 import 'package:dimipay/app/modules/login/page.dart';
 import 'package:dimipay/app/modules/main/binding.dart';
 import 'package:dimipay/app/modules/main/page.dart';
+import 'package:dimipay/app/modules/register_card/binding.dart';
 import 'package:dimipay/app/modules/register_card/page.dart';
 import 'package:dimipay/app/modules/transaction_history/page.dart';
 import 'package:dimipay/app/routes/routes.dart';
@@ -25,7 +26,7 @@ class AppPages {
     GetPage(name: Routes.HOME, page: () => const HomePage()),
     GetPage(name: Routes.ACCOUNTINFO, page: () => const AccountInfoPage()),
     GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage()),
-    GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage()),
+    GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage(), binding: RegisterCardPageBinding()),
     GetPage(name: Routes.SELECTCHARGINGMETHOD, page: () => const SelectChargingMethodPage()),
     GetPage(name: Routes.EDITCARDNAME, page: () => EditCardNamePage()),
     GetPage(name: Routes.CARDFIN, page: () => const CardFinPage()),

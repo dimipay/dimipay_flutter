@@ -1,8 +1,10 @@
+import 'package:dimipay/app/modules/register_card/controller.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class RegisterCardPage extends StatelessWidget {
+class RegisterCardPage extends GetView<RegisterCardPageController> {
   const RegisterCardPage({Key? key}) : super(key: key);
 
   @override
@@ -22,6 +24,7 @@ class RegisterCardPage extends StatelessWidget {
                     children: [
                       const SizedBox(height: 32),
                       DPTextField(
+                        controller: controller.cardNumberFieldController,
                         label: '카드 번호',
                         hintText: '카드 번호 16자리를 입력해주세요',
                       ),
@@ -30,6 +33,7 @@ class RegisterCardPage extends StatelessWidget {
                         children: [
                           Flexible(
                             child: DPTextField(
+                              controller: controller.expireDateFieldController,
                               label: '유효기간',
                               hintText: 'MM/YY',
                             ),
@@ -37,6 +41,7 @@ class RegisterCardPage extends StatelessWidget {
                           const SizedBox(width: 18),
                           Flexible(
                             child: DPTextField(
+                              controller: controller.birthdayFieldController,
                               label: '생년 월일',
                               hintText: '4자리로 입력',
                             ),
@@ -45,6 +50,7 @@ class RegisterCardPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 18),
                       DPTextField(
+                        controller: controller.passwordFieldController,
                         label: '비밀번호',
                         hintText: '앞 2자리를 입력해주세요',
                       ),
