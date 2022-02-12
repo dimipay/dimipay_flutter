@@ -1,3 +1,4 @@
+import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class EditCardNamePage extends StatelessWidget {
                 children: [
                   const Text(
                     '카드의 이름을 입력해주세요',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    style: DPTextTheme.SECTION_HEADER,
                   ),
                   const SizedBox(height: 12),
                   GestureDetector(
@@ -67,7 +68,7 @@ class EditCardNamePage extends StatelessWidget {
               children: [
                 const Text(
                   '다음에 설정에서 바꿀게요',
-                  style: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
+                  style: DPTextTheme.DESCRIPTION,
                 ),
                 const SizedBox(width: 6),
                 SvgPicture.asset('asset/images/arrow_right_6.svg'),
