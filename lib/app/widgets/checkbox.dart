@@ -1,3 +1,5 @@
+import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class DPCheckbox extends StatelessWidget {
@@ -17,9 +19,10 @@ class DPCheckbox extends StatelessWidget {
             value: value,
             onChanged: onChanged,
             splashRadius: 10,
-            activeColor: const Color.fromRGBO(46, 164, 171, 1),
+            activeColor: DPColors.MAIN_THEME,
           ),
         ),
+        const SizedBox(width: 4),
         label == null
             ? Container()
             : Row(
@@ -27,7 +30,7 @@ class DPCheckbox extends StatelessWidget {
                   const SizedBox(width: 4),
                   Text(
                     label!,
-                    style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
+                    style: DPTextTheme.DESCRIPTION,
                   ),
                 ],
               ),
