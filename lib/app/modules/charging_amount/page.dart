@@ -1,3 +1,4 @@
+import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
@@ -23,14 +24,14 @@ class ChargingAmountPage extends StatelessWidget {
                   children: [
                     const Text(
                       '얼마나 충전할까요',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                      style: DPTextTheme.SECTION_HEADER,
                     ),
                     const SizedBox(height: 6),
                     const Text.rich(TextSpan(children: <TextSpan>[
-                      TextSpan(text: "현재 금액 "),
+                      TextSpan(text: "현재 잔액 ", style: DPTextTheme.REGULAR),
                       TextSpan(
                         text: "3,700원",
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: DPTextTheme.REGULAR_IMPORTANT,
                       )
                     ])),
                     const SizedBox(height: 24),
@@ -39,6 +40,7 @@ class ChargingAmountPage extends StatelessWidget {
                         textFieldFocusNode.requestFocus();
                       },
                       child: const DPTextField(
+                        textInputType: TextInputType.number,
                         label: "충전 금액",
                         autofocus: true,
                       ),
