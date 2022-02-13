@@ -1,3 +1,5 @@
+import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/payment.dart';
 import 'package:flutter/material.dart';
@@ -19,15 +21,15 @@ class ChargingFinPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Text(
-                      '카드를 성공적으로 등록했어요',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    DPPaymentCard(
+                      color: DPColors.MAIN_THEME,
+                      cardName: '페이머니',
+                      cardNumber: '잔액 3,600원',
                     ),
                     SizedBox(height: 36),
-                    DPPaymentCard(
-                      color: Color(0xFF766C62),
-                      cardName: '개돼지',
-                      cardNumber: '2158',
+                    Text(
+                      '카드를 성공적으로 등록했어요',
+                      style: DPTextTheme.SECTION_HEADER,
                     ),
                   ],
                 ),
