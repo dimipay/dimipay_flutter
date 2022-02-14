@@ -69,7 +69,7 @@ class DPKeyboardReactiveButton extends StatelessWidget {
   final EdgeInsets innerPadding;
   final EdgeInsets padding;
   final void Function()? onTap;
-  const DPKeyboardReactiveButton({Key? key, required this.child, this.width, required this.innerPadding, this.onTap, this.padding = const EdgeInsets.all(0)}) : super(key: key);
+  const DPKeyboardReactiveButton({Key? key, required this.child, this.width, this.innerPadding = const EdgeInsets.all(16), this.onTap, this.padding = const EdgeInsets.all(0)}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
