@@ -1,9 +1,7 @@
 import 'package:dimipay/app/core/theme/text_theme.dart';
-import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 
 class EditCardNamePage extends StatelessWidget {
   final FocusNode textFieldFocusNode = FocusNode();
@@ -75,17 +73,11 @@ class EditCardNamePage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 24),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: DPMediumTextButton(
-                text: '다음',
-                width: double.infinity,
-                onTap: () {
-                  Get.offNamed(Routes.CARDFIN);
-                },
-              ),
+            DPKeyboardReactiveButton(
+              onTap: () {},
+              padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+              child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
             ),
-            const SizedBox(height: 24),
           ],
         ),
       ),

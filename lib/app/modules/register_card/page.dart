@@ -68,11 +68,11 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                 ),
               ),
             ),
-            Container(
-              color: Colors.white,
+            DPKeyboardReactiveButton(
+              onTap: () {},
               padding: const EdgeInsets.all(24),
-              child: const DPMediumTextButton(text: '다음', width: double.infinity),
-            )
+              child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+            ),
           ],
         ),
       ),

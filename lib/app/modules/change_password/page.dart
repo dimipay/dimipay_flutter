@@ -10,9 +10,7 @@ class ChangePasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("디미고 계정 비밀번호 변경"),
-      ),
+      appBar: AppBar(),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -46,21 +44,17 @@ class ChangePasswordPage extends StatelessWidget {
                       DPTextField(label: "변경할 비밀번호", isPassword: true),
                       SizedBox(height: 16),
                       DPTextField(label: "한번 더 입력해주세요", isPassword: true),
+                      SizedBox(height: 48),
                     ],
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 24),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: DPMediumTextButton(
-                text: '다음',
-                width: double.infinity,
-                onTap: () {},
-              ),
+            DPKeyboardReactiveButton(
+              onTap: () {},
+              padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+              child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
             ),
-            const SizedBox(height: 24),
           ],
         ),
       ),
