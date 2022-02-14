@@ -1,5 +1,6 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DPIconButton extends StatelessWidget {
@@ -62,6 +63,67 @@ class DPIconButton extends StatelessWidget {
   }
 }
 
+class DPKeyboardReactiveButton extends StatelessWidget {
+  final Widget child;
+  final double? width;
+  final EdgeInsets innerPadding;
+  final EdgeInsets padding;
+  final void Function()? onTap;
+  const DPKeyboardReactiveButton({Key? key, required this.child, this.width, required this.innerPadding, this.onTap, this.padding = const EdgeInsets.all(0)}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return KeyboardVisibilityBuilder(
+      builder: (p0, isKeyboardVisible) {
+        double begin, end;
+        if (isKeyboardVisible) {
+          begin = 0;
+          end = 1;
+        } else {
+          begin = 1;
+          end = 0;
+        }
+        return TweenAnimationBuilder<double>(
+          tween: Tween<double>(begin: begin, end: end),
+          duration: const Duration(milliseconds: 100),
+          builder: (context, value, _) {
+            return Padding(
+              padding: EdgeInsets.only(
+                top: padding.top * (1 - value),
+                bottom: padding.bottom * (1 - value),
+                left: padding.left * (1 - value),
+                right: padding.right * (1 - value),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: const [BoxShadow(color: Color.fromRGBO(46, 164, 171, 0.24), offset: Offset(0, 4), blurRadius: 12)],
+                  borderRadius: BorderRadius.circular(12 * (1 - value)),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12 * (1 - value)),
+                  child: Material(
+                    color: DPColors.MAIN_THEME,
+                    child: InkWell(
+                      onTap: onTap,
+                      child: Container(
+                        width: width,
+                        padding: innerPadding,
+                        child: Center(
+                          child: child,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
 class DPBaseButton extends StatelessWidget {
   final Widget child;
   final double? width;
@@ -79,16 +141,14 @@ class DPBaseButton extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: Material(
-          color: const Color.fromRGBO(46, 164, 171, 1),
+          color: DPColors.MAIN_THEME,
           child: InkWell(
             onTap: onTap,
             child: Container(
               width: width,
               padding: padding,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [child],
+              child: Center(
+                child: child,
               ),
             ),
           ),
