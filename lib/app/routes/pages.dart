@@ -5,6 +5,7 @@ import 'package:dimipay/app/modules/experiment/page.dart';
 import 'package:dimipay/app/modules/login/page.dart';
 import 'package:dimipay/app/modules/register_card/binding.dart';
 import 'package:dimipay/app/modules/register_card/page.dart';
+import 'package:dimipay/app/modules/transaction/page.dart';
 import 'package:dimipay/app/modules/transaction_history/page.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/modules/manage_method/page.dart';
@@ -35,6 +36,7 @@ class AppPages {
     GetPage(name: Routes.LOGIN, page: () => LoginPage()),
     GetPage(name: Routes.CHANGEPASSWORD, page: () => const ChangePasswordPage()),
     GetPage(name: Routes.UNTITLED, page: () => const Untitled()),
-    GetPage(name: Routes.EXPERIMENT, page: () => ExperimentPage()),
+    GetPage(name: Routes.EXPERIMENT, page: () => const ExperimentPage()),
+    GetPage(name: Routes.TRANSACTION, page: () => const TransactionPage()),
   ];
 }

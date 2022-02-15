@@ -121,6 +121,12 @@ class Home extends StatelessWidget {
             },
             child: const Text('EXPERIMENT'),
           ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.TRANSACTION);
+            },
+            child: const Text('TRANSACTION'),
+          ),
         ],
       ),
     );

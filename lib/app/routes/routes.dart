@@ -17,4 +17,5 @@ abstract class Routes {
   static const CHANGEPASSWORD = "/ChangePassword";
   static const UNTITLED = "/Untitled";
   static const EXPERIMENT = "/Experiment";
+  static const TRANSACTION = "/Transaction";
 }
