@@ -36,6 +36,7 @@ dependencies:
   get: ^4.6.1
   flutter_svg: ^1.0.0
   flutter_keyboard_visibility: ^5.1.1
+  qr_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:
