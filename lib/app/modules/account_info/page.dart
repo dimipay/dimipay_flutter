@@ -1,79 +1,100 @@
+import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class AccountInfoPage extends StatelessWidget {
   const AccountInfoPage({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: Column(
-        children: [
-          Profile(),
-        ],
-      )),
-    );
-  }
-}
-
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget _profileArea() {
+    return Row(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const CircleAvatar(
-          radius: 50,
-          //backgroundImage: AssetImage("asset/images/Image11.png"),
-          backgroundImage: NetworkImage("https://flyclipart.com/thumb2/boss-circle-man-person-profile-staff-user-icon-133441.png"),
-        ),
-        const SizedBox(height: 16),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        const CircleAvatar(backgroundImage: AssetImage('asset/images/Image11.png'), radius: 24),
+        const SizedBox(width: 12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text("장인화", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+            Text("박정한", style: DPTextTheme.REGULAR_IMPORTANT),
             SizedBox(height: 4),
+            Text("디미고 계정으로 로그인 됨", style: DPTextTheme.DESCRIPTION),
           ],
         ),
       ],
     );
   }
-}
-
-class TransactionHistory extends StatelessWidget {
-  const TransactionHistory({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 36),
+                _profileArea(),
+                const SizedBox(height: 36),
+                Row(
+                  children: [
+                    Flexible(
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.toNamed(Routes.MANAGEMETHOD);
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: DPColors.DARK6,
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 24),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset("asset/images/card.svg"),
+                              const SizedBox(width: 8),
+                              const Text(
+                                "결제수단",
+                                style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w600, fontSize: 16, height: 1.2, color: DPColors.MAIN_THEME),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Flexible(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: DPColors.DARK6,
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 24),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset("asset/images/inquiry.svg"),
+                            const SizedBox(width: 8),
+                            const Text(
+                              "문의",
+                              style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w600, fontSize: 16, height: 1.2, color: DPColors.MAIN_THEME),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 36),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
-}
-
-//개월마다 날짜가 내림차순으로 정렬된 상태로 파라미터가 온다고 할 때
-class TransactionGroup extends StatelessWidget {
-  final List<Transaction> tranactions;
-  const TransactionGroup({Key? key, this.tranactions = const []}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    List<List<Transaction>> temp = [];
-    List<int> day = [];
-
-    int last = tranactions[0].date.day;
-    temp.add([tranactions[0]]);
-    day.add(tranactions[0].date.day);
-
-    for (int i = 1; i < tranactions.length; i++) {}
-    return Container();
-  }
-}
-
-class Transaction {
-  String title;
-  DateTime date;
-  int price;
-  Transaction(this.title, this.date, this.price);
 }

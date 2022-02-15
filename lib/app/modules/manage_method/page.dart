@@ -28,21 +28,7 @@ class _ManageMethodPageState extends State<ManageMethodPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 32),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('실물카드', style: DPTextTheme.SECTION_HEADER),
-                Row(
-                  children: [
-                    DPCheckbox(
-                      value: false,
-                      onChanged: (value) {},
-                      label: '기본 결제수단',
-                    )
-                  ],
-                )
-              ],
-            ),
+            const Text('실물카드', style: DPTextTheme.SECTION_HEADER),
             const SizedBox(height: 24),
             const DPRealCard(),
             const SizedBox(height: 24),
@@ -72,21 +58,7 @@ class _ManageMethodPageState extends State<ManageMethodPage> {
             const SizedBox(height: 36),
             const Divider(height: 1, thickness: 1, color: DPColors.DARK6),
             const SizedBox(height: 36),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('페이머니', style: DPTextTheme.SECTION_HEADER),
-                Row(
-                  children: [
-                    DPCheckbox(
-                      value: false,
-                      onChanged: (value) {},
-                      label: '기본 결제수단',
-                    )
-                  ],
-                )
-              ],
-            ),
+            const Text('페이머니', style: DPTextTheme.SECTION_HEADER),
             const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

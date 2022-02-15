@@ -1,6 +1,7 @@
 import 'package:dimipay/app/modules/card_fin/page.dart';
 import 'package:dimipay/app/modules/charging_amount/page.dart';
 import 'package:dimipay/app/modules/coupon_list/page.dart';
+import 'package:dimipay/app/modules/experiment/page.dart';
 import 'package:dimipay/app/modules/login/page.dart';
 import 'package:dimipay/app/modules/main/binding.dart';
 import 'package:dimipay/app/modules/main/page.dart';
@@ -37,5 +38,6 @@ class AppPages {
     GetPage(name: Routes.LOGIN, page: () => LoginPage()),
     GetPage(name: Routes.CHANGEPASSWORD, page: () => const ChangePasswordPage()),
     GetPage(name: Routes.UNTITLED, page: () => const Untitled()),
+    GetPage(name: Routes.EXPERIMENT, page: () => ExperimentPage()),
   ];
 }
