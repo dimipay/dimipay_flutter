@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             DPIconButton(
-              'asset/images/more_vert.svg',
+              'asset/images/profile.svg',
               onTap: () {
                 Get.toNamed(Routes.ACCOUNTINFO);
               },
