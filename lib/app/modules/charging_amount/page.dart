@@ -1,7 +1,9 @@
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ChargingAmountPage extends StatelessWidget {
   final FocusNode textFieldFocusNode = FocusNode();
@@ -51,7 +53,9 @@ class ChargingAmountPage extends StatelessWidget {
             ),
             const SizedBox(height: 36),
             DPKeyboardReactiveButton(
-              onTap: () {},
+              onTap: () {
+                Get.offNamed(Routes.CHARGINGFIN);
+              },
               padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
               child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
             ),
