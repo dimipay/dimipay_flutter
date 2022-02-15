@@ -39,12 +39,6 @@ class Home extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.MAIN);
-            },
-            child: const Text("MAIN"),
-          ),
-          TextButton(
-            onPressed: () {
               Get.toNamed(Routes.HOME);
             },
             child: const Text("HOME"),
