@@ -1,3 +1,4 @@
+import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/routes/pages.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ void main() {
           systemOverlayStyle: SystemUiOverlayStyle.dark,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          foregroundColor: Colors.black,
+          foregroundColor: DPColors.DARK1,
           centerTitle: false,
         ),
         scaffoldBackgroundColor: Colors.white,
