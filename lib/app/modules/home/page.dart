@@ -181,16 +181,24 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-              child: _topArea(),
+    return Container(
+      color: DPColors.DARK6,
+      child: SafeArea(
+        top: false,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: SafeArea(
+            bottom: false,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: _topArea(),
+                ),
+                _paymentsArea(),
+              ],
             ),
-            _paymentsArea(),
-          ],
+          ),
         ),
       ),
     );
