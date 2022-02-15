@@ -6,7 +6,8 @@ import 'package:flutter_svg/svg.dart';
 class DPIconButton extends StatelessWidget {
   final String iconPath;
   final int? badgeNumber;
-  const DPIconButton(this.iconPath, {this.badgeNumber, Key? key}) : super(key: key);
+  final void Function()? onTap;
+  const DPIconButton(this.iconPath, {this.badgeNumber, this.onTap, Key? key}) : super(key: key);
 
   Widget _badge() {
     if (badgeNumber != null) {
@@ -36,6 +37,7 @@ class DPIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTap,
       child: Container(
         width: 48,
         height: 48,
