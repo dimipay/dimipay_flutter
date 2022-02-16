@@ -26,6 +26,83 @@ class AccountInfoPage extends StatelessWidget {
     );
   }
 
+  Widget _topArea() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 16),
+        _profileArea(),
+        const SizedBox(height: 36),
+        Row(
+          children: [
+            Flexible(
+              child: GestureDetector(
+                onTap: () {
+                  Get.toNamed(Routes.MANAGEMETHOD);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: DPColors.DARK6,
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset("asset/images/card.svg"),
+                      const SizedBox(width: 8),
+                      const Text(
+                        "결제수단",
+                        style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w600, fontSize: 16, height: 1.2, color: DPColors.MAIN_THEME),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Flexible(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: DPColors.DARK6,
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset("asset/images/inquiry.svg"),
+                    const SizedBox(width: 8),
+                    const Text(
+                      "문의",
+                      style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w600, fontSize: 16, height: 1.2, color: DPColors.MAIN_THEME),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 36),
+      ],
+    );
+  }
+
+  Widget _transactionHistoryArea() {
+    return Column(
+      children: [
+        SizedBox(height: 36),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('결제기록', style: DPTextTheme.SECTION_HEADER),
+            SvgPicture.asset('asset/images/arrow_right.svg'),
+          ],
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,63 +112,7 @@ class AccountInfoPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 16),
-                _profileArea(),
-                const SizedBox(height: 36),
-                Row(
-                  children: [
-                    Flexible(
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.toNamed(Routes.MANAGEMETHOD);
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: DPColors.DARK6,
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 24),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset("asset/images/card.svg"),
-                              const SizedBox(width: 8),
-                              const Text(
-                                "결제수단",
-                                style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w600, fontSize: 16, height: 1.2, color: DPColors.MAIN_THEME),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Flexible(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: DPColors.DARK6,
-                        ),
-                        padding: const EdgeInsets.symmetric(vertical: 24),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset("asset/images/inquiry.svg"),
-                            const SizedBox(width: 8),
-                            const Text(
-                              "문의",
-                              style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w600, fontSize: 16, height: 1.2, color: DPColors.MAIN_THEME),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 36),
-              ],
+              children: [_topArea(), Divider(color: DPColors.DARK6, height: 1, thickness: 1), _transactionHistoryArea()],
             ),
           ),
         ),
