@@ -69,7 +69,7 @@ class EditCardNamePage extends StatelessWidget {
                   style: DPTextTheme.DESCRIPTION,
                 ),
                 const SizedBox(width: 6),
-                SvgPicture.asset('asset/images/arrow_right_6.svg'),
+                SvgPicture.asset('asset/images/arrow_right.svg'),
               ],
             ),
             const SizedBox(height: 24),

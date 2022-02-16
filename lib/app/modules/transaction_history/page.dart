@@ -177,7 +177,7 @@ class TransactionCalendarViewer extends StatelessWidget {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               const SizedBox(width: 10),
-              SvgPicture.asset('asset/images/arrow_right_6.svg'),
+              SvgPicture.asset('asset/images/arrow_right.svg'),
             ],
           ),
           const SizedBox(height: 12),

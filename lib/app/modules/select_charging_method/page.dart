@@ -62,7 +62,7 @@ class SelectChargingMethodPage extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 64),
-          SvgPicture.asset('asset/images/arrow_right_6.svg'),
+          SvgPicture.asset('asset/images/arrow_right.svg'),
         ],
       ),
     );

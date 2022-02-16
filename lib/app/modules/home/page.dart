@@ -119,7 +119,7 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            SvgPicture.asset('asset/images/arrow_right_8.svg', semanticsLabel: 'arrow_right'),
+            SvgPicture.asset('asset/images/arrow_right.svg', semanticsLabel: 'arrow_right'),
           ],
         ),
         const SizedBox(height: 24),
