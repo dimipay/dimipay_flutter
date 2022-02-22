@@ -2,7 +2,6 @@ import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/modules/home/page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class TransactionPage extends StatelessWidget {
@@ -57,9 +56,9 @@ class TransactionPage extends StatelessWidget {
                       size: 240.0,
                     ),
                     const SizedBox(height: 36),
-                    Text('결제단말기로 정보무늬를 읽어주세요', style: DPTextTheme.DESCRIPTION_IMPORTANT),
-                    SizedBox(height: 6),
-                    Text('위 정보무늬의 사용 권한은 계정 소유주로 한정됩니다.', style: DPTextTheme.DESCRIPTION),
+                    const Text('결제단말기로 정보무늬를 읽어주세요', style: DPTextTheme.DESCRIPTION_IMPORTANT),
+                    const SizedBox(height: 6),
+                    const Text('위 정보무늬의 사용 권한은 계정 소유주로 한정됩니다.', style: DPTextTheme.DESCRIPTION),
                   ],
                 ),
               ),

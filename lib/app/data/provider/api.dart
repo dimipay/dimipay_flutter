@@ -9,10 +9,7 @@ class ApiProvider extends GetConnect {
       'username': username,
       'password': password,
     };
-    Response response = await post('$_baseUrl/auth/login', {
-      'username': username,
-      'password': password,
-    });
+    Response response = await post('$_baseUrl/auth/login', body);
     if (response.statusCode == 201) {
       return response.body['accessToken'];
     } else {
