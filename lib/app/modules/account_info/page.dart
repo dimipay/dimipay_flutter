@@ -1,5 +1,6 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -91,11 +92,11 @@ class AccountInfoPage extends StatelessWidget {
   Widget _transactionHistoryArea() {
     return Column(
       children: [
-        SizedBox(height: 36),
+        const SizedBox(height: 36),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('결제기록', style: DPTextTheme.SECTION_HEADER),
+            const Text('결제기록', style: DPTextTheme.SECTION_HEADER),
             SvgPicture.asset('asset/images/arrow_right.svg'),
           ],
         )
@@ -106,13 +107,29 @@ class AccountInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'logout') {
+                Get.find<AuthService>().logout();
+              }
+            },
+            itemBuilder: (_) => [
+              const PopupMenuItem(
+                value: 'logout',
+                child: Text('로그아웃'),
+              ),
+            ],
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: SingleChildScrollView(
             child: Column(
-              children: [_topArea(), Divider(color: DPColors.DARK6, height: 1, thickness: 1), _transactionHistoryArea()],
+              children: [_topArea(), const Divider(color: DPColors.DARK6, height: 1, thickness: 1), _transactionHistoryArea()],
             ),
           ),
         ),

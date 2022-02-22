@@ -1,5 +1,6 @@
 import 'package:dimipay/app/data/provider/api.dart';
 import 'package:dimipay/app/data/services/auth/repository.dart';
+import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +19,7 @@ class AuthService extends GetxService {
   Future _removeToken() async {
     _token.value = '';
     await _storage.delete(key: 'jwt');
+    Get.offAllNamed(Routes.LOGIN);
   }
 
   Future<AuthService> init() async {
@@ -34,5 +36,9 @@ class AuthService extends GetxService {
     if (token != null) {
       _setToken(token);
     }
+  }
+
+  Future<void> logout() async {
+    _removeToken();
   }
 }
