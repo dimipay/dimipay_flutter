@@ -40,6 +40,12 @@ class Home extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () {
+              Get.toNamed(Routes.SPLASH);
+            },
+            child: const Text("SPLASH"),
+          ),
+          TextButton(
+            onPressed: () {
               Get.toNamed(Routes.HOME);
             },
             child: const Text("HOME"),

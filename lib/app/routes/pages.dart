@@ -3,9 +3,12 @@ import 'package:dimipay/app/modules/charging_amount/page.dart';
 import 'package:dimipay/app/modules/coupon_list/page.dart';
 import 'package:dimipay/app/modules/event/page.dart';
 import 'package:dimipay/app/modules/experiment/page.dart';
+import 'package:dimipay/app/modules/login/binding.dart';
 import 'package:dimipay/app/modules/login/page.dart';
 import 'package:dimipay/app/modules/register_card/binding.dart';
 import 'package:dimipay/app/modules/register_card/page.dart';
+import 'package:dimipay/app/modules/splash/binding.dart';
+import 'package:dimipay/app/modules/splash/page.dart';
 import 'package:dimipay/app/modules/transaction/page.dart';
 import 'package:dimipay/app/modules/transaction_history/page.dart';
 import 'package:dimipay/app/routes/routes.dart';
@@ -34,11 +37,12 @@ class AppPages {
     GetPage(name: Routes.CHARGINGAMOUNT, page: () => ChargingAmountPage()),
     GetPage(name: Routes.COUPONLIST, page: () => const CouponListPage()),
     GetPage(name: Routes.TRANSACTIONHISTORY, page: () => const TransactionHistoryPage()),
-    GetPage(name: Routes.LOGIN, page: () => LoginPage()),
+    GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
     GetPage(name: Routes.CHANGEPASSWORD, page: () => const ChangePasswordPage()),
     GetPage(name: Routes.UNTITLED, page: () => const Untitled()),
     GetPage(name: Routes.EXPERIMENT, page: () => const ExperimentPage()),
     GetPage(name: Routes.TRANSACTION, page: () => const TransactionPage()),
     GetPage(name: Routes.EVENT, page: () => const EventPage()),
+    GetPage(name: Routes.SPLASH, page: () => const SplashPage(), binding: SplashPageBinding()),
   ];
 }
