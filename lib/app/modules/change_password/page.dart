@@ -1,4 +1,5 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/modules/change_password/widget/change_form.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
@@ -15,41 +16,7 @@ class ChangePasswordPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Flexible(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      SizedBox(height: 24),
-                      Text(
-                        '보안을 위해 비밀번호를 변경해주세요',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                      ),
-                      SizedBox(height: 16),
-                      Text(
-                        '비밀번호가 초기 설정 이후 변경되지 않았거나 아이디와 똑같이 설정되어 있어요.',
-                      ),
-                      SizedBox(height: 16),
-                      CheckPassword(title: "숫자가 포함되어있어요", checked: true),
-                      SizedBox(height: 12),
-                      CheckPassword(title: "7자 이상이예요", checked: false),
-                      SizedBox(height: 12),
-                      CheckPassword(title: "아이디와 동일하지 않아요", checked: false),
-                      SizedBox(height: 12),
-                      SizedBox(height: 24),
-                      DPTextField(label: "현재 비밀번호", isPassword: true),
-                      SizedBox(height: 16),
-                      DPTextField(label: "변경할 비밀번호", isPassword: true),
-                      SizedBox(height: 16),
-                      DPTextField(label: "한번 더 입력해주세요", isPassword: true),
-                      SizedBox(height: 48),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            ChangePasswordForm(),
             DPKeyboardReactiveButton(
               onTap: () {},
               padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
