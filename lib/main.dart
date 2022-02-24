@@ -1,11 +1,18 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/routes/pages.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); //네이티브 코드의 비동기 작업 보장?
+
+  await Get.put<FlutterSecureStorage>(const FlutterSecureStorage(), permanent: true);
+  await Get.putAsync(() => AuthService().init());
+
   runApp(
     GetMaterialApp(
       initialRoute: Routes.TEST,
