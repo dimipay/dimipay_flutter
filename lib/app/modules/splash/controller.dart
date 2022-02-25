@@ -17,7 +17,6 @@ class SplashPageController extends GetxController {
 
     AuthService authService = Get.find<AuthService>();
     if (authService.token != '') {
-      print(authService.token);
       Get.offNamed(Routes.HOME);
     } else {
       Get.offNamed(Routes.LOGIN);
