@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-void main() async {
+void main() {
   runApp(
     GetMaterialApp(
       initialRoute: Routes.TEST,
