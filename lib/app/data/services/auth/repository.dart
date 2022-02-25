@@ -6,5 +6,5 @@ class AuthRepository {
   AuthRepository(this.api);
 
   Future<String?> login(username, password) => api.login(username, password);
-  getUserInfo(token) => api.getUserInfo(token);
+  getUserInfo() => api.getUserInfo();
 }

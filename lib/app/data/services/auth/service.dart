@@ -37,9 +37,7 @@ class AuthService extends GetxService {
     String? token = await repository.login(username, password);
     if (token != null) {
       _setToken(token);
-
-      final userInfo = await repository.getUserInfo(token);
-      user.value = User.fromJson(userInfo);
+      user.value = await repository.getUserInfo();
     }
   }
 

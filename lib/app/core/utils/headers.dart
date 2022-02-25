@@ -1,11 +1,10 @@
 class HeadersAPI {
-  final token;
-  HeadersAPI({this.token});
   Map<String, String> getHeaders() {
-    return {"Content-Type": "application/json", "Authorization": "Bearer $token"};
+    return {"Content-Type": "application/json"};
   }
 
   Map<String, String> getAuthorization() {
+    String token = "";
     return {"Authorization": "Bearer $token"};
   }
 }
