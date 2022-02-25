@@ -1,27 +1,40 @@
 class User {
-  int? id;
-  String? username;
+  int? systemId;
+  String? name;
+  String? studentNumber;
+  String? accountName;
+  String? profileImage;
   String? password;
   String? changedPassword;
+
   double? payMoney;
+
+  List<dynamic>? receivedCoupons;
+  List<dynamic>? paymentMethods;
 
   String? token;
 
-  User({this.id, this.username, this.password});
+  User({this.systemId, this.name, this.password});
 
   User.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    username = json['username'];
-    password = json['password'];
-    payMoney = json['payMoney'];
+    systemId = json['systemId'];
+    accountName = json['accountName'];
+    name = json['name'];
+    profileImage = json['profileImage'];
+    studentNumber = json['studentNumber'];
+    receivedCoupons = json['receivedCoupons'];
+    paymentMethods = json['paymentMethods'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = id;
-    data['username'] = username;
-    data['password'] = password;
-    data['payMoney'] = payMoney;
+    data['systemId'] = systemId;
+    data['accountName'] = accountName;
+    data['name'] = name;
+    data['profileImage'] = profileImage;
+    data['studentNumber'] = studentNumber;
+    data['receivedCoupons'] = receivedCoupons;
+    data['paymentMethods'] = paymentMethods;
     return data;
   }
 }
