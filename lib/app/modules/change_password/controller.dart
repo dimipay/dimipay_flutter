@@ -39,7 +39,7 @@ class ChangePasswordPageController extends GetxController {
       isSevenOver.value = true;
     } else
       isSevenOver.value = false;
-    if (v.contains(auth!.user.value.username != null ? "" : "")) {
+    if (v.contains(auth!.user.value.accountName != null ? "" : "")) {
       isNotSameId.value = true;
     } else
       isNotSameId.value = false;
