@@ -7,11 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); //네이티브 코드의 비동기 작업 보장?
-
-  await Get.put<FlutterSecureStorage>(const FlutterSecureStorage(), permanent: true);
-  await Get.putAsync(() => AuthService().init());
+void main() async { 
 
   runApp(
     GetMaterialApp(
