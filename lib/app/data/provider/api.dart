@@ -1,3 +1,4 @@
+import 'package:dimipay/app/core/utils/headers.dart';
 import 'package:get/get.dart';
 
 class ApiProvider extends GetConnect {
@@ -15,5 +16,10 @@ class ApiProvider extends GetConnect {
     } else {
       return null;
     }
+  }
+
+  getUserInfo(String token) async {
+    Response response = await get('$_baseUrl/user/me', headers: HeadersAPI(token: token).getAuthorization());
+    return response.body['me'];
   }
 }
