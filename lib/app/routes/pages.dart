@@ -1,4 +1,5 @@
 import 'package:dimipay/app/modules/card_fin/page.dart';
+import 'package:dimipay/app/modules/change_password/binding.dart';
 import 'package:dimipay/app/modules/charging_amount/page.dart';
 import 'package:dimipay/app/modules/coupon_list/page.dart';
 import 'package:dimipay/app/modules/event/page.dart';
@@ -38,7 +39,7 @@ class AppPages {
     GetPage(name: Routes.COUPONLIST, page: () => const CouponListPage()),
     GetPage(name: Routes.TRANSACTIONHISTORY, page: () => const TransactionHistoryPage()),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
-    GetPage(name: Routes.CHANGEPASSWORD, page: () => const ChangePasswordPage()),
+    GetPage(name: Routes.CHANGEPASSWORD, page: () => const ChangePasswordPage(), binding: ChangePasswordPageBinding()),
     GetPage(name: Routes.UNTITLED, page: () => const Untitled()),
     GetPage(name: Routes.EXPERIMENT, page: () => const ExperimentPage()),
     GetPage(name: Routes.TRANSACTION, page: () => const TransactionPage()),
