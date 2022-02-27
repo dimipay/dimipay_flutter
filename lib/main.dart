@@ -1,14 +1,11 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
-import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/routes/pages.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
-void main() async { 
-
+void main() {
   runApp(
     GetMaterialApp(
       initialRoute: Routes.TEST,

@@ -1,3 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'user.g.dart';
+
+// g.dart 파일 생성 : flutter pub run build_runner build
+
+@JsonSerializable()
 class User {
   int? systemId;
   String? name;
@@ -16,25 +22,6 @@ class User {
 
   User({this.systemId, this.name, this.password});
 
-  User.fromJson(Map<String, dynamic> json) {
-    systemId = json['systemId'];
-    accountName = json['accountName'];
-    name = json['name'];
-    profileImage = json['profileImage'];
-    studentNumber = json['studentNumber'];
-    receivedCoupons = json['receivedCoupons'];
-    paymentMethods = json['paymentMethods'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['systemId'] = systemId;
-    data['accountName'] = accountName;
-    data['name'] = name;
-    data['profileImage'] = profileImage;
-    data['studentNumber'] = studentNumber;
-    data['receivedCoupons'] = receivedCoupons;
-    data['paymentMethods'] = paymentMethods;
-    return data;
-  }
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }
