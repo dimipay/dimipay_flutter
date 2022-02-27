@@ -1,11 +1,19 @@
+import 'package:dimipay/app/data/services/auth/service.dart';
+import 'package:get/get.dart';
+
 class HeadersAPI {
-  final token;
-  HeadersAPI({this.token});
-  Map<String, String> getHeaders() {
-    return {"Content-Type": "application/json", "Authorization": "Bearer $token"};
+  Map<String, String>? getHeaders({bool auth = false}) {
+    if (auth) {
+      return _getAuthorization();
+    }
+    return {"Content-Type": "application/json"};
   }
 
-  Map<String, String> getAuthorization() {
+  Map<String, String> _getAuthorization() {
+    AuthService service = Get.find<AuthService>();
+
+    String token = service.token;
+
     return {"Authorization": "Bearer $token"};
   }
 }
