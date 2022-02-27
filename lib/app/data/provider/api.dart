@@ -21,12 +21,12 @@ class ApiProvider extends GetConnect {
   }
 
   getUserInfo() async {
-    Response response = await get('$_baseUrl/user/me', headers: HeadersAPI().getHeaders(auth: true));
+    Response response = await get('$_baseUrl/user/me', headers: HeadersAPI().getHeaders());
     return User.fromJson(response.body['me']);
   }
 
   Future<List<Coupon>> getCoupons() async {
-    Response response = await get('$_baseUrl/user/me', headers: HeadersAPI().getHeaders(auth: true));
+    Response response = await get('$_baseUrl/user/me', headers: HeadersAPI().getHeaders());
     if (response.statusCode == 200) {
       return json.decode(response.body).map((model) => Coupon.fromJson(model)).toList();
     } else {
