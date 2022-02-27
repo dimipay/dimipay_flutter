@@ -15,18 +15,18 @@ class AuthService extends GetxService {
 
   Future _setToken(String token) async {
     _token.value = token;
-    await _storage.write(key: 'jwt', value: token);
+    await _storage.write(key: 'accessToken', value: token);
   }
 
   Future _removeToken() async {
     _token.value = '';
-    await _storage.delete(key: 'jwt');
+    await _storage.delete(key: 'accessToken');
     Get.offAllNamed(Routes.LOGIN);
   }
 
   Future<AuthService> init() async {
     repository = AuthRepository(ApiProvider());
-    String? tokenInStorage = await _storage.read(key: 'jwt');
+    String? tokenInStorage = await _storage.read(key: 'accessToken');
     if (tokenInStorage != null && tokenInStorage != '') {
       _token.value = tokenInStorage;
     }
