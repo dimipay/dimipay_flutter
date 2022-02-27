@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:dimipay/app/core/utils/headers.dart';
 import 'package:dimipay/app/data/models/coupon.dart';
 import 'package:dimipay/app/data/models/user.dart';
@@ -7,7 +5,6 @@ import 'package:get/get.dart';
 import 'dart:convert';
 
 class ApiProvider extends GetConnect {
-  String? _token;
   final String _baseUrl = 'https://dimipay.up.railway.app';
 
   Future<String?> login(String username, String password) async {
