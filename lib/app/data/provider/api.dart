@@ -1,8 +1,10 @@
 import 'dart:html';
 
 import 'package:dimipay/app/core/utils/headers.dart';
+import 'package:dimipay/app/data/models/coupon.dart';
 import 'package:dimipay/app/data/models/user.dart';
 import 'package:get/get.dart';
+import 'dart:convert';
 
 class ApiProvider extends GetConnect {
   String? _token;
@@ -24,5 +26,14 @@ class ApiProvider extends GetConnect {
   getUserInfo() async {
     Response response = await get('$_baseUrl/user/me', headers: HeadersAPI().getHeaders(auth: true));
     return User.fromJson(response.body['me']);
+  }
+
+  Future<List<Coupon>> getCoupons() async {
+    Response response = await get('$_baseUrl/user/me', headers: HeadersAPI().getHeaders(auth: true));
+    if (response.statusCode == 200) {
+      return json.decode(response.body).map((model) => Coupon.fromJson(model)).toList();
+    } else {
+      return [];
+    }
   }
 }
