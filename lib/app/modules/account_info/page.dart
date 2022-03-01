@@ -1,13 +1,22 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
+import 'package:dimipay/app/modules/account_info/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class AccountInfoPage extends StatelessWidget {
-  const AccountInfoPage({Key? key}) : super(key: key);
+  AccountInfoPage({Key? key}) : super(key: key);
+  final UserController userController = Get.find<UserController>();
+
+  Widget _userName() {
+    return userController.obx(
+      (state) => Text(state!.value.name, style: DPTextTheme.REGULAR_IMPORTANT),
+      onLoading: const Text('loading...', style: DPTextTheme.REGULAR_IMPORTANT),
+    );
+  }
 
   Widget _profileArea() {
     return Row(
@@ -17,10 +26,10 @@ class AccountInfoPage extends StatelessWidget {
         const SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text("박정한", style: DPTextTheme.REGULAR_IMPORTANT),
-            SizedBox(height: 4),
-            Text("디미고 계정으로 로그인 됨", style: DPTextTheme.DESCRIPTION),
+          children: [
+            _userName(),
+            const SizedBox(height: 4),
+            const Text("디미고 계정으로 로그인 됨", style: DPTextTheme.DESCRIPTION),
           ],
         ),
       ],
