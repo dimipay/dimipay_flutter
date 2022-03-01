@@ -20,7 +20,7 @@ class ApiProvider extends GetConnect {
     }
   }
 
-  getUserInfo() async {
+  Future<User> getUserInfo() async {
     Response response = await get('$_baseUrl/user/me', headers: HeadersAPI().getHeaders());
     return User.fromJson(response.body['me']);
   }
