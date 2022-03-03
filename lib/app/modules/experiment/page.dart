@@ -1,7 +1,5 @@
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:get/get.dart';
 
 class ExperimentPage extends StatefulWidget {
   const ExperimentPage({Key? key}) : super(key: key);
@@ -19,17 +17,17 @@ class _ExperimentPageState extends State<ExperimentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Experiment')),
+      appBar: AppBar(title: const Text('Experiment')),
       body: Column(
         children: [
-          TextField(),
+          const TextField(),
           DPKeyboardReactiveButton(
-            child: Text('hi'),
-            innerPadding: EdgeInsets.all(20),
+            child: const Text('hi'),
+            innerPadding: const EdgeInsets.all(20),
             onTap: () {},
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
           ),
-          DPLargeButton(child: Text('hi')),
+          const DPLargeButton(child: Text('hi')),
         ],
       ),
     );
