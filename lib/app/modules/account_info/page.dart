@@ -18,6 +18,13 @@ class AccountInfoPage extends StatelessWidget {
     );
   }
 
+  Widget _userId() {
+    return userController.obx(
+      (state) => Text('@' + state!.value.accountName, style: DPTextTheme.DESCRIPTION),
+      onLoading: const Text('loading...', style: DPTextTheme.DESCRIPTION),
+    );
+  }
+
   Widget _profileArea() {
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -29,7 +36,7 @@ class AccountInfoPage extends StatelessWidget {
           children: [
             _userName(),
             const SizedBox(height: 4),
-            const Text("디미고 계정으로 로그인 됨", style: DPTextTheme.DESCRIPTION),
+            _userId(),
           ],
         ),
       ],
