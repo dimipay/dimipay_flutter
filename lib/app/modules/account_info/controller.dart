@@ -20,10 +20,3 @@ class UserController extends GetxController with StateMixin<Rx<User>> {
     change(user, status: RxStatus.success());
   }
 }
-
-class AccountInfoPageController extends GetxController {
-  @override
-  void onInit() {
-    super.onInit();
-  }
-}

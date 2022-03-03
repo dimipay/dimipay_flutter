@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 class AccountInfoPageBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AccountInfoPageController>(() => AccountInfoPageController());
     Get.lazyPut<UserController>(() => UserController(UserRepository(ApiProvider())));
   }
 }
