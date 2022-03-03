@@ -1,54 +1,28 @@
-import 'package:dimipay/app/data/services/auth/service.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChangePasswordPageController extends GetxController {
-  AuthService? auth;
+  TextEditingController currentPasswordField = TextEditingController();
+  TextEditingController newPasswordField = TextEditingController();
+  TextEditingController verifyNewPasswordField = TextEditingController();
 
   final isNum = false.obs;
   final isSevenOver = false.obs;
   final isNotSameId = true.obs;
 
-  final isSamePassword = false.obs;
-  final isSameChangedPassword = false.obs;
+  currentPasswordChanged(String v) {}
 
-  @override
-  void onInit() {
-    auth = Get.find<AuthService>();
-    super.onInit();
+  newPasswordChanged(String v) {
+    v = v.trim();
+    isNum.value = RegExp(r'(\d+)').hasMatch(v);
+
+    isSevenOver.value = v.length >= 7;
+    // if (v.contains(auth.user.value.accountName != null ? "" : "")) {
+    //   isNotSameId.value = true;
+    // } else {
+    //   isNotSameId.value = false;
+    // }
   }
 
-  changePassword(v) {
-    if (v == auth!.user.value.password) {
-      isSamePassword.value = true;
-    } else
-      isSamePassword.value = false;
-  }
-
-  changeChangedPassword(v) {
-    auth!.user.update((val) {
-      val!.changedPassword = v;
-    });
-
-    if (RegExp(r'(\d+)').hasMatch(v)) {
-      isNum.value = true;
-    } else
-      isNum.value = false;
-
-    if (v.length >= 7) {
-      isSevenOver.value = true;
-    } else
-      isSevenOver.value = false;
-    if (v.contains(auth!.user.value.accountName != null ? "" : "")) {
-      isNotSameId.value = true;
-    } else
-      isNotSameId.value = false;
-  }
-
-  changeChangedPasswordOneMore(v) {
-    if (v == auth!.user.value.changedPassword) {
-      isSameChangedPassword.value = true;
-    } else
-      isSameChangedPassword.value = false;
-  }
+  verifyNewPasswordChanged(v) {}
 }
