@@ -1,4 +1,3 @@
-import 'package:dimipay/app/data/models/user.dart';
 import 'package:dimipay/app/data/provider/api.dart';
 import 'package:dimipay/app/data/services/auth/repository.dart';
 import 'package:dimipay/app/routes/routes.dart';
@@ -9,7 +8,6 @@ class AuthService extends GetxService {
   late AuthRepository repository;
   final FlutterSecureStorage _storage = Get.find<FlutterSecureStorage>();
   final _token = ''.obs;
-  final user = User().obs;
 
   String get token => _token.value;
 
@@ -36,12 +34,11 @@ class AuthService extends GetxService {
   Future<void> login(String username, String password) async {
     String? token = await repository.login(username, password);
     if (token != null) {
-      _setToken(token);
-      user.value = await repository.getUserInfo();
+      await _setToken(token);
     }
   }
 
   Future<void> logout() async {
-    _removeToken();
+    await _removeToken();
   }
 }
