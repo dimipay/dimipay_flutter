@@ -1,3 +1,4 @@
+import 'package:dimipay/app/modules/account_info/binding.dart';
 import 'package:dimipay/app/modules/card_fin/page.dart';
 import 'package:dimipay/app/modules/change_password/binding.dart';
 import 'package:dimipay/app/modules/charging_amount/page.dart';
@@ -28,7 +29,7 @@ class AppPages {
   static final pages = [
     GetPage(name: Routes.TEST, page: () => const Home()),
     GetPage(name: Routes.HOME, page: () => const HomePage()),
-    GetPage(name: Routes.ACCOUNTINFO, page: () => const AccountInfoPage()),
+    GetPage(name: Routes.ACCOUNTINFO, page: () => AccountInfoPage(), binding: AccountInfoPageBinding()),
     GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage()),
     GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage(), binding: RegisterCardPageBinding()),
     GetPage(name: Routes.SELECTCHARGINGMETHOD, page: () => const SelectChargingMethodPage()),
