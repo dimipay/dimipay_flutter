@@ -1,5 +1,11 @@
 class Coupon {
-  int? id;
+  String id;
+  DateTime createdAt;
+  DateTime updatedAt;
+  String name;
+
+  DateTime? expiresAt;
+  int amount;
   String? title;
   String? subtitle;
   DateTime? expireDate;
