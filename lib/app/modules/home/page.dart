@@ -230,10 +230,9 @@ class DPSmallCardPayment extends StatelessWidget {
               : Column(
                   children: [
                     Text(subtitle!, style: const TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.2, color: Color.fromRGBO(255, 255, 255, 0.4))),
-                    const SizedBox(height: 4),
                   ],
                 ),
-          Text(title, style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 18, height: 1.2, color: Colors.white)),
+          Text(title, style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 17, height: 1.2, color: Colors.white)),
         ],
       ),
     );
