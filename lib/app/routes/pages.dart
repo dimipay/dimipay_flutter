@@ -2,11 +2,14 @@ import 'package:dimipay/app/modules/account_info/binding.dart';
 import 'package:dimipay/app/modules/card_fin/page.dart';
 import 'package:dimipay/app/modules/change_password/binding.dart';
 import 'package:dimipay/app/modules/charging_amount/page.dart';
+import 'package:dimipay/app/modules/coupon_list/binding.dart';
 import 'package:dimipay/app/modules/coupon_list/page.dart';
 import 'package:dimipay/app/modules/event/page.dart';
 import 'package:dimipay/app/modules/experiment/page.dart';
 import 'package:dimipay/app/modules/login/binding.dart';
 import 'package:dimipay/app/modules/login/page.dart';
+import 'package:dimipay/app/modules/notification/binding.dart';
+import 'package:dimipay/app/modules/notification/page.dart';
 import 'package:dimipay/app/modules/register_card/binding.dart';
 import 'package:dimipay/app/modules/register_card/page.dart';
 import 'package:dimipay/app/modules/splash/binding.dart';
@@ -37,7 +40,7 @@ class AppPages {
     GetPage(name: Routes.CARDFIN, page: () => const CardFinPage()),
     GetPage(name: Routes.CHARGINGFIN, page: () => const ChargingFinPage()),
     GetPage(name: Routes.CHARGINGAMOUNT, page: () => ChargingAmountPage()),
-    GetPage(name: Routes.COUPONLIST, page: () => const CouponListPage()),
+    GetPage(name: Routes.COUPON, page: () => CouponPage(), binding: CouponPageBinding()),
     GetPage(name: Routes.TRANSACTIONHISTORY, page: () => const TransactionHistoryPage()),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
     GetPage(name: Routes.CHANGEPASSWORD, page: () => const ChangePasswordPage(), binding: ChangePasswordPageBinding()),
@@ -46,5 +49,6 @@ class AppPages {
     GetPage(name: Routes.TRANSACTION, page: () => const TransactionPage()),
     GetPage(name: Routes.EVENT, page: () => const EventPage()),
     GetPage(name: Routes.SPLASH, page: () => const SplashPage(), binding: SplashPageBinding()),
+    GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage(), binding: NotificationPageBinding()),
   ];
 }

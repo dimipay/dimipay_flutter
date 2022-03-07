@@ -1,11 +1,37 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/data/models/coupon.dart';
+import 'package:dimipay/app/modules/coupon_list/controller.dart';
 import 'package:dimipay/app/modules/coupon_list/widget.dart/coupon_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
-class CouponListPage extends StatelessWidget {
-  const CouponListPage({Key? key}) : super(key: key);
+class CouponPage extends StatelessWidget {
+  CouponPage({Key? key}) : super(key: key);
+  final couponController = Get.find<CouponController>();
+
+  Widget _buildCoupons(List<Coupon> coupons) {
+    return Column(
+      children: coupons
+          .map(
+            (e) => Column(
+              children: [
+                CouponListItem(e.name, '${e.issuer.name} 발행', e.amount, e.expiresAt ?? DateTime(0)),
+                const SizedBox(height: 36),
+              ],
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  Widget _couponArea() {
+    return couponController.obx(
+      (state) => _buildCoupons(state!),
+      onLoading: const CircularProgressIndicator(color: DPColors.MAIN_THEME),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,44 +63,19 @@ class CouponListPage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 36),
-                      CouponListItem('공업수학', '이병혁 선생님 발행', 500, DateTime(2022, 4, 4)),
-                      const SizedBox(height: 36),
-                      CouponListItem('공업수학', '이병혁 선생님 발행', 500, DateTime(2022, 4, 4)),
-                      const SizedBox(height: 36),
-                      CouponListItem('공업수학', '이병혁 선생님 발행', 500, DateTime(2022, 4, 4)),
-                      const SizedBox(height: 36),
-                      CouponListItem('공업수학', '이병혁 선생님 발행', 500, DateTime(2022, 4, 4)),
-                      const SizedBox(height: 36),
-                      CouponListItem('공업수학', '이병혁 선생님 발행', 500, DateTime(2022, 4, 4)),
-                      const SizedBox(height: 36),
-                      CouponListItem('공업수학', '이병혁 선생님 발행', 500, DateTime(2022, 4, 4)),
-                      const SizedBox(height: 36),
-                      CouponListItem('공업수학', '이병혁 선생님 발행', 500, DateTime(2022, 4, 4)),
-                      const SizedBox(height: 36),
-                      CouponListItem('공업수학', '이병혁 선생님 발행', 500, DateTime(2022, 4, 4)),
-                      const SizedBox(height: 36),
-                      CouponListItem('공업수학', '이병혁 선생님 발행', 500, DateTime(2022, 4, 4)),
-                      const SizedBox(height: 36),
-                      CouponListItem('공업수학', '이병혁 선생님 발행', 500, DateTime(2022, 4, 4)),
-                      const SizedBox(height: 36),
-                      CouponListItem('공업수학', '이병혁 선생님 발행', 500, DateTime(2022, 4, 4)),
-                      const SizedBox(height: 36),
-                      CouponListItem('공업수학', '이병혁 선생님 발행', 500, DateTime(2022, 4, 4)),
-                      const SizedBox(height: 36),
-                      CouponListItem('공업수학', '이병혁 선생님 발행', 500, DateTime(2022, 4, 4)),
-                      const SizedBox(height: 36),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text(
-                            '만료된 쿠폰 보기',
-                            style: DPTextTheme.DESCRIPTION,
-                          ),
-                          const SizedBox(width: 12),
-                          SvgPicture.asset('asset/images/arrow_down.svg', color: DPColors.DARK4),
-                        ],
-                      ),
-                      const SizedBox(height: 36),
+                      _couponArea(),
+                      // Row(
+                      //   mainAxisSize: MainAxisSize.min,
+                      //   children: [
+                      //     const Text(
+                      //       '만료된 쿠폰 보기',
+                      //       style: DPTextTheme.DESCRIPTION,
+                      //     ),
+                      //     const SizedBox(width: 12),
+                      //     SvgPicture.asset('asset/images/arrow_down.svg', color: DPColors.DARK4),
+                      //   ],
+                      // ),
+                      // const SizedBox(height: 36),
                     ],
                   ),
                 ),
