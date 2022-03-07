@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
               'asset/images/event.svg',
               badgeNumber: 3,
               onTap: () {
-                Get.toNamed(Routes.COUPONLIST);
+                Get.toNamed(Routes.COUPON);
               },
             ),
             const SizedBox(width: 12),
