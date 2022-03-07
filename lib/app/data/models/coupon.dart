@@ -1,3 +1,18 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'coupon.g.dart';
+
+@JsonSerializable()
+class Issuer {
+  String name;
+  bool isTeacher;
+  String systemId;
+
+  Issuer({required this.name, required this.isTeacher, required this.systemId});
+  factory Issuer.fromJson(Map<String, dynamic> json) => _$IssuerFromJson(json);
+  Map<String, dynamic> toJson() => _$IssuerToJson(this);
+}
+
+@JsonSerializable()
 class Coupon {
   String id;
   DateTime createdAt;
@@ -6,27 +21,10 @@ class Coupon {
 
   DateTime? expiresAt;
   int amount;
-  String? title;
-  String? subtitle;
-  DateTime? expireDate;
 
-  String? token;
+  Issuer issuer;
 
-  Coupon({this.id, this.title, this.subtitle, this.expireDate});
-
-  Coupon.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    subtitle = json['subtitle'];
-    expireDate = json['expireDate'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['title'] = title;
-    data['subtitle'] = subtitle;
-    data['expireData'] = expireDate;
-    return data;
-  }
+  Coupon({required this.id, required this.createdAt, required this.updatedAt, required this.name, this.expiresAt, required this.amount, required this.issuer});
+  factory Coupon.fromJson(Map<String, dynamic> json) => _$CouponFromJson(json);
+  Map<String, dynamic> toJson() => _$CouponToJson(this);
 }
