@@ -11,7 +11,7 @@ class SplashPageController extends GetxController {
   }
 
   Future initializeApp() async {
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 1));
     Get.put<FlutterSecureStorage>(const FlutterSecureStorage(), permanent: true);
     await Get.putAsync(() => AuthService().init());
 
