@@ -8,7 +8,6 @@ import 'package:dimipay/app/modules/event/page.dart';
 import 'package:dimipay/app/modules/experiment/page.dart';
 import 'package:dimipay/app/modules/login/binding.dart';
 import 'package:dimipay/app/modules/login/page.dart';
-import 'package:dimipay/app/modules/notification/binding.dart';
 import 'package:dimipay/app/modules/notification/page.dart';
 import 'package:dimipay/app/modules/register_card/binding.dart';
 import 'package:dimipay/app/modules/register_card/page.dart';
@@ -49,6 +48,6 @@ class AppPages {
     GetPage(name: Routes.TRANSACTION, page: () => const TransactionPage()),
     GetPage(name: Routes.EVENT, page: () => const EventPage()),
     GetPage(name: Routes.SPLASH, page: () => const SplashPage(), binding: SplashPageBinding()),
-    GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage(), binding: NotificationPageBinding()),
+    GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage()),
   ];
 }
