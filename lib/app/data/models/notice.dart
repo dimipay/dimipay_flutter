@@ -1,23 +1,31 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'notice.g.dart';
+
+@JsonSerializable()
 class Notice {
-  int? id;
-  String? title;
-  String? content;
+  String id;
+  DateTime createdAt;
+  DateTime updatedAt;
+  DateTime startsAt;
+  DateTime? endsAt;
 
-  String? token;
+  String title;
+  String description;
+  String url;
+  String authorId;
 
-  Notice({this.id, this.title, this.content});
+  Notice({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.startsAt,
+    this.endsAt,
+    required this.title,
+    required this.description,
+    required this.url,
+    required this.authorId,
+  });
 
-  Notice.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    content = json['content'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['title'] = title;
-    data['content'] = content;
-    return data;
-  }
+  factory Notice.fromJson(Map<String, dynamic> json) => _$NoticeFromJson(json);
+  Map<String, dynamic> toJson() => _$NoticeToJson(this);
 }
