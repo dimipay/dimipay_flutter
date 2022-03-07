@@ -11,7 +11,7 @@ abstract class Routes {
   static const CARDFIN = '/CardFin';
   static const CHARGINGFIN = '/ChargingFin';
   static const CHARGINGAMOUNT = "/ChargingFin/ChargingAmount";
-  static const COUPONLIST = "/CouponList";
+  static const COUPON = "/Coupon";
   static const TRANSACTIONHISTORY = '/TransactionHistory';
   static const LOGIN = "/login";
   static const CHANGEPASSWORD = "/ChangePassword";
@@ -20,4 +20,5 @@ abstract class Routes {
   static const TRANSACTION = "/Transaction";
   static const EVENT = "/Event";
   static const SPLASH = "/Splash";
+  static const NOTIFICATION = "/Notification";
 }

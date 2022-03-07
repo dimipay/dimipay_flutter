@@ -94,7 +94,7 @@ class Home extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.COUPONLIST);
+              Get.toNamed(Routes.COUPON);
             },
             child: const Text('COUPONLIST'),
           ),

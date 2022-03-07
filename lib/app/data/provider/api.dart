@@ -26,9 +26,9 @@ class ApiProvider extends GetConnect {
   }
 
   Future<List<Coupon>> getCoupons() async {
-    Response response = await get('$_baseUrl/user/me', headers: HeadersAPI().getHeaders());
+    Response response = await get('$_baseUrl/coupons', headers: HeadersAPI().getHeaders());
     if (response.statusCode == 200) {
-      return json.decode(response.body).map((model) => Coupon.fromJson(model)).toList();
+      return response.body.map<Coupon>((model) => Coupon.fromJson(model)).toList();
     } else {
       return [];
     }
