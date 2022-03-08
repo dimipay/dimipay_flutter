@@ -1,5 +1,6 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/modules/coupon/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +17,14 @@ class HomePage extends StatelessWidget {
         const Text('DIMIPAY', style: TextStyle(color: Color.fromRGBO(46, 164, 171, 1), fontFamily: 'Montserrat', fontSize: 26)),
         Row(
           children: [
-            DPIconButton(
-              'asset/images/event.svg',
-              badgeNumber: 3,
-              onTap: () {
-                Get.toNamed(Routes.COUPON);
-              },
+            Obx(
+              () => DPIconButton(
+                'asset/images/event.svg',
+                badgeNumber: Get.find<CouponController>().coupons.value?.length,
+                onTap: () {
+                  Get.toNamed(Routes.COUPON);
+                },
+              ),
             ),
             const SizedBox(width: 12),
             DPIconButton(

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class CouponController extends GetxController with StateMixin<List<Coupon>> {
   final CouponRepository repository;
   CouponController(this.repository);
-  Rx<List<Coupon>> coupons = Rx([]);
+  Rx<List<Coupon>?> coupons = Rx(null);
 
   @override
   void onInit() {
