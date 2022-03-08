@@ -1,5 +1,6 @@
 import 'package:dimipay/app/data/models/coupon.dart';
 import 'package:dimipay/app/modules/coupon/repository.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class CouponController extends GetxController with StateMixin<List<Coupon>> {
@@ -20,6 +21,7 @@ class CouponController extends GetxController with StateMixin<List<Coupon>> {
   }
 
   Future<void> refreshCoupons() async {
+    HapticFeedback.selectionClick();
     await getCoupons();
   }
 }
