@@ -38,11 +38,13 @@ class LoginPage extends GetView<LoginPageController> {
               ),
             ),
             const SizedBox(height: 36),
-            DPKeyboardReactiveButton(
-              onTap: controller.login,
-              padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
-              child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
-            ),
+            controller.obx(
+                (state) => DPKeyboardReactiveButton(
+                      onTap: controller.login,
+                      padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+                      child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+                    ),
+                onLoading: CircularProgressIndicator()),
           ],
         ),
       ),
