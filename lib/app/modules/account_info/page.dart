@@ -141,11 +141,17 @@ class AccountInfoPage extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [_topArea(), const Divider(color: DPColors.DARK6, height: 1, thickness: 1), _transactionHistoryArea()],
+        child: RefreshIndicator(
+          color: DPColors.MAIN_THEME,
+          onRefresh: userController.refreshData,
+          child: Container(
+            height: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                children: [_topArea(), const Divider(color: DPColors.DARK6, height: 1, thickness: 1), _transactionHistoryArea()],
+              ),
             ),
           ),
         ),
