@@ -3,11 +3,11 @@ import 'package:dimipay/app/modules/account_info/repository.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class UserController extends GetxController with StateMixin<Rx<User>> {
+class UserController extends GetxController with StateMixin<Rx<User?>> {
   final UserRepository repository;
   UserController(this.repository);
 
-  late Rx<User> user;
+  late Rx<User?> user;
 
   @override
   void onInit() {
