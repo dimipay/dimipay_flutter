@@ -11,7 +11,7 @@ class LoginPageController extends GetxController {
   Future login() async {
     await authService.login(usernameField.text, passwordField.text);
     if (authService.token != '') {
-      Get.offNamed(Routes.HOME);
+      Get.offNamed(Routes.SPLASH);
     }
   }
 }
