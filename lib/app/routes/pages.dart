@@ -6,6 +6,7 @@ import 'package:dimipay/app/modules/coupon_list/binding.dart';
 import 'package:dimipay/app/modules/coupon_list/page.dart';
 import 'package:dimipay/app/modules/event/page.dart';
 import 'package:dimipay/app/modules/experiment/page.dart';
+import 'package:dimipay/app/modules/home/binding.dart';
 import 'package:dimipay/app/modules/login/binding.dart';
 import 'package:dimipay/app/modules/login/page.dart';
 import 'package:dimipay/app/modules/notification/page.dart';
@@ -30,7 +31,7 @@ import 'package:get/get.dart';
 class AppPages {
   static final pages = [
     GetPage(name: Routes.TEST, page: () => const Home()),
-    GetPage(name: Routes.HOME, page: () => const HomePage()),
+    GetPage(name: Routes.HOME, page: () => HomePage(), binding: HomePageBinding()),
     GetPage(name: Routes.ACCOUNTINFO, page: () => AccountInfoPage(), binding: AccountInfoPageBinding()),
     GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage()),
     GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage(), binding: RegisterCardPageBinding()),
