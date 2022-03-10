@@ -10,12 +10,12 @@ class CouponController extends GetxController with StateMixin<List<Coupon>> {
 
   @override
   void onInit() {
-    change(null, status: RxStatus.loading());
     getCoupons();
     super.onInit();
   }
 
   Future getCoupons() async {
+    change(null, status: RxStatus.loading());
     coupons.value = await repository.get();
     change(coupons.value, status: RxStatus.success());
   }
