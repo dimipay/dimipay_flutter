@@ -1,5 +1,6 @@
 import 'package:dimipay/app/core/utils/headers.dart';
 import 'package:dimipay/app/data/models/coupon.dart';
+import 'package:dimipay/app/data/models/notice.dart';
 import 'package:dimipay/app/data/models/user.dart';
 import 'package:get/get.dart';
 
@@ -30,6 +31,15 @@ class ApiProvider extends GetConnect {
       return response.body.map<Coupon>((model) => Coupon.fromJson(model)).toList();
     } else {
       return [];
+    }
+  }
+
+  Future<Notice?> getNotice() async {
+    Response response = await get('$_baseUrl/notice/current', headers: HeadersAPI().getHeaders());
+    if (response.statusCode == 200) {
+      return Notice.fromJson(response.body);
+    } else {
+      return null;
     }
   }
 }
