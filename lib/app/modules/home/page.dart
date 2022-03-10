@@ -1,5 +1,6 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/modules/home/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,8 @@ import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+  final NoticeController noticeController = Get.find<NoticeController>();
 
   Widget _logoArea() {
     return Row(
@@ -36,28 +38,44 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _notice(String title, String content) {
-    return Row(
-      children: [
-        SvgPicture.asset('asset/images/notice.svg', color: DPColors.MAIN_THEME),
-        const SizedBox(width: 26),
-        Flexible(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _notice() {
+    return noticeController.obx(
+      (notice) {
+        if (notice != null) {
+          return Column(
             children: [
-              Text(
-                title,
-                style: DPTextTheme.REGULAR_IMPORTANT,
+              Row(
+                children: [
+                  SvgPicture.asset('asset/images/notice.svg', color: DPColors.MAIN_THEME),
+                  const SizedBox(width: 26),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          notice.title,
+                          style: DPTextTheme.REGULAR_IMPORTANT,
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          notice.description,
+                          style: DPTextTheme.DESCRIPTION,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 4),
-              Text(
-                content,
-                style: DPTextTheme.DESCRIPTION,
-              ),
+              const SizedBox(height: 36),
+              const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
+              const SizedBox(height: 36),
             ],
-          ),
-        ),
-      ],
+          );
+        } else {
+          return Container();
+        }
+      },
+      onLoading: Container(),
     );
   }
 
@@ -141,10 +159,7 @@ class HomePage extends StatelessWidget {
           children: [
             _logoArea(),
             const SizedBox(height: 36),
-            _notice('7월 3일 점검 예정', '17시부터 19시까지는 매점을 이용하실 수 없습니다'),
-            const SizedBox(height: 36),
-            const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
-            const SizedBox(height: 36),
+            _notice(),
             _events(),
           ],
         ),
