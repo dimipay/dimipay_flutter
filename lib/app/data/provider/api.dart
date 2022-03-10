@@ -12,7 +12,7 @@ class ApiProvider extends GetConnect {
       'password': password,
     };
     Response response = await post('$_baseUrl/auth/login', body);
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       return response.body['accessToken'];
     } else {
       return null;
