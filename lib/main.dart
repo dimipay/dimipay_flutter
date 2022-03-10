@@ -26,8 +26,8 @@ void main() {
   );
 }
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class TestPage extends StatelessWidget {
+  const TestPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
