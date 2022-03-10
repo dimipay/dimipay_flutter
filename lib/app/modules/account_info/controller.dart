@@ -11,12 +11,12 @@ class UserController extends GetxController with StateMixin<Rx<User?>> {
 
   @override
   void onInit() {
-    change(null, status: RxStatus.loading());
     _loadData();
     super.onInit();
   }
 
   Future _loadData() async {
+    change(null, status: RxStatus.loading());
     user = Rx(await repository.get());
     change(user, status: RxStatus.success());
   }
