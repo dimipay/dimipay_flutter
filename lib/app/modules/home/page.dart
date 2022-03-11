@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
               Row(
                 children: [
                   SvgPicture.asset('asset/images/notice.svg', color: DPColors.MAIN_THEME),
-                  const SizedBox(width: 26),
+                  const SizedBox(width: 24),
                   Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,22 +85,12 @@ class HomePage extends StatelessWidget {
   Widget _event(String title, String description, DateTime expireDate) {
     return Row(
       children: [
-        Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            color: DPColors.DARK6,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Center(
-            child: SizedBox(
-              width: 24,
-              height: 24,
-              child: SvgPicture.asset('asset/images/logo.svg'),
-            ),
-          ),
+        SizedBox(
+          width: 24,
+          height: 24,
+          child: SvgPicture.asset('asset/images/logo.svg'),
         ),
-        const SizedBox(width: 16),
+        const SizedBox(width: 24),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +120,7 @@ class HomePage extends StatelessWidget {
             Row(
               children: const [
                 Text(
-                  '진행중인 이벤트',
+                  '이벤트',
                   style: DPTextTheme.SECTION_HEADER,
                 ),
                 SizedBox(width: 12),
