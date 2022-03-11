@@ -1,4 +1,3 @@
-import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/modules/login/controller.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/text_field.dart';
