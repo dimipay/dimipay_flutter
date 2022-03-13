@@ -44,12 +44,12 @@ class ApiProvider extends GetConnect {
     }
   }
 
-  Future<Transaction?> getTransaction() async {
+  Future<List<Transaction>> getTransaction() async {
     Response response = await get('$_baseUrl/transaction/my', headers: HeadersAPI().getHeaders());
     if (response.statusCode == 200) {
-      return Transaction.fromJson(response.body);
+      return response.body.map<Transaction>((model) => Transaction.fromJson(model)).toList();
     } else {
-      return null;
+      return [];
     }
   }
 }
