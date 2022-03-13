@@ -10,10 +10,12 @@ Notice _$NoticeFromJson(Map<String, dynamic> json) => Notice(
       createdAt: DateTime.parse(json['createdAt'] as String),
       title: json['title'] as String,
       description: json['description'] as String,
+      url: json['url'] as String?,
     );
 
 Map<String, dynamic> _$NoticeToJson(Notice instance) => <String, dynamic>{
       'createdAt': instance.createdAt.toIso8601String(),
       'title': instance.title,
       'description': instance.description,
+      'url': instance.url,
     };

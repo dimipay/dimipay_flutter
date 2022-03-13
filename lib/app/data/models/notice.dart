@@ -7,12 +7,9 @@ class Notice {
 
   String title;
   String description;
+  String? url;
 
-  Notice({
-    required this.createdAt,
-    required this.title,
-    required this.description,
-  });
+  Notice({required this.createdAt, required this.title, required this.description, this.url});
 
   factory Notice.fromJson(Map<String, dynamic> json) => _$NoticeFromJson(json);
   Map<String, dynamic> toJson() => _$NoticeToJson(this);
