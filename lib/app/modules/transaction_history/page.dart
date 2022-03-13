@@ -1,15 +1,11 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/data/models/transaction.dart';
+import 'package:dimipay/app/modules/transaction_history/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
-class Transaction {
-  String title;
-  DateTime date;
-  int price;
-  Transaction(this.title, this.date, this.price);
-}
-
-class TransactionHistoryPage extends StatelessWidget {
+class TransactionHistoryPage extends GetView<TransactionController> {
   const TransactionHistoryPage({Key? key}) : super(key: key);
 
   @override
@@ -31,22 +27,14 @@ class TransactionHistoryPage extends StatelessWidget {
                         child: Column(
                           children: [
                             const SizedBox(height: 24),
-                            TransactionGroup(
-                              date: DateTime(2021, 12, 22, 11, 22),
-                              transactions: [
-                                Transaction('돼지바 까만색, 돼지바 빨간색', DateTime(2021, 12, 22, 11, 22), 500),
-                                Transaction('돼지바 까만색, 돼지바 빨간색', DateTime(2021, 12, 22, 11, 22), 500),
-                              ],
-                            ),
-                            const SizedBox(height: 36),
-                            TransactionGroup(
-                              date: DateTime(2021, 12, 22, 11, 22),
-                              transactions: [
-                                Transaction('돼지바 까만색, 돼지바 빨간색', DateTime(2021, 12, 22, 11, 22), 500),
-                                Transaction('돼지바 까만색, 돼지바 빨간색', DateTime(2021, 12, 22, 11, 22), 500),
-                                Transaction('돼지바 까만색, 돼지바 빨간색', DateTime(2021, 12, 22, 11, 22), 500),
-                              ],
-                            ),
+                            controller.obx(
+                                (state) => Column(
+                                        children: controller.transaction.value.map((model) {
+                                      final products = model.products;
+                                      List<String> names = products.map((model) => model.name).toList();
+                                      return TransactionWidget(transaction: model);
+                                    }).toList()),
+                                onLoading: CircularProgressIndicator()),
                             const SizedBox(height: 36),
                             const Text(
                               '3월 결제 기록 보기',
@@ -78,7 +66,7 @@ class TransactionGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     int sum = 0;
     for (var transaction in transactions) {
-      sum += transaction.price;
+      sum += transaction.totalPrice;
     }
     return Column(
       children: [
@@ -101,7 +89,7 @@ class TransactionGroup extends StatelessWidget {
           builder: (context) {
             List<Widget> childeren = [];
             if (transactions.isNotEmpty) {
-              transactions.sort((a, b) => a.date.compareTo(b.date));
+              //transactions.sort((a, b) => a.date.compareTo(b.date));
               for (var transaction in transactions) {
                 childeren.add(const SizedBox(height: 24));
                 childeren.add(TransactionWidget(transaction: transaction));
@@ -121,6 +109,8 @@ class TransactionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime datetime = DateTime.parse("${transaction.createdAt}");
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,12 +120,12 @@ class TransactionWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                transaction.title,
+                "transaction.title",
                 style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 4),
               Text(
-                '${transaction.date.hour}시 ${transaction.date.minute}분',
+                '${datetime.hour}시 ${datetime.minute}분',
                 style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
               ),
             ],
@@ -143,7 +133,7 @@ class TransactionWidget extends StatelessWidget {
         ),
         const SizedBox(width: 53),
         Text(
-          '${transaction.price}원',
+          '${transaction.totalPrice}원',
           style: const TextStyle(fontSize: 16, color: DPColors.MAIN_THEME, fontWeight: FontWeight.w600),
         ),
       ],
