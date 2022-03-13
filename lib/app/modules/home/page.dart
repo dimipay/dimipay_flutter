@@ -7,6 +7,7 @@ import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
