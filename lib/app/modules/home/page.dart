@@ -45,34 +45,39 @@ class HomePage extends StatelessWidget {
   Widget _notice() {
     return noticeController.obx((notice) {
       if (notice != null) {
-        return Column(
-          children: [
-            Row(
-              children: [
-                SvgPicture.asset('asset/images/notice.svg', color: DPColors.MAIN_THEME),
-                const SizedBox(width: 24),
-                Flexible(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        notice.title,
-                        style: DPTextTheme.REGULAR_IMPORTANT,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        notice.description,
-                        style: DPTextTheme.DESCRIPTION,
-                      ),
-                    ],
+        return GestureDetector(
+          onTap: () {
+            notice.url != null ? Get.dialog(WebView(initialUrl: "${notice.url}")) : null;
+          },
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  SvgPicture.asset('asset/images/notice.svg', color: DPColors.MAIN_THEME),
+                  const SizedBox(width: 24),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          notice.title,
+                          style: DPTextTheme.REGULAR_IMPORTANT,
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          notice.description,
+                          style: DPTextTheme.DESCRIPTION,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 36),
-            const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
-            const SizedBox(height: 36),
-          ],
+                ],
+              ),
+              const SizedBox(height: 36),
+              const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
+              const SizedBox(height: 36),
+            ],
+          ),
         );
       } else {
         return Column(
