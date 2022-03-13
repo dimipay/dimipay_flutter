@@ -42,44 +42,85 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _notice() {
-    return noticeController.obx(
-      (notice) {
-        if (notice != null) {
-          return Column(
-            children: [
-              Row(
-                children: [
-                  SvgPicture.asset('asset/images/notice.svg', color: DPColors.MAIN_THEME),
-                  const SizedBox(width: 24),
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          notice.title,
-                          style: DPTextTheme.REGULAR_IMPORTANT,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          notice.description,
-                          style: DPTextTheme.DESCRIPTION,
-                        ),
-                      ],
-                    ),
+    return noticeController.obx((notice) {
+      if (notice != null) {
+        return Column(
+          children: [
+            Row(
+              children: [
+                SvgPicture.asset('asset/images/notice.svg', color: DPColors.MAIN_THEME),
+                const SizedBox(width: 24),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        notice.title,
+                        style: DPTextTheme.REGULAR_IMPORTANT,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        notice.description,
+                        style: DPTextTheme.DESCRIPTION,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              const SizedBox(height: 36),
-              const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
-              const SizedBox(height: 36),
-            ],
-          );
-        } else {
-          return Container();
-        }
-      },
-      onLoading: Container(),
-    );
+                ),
+              ],
+            ),
+            const SizedBox(height: 36),
+            const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
+            const SizedBox(height: 36),
+          ],
+        );
+      } else {
+        return Column(
+          children: [
+            Row(
+              children: [
+                SvgPicture.asset('asset/images/notice.svg', color: DPColors.MAIN_THEME),
+                const SizedBox(width: 24),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "공지가 없습니다",
+                        style: DPTextTheme.REGULAR_IMPORTANT,
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        "공지가 없습니다",
+                        style: DPTextTheme.DESCRIPTION,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 36),
+            const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
+            const SizedBox(height: 36),
+          ],
+        );
+      }
+    },
+        onLoading: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Flexible(
+                    child: CircularProgressIndicator(
+                  color: DPColors.MAIN_THEME,
+                )),
+              ],
+            ),
+            const SizedBox(height: 36),
+            const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
+            const SizedBox(height: 36),
+          ],
+        ));
   }
 
   Widget _event(String title, String description, DateTime expireDate) {
