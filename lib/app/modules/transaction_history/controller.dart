@@ -17,7 +17,7 @@ class TransactionController extends GetxController with StateMixin {
     change(null, status: RxStatus.loading());
     transaction.value = await repository.get();
     if (transaction.value != null)
-      change(transaction.value, status: RxStatus.success());
+      change(transaction, status: RxStatus.success());
     else
       change(null, status: RxStatus.success());
   }
