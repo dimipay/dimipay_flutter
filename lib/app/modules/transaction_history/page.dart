@@ -14,43 +14,46 @@ class TransactionHistoryPage extends GetView<TransactionController> {
       backgroundColor: Colors.white,
       appBar: AppBar(title: const Text('결제 기록')),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return SingleChildScrollView(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 24),
-                            controller.obx(
-                                (state) => Column(
-                                        children: controller.transaction.value.map((model) {
-                                      final products = model.products;
-                                      List<String> names = products.map((model) => model.name).toList();
-                                      return TransactionWidget(transaction: model);
-                                    }).toList()),
-                                onLoading: CircularProgressIndicator()),
-                            const SizedBox(height: 36),
-                            const Text(
-                              '3월 결제 기록 보기',
-                              style: TextStyle(color: DPColors.MAIN_THEME, decoration: TextDecoration.underline),
-                            ),
-                            const SizedBox(height: 36),
-                          ],
+        child: RefreshIndicator(
+          onRefresh: controller.refreshData,
+          child: Column(
+            children: [
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return SingleChildScrollView(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 24),
+                              controller.obx(
+                                  (state) => Column(
+                                          children: controller.transaction.value.map((model) {
+                                        final products = model.products;
+                                        List<String> names = products.map((model) => model.name).toList();
+                                        return TransactionWidget(transaction: model);
+                                      }).toList()),
+                                  onLoading: CircularProgressIndicator()),
+                              const SizedBox(height: 36),
+                              const Text(
+                                '3월 결제 기록 보기',
+                                style: TextStyle(color: DPColors.MAIN_THEME, decoration: TextDecoration.underline),
+                              ),
+                              const SizedBox(height: 36),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-            const TransactionCalendarViewer(),
-          ],
+              const TransactionCalendarViewer(),
+            ],
+          ),
         ),
       ),
     );
