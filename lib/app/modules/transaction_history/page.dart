@@ -1,16 +1,41 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/data/models/transaction.dart';
+import 'package:dimipay/app/modules/transaction_history/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-class Transaction {
-  String title;
-  DateTime date;
-  int price;
-  Transaction(this.title, this.date, this.price);
-}
+import 'package:get/get.dart';
 
 class TransactionHistoryPage extends StatelessWidget {
-  const TransactionHistoryPage({Key? key}) : super(key: key);
+  TransactionHistoryPage({Key? key}) : super(key: key);
+  final TransactionController transactionController = Get.find<TransactionController>();
+
+  Widget _buildTransactions(List<Transaction> transactions) {
+    Map<DateTime, List<Transaction>> dailyTransactions = {};
+    for (var transaction in transactions) {
+      DateTime dt = DateTime(transaction.createdAt.year, transaction.createdAt.month, transaction.createdAt.day);
+      if (dailyTransactions[dt] == null) {
+        dailyTransactions[dt] = [];
+      }
+      dailyTransactions[dt]!.add(transaction);
+    }
+
+    List<TransactionGroup> children = [];
+    for (var dailyTransaction in dailyTransactions.entries) {
+      children.add(TransactionGroup(date: dailyTransaction.key, transactions: dailyTransaction.value));
+    }
+    children.sort((a, b) => a.date.compareTo(b.date));
+    return Column(children: children);
+  }
+
+  Widget _couponArea() {
+    return transactionController.obx(
+      (state) {
+        return _buildTransactions(state!);
+      },
+      onLoading: const CircularProgressIndicator(color: DPColors.MAIN_THEME),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,51 +43,29 @@ class TransactionHistoryPage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(title: const Text('결제 기록')),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return SingleChildScrollView(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 24),
-                            TransactionGroup(
-                              date: DateTime(2021, 12, 22, 11, 22),
-                              transactions: [
-                                Transaction('돼지바 까만색, 돼지바 빨간색', DateTime(2021, 12, 22, 11, 22), 500),
-                                Transaction('돼지바 까만색, 돼지바 빨간색', DateTime(2021, 12, 22, 11, 22), 500),
-                              ],
-                            ),
-                            const SizedBox(height: 36),
-                            TransactionGroup(
-                              date: DateTime(2021, 12, 22, 11, 22),
-                              transactions: [
-                                Transaction('돼지바 까만색, 돼지바 빨간색', DateTime(2021, 12, 22, 11, 22), 500),
-                                Transaction('돼지바 까만색, 돼지바 빨간색', DateTime(2021, 12, 22, 11, 22), 500),
-                                Transaction('돼지바 까만색, 돼지바 빨간색', DateTime(2021, 12, 22, 11, 22), 500),
-                              ],
-                            ),
-                            const SizedBox(height: 36),
-                            const Text(
-                              '3월 결제 기록 보기',
-                              style: TextStyle(color: DPColors.MAIN_THEME, decoration: TextDecoration.underline),
-                            ),
-                            const SizedBox(height: 36),
-                          ],
-                        ),
-                      ),
+        child: RefreshIndicator(
+          color: DPColors.MAIN_THEME,
+          onRefresh: transactionController.refreshData,
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 24),
+                        _couponArea(),
+                        const SizedBox(height: 36),
+                      ],
                     ),
-                  );
-                },
+                  ),
+                ),
               ),
-            ),
-            const TransactionCalendarViewer(),
-          ],
+              const TransactionCalendarViewer(),
+            ],
+          ),
         ),
       ),
     );
@@ -72,13 +75,23 @@ class TransactionHistoryPage extends StatelessWidget {
 class TransactionGroup extends StatelessWidget {
   final DateTime date;
   final List<Transaction> transactions;
-  const TransactionGroup({Key? key, required this.date, this.transactions = const []}) : super(key: key);
+  const TransactionGroup({Key? key, required this.date, required this.transactions}) : super(key: key);
+
+  Widget _buildTransactions(List<Transaction> transactions) {
+    List<Widget> childeren = [];
+    transactions.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+    for (var transaction in transactions) {
+      childeren.add(const SizedBox(height: 18));
+      childeren.add(TransactionWidget(transaction: transaction));
+    }
+    return Column(children: childeren);
+  }
 
   @override
   Widget build(BuildContext context) {
     int sum = 0;
     for (var transaction in transactions) {
-      sum += transaction.price;
+      sum += transaction.totalPrice;
     }
     return Column(
       children: [
@@ -87,29 +100,18 @@ class TransactionGroup extends StatelessWidget {
           children: [
             Text(
               '${date.month}월 ${date.day}일',
-              style: const TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4)),
+              style: const TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.2, color: DPColors.DARK1),
             ),
             Text(
               '$sum원',
-              style: const TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4)),
+              style: const TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.2, color: DPColors.DARK1),
             ),
           ],
         ),
         const SizedBox(height: 12),
-        const Divider(color: Color.fromRGBO(0, 0, 0, 0.4)),
-        Builder(
-          builder: (context) {
-            List<Widget> childeren = [];
-            if (transactions.isNotEmpty) {
-              transactions.sort((a, b) => a.date.compareTo(b.date));
-              for (var transaction in transactions) {
-                childeren.add(const SizedBox(height: 24));
-                childeren.add(TransactionWidget(transaction: transaction));
-              }
-            }
-            return Column(children: childeren);
-          },
-        ),
+        const Divider(color: DPColors.DARK6),
+        _buildTransactions(transactions),
+        const SizedBox(height: 48),
       ],
     );
   }
@@ -129,21 +131,21 @@ class TransactionWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                transaction.title,
-                style: const TextStyle(fontSize: 16),
+              const Text(
+                "transaction.title",
+                style: DPTextTheme.REGULAR,
               ),
               const SizedBox(height: 4),
               Text(
-                '${transaction.date.hour}시 ${transaction.date.minute}분',
-                style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
+                '${transaction.createdAt.hour}시 ${transaction.createdAt.minute}분',
+                style: DPTextTheme.DESCRIPTION,
               ),
             ],
           ),
         ),
         const SizedBox(width: 53),
         Text(
-          '${transaction.price}원',
+          '${transaction.totalPrice}원',
           style: const TextStyle(fontSize: 16, color: DPColors.MAIN_THEME, fontWeight: FontWeight.w600),
         ),
       ],
