@@ -15,6 +15,7 @@ import 'package:dimipay/app/modules/register_card/page.dart';
 import 'package:dimipay/app/modules/splash/binding.dart';
 import 'package:dimipay/app/modules/splash/page.dart';
 import 'package:dimipay/app/modules/transaction/page.dart';
+import 'package:dimipay/app/modules/transaction_history/binding.dart';
 import 'package:dimipay/app/modules/transaction_history/page.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/modules/manage_method/page.dart';
@@ -41,7 +42,7 @@ class AppPages {
     GetPage(name: Routes.CHARGINGFIN, page: () => const ChargingFinPage()),
     GetPage(name: Routes.CHARGINGAMOUNT, page: () => ChargingAmountPage()),
     GetPage(name: Routes.COUPON, page: () => CouponPage(), binding: CouponPageBinding()),
-    GetPage(name: Routes.TRANSACTIONHISTORY, page: () => const TransactionHistoryPage()),
+    GetPage(name: Routes.TRANSACTIONHISTORY, page: () => TransactionHistoryPage(), binding: TransactionBinding()),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
     GetPage(name: Routes.CHANGEPASSWORD, page: () => const ChangePasswordPage(), binding: ChangePasswordPageBinding()),
     GetPage(name: Routes.UNTITLED, page: () => const Untitled()),
