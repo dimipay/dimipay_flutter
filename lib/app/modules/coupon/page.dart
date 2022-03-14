@@ -36,6 +36,7 @@ class CouponPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text('쿠폰', style: DPTextTheme.PAGE_HEADER)),
       body: RefreshIndicator(
         onRefresh: couponController.refreshCoupons,
         color: DPColors.MAIN_THEME,
@@ -46,22 +47,15 @@ class CouponPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                const SizedBox(height: 24),
+                Row(
                   children: [
-                    const SizedBox(height: 36),
-                    const Text('쿠폰', style: DPTextTheme.PAGE_HEADER),
-                    const SizedBox(height: 32),
-                    Row(
-                      children: [
-                        SvgPicture.asset('asset/images/circled_question.svg'),
-                        const SizedBox(width: 12),
-                        const Text('쿠폰은 어떻게 사용하나요?', style: DPTextTheme.DESCRIPTION),
-                      ],
-                    ),
-                    const SizedBox(height: 36),
+                    SvgPicture.asset('asset/images/circled_question.svg'),
+                    const SizedBox(width: 12),
+                    const Text('쿠폰은 어떻게 사용하나요?', style: DPTextTheme.DESCRIPTION),
                   ],
                 ),
+                const SizedBox(height: 36),
                 Expanded(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
