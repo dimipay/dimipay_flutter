@@ -30,30 +30,23 @@ class TransactionHistoryPage extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return SingleChildScrollView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 24),
-                              transactionController.obx((state) => _buildTransaction(state), onLoading: const CircularProgressIndicator(color: DPColors.MAIN_THEME)),
-                              const SizedBox(height: 36),
-                              const Text(
-                                '3월 결제 기록 보기',
-                                style: TextStyle(color: DPColors.MAIN_THEME, decoration: TextDecoration.underline),
-                              ),
-                              const SizedBox(height: 36),
-                            ],
-                          ),
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 24),
+                        transactionController.obx((state) => _buildTransaction(state), onLoading: const CircularProgressIndicator(color: DPColors.MAIN_THEME)),
+                        const SizedBox(height: 36),
+                        const Text(
+                          '3월 결제 기록 보기',
+                          style: TextStyle(color: DPColors.MAIN_THEME, decoration: TextDecoration.underline),
                         ),
-                      ),
-                    );
-                  },
+                        const SizedBox(height: 36),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               const TransactionCalendarViewer(),
