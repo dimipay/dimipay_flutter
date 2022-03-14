@@ -22,7 +22,8 @@ class UserController extends GetxController with StateMixin<Rx<User?>> {
   }
 
   Future<void> refreshData() async {
-    HapticFeedback.selectionClick();
+    HapticFeedback.mediumImpact();
     await _loadData();
+    HapticFeedback.mediumImpact();
   }
 }

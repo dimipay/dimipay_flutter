@@ -21,7 +21,8 @@ class CouponController extends GetxController with StateMixin<List<Coupon>> {
   }
 
   Future<void> refreshCoupons() async {
-    HapticFeedback.selectionClick();
+    HapticFeedback.mediumImpact();
     await getCoupons();
+    HapticFeedback.mediumImpact();
   }
 }
