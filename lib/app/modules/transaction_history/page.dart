@@ -8,6 +8,15 @@ import 'package:get/get.dart';
 class TransactionHistoryPage extends GetView<TransactionController> {
   const TransactionHistoryPage({Key? key}) : super(key: key);
 
+  _buildTransaction(state) {
+    return Column(
+        children: controller.transaction.value.map((model) {
+      final products = model.products;
+      List<String> names = products.map((model) => model.name).toList();
+      return TransactionWidget(transaction: model);
+    }).toList());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,14 +38,7 @@ class TransactionHistoryPage extends GetView<TransactionController> {
                           child: Column(
                             children: [
                               const SizedBox(height: 24),
-                              controller.obx(
-                                  (state) => Column(
-                                          children: controller.transaction.value.map((model) {
-                                        final products = model.products;
-                                        List<String> names = products.map((model) => model.name).toList();
-                                        return TransactionWidget(transaction: model);
-                                      }).toList()),
-                                  onLoading: CircularProgressIndicator(color: DPColors.MAIN_THEME)),
+                              controller.obx((state) => _buildTransaction(state), onLoading: CircularProgressIndicator(color: DPColors.MAIN_THEME)),
                               const SizedBox(height: 36),
                               const Text(
                                 '3월 결제 기록 보기',
