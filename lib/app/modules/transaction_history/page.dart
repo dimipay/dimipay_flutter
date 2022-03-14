@@ -1,4 +1,5 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/data/models/transaction.dart';
 import 'package:dimipay/app/modules/transaction_history/controller.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,31 @@ class TransactionHistoryPage extends StatelessWidget {
   TransactionHistoryPage({Key? key}) : super(key: key);
   final TransactionController transactionController = Get.find<TransactionController>();
 
-  _buildTransaction(state) {
-    return Column(
-        children: transactionController.transaction.value.map((model) {
-      final products = model.products;
-      List<String> names = products.map((model) => model.name).toList();
-      return TransactionWidget(transaction: model);
-    }).toList());
+  Widget _buildTransactions(List<Transaction> transactions) {
+    Map<DateTime, List<Transaction>> dailyTransactions = {};
+    for (var transaction in transactions) {
+      DateTime dt = DateTime(transaction.createdAt.year, transaction.createdAt.month, transaction.createdAt.day);
+      if (dailyTransactions[dt] == null) {
+        dailyTransactions[dt] = [];
+      }
+      dailyTransactions[dt]!.add(transaction);
+    }
+
+    List<TransactionGroup> children = [];
+    for (var dailyTransaction in dailyTransactions.entries) {
+      children.add(TransactionGroup(date: dailyTransaction.key, transactions: dailyTransaction.value));
+    }
+    children.sort((a, b) => a.date.compareTo(b.date));
+    return Column(children: children);
+  }
+
+  Widget _couponArea() {
+    return transactionController.obx(
+      (state) {
+        return _buildTransactions(state!);
+      },
+      onLoading: const CircularProgressIndicator(color: DPColors.MAIN_THEME),
+    );
   }
 
   @override
@@ -37,12 +56,7 @@ class TransactionHistoryPage extends StatelessWidget {
                     child: Column(
                       children: [
                         const SizedBox(height: 24),
-                        transactionController.obx((state) => _buildTransaction(state), onLoading: const CircularProgressIndicator(color: DPColors.MAIN_THEME)),
-                        const SizedBox(height: 36),
-                        const Text(
-                          '3월 결제 기록 보기',
-                          style: TextStyle(color: DPColors.MAIN_THEME, decoration: TextDecoration.underline),
-                        ),
+                        _couponArea(),
                         const SizedBox(height: 36),
                       ],
                     ),
@@ -61,7 +75,17 @@ class TransactionHistoryPage extends StatelessWidget {
 class TransactionGroup extends StatelessWidget {
   final DateTime date;
   final List<Transaction> transactions;
-  const TransactionGroup({Key? key, required this.date, this.transactions = const []}) : super(key: key);
+  const TransactionGroup({Key? key, required this.date, required this.transactions}) : super(key: key);
+
+  Widget _buildTransactions(List<Transaction> transactions) {
+    List<Widget> childeren = [];
+    transactions.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+    for (var transaction in transactions) {
+      childeren.add(const SizedBox(height: 18));
+      childeren.add(TransactionWidget(transaction: transaction));
+    }
+    return Column(children: childeren);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,29 +100,18 @@ class TransactionGroup extends StatelessWidget {
           children: [
             Text(
               '${date.month}월 ${date.day}일',
-              style: const TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4)),
+              style: const TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.2, color: DPColors.DARK1),
             ),
             Text(
               '$sum원',
-              style: const TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.4)),
+              style: const TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.2, color: DPColors.DARK1),
             ),
           ],
         ),
         const SizedBox(height: 12),
-        const Divider(color: Color.fromRGBO(0, 0, 0, 0.4)),
-        Builder(
-          builder: (context) {
-            List<Widget> childeren = [];
-            if (transactions.isNotEmpty) {
-              //transactions.sort((a, b) => a.date.compareTo(b.date));
-              for (var transaction in transactions) {
-                childeren.add(const SizedBox(height: 24));
-                childeren.add(TransactionWidget(transaction: transaction));
-              }
-            }
-            return Column(children: childeren);
-          },
-        ),
+        const Divider(color: DPColors.DARK6),
+        _buildTransactions(transactions),
+        const SizedBox(height: 48),
       ],
     );
   }
@@ -110,8 +123,6 @@ class TransactionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime datetime = DateTime.parse("${transaction.createdAt}");
-
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -120,14 +131,14 @@ class TransactionWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "transaction.title",
-                style: const TextStyle(fontSize: 16),
+                style: DPTextTheme.REGULAR,
               ),
               const SizedBox(height: 4),
               Text(
-                '${datetime.hour}시 ${datetime.minute}분',
-                style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.4)),
+                '${transaction.createdAt.hour}시 ${transaction.createdAt.minute}분',
+                style: DPTextTheme.DESCRIPTION,
               ),
             ],
           ),

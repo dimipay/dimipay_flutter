@@ -22,6 +22,6 @@ class TransactionController extends GetxController with StateMixin {
 
   Future<void> refreshData() async {
     HapticFeedback.selectionClick();
-    getTransaction();
+    await getTransaction();
   }
 }
