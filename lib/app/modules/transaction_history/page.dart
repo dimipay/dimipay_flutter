@@ -36,7 +36,7 @@ class TransactionHistoryPage extends GetView<TransactionController> {
                                         List<String> names = products.map((model) => model.name).toList();
                                         return TransactionWidget(transaction: model);
                                       }).toList()),
-                                  onLoading: CircularProgressIndicator()),
+                                  onLoading: CircularProgressIndicator(color: DPColors.MAIN_THEME)),
                               const SizedBox(height: 36),
                               const Text(
                                 '3월 결제 기록 보기',
