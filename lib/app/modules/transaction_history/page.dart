@@ -25,6 +25,7 @@ class TransactionHistoryPage extends StatelessWidget {
       appBar: AppBar(title: const Text('결제 기록')),
       body: SafeArea(
         child: RefreshIndicator(
+          color: DPColors.MAIN_THEME,
           onRefresh: transactionController.refreshData,
           child: Column(
             children: [
@@ -32,6 +33,7 @@ class TransactionHistoryPage extends StatelessWidget {
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     return SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
                       child: ConstrainedBox(
                         constraints: BoxConstraints(minHeight: constraints.maxHeight),
                         child: Padding(
