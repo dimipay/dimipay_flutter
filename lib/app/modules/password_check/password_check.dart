@@ -1,4 +1,5 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/modules/password_check/widget/password_field.dart';
 import 'package:flutter/material.dart';
 
 class PasswordCheckPage extends StatefulWidget {
@@ -11,8 +12,13 @@ class PasswordCheckPage extends StatefulWidget {
 class _PasswordCheckPageState extends State<PasswordCheckPage> {
   buildPassword() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: const [Text("0"), Text("0"), Text("0"), Text("0")],
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const PasswordField(),
+        const PasswordField(),
+        const PasswordField(),
+        const PasswordField(),
+      ],
     );
   }
 
@@ -60,23 +66,21 @@ class _PasswordCheckPageState extends State<PasswordCheckPage> {
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Flexible(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "결제 비밀번호 입력",
-                      style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 20, height: 1.2, color: DPColors.MAIN_THEME),
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    buildPassword(),
-                  ],
-                ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "결제 비밀번호 입력",
+                    style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 20, height: 1.2, color: DPColors.MAIN_THEME),
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  buildPassword(),
+                ],
               ),
               buildNumberPad()
             ],
