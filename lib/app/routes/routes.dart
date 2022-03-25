@@ -21,6 +21,6 @@ abstract class Routes {
   static const EVENT = "/Event";
   static const SPLASH = "/Splash";
   static const NOTIFICATION = "/Notification";
-  static const PASSWORDCHECK = "/PasswordCheck";
+  static const PINAUTH = "/PINAUTH";
   static const BIOMETRICAUTH = "/BiometricAuth";
 }

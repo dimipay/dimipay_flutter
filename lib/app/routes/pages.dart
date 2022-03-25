@@ -53,7 +53,7 @@ class AppPages {
     GetPage(name: Routes.EVENT, page: () => const EventPage()),
     GetPage(name: Routes.SPLASH, page: () => const SplashPage(), binding: SplashPageBinding()),
     GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage()),
-    GetPage(name: Routes.PASSWORDCHECK, page: () => const PinAuthPage()),
+    GetPage(name: Routes.PINAUTH, page: () => const PinAuthPage()),
     GetPage(name: Routes.BIOMETRICAUTH, page: () => const BiometricAuth()),
   ];
 }
