@@ -22,4 +22,5 @@ abstract class Routes {
   static const SPLASH = "/Splash";
   static const NOTIFICATION = "/Notification";
   static const PASSWORDCHECK = "/PasswordCheck";
+  static const BIOMETRICAUTH = "/BiometricAuth";
 }

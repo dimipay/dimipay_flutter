@@ -146,6 +146,12 @@ class TestPage extends StatelessWidget {
             },
             child: const Text('PASSWORDCHECK'),
           ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.BIOMETRICAUTH);
+            },
+            child: const Text('BIOMETRICAUTH'),
+          ),
         ],
       ),
     );

@@ -10,6 +10,7 @@ import 'package:dimipay/app/modules/home/binding.dart';
 import 'package:dimipay/app/modules/login/binding.dart';
 import 'package:dimipay/app/modules/login/page.dart';
 import 'package:dimipay/app/modules/notification/page.dart';
+import 'package:dimipay/app/modules/password_check/biomertric_auth.dart';
 import 'package:dimipay/app/modules/password_check/password_check.dart';
 import 'package:dimipay/app/modules/register_card/binding.dart';
 import 'package:dimipay/app/modules/register_card/page.dart';
@@ -52,6 +53,7 @@ class AppPages {
     GetPage(name: Routes.EVENT, page: () => const EventPage()),
     GetPage(name: Routes.SPLASH, page: () => const SplashPage(), binding: SplashPageBinding()),
     GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage()),
-		GetPage(name: Routes.PASSWORDCHECK, page:()=> const PasswordCheckPage()),
+    GetPage(name: Routes.PASSWORDCHECK, page: () => const PasswordCheckPage()),
+    GetPage(name: Routes.BIOMETRICAUTH, page: () => const BiometricAuth()),
   ];
 }
