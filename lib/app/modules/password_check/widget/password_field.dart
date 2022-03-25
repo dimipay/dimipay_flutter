@@ -8,11 +8,15 @@ class PasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: DPColors.DARK6,
-      shape: RoundedRectangleBorder(side: const BorderSide(color: DPColors.MAIN_THEME, width: 3), borderRadius: BorderRadius.circular(5)),
-      child: const Padding(
-        padding: EdgeInsets.all(16.0),
+    return Container(
+      width: 32,
+      height: 40,
+      decoration: BoxDecoration(
+        border: Border.all(color: DPColors.MAIN_THEME, width: 2),
+        borderRadius: BorderRadius.circular(3),
+        color: DPColors.DARK6,
+      ),
+      child: const Center(
         child: Text(" "),
       ),
     );

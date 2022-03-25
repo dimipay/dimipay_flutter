@@ -1,4 +1,5 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/modules/password_check/widget/numberpad_item.dart';
 import 'package:dimipay/app/modules/password_check/widget/password_field.dart';
 import 'package:flutter/material.dart';
 
@@ -12,49 +13,137 @@ class PasswordCheckPage extends StatefulWidget {
 class _PasswordCheckPageState extends State<PasswordCheckPage> {
   buildPassword() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const PasswordField(),
-        const PasswordField(),
-        const PasswordField(),
-        const PasswordField(),
+      mainAxisSize: MainAxisSize.min,
+      children: const [
+        PasswordField(),
+        SizedBox(width: 16),
+        PasswordField(),
+        SizedBox(width: 16),
+        PasswordField(),
+        SizedBox(width: 16),
+        PasswordField(),
       ],
     );
   }
 
   buildNumberPad({List<List<int>>? nums}) {
-    List<List<int>> nums = [
-      [1, 2, 3],
-      [4, 5, 6],
-      [7, 8, 9],
-      [-1, 0, -1]
-    ];
-
-    return Center(
-      child: SizedBox(
-        width: 200,
-        height: 300,
-        child: Builder(builder: (context) {
-          List<Row> rows = [];
-          for (int i = 0; i < 4; i++) {
-            List<Text> texts = [];
-
-            for (int j = 0; j < 3; j++) {
-              texts.add(Text(
-                "${nums[i][j]}",
-                style: const TextStyle(fontFamily: 'Pretendard', fontSize: 24, height: 1.2, color: DPColors.DARK1),
-              ));
-            }
-            rows.add(Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: texts,
-            ));
-          }
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: rows,
-          );
-        }),
+    return SizedBox(
+      width: 300,
+      height: 300,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Row(
+              children: const [
+                Expanded(
+                  child: NumberPadItem(
+                    child: Text(
+                      '4',
+                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: NumberPadItem(
+                    child: Text(
+                      '1',
+                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: NumberPadItem(
+                    child: Text(
+                      '8',
+                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Row(
+              children: const [
+                Expanded(
+                  child: NumberPadItem(
+                    child: Text(
+                      '2',
+                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: NumberPadItem(
+                    child: Text(
+                      '5',
+                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: NumberPadItem(
+                    child: Text(
+                      '7',
+                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Row(
+              children: const [
+                Expanded(
+                  child: NumberPadItem(
+                    child: Text(
+                      '6',
+                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: NumberPadItem(
+                    child: Text(
+                      '3',
+                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: NumberPadItem(
+                    child: Text(
+                      '9',
+                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(),
+                ),
+                const Expanded(
+                  child: NumberPadItem(
+                    child: Text(
+                      '0',
+                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -62,27 +151,27 @@ class _PasswordCheckPageState extends State<PasswordCheckPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32),
-        child: Center(
+      body: SafeArea(
+        child: SizedBox(
+          width: double.infinity,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "결제 비밀번호 입력",
-                    style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 20, height: 1.2, color: DPColors.MAIN_THEME),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  buildPassword(),
-                ],
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "결제 비밀번호 입력",
+                      style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 24, height: 1.2, color: DPColors.MAIN_THEME),
+                    ),
+                    const SizedBox(height: 24),
+                    buildPassword(),
+                  ],
+                ),
               ),
-              buildNumberPad()
+              buildNumberPad(),
+              const SizedBox(height: 100),
             ],
           ),
         ),
