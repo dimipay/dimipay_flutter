@@ -16,7 +16,7 @@ class _PasswordCheckPageState extends State<PasswordCheckPage> {
     );
   }
 
-  buildNumberPad() {
+  buildNumberPad({List<List<int>>? nums}) {
     List<List<int>> nums = [
       [1, 2, 3],
       [4, 5, 6],
@@ -31,9 +31,17 @@ class _PasswordCheckPageState extends State<PasswordCheckPage> {
         child: Builder(builder: (context) {
           List<Row> rows = [];
           for (int i = 0; i < 4; i++) {
+            List<Text> texts = [];
+
+            for (int j = 0; j < 3; j++) {
+              texts.add(Text(
+                "${nums[i][j]}",
+                style: const TextStyle(fontFamily: 'Pretendard', fontSize: 24, height: 1.2, color: DPColors.DARK1),
+              ));
+            }
             rows.add(Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text("${nums[i][0]}"), Text("${nums[i][1]}"), Text("${nums[i][2]}")],
+              children: texts,
             ));
           }
           return Column(
@@ -55,15 +63,20 @@ class _PasswordCheckPageState extends State<PasswordCheckPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
-                "결제 비밀번호 입력",
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              buildPassword(),
-              const SizedBox(
-                height: 24,
+              Flexible(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "결제 비밀번호 입력",
+                      style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 20, height: 1.2, color: DPColors.MAIN_THEME),
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    buildPassword(),
+                  ],
+                ),
               ),
               buildNumberPad()
             ],
