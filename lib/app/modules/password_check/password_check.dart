@@ -1,3 +1,4 @@
+import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:flutter/material.dart';
 
 class PasswordCheckPage extends StatefulWidget {
@@ -11,7 +12,7 @@ class _PasswordCheckPageState extends State<PasswordCheckPage> {
   buildPassword() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [Text("0"), Text("0"), Text("0"), Text("0")],
+      children: const [Text("0"), Text("0"), Text("0"), Text("0")],
     );
   }
 
@@ -24,12 +25,10 @@ class _PasswordCheckPageState extends State<PasswordCheckPage> {
     ];
 
     return Center(
-      child: Container(
+      child: SizedBox(
         width: 200,
         height: 300,
         child: Builder(builder: (context) {
-          int i = 0;
-
           List<Row> rows = [];
           for (int i = 0; i < 4; i++) {
             rows.add(Row(
@@ -56,12 +55,14 @@ class _PasswordCheckPageState extends State<PasswordCheckPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("결제 비밀번호 입력"),
-              SizedBox(
+              const Text(
+                "결제 비밀번호 입력",
+              ),
+              const SizedBox(
                 height: 24,
               ),
               buildPassword(),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               buildNumberPad()
