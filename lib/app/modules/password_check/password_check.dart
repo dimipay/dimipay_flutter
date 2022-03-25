@@ -3,14 +3,9 @@ import 'package:dimipay/app/modules/password_check/widget/numberpad_item.dart';
 import 'package:dimipay/app/modules/password_check/widget/password_field.dart';
 import 'package:flutter/material.dart';
 
-class PasswordCheckPage extends StatefulWidget {
+class PasswordCheckPage extends StatelessWidget {
   const PasswordCheckPage({Key? key}) : super(key: key);
 
-  @override
-  State<PasswordCheckPage> createState() => _PasswordCheckPageState();
-}
-
-class _PasswordCheckPageState extends State<PasswordCheckPage> {
   buildPassword() {
     return Row(
       mainAxisSize: MainAxisSize.min,
