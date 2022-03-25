@@ -140,6 +140,12 @@ class TestPage extends StatelessWidget {
             },
             child: const Text('EVENT'),
           ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.PASSWORDCHECK);
+            },
+            child: const Text('PASSWORDCHECK'),
+          ),
         ],
       ),
     );
