@@ -3,8 +3,8 @@ import 'package:dimipay/app/modules/password_check/widget/numberpad_item.dart';
 import 'package:dimipay/app/modules/password_check/widget/password_field.dart';
 import 'package:flutter/material.dart';
 
-class PasswordCheckPage extends StatelessWidget {
-  const PasswordCheckPage({Key? key}) : super(key: key);
+class PinAuthPage extends StatelessWidget {
+  const PinAuthPage({Key? key}) : super(key: key);
 
   buildPassword() {
     return Row(
