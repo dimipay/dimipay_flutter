@@ -11,7 +11,7 @@ import 'package:dimipay/app/modules/login/binding.dart';
 import 'package:dimipay/app/modules/login/page.dart';
 import 'package:dimipay/app/modules/notification/page.dart';
 import 'package:dimipay/app/modules/biometric_auth/biomertric_auth.dart';
-import 'package:dimipay/app/modules/password_check/password_check.dart';
+import 'package:dimipay/app/modules/pin_auth/page.dart';
 import 'package:dimipay/app/modules/register_card/binding.dart';
 import 'package:dimipay/app/modules/register_card/page.dart';
 import 'package:dimipay/app/modules/splash/binding.dart';

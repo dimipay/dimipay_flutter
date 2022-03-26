@@ -1,6 +1,6 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
-import 'package:dimipay/app/modules/password_check/widget/numberpad_item.dart';
-import 'package:dimipay/app/modules/password_check/widget/password_field.dart';
+import 'package:dimipay/app/modules/pin_auth/widget/numberpad_item.dart';
+import 'package:dimipay/app/modules/pin_auth/widget/password_field.dart';
 import 'package:flutter/material.dart';
 
 class PinAuthPage extends StatelessWidget {
