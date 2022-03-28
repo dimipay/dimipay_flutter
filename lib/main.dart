@@ -142,6 +142,12 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
+              Get.toNamed(Routes.ISSUECOUPON);
+            },
+            child: const Text('ISSUECOUPON'),
+          ),
+          TextButton(
+            onPressed: () {
               Get.toNamed(Routes.PINAUTH);
             },
             child: const Text('PINAUTH'),
