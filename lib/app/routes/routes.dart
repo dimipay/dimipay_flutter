@@ -21,4 +21,5 @@ abstract class Routes {
   static const EVENT = "/Event";
   static const SPLASH = "/Splash";
   static const NOTIFICATION = "/Notification";
+	static const ISSUECOUPON = '/IssueCoupon';
 }
