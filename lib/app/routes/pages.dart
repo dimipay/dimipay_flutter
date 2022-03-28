@@ -4,10 +4,10 @@ import 'package:dimipay/app/modules/change_password/binding.dart';
 import 'package:dimipay/app/modules/charging_amount/page.dart';
 import 'package:dimipay/app/modules/coupon/binding.dart';
 import 'package:dimipay/app/modules/coupon/page.dart';
-import 'package:dimipay/app/modules/coupon_issue/coupon_issue.dart';
 import 'package:dimipay/app/modules/event/page.dart';
 import 'package:dimipay/app/modules/experiment/page.dart';
 import 'package:dimipay/app/modules/home/binding.dart';
+import 'package:dimipay/app/modules/issue_coupon/page.dart';
 import 'package:dimipay/app/modules/login/binding.dart';
 import 'package:dimipay/app/modules/login/page.dart';
 import 'package:dimipay/app/modules/notification/page.dart';
@@ -52,6 +52,6 @@ class AppPages {
     GetPage(name: Routes.EVENT, page: () => const EventPage()),
     GetPage(name: Routes.SPLASH, page: () => const SplashPage(), binding: SplashPageBinding()),
     GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage()),
-    GetPage(name: Routes.ISSUECOUPON, page: () => const CouponIssuePage()),
+    GetPage(name: Routes.ISSUECOUPON, page: () => const IssueCouponPage()),
   ];
 }
