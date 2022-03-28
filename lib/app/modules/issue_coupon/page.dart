@@ -2,14 +2,9 @@ import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
-class IssueCouponPage extends StatefulWidget {
+class IssueCouponPage extends StatelessWidget {
   const IssueCouponPage({Key? key}) : super(key: key);
 
-  @override
-  State<IssueCouponPage> createState() => _IssueCouponPageState();
-}
-
-class _IssueCouponPageState extends State<IssueCouponPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
