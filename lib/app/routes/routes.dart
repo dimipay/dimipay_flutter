@@ -22,4 +22,6 @@ abstract class Routes {
   static const SPLASH = "/Splash";
   static const NOTIFICATION = "/Notification";
 	static const ISSUECOUPON = '/IssueCoupon';
+  static const PINAUTH = "/PINAUTH";
+  static const BIOMETRICAUTH = "/BiometricAuth";
 }
