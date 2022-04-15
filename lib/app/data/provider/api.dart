@@ -35,10 +35,10 @@ class ApiProvider extends GetConnect {
     }
   }
 
-  Future<Notice?> getNotice() async {
+  Future<List<Notice>?> getNotice() async {
     Response response = await get('$_baseUrl/notice/current', headers: HeadersAPI().getHeaders());
     if (response.statusCode == 200) {
-      return Notice.fromJson(response.body);
+      return (response.body as List?)?.map((e) => Notice.fromJson(e)).toList();
     } else {
       return null;
     }
