@@ -75,8 +75,6 @@ class HomePage extends StatelessWidget {
             children: [
               for (Notice notice in notices) _notice(notice),
               const SizedBox(height: 36),
-              const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
-              const SizedBox(height: 36),
             ],
           );
         } else {
@@ -117,34 +115,41 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _events() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
+    return GestureDetector(
+      onTap: () => Get.toNamed(Routes.EVENT),
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            const SizedBox(height: 36),
             Row(
-              children: const [
-                Text(
-                  '이벤트',
-                  style: DPTextTheme.SECTION_HEADER,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: const [
+                    Text(
+                      '이벤트',
+                      style: DPTextTheme.SECTION_HEADER,
+                    ),
+                    SizedBox(width: 12),
+                    Text(
+                      '3개',
+                      style: DPTextTheme.DESCRIPTION,
+                    ),
+                  ],
                 ),
-                SizedBox(width: 12),
-                Text(
-                  '3개',
-                  style: DPTextTheme.DESCRIPTION,
-                ),
+                SvgPicture.asset('asset/images/arrow_right.svg', semanticsLabel: 'arrow_right'),
               ],
             ),
-            SvgPicture.asset('asset/images/arrow_right.svg', semanticsLabel: 'arrow_right'),
+            const SizedBox(height: 24),
+            _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
+            const SizedBox(height: 24),
+            _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
+            const SizedBox(height: 24),
+            _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
           ],
         ),
-        const SizedBox(height: 24),
-        _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
-        const SizedBox(height: 24),
-        _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
-        const SizedBox(height: 24),
-        _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
-      ],
+      ),
     );
   }
 
@@ -158,6 +163,7 @@ class HomePage extends StatelessWidget {
             _logoArea(),
             const SizedBox(height: 36),
             _noticeArea(),
+            const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
             _events(),
           ],
         ),
