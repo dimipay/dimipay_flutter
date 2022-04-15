@@ -106,17 +106,25 @@ class AccountInfoPage extends StatelessWidget {
   }
 
   Widget _transactionHistoryArea() {
-    return Column(
-      children: [
-        const SizedBox(height: 36),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(Routes.TRANSACTIONHISTORY);
+      },
+      child: Container(
+        color: Colors.white,
+        child: Column(
           children: [
-            const Text('결제기록', style: DPTextTheme.SECTION_HEADER),
-            SvgPicture.asset('asset/images/arrow_right.svg'),
+            const SizedBox(height: 36),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('결제기록', style: DPTextTheme.SECTION_HEADER),
+                SvgPicture.asset('asset/images/arrow_right.svg'),
+              ],
+            )
           ],
-        )
-      ],
+        ),
+      ),
     );
   }
 
@@ -150,7 +158,11 @@ class AccountInfoPage extends StatelessWidget {
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               child: Column(
-                children: [_topArea(), const Divider(color: DPColors.DARK6, height: 1, thickness: 1), _transactionHistoryArea()],
+                children: [
+                  _topArea(),
+                  const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
+                  _transactionHistoryArea(),
+                ],
               ),
             ),
           ),
