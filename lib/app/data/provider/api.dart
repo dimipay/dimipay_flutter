@@ -1,4 +1,5 @@
 import 'package:dimipay/app/core/utils/headers.dart';
+import 'package:dimipay/app/data/models/card.dart';
 import 'package:dimipay/app/data/models/coupon.dart';
 import 'package:dimipay/app/data/models/notice.dart';
 import 'package:dimipay/app/data/models/transaction.dart';
@@ -56,7 +57,7 @@ class ApiProvider extends GetConnect {
   Future<void> getPaymentMethod(String cardNumber) async {
     Response response = await get("$_baseUrl/payment/method", headers: HeadersAPI().getHeaders(auth: true));
     if (response.statusCode == 200) {
-      return response.body['paymentMethod'];
+      return response.body['paymentMethod'].map((model) => CardItem.fromJson(model)).toList();
     }
   }
 
