@@ -6,14 +6,14 @@ part 'event.g.dart';
 @JsonSerializable()
 class Event {
   String title;
-  String describtion;
+  String description;
   String url;
   DateTime? startsAt;
   DateTime? endsAt;
 
   Event({
     required this.title,
-    required this.describtion,
+    required this.description,
     required this.url,
     this.startsAt,
     this.endsAt,
