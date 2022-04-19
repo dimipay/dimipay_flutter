@@ -15,7 +15,7 @@ class EventPage extends StatelessWidget {
           .map(
             (event) => Column(
               children: [
-                EventItem(title: event.title, description: event.description, expireDate: event.endsAt ?? DateTime(0)),
+                EventItem(title: event.title, description: event.description, expireDate: event.endsAt),
                 const SizedBox(height: 36),
               ],
             ),
@@ -49,6 +49,7 @@ class EventPage extends StatelessWidget {
         onRefresh: eventsController.refreshEvents,
         child: SizedBox(
           width: double.infinity,
+          height: double.infinity,
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
