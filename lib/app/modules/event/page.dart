@@ -38,11 +38,11 @@ class EventPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           '진행중',
           style: DPTextTheme.SECTION_HEADER,
         ),
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
         _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
         const SizedBox(height: 24),
         _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
@@ -57,7 +57,7 @@ class EventPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('이벤트')),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
         children: [
           _runningEvents(),
         ],
