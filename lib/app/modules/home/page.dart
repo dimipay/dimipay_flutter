@@ -1,8 +1,13 @@
+import 'dart:math';
+
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/data/models/event.dart';
 import 'package:dimipay/app/data/models/notice.dart';
 import 'package:dimipay/app/modules/coupon/controller.dart';
+import 'package:dimipay/app/modules/event/controller.dart';
 import 'package:dimipay/app/modules/home/controller.dart';
+import 'package:dimipay/app/modules/home/widget/event_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +17,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
   final NoticeController noticeController = Get.find<NoticeController>();
+  final EventController eventController = Get.find<EventController>();
 
   Widget _logoArea() {
     return Row(
@@ -85,71 +91,76 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _event(String title, String description, DateTime expireDate) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 24,
-          height: 24,
-          child: SvgPicture.asset('asset/images/logo.svg'),
-        ),
-        const SizedBox(width: 24),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: DPTextTheme.REGULAR_IMPORTANT),
-              const SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(description, style: DPTextTheme.DESCRIPTION),
-                  Text('~${expireDate.month}월 ${expireDate.day}일', style: DPTextTheme.DESCRIPTION),
-                ],
-              ),
-            ],
-          ),
-        )
-      ],
+  int _compEvent(Event a, Event b) {
+    if (a.endsAt == null) {
+      return 1;
+    }
+    if (b.endsAt == null) {
+      return 0;
+    }
+    return a.endsAt!.isBefore(b.endsAt!) ? 1 : 0;
+  }
+
+  Widget _buildEvents(List<Event> events) {
+    return Column(
+      children: events
+          .map(
+            (event) => Column(
+              children: [
+                EventItem(title: event.title, description: event.description, expireDate: event.endsAt),
+                const SizedBox(height: 36),
+              ],
+            ),
+          )
+          .toList(),
     );
   }
 
-  Widget _events() {
-    return GestureDetector(
-      onTap: () => Get.toNamed(Routes.EVENT),
-      child: Container(
-        color: Colors.white,
-        child: Column(
-          children: [
-            const SizedBox(height: 36),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: const [
-                    Text(
-                      '이벤트',
-                      style: DPTextTheme.SECTION_HEADER,
-                    ),
-                    SizedBox(width: 12),
-                    Text(
-                      '3개',
-                      style: DPTextTheme.DESCRIPTION,
-                    ),
-                  ],
-                ),
-                SvgPicture.asset('asset/images/arrow_right.svg', semanticsLabel: 'arrow_right'),
-              ],
+  Widget _eventsArea() {
+    return eventController.obx(
+      (events) {
+        if (events!.isEmpty) {
+          return Container();
+        } else {
+          List<Event> previewingEvents = List.from(events!);
+          previewingEvents.sort(_compEvent);
+          previewingEvents = previewingEvents.sublist(0, min(3, previewingEvents.length));
+          return GestureDetector(
+            onTap: () => Get.toNamed(Routes.EVENT),
+            child: Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
+                  const SizedBox(height: 36),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: [
+                          const Text(
+                            '이벤트',
+                            style: DPTextTheme.SECTION_HEADER,
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            '${events.length}개',
+                            style: DPTextTheme.DESCRIPTION,
+                          ),
+                        ],
+                      ),
+                      SvgPicture.asset('asset/images/arrow_right.svg', semanticsLabel: 'arrow_right'),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  _buildEvents(previewingEvents),
+                ],
+              ),
             ),
-            const SizedBox(height: 24),
-            _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
-            const SizedBox(height: 24),
-            _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
-            const SizedBox(height: 24),
-            _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
-          ],
-        ),
-      ),
+          );
+        }
+      },
+      onLoading: Container(),
     );
   }
 
@@ -163,8 +174,7 @@ class HomePage extends StatelessWidget {
             _logoArea(),
             const SizedBox(height: 36),
             _noticeArea(),
-            const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
-            _events(),
+            _eventsArea(),
           ],
         ),
       ),
