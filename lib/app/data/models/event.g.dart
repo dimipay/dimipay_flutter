@@ -8,7 +8,7 @@ part of 'event.dart';
 
 Event _$EventFromJson(Map<String, dynamic> json) => Event(
       title: json['title'] as String,
-      describtion: json['describtion'] as String,
+      description: json['description'] as String,
       url: json['url'] as String,
       startsAt: json['startsAt'] == null
           ? null
@@ -20,7 +20,7 @@ Event _$EventFromJson(Map<String, dynamic> json) => Event(
 
 Map<String, dynamic> _$EventToJson(Event instance) => <String, dynamic>{
       'title': instance.title,
-      'describtion': instance.describtion,
+      'description': instance.description,
       'url': instance.url,
       'startsAt': instance.startsAt?.toIso8601String(),
       'endsAt': instance.endsAt?.toIso8601String(),
