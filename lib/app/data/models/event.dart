@@ -1,26 +1,24 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'event.g.dart';
+
+// g.dart 파일 생성 : flutter pub run build_runner build --delete-conflicting-outputs
+
+@JsonSerializable()
 class Event {
-  int? id;
-  String? title;
-  String? describtion;
-  DateTime? expireDate;
+  String title;
+  String describtion;
+  String url;
+  DateTime? startsAt;
+  DateTime? endsAt;
 
-  String? token;
+  Event({
+    required this.title,
+    required this.describtion,
+    required this.url,
+    this.startsAt,
+    this.endsAt,
+  });
 
-  Event({this.id, this.title, this.describtion, this.expireDate});
-
-  Event.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    describtion = json['describtion'];
-    expireDate = json['expireDate'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['title'] = title;
-    data['describtion'] = describtion;
-    data['expireData'] = expireDate;
-    return data;
-  }
+  factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
+  Map<String, dynamic> toJson() => _$EventToJson(this);
 }
