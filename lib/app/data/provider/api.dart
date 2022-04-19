@@ -101,4 +101,41 @@ class ApiProvider extends GetConnect {
       }
     }
   }
+
+  Future<void> getPaymentMethod(String cardNumber) async {
+    Response response = await get("/payment/method", headers: HeadersAPI().getHeaders(auth: true));
+    if (response.statusCode == 200) {
+      return response.body['paymentMethod'];
+    }
+  }
+
+  Future<void> createPaymentMethod(String cardNumber) async {
+    Map<String, String> body = {"cardNumber": cardNumber};
+    Response response = await post("/payment/method", body, headers: HeadersAPI().getHeaders(auth: true));
+    if (response.statusCode == 200) {
+      return response.body['name']; //국민카드?
+    }
+  }
+
+  Future<void> postPaymentToken(String token) async {
+    Map<String, String> body = {"token": token};
+    Response response = await post("/payment/token", body, headers: HeadersAPI().getHeaders(auth: true));
+    if (response.statusCode == 200) {}
+  }
+
+  Future<void> createPaymentPin(String paymentPin) async {
+    Map<String, String> body = {"paymentPin": paymentPin};
+    Response response = await post("/payment/pin", body, headers: HeadersAPI().getHeaders(auth: true));
+    if (response.statusCode == 201) {
+      // 성공하면 Created
+    }
+  }
+
+  Future<void> changePaymentPin(String originalPin, String paymentPin) async {
+    Map<String, String> body = {"originalPin": originalPin, "paymentPin": paymentPin};
+    Response response = await put("/payment/pin", body, headers: HeadersAPI().getHeaders(auth: true));
+    if (response.statusCode == 201) {
+      // 성공하면 Created
+    }
+  }
 }
