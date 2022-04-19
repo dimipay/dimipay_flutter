@@ -122,7 +122,7 @@ class HomePage extends StatelessWidget {
         if (events!.isEmpty) {
           return Container();
         } else {
-          List<Event> previewingEvents = List.from(events!);
+          List<Event> previewingEvents = List.from(events);
           previewingEvents.sort(_compEvent);
           previewingEvents = previewingEvents.sublist(0, min(3, previewingEvents.length));
           return GestureDetector(

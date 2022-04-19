@@ -1,4 +1,3 @@
-import 'package:dimipay/app/data/models/coupon.dart';
 import 'package:dimipay/app/data/models/event.dart';
 import 'package:dimipay/app/data/provider/api.dart';
 
