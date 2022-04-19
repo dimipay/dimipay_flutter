@@ -1,66 +1,64 @@
-import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/data/models/event.dart';
+import 'package:dimipay/app/modules/event/controller.dart';
+import 'package:dimipay/app/modules/event/widget/event_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class EventPage extends StatelessWidget {
-  const EventPage({Key? key}) : super(key: key);
+  EventPage({Key? key}) : super(key: key);
+  final eventsController = Get.find<EventController>();
 
-  Widget _event(String title, String description, DateTime expireDate) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 24,
-          height: 24,
-          child: SvgPicture.asset('asset/images/logo.svg'),
-        ),
-        const SizedBox(width: 24),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: DPTextTheme.REGULAR_IMPORTANT),
-              const SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(description, style: DPTextTheme.DESCRIPTION),
-                  Text('~${expireDate.month}월 ${expireDate.day}일', style: DPTextTheme.DESCRIPTION),
-                ],
-              ),
-            ],
-          ),
-        )
-      ],
+  Widget _buildEvents(List<Event> events) {
+    return Column(
+      children: events
+          .map(
+            (event) => Column(
+              children: [
+                EventItem(title: event.title, description: event.description, expireDate: event.endsAt ?? DateTime(0)),
+                const SizedBox(height: 36),
+              ],
+            ),
+          )
+          .toList(),
     );
   }
 
-  Widget _runningEvents() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          '진행중',
-          style: DPTextTheme.SECTION_HEADER,
-        ),
-        SizedBox(height: 24),
-        _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
-        const SizedBox(height: 24),
-        _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
-        const SizedBox(height: 24),
-        _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
-      ],
+  Widget _events() {
+    return eventsController.obx(
+      (events) => _buildEvents(events!),
+      onLoading: const CircularProgressIndicator(color: DPColors.MAIN_THEME),
     );
+    // return Column(
+    //   children: [
+    //     _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
+    //     const SizedBox(height: 24),
+    //     _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
+    //     const SizedBox(height: 24),
+    //     _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
+    //   ],
+    // );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('이벤트')),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 32),
-        children: [
-          _runningEvents(),
-        ],
+      body: RefreshIndicator(
+        color: DPColors.MAIN_THEME,
+        onRefresh: eventsController.refreshEvents,
+        child: SizedBox(
+          width: double.infinity,
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+            child: Column(
+              children: [
+                _events(),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
