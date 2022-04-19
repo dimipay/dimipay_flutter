@@ -1,26 +1,17 @@
-class Card {
-  int? id;
-  String? title;
-  String? subtitle;
-  String? color;
+import 'package:json_annotation/json_annotation.dart';
+part 'card.g.dart';
 
-  String? token;
+@JsonSerializable()
+class CardItem {
+  String id;
+  DateTime createdAt;
+  DateTime updateAt;
+  String type;
+  String color;
+  String name;
+  String ownerId;
+  CardItem({required this.id, required this.createdAt, required this.updateAt, required this.type, required this.color, required this.name, required this.ownerId});
 
-  Card({this.id, this.title, this.subtitle, this.color});
-
-  Card.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    subtitle = json['subtitle'];
-    color = json['color'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['title'] = title;
-    data['subtitle'] = subtitle;
-    data['expireData'] = color;
-    return data;
-  }
+  factory CardItem.fromJson(Map<String, dynamic> json) => _$CardItemFromJson(json);
+  Map<String, dynamic> toJson() => _$CardItemToJson(this);
 }
