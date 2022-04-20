@@ -91,14 +91,16 @@ class ApiProvider extends GetConnect {
     Response response = await put("/payment/pin", body, headers: HeadersAPI().getHeaders(auth: true));
     if (response.statusCode == 201) {
       // 성공하면 Created
-      Future<List<Event>> getOngoingEvents() async {
-        Response response = await get('/event/ongoing', headers: HeadersAPI().getHeaders());
-        if (response.statusCode == 200) {
-          return response.body.map<Event>((model) => Event.fromJson(model)).toList();
-        } else {
-          return [];
-        }
-      }
+
+    }
+  }
+
+  Future<List<Event>> getOngoingEvents() async {
+    Response response = await get('/event/ongoing', headers: HeadersAPI().getHeaders());
+    if (response.statusCode == 200) {
+      return response.body.map<Event>((model) => Event.fromJson(model)).toList();
+    } else {
+      return [];
     }
   }
 }
