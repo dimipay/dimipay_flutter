@@ -33,7 +33,7 @@ import 'package:get/get.dart';
 class AppPages {
   static final pages = [
     GetPage(name: Routes.TEST, page: () => const TestPage()),
-    GetPage(name: Routes.HOME, page: () => HomePage(), binding: HomePageBinding(), transition: Transition.noTransition),
+    GetPage(name: Routes.HOME, page: () => HomePage(), binding: HomePageBinding()),
     GetPage(name: Routes.ACCOUNTINFO, page: () => AccountInfoPage(), binding: AccountInfoPageBinding()),
     GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage()),
     GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage(), binding: RegisterCardPageBinding()),
