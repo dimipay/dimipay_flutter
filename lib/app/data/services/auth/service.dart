@@ -5,7 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 class AuthService extends GetxService {
-  late AuthRepository repository;
+  final AuthRepository repository = AuthRepository(ApiProvider());
   final FlutterSecureStorage _storage = Get.find<FlutterSecureStorage>();
   final _token = ''.obs;
 
@@ -23,7 +23,6 @@ class AuthService extends GetxService {
   }
 
   Future<AuthService> init() async {
-    repository = AuthRepository(ApiProvider());
     String? tokenInStorage = await _storage.read(key: 'accessToken');
     if (tokenInStorage != null && tokenInStorage != '') {
       _token.value = tokenInStorage;
