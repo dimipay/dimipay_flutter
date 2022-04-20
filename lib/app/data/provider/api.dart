@@ -57,10 +57,12 @@ class ApiProvider extends GetConnect {
     }
   }
 
-  Future<void> getPaymentMethod(String cardNumber) async {
+  Future<List<PaymentMethod>> getPaymentMethod(String cardNumber) async {
     Response response = await get("/payment/method", headers: HeadersAPI().getHeaders(auth: true));
     if (response.statusCode == 200) {
       return response.body['paymentMethod'].map((model) => PaymentMethod.fromJson(model)).toList();
+    } else {
+      return [];
     }
   }
 
