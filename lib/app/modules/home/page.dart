@@ -4,6 +4,7 @@ import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/data/models/event.dart';
 import 'package:dimipay/app/data/models/notice.dart';
+import 'package:dimipay/app/data/models/payment_method.dart';
 import 'package:dimipay/app/modules/coupon/controller.dart';
 import 'package:dimipay/app/modules/event/controller.dart';
 import 'package:dimipay/app/modules/home/controller.dart';
@@ -18,6 +19,7 @@ class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
   final NoticeController noticeController = Get.find<NoticeController>();
   final EventController eventController = Get.find<EventController>();
+  final PaymentMethodsController paymentMethodsController = Get.find<PaymentMethodsController>();
 
   Widget _logoArea() {
     return Row(
@@ -181,29 +183,43 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Widget _buildPaymentMethods(List<PaymentMethod> paymentMethods) {
+    return Row(
+      children: [
+        for (PaymentMethod paymentMethod in paymentMethods)
+          Row(
+            children: [
+              DPSmallCardPayment(
+                title: paymentMethod.name ?? '',
+                color: paymentMethod.color != null ? Color(int.parse('FF' + paymentMethod.color!, radix: 16)) : DPColors.MAIN_THEME,
+              ),
+              SizedBox(width: 12),
+            ],
+          ),
+      ],
+    );
+  }
+
   Widget _paymentsArea() {
     return Container(
       decoration: const BoxDecoration(
         color: DPColors.DARK6,
       ),
       padding: const EdgeInsets.symmetric(vertical: 32),
-      child: Column(
-        children: [
-          SingleChildScrollView(
+      child: paymentMethodsController.obx(
+        (state) {
+          return SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: const [
+              children: [
                 SizedBox(width: 32),
-                DPSmallCardPayment(title: '국민카드', subtitle: '카드결제', color: Color.fromRGBO(118, 108, 98, 1)),
-                SizedBox(width: 12),
-                DPSmallCardPayment(title: '페이머니로 결제', subtitle: '잔액 3,600원', color: DPColors.MAIN_THEME),
-                SizedBox(width: 12),
-                DPSmallCardPayment(title: '쿠폰만 쓰기', color: DPColors.DARK2),
-                SizedBox(width: 32),
+                _buildPaymentMethods(state!),
+                SizedBox(width: 20),
               ],
             ),
-          ),
-        ],
+          );
+        },
+        onLoading: Container(height: 81),
       ),
     );
   }
