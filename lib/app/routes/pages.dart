@@ -17,7 +17,6 @@ import 'package:dimipay/app/modules/pin_auth/page.dart';
 import 'package:dimipay/app/modules/register_card/binding.dart';
 import 'package:dimipay/app/modules/register_card/page.dart';
 import 'package:dimipay/app/modules/splash/binding.dart';
-import 'package:dimipay/app/modules/splash/page.dart';
 import 'package:dimipay/app/modules/transaction/page.dart';
 import 'package:dimipay/app/modules/transaction_history/binding.dart';
 import 'package:dimipay/app/modules/transaction_history/page.dart';
@@ -53,7 +52,6 @@ class AppPages {
     GetPage(name: Routes.EXPERIMENT, page: () => const ExperimentPage()),
     GetPage(name: Routes.TRANSACTION, page: () => const TransactionPage()),
     GetPage(name: Routes.EVENT, page: () => EventPage(), binding: EventPageBinding()),
-    GetPage(name: Routes.SPLASH, page: () => const SplashPage(), binding: SplashPageBinding(), transition: Transition.noTransition),
     GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage()),
     GetPage(name: Routes.ISSUECOUPON, page: () => const IssueCouponPage()),
     GetPage(name: Routes.PINAUTH, page: () => const PinAuthPage()),
