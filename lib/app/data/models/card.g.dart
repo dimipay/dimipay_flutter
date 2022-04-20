@@ -6,7 +6,7 @@ part of 'card.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CardItem _$CardItemFromJson(Map<String, dynamic> json) => CardItem(
+DPCard _$DPCardFromJson(Map<String, dynamic> json) => DPCard(
       id: json['id'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updateAt: DateTime.parse(json['updateAt'] as String),
@@ -16,7 +16,7 @@ CardItem _$CardItemFromJson(Map<String, dynamic> json) => CardItem(
       ownerId: json['ownerId'] as String,
     );
 
-Map<String, dynamic> _$CardItemToJson(CardItem instance) => <String, dynamic>{
+Map<String, dynamic> _$DPCardToJson(DPCard instance) => <String, dynamic>{
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
       'updateAt': instance.updateAt.toIso8601String(),
