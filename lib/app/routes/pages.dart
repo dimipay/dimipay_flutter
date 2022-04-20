@@ -36,7 +36,7 @@ import 'package:get/get.dart';
 class AppPages {
   static final pages = [
     GetPage(name: Routes.TEST, page: () => const TestPage()),
-    GetPage(name: Routes.HOME, page: () => HomePage(), binding: HomePageBinding()),
+    GetPage(name: Routes.HOME, page: () => HomePage(), binding: HomePageBinding(), transition: Transition.noTransition),
     GetPage(name: Routes.ACCOUNTINFO, page: () => AccountInfoPage(), binding: AccountInfoPageBinding()),
     GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage()),
     GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage(), binding: RegisterCardPageBinding()),
@@ -53,7 +53,7 @@ class AppPages {
     GetPage(name: Routes.EXPERIMENT, page: () => const ExperimentPage()),
     GetPage(name: Routes.TRANSACTION, page: () => const TransactionPage()),
     GetPage(name: Routes.EVENT, page: () => EventPage(), binding: EventPageBinding()),
-    GetPage(name: Routes.SPLASH, page: () => const SplashPage(), binding: SplashPageBinding()),
+    GetPage(name: Routes.SPLASH, page: () => const SplashPage(), binding: SplashPageBinding(), transition: Transition.noTransition),
     GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage()),
     GetPage(name: Routes.ISSUECOUPON, page: () => const IssueCouponPage()),
     GetPage(name: Routes.PINAUTH, page: () => const PinAuthPage()),
