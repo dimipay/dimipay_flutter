@@ -6,7 +6,6 @@ import 'package:dimipay/app/modules/coupon/binding.dart';
 import 'package:dimipay/app/modules/coupon/page.dart';
 import 'package:dimipay/app/modules/event/binding.dart';
 import 'package:dimipay/app/modules/event/page.dart';
-import 'package:dimipay/app/modules/experiment/page.dart';
 import 'package:dimipay/app/modules/home/binding.dart';
 import 'package:dimipay/app/modules/issue_coupon/page.dart';
 import 'package:dimipay/app/modules/login/binding.dart';
