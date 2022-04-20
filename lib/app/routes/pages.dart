@@ -16,7 +16,6 @@ import 'package:dimipay/app/modules/biometric_auth/biomertric_auth.dart';
 import 'package:dimipay/app/modules/pin_auth/page.dart';
 import 'package:dimipay/app/modules/register_card/binding.dart';
 import 'package:dimipay/app/modules/register_card/page.dart';
-import 'package:dimipay/app/modules/splash/binding.dart';
 import 'package:dimipay/app/modules/transaction/page.dart';
 import 'package:dimipay/app/modules/transaction_history/binding.dart';
 import 'package:dimipay/app/modules/transaction_history/page.dart';
@@ -49,7 +48,6 @@ class AppPages {
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
     GetPage(name: Routes.CHANGEPASSWORD, page: () => const ChangePasswordPage(), binding: ChangePasswordPageBinding()),
     GetPage(name: Routes.UNTITLED, page: () => const Untitled()),
-    GetPage(name: Routes.EXPERIMENT, page: () => const ExperimentPage()),
     GetPage(name: Routes.TRANSACTION, page: () => const TransactionPage()),
     GetPage(name: Routes.EVENT, page: () => EventPage(), binding: EventPageBinding()),
     GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage()),
