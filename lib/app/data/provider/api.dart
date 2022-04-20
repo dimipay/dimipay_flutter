@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class ApiProvider extends GetConnect {
   ApiProvider() {
-    baseUrl = 'https://dimipay.up.railway.app';
+    baseUrl = 'https://pay-api.dimigo.in';
   }
 
   Future<String?> login(String username, String password) async {
