@@ -193,7 +193,7 @@ class HomePage extends StatelessWidget {
                 title: paymentMethod.name ?? '',
                 color: paymentMethod.color != null ? Color(int.parse('FF' + paymentMethod.color!, radix: 16)) : DPColors.MAIN_THEME,
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
             ],
           ),
       ],
@@ -212,9 +212,9 @@ class HomePage extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                SizedBox(width: 32),
+                const SizedBox(width: 32),
                 _buildPaymentMethods(state!),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
               ],
             ),
           );
