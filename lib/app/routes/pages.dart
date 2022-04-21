@@ -15,6 +15,7 @@ import 'package:dimipay/app/modules/biometric_auth/biomertric_auth.dart';
 import 'package:dimipay/app/modules/pin_auth/page.dart';
 import 'package:dimipay/app/modules/register_card/binding.dart';
 import 'package:dimipay/app/modules/register_card/page.dart';
+import 'package:dimipay/app/modules/test/page.dart';
 import 'package:dimipay/app/modules/transaction/page.dart';
 import 'package:dimipay/app/modules/transaction_history/binding.dart';
 import 'package:dimipay/app/modules/transaction_history/page.dart';
@@ -27,7 +28,6 @@ import 'package:dimipay/app/modules/change_password/page.dart';
 import 'package:dimipay/app/modules/untitled/page.dart';
 import 'package:dimipay/app/modules/account_info/page.dart';
 import 'package:dimipay/app/modules/home/page.dart';
-import 'package:dimipay/main.dart';
 import 'package:get/get.dart';
 
 class AppPages {
