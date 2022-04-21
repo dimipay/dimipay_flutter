@@ -16,5 +16,6 @@ class HomePageBinding implements Bindings {
     Get.put<CouponController>(CouponController(CouponRepository(ApiProvider())));
     Get.lazyPut<NoticeController>(() => NoticeController(NoticeRepository(ApiProvider())));
     Get.put<EventController>(EventController(EventRepository(ApiProvider())));
+    Get.put<PaymentMethodsController>(PaymentMethodsController(PaymentMethodRepository(ApiProvider())));
   }
 }
