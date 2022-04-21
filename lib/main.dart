@@ -26,6 +26,7 @@ Future main() async {
   FlutterNativeSplash.remove();
   runApp(
     GetMaterialApp(
+      title: '디미페이',
       initialRoute: getInintialRoute(),
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
