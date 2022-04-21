@@ -2,7 +2,7 @@
     package="com.develop.dimipay">
    <uses-permission android:name="android.permission.VIBRATE"/>
    <application
-        android:label="dimipay"
+        android:label="디미페이"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
