@@ -2,7 +2,7 @@
 
 abstract class Routes {
   static const TEST = '/Test';
-  static const HOME = '/Home';
+  static const HOME = '/';
   static const ACCOUNTINFO = '/AccountInfo';
   static const MANAGEMETHOD = '/MainPage/ManageMethod';
   static const REGISTERCARD = '/RegisterCard';
