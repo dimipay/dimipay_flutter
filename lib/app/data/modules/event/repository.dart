@@ -1,4 +1,4 @@
-import 'package:dimipay/app/data/models/event.dart';
+import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/provider/api.dart';
 
 class EventRepository {

@@ -1,5 +1,5 @@
-import 'package:dimipay/app/data/models/coupon.dart';
-import 'package:dimipay/app/pages/coupon/repository.dart';
+import 'package:dimipay/app/data/modules/coupon/model.dart';
+import 'package:dimipay/app/data/modules/coupon/repository.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 

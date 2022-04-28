@@ -1,5 +1,5 @@
-import 'package:dimipay/app/data/models/user.dart';
-import 'package:dimipay/app/pages/account_info/repository.dart';
+import 'package:dimipay/app/data/modules/user/model.dart';
+import 'package:dimipay/app/data/modules/user/repository.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 

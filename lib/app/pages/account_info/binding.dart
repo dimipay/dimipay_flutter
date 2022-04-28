@@ -1,6 +1,6 @@
+import 'package:dimipay/app/data/modules/user/controller.dart';
+import 'package:dimipay/app/data/modules/user/repository.dart';
 import 'package:dimipay/app/data/provider/api.dart';
-import 'package:dimipay/app/pages/account_info/controller.dart';
-import 'package:dimipay/app/pages/account_info/repository.dart';
 import 'package:get/get.dart';
 
 class AccountInfoPageBinding implements Bindings {

@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'coupon.g.dart';
+part 'model.g.dart';
 
 @JsonSerializable()
 class Issuer {

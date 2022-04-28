@@ -1,4 +1,4 @@
-import 'package:dimipay/app/data/models/coupon.dart';
+import 'package:dimipay/app/data/modules/coupon/model.dart';
 import 'package:dimipay/app/data/provider/api.dart';
 
 class CouponRepository {

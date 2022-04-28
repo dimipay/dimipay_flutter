@@ -1,4 +1,4 @@
-import 'package:dimipay/app/data/models/transaction.dart';
+import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/provider/api.dart';
 
 class TransactionRepository {

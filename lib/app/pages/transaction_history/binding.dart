@@ -1,6 +1,6 @@
+import 'package:dimipay/app/data/modules/transaction/controller.dart';
+import 'package:dimipay/app/data/modules/transaction/respository.dart';
 import 'package:dimipay/app/data/provider/api.dart';
-import 'package:dimipay/app/pages/transaction_history/controller.dart';
-import 'package:dimipay/app/pages/transaction_history/respository.dart';
 import 'package:get/get.dart';
 
 class TransactionBinding implements Bindings {
