@@ -13,13 +13,13 @@ class AuthService extends GetxService {
   String? get token => _token.value;
 
   Future _setToken(String token) async {
-    _token.value = token;
     await _storage.write(key: 'accessToken', value: token);
+    _token.value = token;
   }
 
   Future _removeToken() async {
-    _token.value = null;
     await _storage.delete(key: 'accessToken');
+    _token.value = null;
     Get.offAllNamed(Routes.LOGIN);
   }
 
