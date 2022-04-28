@@ -12,7 +12,7 @@ String getInintialRoute({bool debug = false}) {
   if (debug) {
     return Routes.TEST;
   }
-  if (Get.find<AuthService>().token == '') {
+  if (Get.find<AuthService>().isAuthenticated) {
     return Routes.LOGIN;
   } else {
     return Routes.HOME;

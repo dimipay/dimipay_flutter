@@ -18,7 +18,7 @@ class LoginPageController extends GetxController with StateMixin {
     change(null, status: RxStatus.loading());
     await authService.login(usernameField.text, passwordField.text);
     change(null, status: RxStatus.success());
-    if (authService.token != '') {
+    if (authService.isAuthenticated) {
       Get.offNamed(Routes.HOME);
     }
   }

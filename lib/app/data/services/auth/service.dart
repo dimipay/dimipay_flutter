@@ -7,9 +7,10 @@ import 'package:get/get.dart';
 class AuthService extends GetxService {
   final AuthRepository repository = AuthRepository(ApiProvider());
   final FlutterSecureStorage _storage = Get.find<FlutterSecureStorage>();
-  final _token = ''.obs;
+  final Rx<String?> _token = Rx(null);
 
-  String get token => _token.value;
+  bool get isAuthenticated => _token.value != null;
+  String? get token => _token.value;
 
   Future _setToken(String token) async {
     _token.value = token;
@@ -17,16 +18,13 @@ class AuthService extends GetxService {
   }
 
   Future _removeToken() async {
-    _token.value = '';
+    _token.value = null;
     await _storage.delete(key: 'accessToken');
     Get.offAllNamed(Routes.LOGIN);
   }
 
   Future<AuthService> init() async {
-    String? tokenInStorage = await _storage.read(key: 'accessToken');
-    if (tokenInStorage != null && tokenInStorage != '') {
-      _token.value = tokenInStorage;
-    }
+    _token.value = await _storage.read(key: 'accessToken');
     return this;
   }
 
