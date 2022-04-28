@@ -6,5 +6,5 @@ class CouponRepository {
 
   CouponRepository(this.api);
 
-  Future<List<Coupon>?> get() => api.getCoupons();
+  Future<List<Coupon>> get() => api.getCoupons();
 }
