@@ -1,4 +1,4 @@
-import 'package:dimipay/app/data/models/user.dart';
+import 'package:dimipay/app/data/modules/user/model.dart';
 import 'package:dimipay/app/data/provider/api.dart';
 
 class UserRepository {

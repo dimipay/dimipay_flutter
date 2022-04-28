@@ -1,12 +1,14 @@
+import 'package:dimipay/app/data/modules/coupon/controller.dart';
+import 'package:dimipay/app/data/modules/coupon/repository.dart';
+import 'package:dimipay/app/data/modules/notice/controller.dart';
+import 'package:dimipay/app/data/modules/notice/repository.dart';
+import 'package:dimipay/app/data/modules/payment_method/controller.dart';
+import 'package:dimipay/app/data/modules/payment_method/repository.dart';
+import 'package:dimipay/app/data/modules/user/controller.dart';
+import 'package:dimipay/app/data/modules/user/repository.dart';
 import 'package:dimipay/app/data/provider/api.dart';
-import 'package:dimipay/app/pages/account_info/controller.dart';
-import 'package:dimipay/app/pages/account_info/repository.dart';
-import 'package:dimipay/app/pages/coupon/controller.dart';
-import 'package:dimipay/app/pages/coupon/repository.dart';
-import 'package:dimipay/app/pages/event/controller.dart';
-import 'package:dimipay/app/pages/event/repository.dart';
-import 'package:dimipay/app/pages/home/controller.dart';
-import 'package:dimipay/app/pages/home/repository.dart';
+import 'package:dimipay/app/data/modules/event/controller.dart';
+import 'package:dimipay/app/data/modules/event/repository.dart';
 import 'package:get/get.dart';
 
 class HomePageBinding implements Bindings {

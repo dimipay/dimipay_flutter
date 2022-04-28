@@ -1,6 +1,6 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
-import 'package:dimipay/app/data/models/event.dart';
-import 'package:dimipay/app/pages/event/controller.dart';
+import 'package:dimipay/app/data/modules/event/controller.dart';
+import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/pages/event/widget/event_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

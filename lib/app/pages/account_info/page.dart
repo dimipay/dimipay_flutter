@@ -1,7 +1,7 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/data/modules/user/controller.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
-import 'package:dimipay/app/pages/account_info/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

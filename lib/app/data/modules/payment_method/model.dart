@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'payment_method.g.dart';
+part 'model.g.dart';
 
 // g.dart 파일 생성 : flutter pub run build_runner build --delete-conflicting-outputs
 

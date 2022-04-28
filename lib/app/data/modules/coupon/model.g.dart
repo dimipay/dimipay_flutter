@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'coupon.dart';
+part of 'model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -23,9 +23,7 @@ Coupon _$CouponFromJson(Map<String, dynamic> json) => Coupon(
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       name: json['name'] as String,
-      expiresAt: json['expiresAt'] == null
-          ? null
-          : DateTime.parse(json['expiresAt'] as String),
+      expiresAt: json['expiresAt'] == null ? null : DateTime.parse(json['expiresAt'] as String),
       amount: json['amount'] as int,
       issuer: Issuer.fromJson(json['issuer'] as Map<String, dynamic>),
     );
