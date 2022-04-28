@@ -1,10 +1,10 @@
 import 'package:dimipay/app/core/utils/headers.dart';
-import 'package:dimipay/app/data/models/payment_method.dart';
-import 'package:dimipay/app/data/models/coupon.dart';
-import 'package:dimipay/app/data/models/event.dart';
-import 'package:dimipay/app/data/models/notice.dart';
-import 'package:dimipay/app/data/models/transaction.dart';
-import 'package:dimipay/app/data/models/user.dart';
+import 'package:dimipay/app/data/modules/coupon/model.dart';
+import 'package:dimipay/app/data/modules/event/model.dart';
+import 'package:dimipay/app/data/modules/notice/model.dart';
+import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/data/modules/transaction/model.dart';
+import 'package:dimipay/app/data/modules/user/model.dart';
 import 'package:get/get.dart';
 
 class ApiProvider extends GetConnect {
