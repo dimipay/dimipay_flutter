@@ -6,7 +6,7 @@ class HeadersAPI {
     Map<String, String> header = {"Content-Type": "application/json"};
     if (auth) {
       AuthService authService = Get.find<AuthService>();
-      String token = authService.token;
+      String token = authService.token ?? '';
       header["Authorization"] = "Bearer $token";
     }
     return header;
