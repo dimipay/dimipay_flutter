@@ -22,4 +22,5 @@ abstract class Routes {
   static const ISSUECOUPON = '/IssueCoupon';
   static const PINAUTH = "/PINAUTH";
   static const BIOMETRICAUTH = "/BiometricAuth";
+  static const PRINTERSETTING = "/PrinterSetting";
 }
