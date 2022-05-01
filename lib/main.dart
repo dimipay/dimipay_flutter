@@ -27,7 +27,7 @@ Future main() async {
   runApp(
     GetMaterialApp(
       title: '디미페이',
-      initialRoute: getInintialRoute(),
+      initialRoute: getInintialRoute(debug: true),
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
