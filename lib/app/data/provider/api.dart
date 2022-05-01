@@ -22,7 +22,7 @@ class ApiProvider extends GetConnect {
     Response response = await post(url, body);
 
     if (response.isOk == false) {
-      throw NetworkExcepton(baseUrl! + url);
+      throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
     }
 
     return response.body['accessToken'];
@@ -33,7 +33,7 @@ class ApiProvider extends GetConnect {
     Response response = await get(url, headers: HeadersAPI().getHeaders());
 
     if (response.isOk == false) {
-      throw NetworkExcepton(baseUrl! + url);
+      throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
     }
 
     return User.fromJson(response.body['me']);
@@ -44,7 +44,7 @@ class ApiProvider extends GetConnect {
     Response response = await get(url, headers: HeadersAPI().getHeaders());
 
     if (response.isOk == false) {
-      throw NetworkExcepton(baseUrl! + url);
+      throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
     }
 
     return (response.body as List).map<Coupon>((model) => Coupon.fromJson(model)).toList();
@@ -55,7 +55,7 @@ class ApiProvider extends GetConnect {
     Response response = await get(url, headers: HeadersAPI().getHeaders());
 
     if (response.isOk == false) {
-      throw NetworkExcepton(baseUrl! + url);
+      throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
     }
 
     return (response.body as List).map<Notice>((e) => Notice.fromJson(e)).toList();
@@ -66,7 +66,7 @@ class ApiProvider extends GetConnect {
     Response response = await get(url, headers: HeadersAPI().getHeaders());
 
     if (response.isOk == false) {
-      throw NetworkExcepton(baseUrl! + url);
+      throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
     }
 
     return (response.body as List).map<Transaction>((model) => Transaction.fromJson(model)).toList();
@@ -77,7 +77,7 @@ class ApiProvider extends GetConnect {
     Response response = await get(url, headers: HeadersAPI().getHeaders(auth: true));
 
     if (response.isOk == false) {
-      throw NetworkExcepton(baseUrl! + url);
+      throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
     }
 
     return (response.body['paymentMethod'] as List).map((model) => PaymentMethod.fromJson(model)).toList();
@@ -89,7 +89,7 @@ class ApiProvider extends GetConnect {
     Response response = await post(url, body, headers: HeadersAPI().getHeaders(auth: true));
 
     if (response.isOk == false) {
-      throw NetworkExcepton(baseUrl! + url);
+      throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
     }
 
     return response.body['name']; //국민카드?
@@ -103,7 +103,7 @@ class ApiProvider extends GetConnect {
     Response response = await post(url, body, headers: HeadersAPI().getHeaders(auth: true));
 
     if (response.isOk == false) {
-      throw NetworkExcepton(baseUrl! + url);
+      throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
     }
   }
 
@@ -115,7 +115,7 @@ class ApiProvider extends GetConnect {
     Response response = await post(url, body, headers: HeadersAPI().getHeaders(auth: true));
 
     if (response.isOk == false) {
-      throw NetworkExcepton(baseUrl! + url);
+      throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
     }
   }
 
@@ -128,7 +128,7 @@ class ApiProvider extends GetConnect {
     Response response = await put(url, body, headers: HeadersAPI().getHeaders(auth: true));
 
     if (response.isOk == false) {
-      throw NetworkExcepton(baseUrl! + url);
+      throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
     }
   }
 
@@ -137,7 +137,7 @@ class ApiProvider extends GetConnect {
     Response response = await get(url, headers: HeadersAPI().getHeaders());
 
     if (response.isOk == false) {
-      throw NetworkExcepton(baseUrl! + url);
+      throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
     }
 
     return (response.body as List).map<Event>((model) => Event.fromJson(model)).toList();
