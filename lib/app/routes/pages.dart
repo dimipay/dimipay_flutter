@@ -1,6 +1,6 @@
 import 'package:dimipay/app/pages/account_info/page.dart';
 import 'package:dimipay/app/pages/account_info/binding.dart';
-import 'package:dimipay/app/pages/biometric_auth/biomertric_auth.dart';
+import 'package:dimipay/app/pages/biometric_auth/page.dart';
 import 'package:dimipay/app/pages/card_fin/page.dart';
 import 'package:dimipay/app/pages/change_password/page.dart';
 import 'package:dimipay/app/pages/change_password/binding.dart';
@@ -52,6 +52,6 @@ class AppPages {
     GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage()),
     GetPage(name: Routes.ISSUECOUPON, page: () => const IssueCouponPage()),
     GetPage(name: Routes.PINAUTH, page: () => const PinAuthPage()),
-    GetPage(name: Routes.BIOMETRICAUTH, page: () => const BiometricAuth()),
+    GetPage(name: Routes.BiometricAuthPage, page: () => const BiometricAuthPage()),
   ];
 }

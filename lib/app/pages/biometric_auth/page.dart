@@ -4,14 +4,14 @@ import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class BiometricAuth extends StatefulWidget {
-  const BiometricAuth({Key? key}) : super(key: key);
+class BiometricAuthPage extends StatefulWidget {
+  const BiometricAuthPage({Key? key}) : super(key: key);
 
   @override
-  State<BiometricAuth> createState() => _BiometricAuthState();
+  State<BiometricAuthPage> createState() => _BiometricAuthPageState();
 }
 
-class _BiometricAuthState extends State<BiometricAuth> {
+class _BiometricAuthPageState extends State<BiometricAuthPage> {
   _buildCard(String assetName, String? title) {
     return Card(
       color: DPColors.DARK6,
