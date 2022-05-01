@@ -10,4 +10,5 @@ abstract class DPColors {
   static const DARK4 = Color(0xFFABB0B0);
   static const DARK5 = Color(0xFFD5D7D7);
   static const DARK6 = Color(0xFFF4F5F5);
+  static const ERROR = Color.fromARGB(255, 229, 57, 57);
 }
