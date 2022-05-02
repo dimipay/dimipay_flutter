@@ -52,6 +52,6 @@ class AppPages {
     GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage()),
     GetPage(name: Routes.ISSUECOUPON, page: () => const IssueCouponPage()),
     GetPage(name: Routes.PINAUTH, page: () => const PinAuthPage()),
-    GetPage(name: Routes.BiometricAuthPage, page: () => const BiometricAuthPage()),
+    GetPage(name: Routes.BIOMETRICAUTH, page: () => const BiometricAuthPage()),
   ];
 }
