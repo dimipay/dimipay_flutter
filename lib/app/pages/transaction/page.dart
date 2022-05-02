@@ -51,7 +51,7 @@ class TransactionPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     QrImage(
-                      data: "https://github.com/dimipay",
+                      data: "8801037055726",
                       version: 8,
                       size: 240.0,
                     ),
