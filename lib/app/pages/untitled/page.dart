@@ -22,7 +22,7 @@ class Untitled extends StatelessWidget {
                   children: const [
                     DPPaymentCard(
                       color: Color(0xFF766C62),
-                      cardName: '개돼지',
+                      cardName: '국민카드',
                       cardNumber: '2158',
                     ),
                     SizedBox(
