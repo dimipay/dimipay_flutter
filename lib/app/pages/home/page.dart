@@ -205,6 +205,7 @@ class HomePage extends StatelessWidget {
       decoration: const BoxDecoration(
         color: DPColors.DARK6,
       ),
+      width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 32),
       child: paymentMethodsController.obx(
         (state) {
@@ -212,7 +213,7 @@ class HomePage extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                const SizedBox(width: 32),
+                const SizedBox(width: 32, height: 81),
                 _buildPaymentMethods(state!),
                 const SizedBox(width: 20),
               ],
