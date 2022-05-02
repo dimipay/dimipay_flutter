@@ -124,12 +124,6 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.EVENT);
-            },
-            child: const Text('EVENT'),
-          ),
-          TextButton(
-            onPressed: () {
               Get.toNamed(Routes.PRINTERSETTING);
             },
             child: const Text('PRINTERSETTING'),
