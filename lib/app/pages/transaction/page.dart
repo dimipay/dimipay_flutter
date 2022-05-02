@@ -52,7 +52,7 @@ class TransactionPage extends StatelessWidget {
                   children: [
                     QrImage(
                       data: "8801037055726",
-                      version: 8,
+                      version: 4,
                       size: 240.0,
                     ),
                     const SizedBox(height: 36),
