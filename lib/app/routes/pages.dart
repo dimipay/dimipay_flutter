@@ -19,6 +19,7 @@ import 'package:dimipay/app/pages/login/binding.dart';
 import 'package:dimipay/app/pages/manage_method/page.dart';
 import 'package:dimipay/app/pages/notification/page.dart';
 import 'package:dimipay/app/pages/pin_auth/page.dart';
+import 'package:dimipay/app/pages/printer_setting/page.dart';
 import 'package:dimipay/app/pages/register_card/page.dart';
 import 'package:dimipay/app/pages/register_card/binding.dart';
 import 'package:dimipay/app/pages/select_charging_method/page.dart';
@@ -53,5 +54,6 @@ class AppPages {
     GetPage(name: Routes.ISSUECOUPON, page: () => const IssueCouponPage()),
     GetPage(name: Routes.PINAUTH, page: () => const PinAuthPage()),
     GetPage(name: Routes.BIOMETRICAUTH, page: () => const BiometricAuthPage()),
+    GetPage(name: Routes.PRINTERSETTING, page: () => const PrinterSettingPage()),
   ];
 }

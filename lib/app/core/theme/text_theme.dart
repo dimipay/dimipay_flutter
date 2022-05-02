@@ -13,4 +13,5 @@ abstract class DPTextTheme {
   static const REGULAR_IMPORTANT = TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w600, fontSize: 16, height: 1.2, color: DPColors.DARK1);
   static const DESCRIPTION = TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.2, color: Color(0xFFABB0B0));
   static const DESCRIPTION_IMPORTANT = TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.2, color: DPColors.DARK1);
+  static const DESCRIPTION_IMPORTANT_COLOR = TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.2, color: DPColors.MAIN_THEME);
 }
