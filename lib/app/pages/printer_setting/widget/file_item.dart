@@ -16,7 +16,7 @@ class PrinterFileItem extends StatelessWidget {
         color: DPColors.DARK6,
         width: double.infinity,
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
