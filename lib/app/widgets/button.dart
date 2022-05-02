@@ -71,7 +71,8 @@ class DPKeyboardReactiveButton extends StatelessWidget {
   final EdgeInsets innerPadding;
   final EdgeInsets padding;
   final void Function()? onTap;
-  const DPKeyboardReactiveButton({Key? key, required this.child, this.width, this.innerPadding = const EdgeInsets.all(16), this.onTap, this.padding = const EdgeInsets.all(0)}) : super(key: key);
+  final Color color;
+  const DPKeyboardReactiveButton({Key? key, required this.child, this.width, this.innerPadding = const EdgeInsets.all(16), this.onTap, this.padding = const EdgeInsets.all(0), this.color = DPColors.MAIN_THEME}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,13 +99,13 @@ class DPKeyboardReactiveButton extends StatelessWidget {
               ),
               child: Container(
                 decoration: BoxDecoration(
-                  boxShadow: const [BoxShadow(color: Color.fromRGBO(46, 164, 171, 0.24), offset: Offset(0, 4), blurRadius: 12)],
+                  boxShadow: [BoxShadow(color: Color.fromRGBO(color.red, color.green, color.blue, 0.24), offset: const Offset(0, 4), blurRadius: 12)],
                   borderRadius: BorderRadius.circular(12 * (1 - value)),
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12 * (1 - value)),
                   child: Material(
-                    color: DPColors.MAIN_THEME,
+                    color: color,
                     child: InkWell(
                       onTap: onTap,
                       child: Container(
@@ -131,19 +132,20 @@ class DPBaseButton extends StatelessWidget {
   final double? width;
   final EdgeInsets padding;
   final void Function()? onTap;
-  const DPBaseButton({Key? key, required this.child, required this.padding, this.onTap, this.width}) : super(key: key);
+  final Color color;
+  const DPBaseButton({Key? key, required this.child, required this.padding, this.onTap, this.width, this.color = DPColors.MAIN_THEME}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        boxShadow: const [BoxShadow(color: Color.fromRGBO(46, 164, 171, 0.24), offset: Offset(0, 4), blurRadius: 12)],
+        boxShadow: [BoxShadow(color: Color.fromRGBO(color.red, color.green, color.blue, 0.24), offset: const Offset(0, 4), blurRadius: 12)],
         borderRadius: BorderRadius.circular(12),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: Material(
-          color: DPColors.MAIN_THEME,
+          color: color,
           child: InkWell(
             onTap: onTap,
             child: Container(
@@ -164,7 +166,8 @@ class DPLargeButton extends StatelessWidget {
   final Widget child;
   final double? width;
   final void Function()? onTap;
-  const DPLargeButton({Key? key, required this.child, this.onTap, this.width}) : super(key: key);
+  final Color color;
+  const DPLargeButton({Key? key, required this.child, this.onTap, this.width, this.color = DPColors.MAIN_THEME}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -173,6 +176,7 @@ class DPLargeButton extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       width: width,
       onTap: onTap,
+      color: color,
     );
   }
 }
@@ -181,14 +185,17 @@ class DPLargeTextButton extends StatelessWidget {
   final String text;
   final double? width;
   final void Function()? onTap;
-  const DPLargeTextButton({Key? key, required this.text, this.onTap, this.width}) : super(key: key);
+  final Color color;
+  final Color textColor;
+  const DPLargeTextButton({Key? key, required this.text, this.onTap, this.width, this.color = DPColors.MAIN_THEME, this.textColor = Colors.white}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DPLargeButton(
-      child: Text(text, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+      child: Text(text, style: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w600)),
       width: width,
       onTap: onTap,
+      color: color,
     );
   }
 }
@@ -197,7 +204,8 @@ class DPMediumButton extends StatelessWidget {
   final Widget child;
   final double? width;
   final void Function()? onTap;
-  const DPMediumButton({Key? key, required this.child, this.onTap, this.width}) : super(key: key);
+  final Color color;
+  const DPMediumButton({Key? key, required this.child, this.onTap, this.width, this.color = DPColors.MAIN_THEME}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -206,6 +214,7 @@ class DPMediumButton extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       width: width,
       onTap: onTap,
+      color: color,
     );
   }
 }
@@ -214,14 +223,17 @@ class DPMediumTextButton extends StatelessWidget {
   final String text;
   final double? width;
   final void Function()? onTap;
-  const DPMediumTextButton({Key? key, required this.text, this.onTap, this.width}) : super(key: key);
+  final Color color;
+  final Color textColor;
+  const DPMediumTextButton({Key? key, required this.text, this.onTap, this.width, this.color = DPColors.MAIN_THEME, this.textColor = Colors.white}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DPMediumButton(
-      child: Text(text, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+      child: Text(text, style: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w500)),
       width: width,
       onTap: onTap,
+      color: color,
     );
   }
 }
@@ -230,7 +242,8 @@ class DPSmallButton extends StatelessWidget {
   final Widget child;
   final double? width;
   final void Function()? onTap;
-  const DPSmallButton({Key? key, required this.child, this.onTap, this.width}) : super(key: key);
+  final Color color;
+  const DPSmallButton({Key? key, required this.child, this.onTap, this.width, this.color = DPColors.MAIN_THEME}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -239,6 +252,7 @@ class DPSmallButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       width: width,
       onTap: onTap,
+      color: color,
     );
   }
 }
@@ -247,14 +261,17 @@ class DPSmallTextButton extends StatelessWidget {
   final String text;
   final double? width;
   final void Function()? onTap;
-  const DPSmallTextButton({Key? key, required this.text, this.onTap, this.width}) : super(key: key);
+  final Color color;
+  final Color textColor;
+  const DPSmallTextButton({Key? key, required this.text, this.onTap, this.width, this.color = DPColors.MAIN_THEME, this.textColor = Colors.white}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DPSmallButton(
-      child: Text(text, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+      child: Text(text, style: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w600)),
       width: width,
       onTap: onTap,
+      color: color,
     );
   }
 }
