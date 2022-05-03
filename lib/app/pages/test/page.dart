@@ -128,6 +128,12 @@ class TestPage extends StatelessWidget {
             },
             child: const Text('PRINTERSETTING'),
           ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.TRANSACTIONFIN);
+            },
+            child: const Text('TRANSACTIONFIN'),
+          ),
         ],
       ),
     );
