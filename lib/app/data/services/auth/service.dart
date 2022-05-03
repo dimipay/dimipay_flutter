@@ -1,13 +1,14 @@
-import 'package:dimipay/app/data/provider/api.dart';
 import 'package:dimipay/app/data/services/auth/repository.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 class AuthService extends GetxService {
-  final AuthRepository repository = AuthRepository(ApiProvider());
+  final AuthRepository repository;
   final FlutterSecureStorage _storage = Get.find<FlutterSecureStorage>();
   final Rx<String?> _token = Rx(null);
+
+  AuthService(this.repository);
 
   bool get isAuthenticated => _token.value != null;
   String? get token => _token.value;

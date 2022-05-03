@@ -1,7 +1,7 @@
-import 'package:dimipay/app/data/provider/api.dart';
+import 'package:dimipay/app/data/provider/api_interface.dart';
 
 class AuthRepository {
-  final ApiProvider api;
+  final ApiInterface api;
 
   AuthRepository(this.api);
 
