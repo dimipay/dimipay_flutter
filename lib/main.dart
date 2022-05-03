@@ -13,9 +13,9 @@ String getInintialRoute({bool debug = false}) {
     return Routes.TEST;
   }
   if (Get.find<AuthService>().isAuthenticated) {
-    return Routes.LOGIN;
-  } else {
     return Routes.HOME;
+  } else {
+    return Routes.LOGIN;
   }
 }
 
