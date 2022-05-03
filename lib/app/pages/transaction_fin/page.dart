@@ -20,7 +20,7 @@ class TransactionFinPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Lottie.asset('asset/lottie/complete.json', height: 240),
+                    Lottie.asset('asset/lottie/complete.json', height: 240, repeat: false),
                     const Text('성공적으로 결제되었어요', style: DPTextTheme.PAGE_HEADER),
                   ],
                 ),
