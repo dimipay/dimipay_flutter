@@ -6,5 +6,5 @@ class NoticeRepository {
 
   NoticeRepository(this.api);
 
-  Future<List<Notice>?> get() => api.getNotice();
+  Future<List<Notice>> get() => api.getNotice();
 }
