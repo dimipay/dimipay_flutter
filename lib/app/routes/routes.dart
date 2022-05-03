@@ -23,4 +23,5 @@ abstract class Routes {
   static const PINAUTH = "/PINAUTH";
   static const BIOMETRICAUTH = "/BiometricAuth";
   static const PRINTERSETTING = "/PrinterSetting";
+  static const TRANSACTIONFIN = "/TransactionFin";
 }
