@@ -12,25 +12,25 @@ class AuthService extends GetxService {
   bool get isAuthenticated => _token.value != null;
   String? get token => _token.value;
 
+  Future<AuthService> init() async {
+    _token.value = await _storage.read(key: 'accessToken');
+    return this;
+  }
+
   Future _setToken(String token) async {
     await _storage.write(key: 'accessToken', value: token);
     _token.value = token;
+  }
+
+  Future<void> login(String username, String password) async {
+    String token = await repository.login(username, password);
+    await _setToken(token);
   }
 
   Future _removeToken() async {
     await _storage.delete(key: 'accessToken');
     _token.value = null;
     Get.offAllNamed(Routes.LOGIN);
-  }
-
-  Future<AuthService> init() async {
-    _token.value = await _storage.read(key: 'accessToken');
-    return this;
-  }
-
-  Future<void> login(String username, String password) async {
-    String token = await repository.login(username, password);
-    await _setToken(token);
   }
 
   Future<void> logout() async {
