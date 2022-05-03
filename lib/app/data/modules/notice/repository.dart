@@ -1,8 +1,8 @@
 import 'package:dimipay/app/data/modules/notice/model.dart';
-import 'package:dimipay/app/data/provider/api.dart';
+import 'package:dimipay/app/data/provider/api_interface.dart';
 
 class NoticeRepository {
-  final ApiProvider api;
+  final ApiInterface api;
 
   NoticeRepository(this.api);
 

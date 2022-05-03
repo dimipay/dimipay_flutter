@@ -1,8 +1,8 @@
 import 'package:dimipay/app/data/modules/coupon/model.dart';
-import 'package:dimipay/app/data/provider/api.dart';
+import 'package:dimipay/app/data/provider/api_interface.dart';
 
 class CouponRepository {
-  final ApiProvider api;
+  final ApiInterface api;
 
   CouponRepository(this.api);
 
