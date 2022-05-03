@@ -29,10 +29,8 @@ class AuthService extends GetxService {
   }
 
   Future<void> login(String username, String password) async {
-    String? token = await repository.login(username, password);
-    if (token != null) {
-      await _setToken(token);
-    }
+    String token = await repository.login(username, password);
+    await _setToken(token);
   }
 
   Future<void> logout() async {

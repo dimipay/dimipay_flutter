@@ -6,5 +6,5 @@ class UserRepository {
 
   UserRepository(this.api);
 
-  Future<User?> get() => api.getUserInfo();
+  Future<User> get() => api.getUserInfo();
 }
