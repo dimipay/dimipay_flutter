@@ -56,7 +56,7 @@ class MockApiProvider implements ApiInterface {
     await Future.delayed(const Duration(seconds: 1));
     return [
       PaymentMethod(id: 'test0001', createdAt: DateTime(2022, 1, 1), updatedAt: DateTime(2022, 1, 1), type: PaymentType.GENERAL, color: 'ff0000', name: '국민카드', ownerId: 'asfsd'),
-      PaymentMethod(id: 'test0001', createdAt: DateTime(2022, 1, 1), updatedAt: DateTime(2022, 1, 1), type: PaymentType.PREPAID, color: 'ff0000', name: '페이머니', ownerId: 'asfsd'),
+      PaymentMethod(id: 'test0002', createdAt: DateTime(2022, 1, 1), updatedAt: DateTime(2022, 1, 1), type: PaymentType.PREPAID, color: 'ff0000', name: '페이머니', ownerId: 'asfsd'),
     ];
   }
 
