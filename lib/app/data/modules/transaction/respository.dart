@@ -1,8 +1,8 @@
 import 'package:dimipay/app/data/modules/transaction/model.dart';
-import 'package:dimipay/app/data/provider/api.dart';
+import 'package:dimipay/app/data/provider/api_interface.dart';
 
 class TransactionRepository {
-  final ApiProvider api;
+  final ApiInterface api;
 
   TransactionRepository(this.api);
 
