@@ -255,31 +255,35 @@ class DPSmallCardPayment extends StatelessWidget {
   final String title;
   final String? subtitle;
   final Color color;
-  const DPSmallCardPayment({Key? key, required this.title, required this.color, this.subtitle}) : super(key: key);
+  final void Function()? onTap;
+  const DPSmallCardPayment({Key? key, required this.title, required this.color, this.subtitle, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 160,
-      height: 81,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-        color: color,
-      ),
-      padding: const EdgeInsets.all(18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          subtitle == null
-              ? Container()
-              : Column(
-                  children: [
-                    Text(subtitle!, style: const TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.2, color: Color.fromRGBO(255, 255, 255, 0.4))),
-                  ],
-                ),
-          Text(title, style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 17, height: 1.2, color: Colors.white)),
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 160,
+        height: 81,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          color: color,
+        ),
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            subtitle == null
+                ? Container()
+                : Column(
+                    children: [
+                      Text(subtitle!, style: const TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.2, color: Color.fromRGBO(255, 255, 255, 0.4))),
+                    ],
+                  ),
+            Text(title, style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 17, height: 1.2, color: Colors.white)),
+          ],
+        ),
       ),
     );
   }
