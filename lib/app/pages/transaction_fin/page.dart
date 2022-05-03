@@ -1,11 +1,14 @@
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class TransactionFinPage extends StatelessWidget {
-  const TransactionFinPage({Key? key}) : super(key: key);
+  TransactionFinPage({Key? key}) : super(key: key) {
+    HapticHelper.feedback(HapticPatterns.transactionSuccess);
+  }
 
   @override
   Widget build(BuildContext context) {
