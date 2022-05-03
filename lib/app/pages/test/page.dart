@@ -22,6 +22,12 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
+              Get.toNamed(Routes.ACCOUNTINFO);
+            },
+            child: const Text('ACCOUNTINFO'),
+          ),
+          TextButton(
+            onPressed: () {
               Get.toNamed(Routes.MANAGEMETHOD);
             },
             child: const Text("MANAGEMETHOD"),
