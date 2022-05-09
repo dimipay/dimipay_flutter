@@ -25,7 +25,12 @@ class DPDialogActionButton extends StatelessWidget {
 }
 
 class DPDialog extends StatelessWidget {
-  const DPDialog({Key? key, required this.title, required this.content, required this.actions}) : super(key: key);
+  const DPDialog({
+    Key? key,
+    required this.title,
+    required this.content,
+    required this.actions,
+  }) : super(key: key);
 
   final String title;
   final String content;
