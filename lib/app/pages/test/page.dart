@@ -143,10 +143,15 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.dialog(const DPTextDialog(
-                title: "비밀번호가 취약해요",
-                content: "비밀번호가 아이디와 똑같이 설정되어 있어요. 디미페이를 사용하려면 비밀번호를 변경해야 해요.",
-              ));
+              Get.dialog(
+                DPDialog(
+                  title: "비밀번호가 취약해요",
+                  content: "비밀번호가 아이디와 똑같이 설정되어 있어요. 디미페이를 사용하려면 비밀번호를 변경해야 해요.",
+                  actions: [
+                    DPDialogAction(title: '설정하기', isHighlighted: true),
+                  ],
+                ),
+              );
             },
             child: const Text('DIALOG'),
           ),
