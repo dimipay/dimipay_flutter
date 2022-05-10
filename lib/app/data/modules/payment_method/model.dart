@@ -8,6 +8,7 @@ part 'model.g.dart';
 enum PaymentType {
   PREPAID,
   GENERAL,
+  COUPON,
 }
 
 @JsonSerializable()
