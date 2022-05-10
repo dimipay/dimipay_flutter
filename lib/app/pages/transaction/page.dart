@@ -1,32 +1,19 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/pages/home/page.dart';
+import 'package:dimipay/app/pages/transaction/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-class TransactionPage extends StatelessWidget {
-  TransactionPage({Key? key}) : super(key: key);
+class TransactionPage extends GetView<TransactionPageController> {
   final PaymentMethodsController paymentMethodsController = Get.find<PaymentMethodsController>();
 
-  Widget _buildPaymentMethods(List<PaymentMethod> paymentMethods) {
-    return Row(
-      children: [
-        for (PaymentMethod paymentMethod in paymentMethods)
-          Row(
-            children: [
-              DPSmallCardPayment(
-                title: paymentMethod.name ?? '',
-                color: paymentMethod.color != null ? Color(int.parse('FF' + paymentMethod.color!, radix: 16)) : DPColors.MAIN_THEME,
-              ),
-              const SizedBox(width: 12),
-            ],
-          ),
-      ],
-    );
-  }
+  TransactionPage({Key? key}) : super(key: key);
 
   Widget _paymentsArea() {
     return Container(
@@ -36,15 +23,37 @@ class TransactionPage extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 32),
       child: paymentMethodsController.obx(
-        (state) {
-          return SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                const SizedBox(width: 32, height: 81),
-                _buildPaymentMethods(state!),
-                const SizedBox(width: 20),
-              ],
+        (paymentMethods) {
+          return CarouselSlider(
+            items: paymentMethods!
+                .map(
+                  (paymentMethod) => DPSmallCardPayment(
+                    title: paymentMethod.name ?? '',
+                    color: paymentMethod.color != null ? Color(int.parse('FF' + paymentMethod.color!, radix: 16)) : DPColors.MAIN_THEME,
+                  ),
+                )
+                .toList(),
+            options: CarouselOptions(
+              height: 81,
+              enableInfiniteScroll: false,
+              enlargeCenterPage: true,
+              enlargeStrategy: CenterPageEnlargeStrategy.scale,
+              viewportFraction: 0.45,
+              initialPage: controller.currentIndex,
+              onPageChanged: (index, carouselPageChangedReason) {
+                switch (index) {
+                  case 0:
+                    controller.selectedPayment.value = PaymentType.GENERAL;
+                    break;
+                  case 1:
+                    controller.selectedPayment.value = PaymentType.PREPAID;
+                    break;
+                  case 2:
+                    controller.selectedPayment.value = PaymentType.COUPON;
+                    break;
+                }
+                HapticHelper.feedback(HapticPatterns.once);
+              },
             ),
           );
         },
