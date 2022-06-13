@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 class ApiProvider extends GetConnect implements ApiInterface {
   ApiProvider() {
-    baseUrl = 'https://pay-api.dimigo.in';
+    baseUrl = 'https://dimipay-api.rycont.ninja';
   }
 
   @override
