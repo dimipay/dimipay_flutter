@@ -34,7 +34,7 @@ class CheckPassword extends StatefulWidget {
   const CheckPassword({Key? key, required this.title, required this.checked}) : super(key: key);
 
   @override
-  _CheckPasswordState createState() => _CheckPasswordState();
+  State<CheckPassword> createState() => _CheckPasswordState();
 }
 
 class _CheckPasswordState extends State<CheckPassword> {
