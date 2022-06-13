@@ -27,6 +27,9 @@ class ApiProvider extends GetConnect implements ApiInterface {
     Response response = await post(url, body);
 
     if (response.isOk == false) {
+      if (response.statusCode == 401) {
+        throw NetworkExcepton(response.body['message'], code: response.statusCode!);
+      }
       throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
     }
 
