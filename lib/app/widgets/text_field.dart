@@ -10,6 +10,9 @@ class DPTextField extends StatelessWidget {
   final int? maxLength;
   final TextInputType? textInputType;
   final TextEditingController? controller;
+  final void Function(String)? onChanged;
+  final TextInputAction? textInputAction;
+  final void Function()? onEditingComplete;
 
   const DPTextField({
     Key? key,
@@ -18,6 +21,9 @@ class DPTextField extends StatelessWidget {
     this.controller,
     this.maxLength,
     this.textInputType,
+    this.onChanged,
+    this.textInputAction,
+    this.onEditingComplete,
     this.autofocus = false,
     this.isPassword = false,
   }) : super(key: key);
@@ -34,6 +40,9 @@ class DPTextField extends StatelessWidget {
       keyboardType: textInputType,
       maxLength: maxLength,
       controller: controller,
+      onChanged: onChanged,
+      onEditingComplete: onEditingComplete,
+      textInputAction: textInputAction,
       decoration: InputDecoration(
         hintText: hintText,
         labelText: label,
@@ -63,6 +72,9 @@ class DPTextFormField extends StatelessWidget {
   final TextInputType? textInputType;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
+  final TextInputAction? textInputAction;
+  final void Function()? onEditingComplete;
 
   const DPTextFormField({
     Key? key,
@@ -71,23 +83,29 @@ class DPTextFormField extends StatelessWidget {
     this.controller,
     this.maxLength,
     this.textInputType,
-    this.autofocus = false,
     this.validator,
+    this.onChanged,
+    this.textInputAction,
+    this.onEditingComplete,
+    this.autofocus = false,
     this.isPassword = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction: textInputAction,
       obscureText: isPassword,
       enableSuggestions: !isPassword,
       autocorrect: !isPassword,
       autofocus: autofocus,
       style: DPTextTheme.REGULAR,
+      onEditingComplete: onEditingComplete,
       cursorColor: Colors.black,
       keyboardType: textInputType,
       maxLength: maxLength,
       controller: controller,
+      onChanged: onChanged,
       decoration: InputDecoration(
         hintText: hintText,
         labelText: label,
