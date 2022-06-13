@@ -20,6 +20,9 @@ class ApiProvider extends GetConnect implements ApiInterface {
     Map body = {
       'username': username,
       'password': password,
+      "pin": "1234",
+      "deviceUid": "9cf20349-c0af-42d3-820e-f17862c2d923",
+      "bioKey": "580a4559-78c7-4d00-a5b7-b501b2c0e112",
     };
     Response response = await post(url, body);
 
@@ -87,7 +90,7 @@ class ApiProvider extends GetConnect implements ApiInterface {
       throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
     }
 
-    return (response.body['paymentMethod'] as List).map((model) => PaymentMethod.fromJson(model)).toList();
+    return (response.body['paymentMethod'] as List?)?.map((model) => PaymentMethod.fromJson(model)).toList() ?? [];
   }
 
   @override
