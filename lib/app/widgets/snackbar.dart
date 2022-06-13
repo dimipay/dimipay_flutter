@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DPSnackBar {
-  final Color _backgroundColor = DPColors.DARK5;
-  final Color _textColor = DPColors.DARK1;
+  Color _backgroundColor = DPColors.DARK5;
+  Color _textColor = DPColors.DARK1;
 
   void open(String title, {String? message}) {
     Get.rawSnackbar(
@@ -21,8 +21,10 @@ class DPSnackBar {
 }
 
 class DPErrorSnackBar extends DPSnackBar {
-  final Color _backgroundColor = DPColors.ERROR;
-  final Color _textColor = Colors.white;
+  DPErrorSnackBar() {
+    _backgroundColor = DPColors.ERROR;
+    _textColor = Colors.white;
+  }
 
   @override
   void open(String title, {String? message}) {
