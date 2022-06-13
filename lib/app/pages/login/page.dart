@@ -32,9 +32,25 @@ class LoginPage extends GetView<LoginPageController> {
                         style: TextStyle(fontSize: 16),
                       ),
                       const SizedBox(height: 16),
-                      DPTextFormField(label: "ID", controller: controller.usernameField, validator: controller.idValidator),
+                      DPTextFormField(
+                        label: "ID",
+                        validator: controller.usernameValidator,
+                        onChanged: (username) {
+                          controller.username.value = username;
+                        },
+                        textInputAction: TextInputAction.next,
+                      ),
                       const SizedBox(height: 16),
-                      DPTextFormField(label: "비밀번호", isPassword: true, controller: controller.passwordField, validator: controller.passwordValidator),
+                      DPTextFormField(
+                        label: "비밀번호",
+                        isPassword: true,
+                        validator: controller.passwordValidator,
+                        onEditingComplete: controller.login,
+                        textInputAction: TextInputAction.done,
+                        onChanged: (password) {
+                          controller.password.value = password;
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -42,12 +58,16 @@ class LoginPage extends GetView<LoginPageController> {
             ),
             const SizedBox(height: 36),
             controller.obx(
-              (_) => DPKeyboardReactiveButton(
-                onTap: controller.login,
-                padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
-                child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+              (_) => Obx(
+                () => DPKeyboardReactiveButton(
+                  disabled: !controller.buttonEnabled,
+                  onTap: controller.buttonEnabled ? controller.login : null,
+                  padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+                  child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+                ),
               ),
               onLoading: const DPKeyboardReactiveButton(
+                disabled: true,
                 padding: EdgeInsets.only(left: 24, right: 24, bottom: 24),
                 child: SizedBox(
                   height: 20,
