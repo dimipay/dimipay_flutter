@@ -111,6 +111,7 @@ class SelectChargingMethodPage extends StatelessWidget {
                 child: DPCard(
                   isHighlighted: true,
                   width: double.infinity,
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -131,7 +132,6 @@ class SelectChargingMethodPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  padding: const EdgeInsets.all(24),
                 ),
               ),
             ],

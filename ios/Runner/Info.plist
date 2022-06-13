@@ -49,5 +49,7 @@
 		<array>
 			<string>_dartobservatory._tcp</string>
 		</array>
-	</dict>
+		<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+</dict>
 </plist>
