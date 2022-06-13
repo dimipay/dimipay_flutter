@@ -5,6 +5,6 @@ class NetworkExcepton implements Exception {
 
   @override
   String toString() {
-    return 'NetworkException occured(code:$code) : ' + message;
+    return 'NetworkException occured(code:$code) : $message';
   }
 }

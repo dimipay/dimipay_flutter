@@ -172,11 +172,11 @@ class DPLargeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DPBaseButton(
-      child: child,
       padding: const EdgeInsets.all(24),
       width: width,
       onTap: onTap,
       color: color,
+      child: child,
     );
   }
 }
@@ -192,10 +192,10 @@ class DPLargeTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DPLargeButton(
-      child: Text(text, style: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w600)),
       width: width,
       onTap: onTap,
       color: color,
+      child: Text(text, style: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w600)),
     );
   }
 }
@@ -210,11 +210,11 @@ class DPMediumButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DPBaseButton(
-      child: child,
       padding: const EdgeInsets.all(16),
       width: width,
       onTap: onTap,
       color: color,
+      child: child,
     );
   }
 }
@@ -230,10 +230,10 @@ class DPMediumTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DPMediumButton(
-      child: Text(text, style: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w500)),
       width: width,
       onTap: onTap,
       color: color,
+      child: Text(text, style: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w500)),
     );
   }
 }
@@ -248,11 +248,11 @@ class DPSmallButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DPBaseButton(
-      child: child,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       width: width,
       onTap: onTap,
       color: color,
+      child: child,
     );
   }
 }
@@ -268,10 +268,10 @@ class DPSmallTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DPSmallButton(
-      child: Text(text, style: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w600)),
       width: width,
       onTap: onTap,
       color: color,
+      child: Text(text, style: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.w600)),
     );
   }
 }
