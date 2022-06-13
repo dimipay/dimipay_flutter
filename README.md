@@ -1,16 +1,21 @@
-# dimipay
+# Dimipay
 
-A new Flutter project.
+<aside>
+💡 모바일 매점 결제 핀테크 시스템
+</aside>
 
-## Getting Started
+Public으로 바꾸기 전에 지우기!
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- 전체적인 라우팅 설정
+    - [ ]  Deploy 배포 앱 설정…?
+- 데이터베이스
+    - [ ]  쿠폰 발행 테스트
+    - [ ]  쿠폰 사용 이벤트
+    - [ ]  쿠폰 발급 이벤트
+    - [ ]  카드 등록 이벤트
+    - [ ]  카드 금액 충전 이벤트
+    - [ ]  비밀번호 변경 이벤트
+- PG사 카드 결제 테스트
+    - [ ]  결제 로직 테스트
+- 사소
+    - [ ]  디바이스 고유 키, 바이오 키
