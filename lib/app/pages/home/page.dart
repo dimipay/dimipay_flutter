@@ -82,7 +82,6 @@ class HomePage extends StatelessWidget {
           return Column(
             children: [
               for (Notice notice in notices) _notice(notice),
-              const SizedBox(height: 36),
             ],
           );
         } else {
@@ -110,7 +109,6 @@ class HomePage extends StatelessWidget {
             (event) => Column(
               children: [
                 EventItem(title: event.title, description: event.description, expireDate: event.endsAt),
-                const SizedBox(height: 36),
               ],
             ),
           )
@@ -133,8 +131,6 @@ class HomePage extends StatelessWidget {
               color: Colors.white,
               child: Column(
                 children: [
-                  const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
-                  const SizedBox(height: 36),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -166,6 +162,16 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Widget _topDivider() {
+    return Column(
+      children: const [
+        SizedBox(height: 36),
+        Divider(color: DPColors.DARK6, height: 1, thickness: 1),
+        SizedBox(height: 36),
+      ],
+    );
+  }
+
   Widget _topArea() {
     return SingleChildScrollView(
       child: Padding(
@@ -176,6 +182,15 @@ class HomePage extends StatelessWidget {
             _logoArea(),
             const SizedBox(height: 36),
             _noticeArea(),
+            Obx(
+              () {
+                if (noticeController.notices.value.isNotEmpty && eventController.events.value.isNotEmpty) {
+                  return _topDivider();
+                } else {
+                  return Container();
+                }
+              },
+            ),
             _eventsArea(),
           ],
         ),
