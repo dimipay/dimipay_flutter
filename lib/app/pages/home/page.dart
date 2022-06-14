@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
             Obx(
               () => DPIconButton(
                 'asset/images/event.svg',
-                badgeNumber: Get.find<CouponController>().coupons.value?.length,
+                badgeNumber: Get.find<CouponController>().coupons.value.length,
                 onTap: () {
                   Get.toNamed(Routes.COUPON);
                 },
