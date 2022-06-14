@@ -17,9 +17,9 @@ class PaymentMethod {
   DateTime createdAt;
   DateTime updatedAt;
   PaymentType type;
-  String? color;
-  String? name;
-  String ownerId;
+  String color;
+  String name;
+  int ownerId;
   PaymentMethod({required this.systemId, required this.createdAt, required this.updatedAt, required this.type, required this.color, required this.name, required this.ownerId});
 
   factory PaymentMethod.fromJson(Map<String, dynamic> json) => _$PaymentMethodFromJson(json);
