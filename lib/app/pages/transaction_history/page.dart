@@ -63,7 +63,7 @@ class TransactionHistoryPage extends StatelessWidget {
                   ),
                 ),
               ),
-              const TransactionCalendarViewer(),
+              // const TransactionCalendarViewer(),
             ],
           ),
         ),
