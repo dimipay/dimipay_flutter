@@ -18,6 +18,7 @@ import 'package:dimipay/app/pages/login/page.dart';
 import 'package:dimipay/app/pages/login/binding.dart';
 import 'package:dimipay/app/pages/manage_method/page.dart';
 import 'package:dimipay/app/pages/notification/page.dart';
+import 'package:dimipay/app/pages/onboarding/page.dart';
 import 'package:dimipay/app/pages/pin_auth/page.dart';
 import 'package:dimipay/app/pages/printer_setting/page.dart';
 import 'package:dimipay/app/pages/register_card/page.dart';
@@ -58,5 +59,6 @@ class AppPages {
     GetPage(name: Routes.BIOMETRICAUTH, page: () => const BiometricAuthPage()),
     GetPage(name: Routes.PRINTERSETTING, page: () => const PrinterSettingPage()),
     GetPage(name: Routes.TRANSACTIONFIN, page: () => TransactionFinPage()),
+    GetPage(name: Routes.ONBOARDING, page: () => const OnboardingPage()),
   ];
 }
