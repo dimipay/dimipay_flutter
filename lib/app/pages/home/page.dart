@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text('DIMIPAY', style: TextStyle(color: Color.fromRGBO(46, 164, 171, 1), fontFamily: 'Montserrat', fontSize: 26)),
+        const Text('DIMIPAY', style: TextStyle(color: Color.fromRGBO(46, 164, 171, 1), fontFamily: 'Montserrat', fontSize: 20)),
         Row(
           children: [
             Obx(
@@ -42,6 +42,13 @@ class HomePage extends StatelessWidget {
               'asset/images/profile.svg',
               onTap: () {
                 Get.toNamed(Routes.ACCOUNTINFO);
+              },
+            ),
+            const SizedBox(width: 12),
+            DPIconButton(
+              'asset/images/printer.svg',
+              onTap: () {
+                Get.toNamed(Routes.PRINTERSETTING);
               },
             ),
           ],
