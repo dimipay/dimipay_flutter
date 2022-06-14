@@ -276,6 +276,14 @@ class HomePage extends StatelessWidget {
                             Get.toNamed(Routes.REGISTERCARD);
                           },
                           child: const Text("테스트용 버튼 (카드 생성)")),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.CHARGINGAMOUNT);
+                          },
+                          child: const Text("테스트용 버튼 (금액 충전)")),
                     ],
                   ),
                 ),

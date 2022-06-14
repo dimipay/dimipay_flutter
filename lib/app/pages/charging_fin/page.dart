@@ -28,7 +28,7 @@ class ChargingFinPage extends StatelessWidget {
                     ),
                     SizedBox(height: 36),
                     Text(
-                      '카드를 성공적으로 등록했어요',
+                      '성공적으로 페이머니를 충전했어요',
                       style: DPTextTheme.SECTION_HEADER,
                     ),
                   ],
