@@ -1,7 +1,9 @@
 import 'package:dimipay/app/data/modules/coupon/model.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
+import 'package:dimipay/app/data/modules/payment_method/general/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/data/modules/payment_method/prepaid/model.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
 import 'package:dimipay/app/data/provider/api_interface.dart';
@@ -94,13 +96,6 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<List<PaymentMethod>> getPaymentMethods() async {
-    String url = '/payment/method';
-    Response response = await dio.get(url);
-    return (response.data['methods'] as List?)?.map((model) => PaymentMethod.fromJson(model)).toList() ?? [];
-  }
-
-  @override
   Future<List<Transaction>> getTransaction() async {
     String url = '/transaction/my';
     Response response = await dio.get(url);
@@ -140,5 +135,19 @@ class ApiProvider implements ApiInterface {
       'token': token,
     };
     await dio.post(url, data: body);
+  }
+
+  @override
+  Future<List<GeneralCard>> getGeneralCard() async {
+    String url = '/payment/method';
+    Response response = await dio.get(url);
+    return (response.data['methods'] as List?)?.where((element) => element['type'] == 'GENERAL').map((model) => GeneralCard.fromJson(model)).toList() ?? [];
+  }
+
+  @override
+  Future<List<PrepaidCard>> getPrepaidCard() async {
+    String url = '/payment/method';
+    Response response = await dio.get(url);
+    return (response.data['methods'] as List?)?.where((element) => element['type'] == 'PREPAID').map((model) => PrepaidCard.fromJson(model)).toList() ?? [];
   }
 }

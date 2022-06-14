@@ -1,3 +1,5 @@
+import 'package:dimipay/app/data/modules/payment_method/general/model.dart';
+import 'package:dimipay/app/data/modules/payment_method/prepaid/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
@@ -55,8 +57,8 @@ class MockApiProvider implements ApiInterface {
   Future<List<PaymentMethod>> getPaymentMethods() async {
     await Future.delayed(const Duration(seconds: 1));
     return [
-      PaymentMethod(systemId: 'test0001', createdAt: DateTime(2022, 1, 1), updatedAt: DateTime(2022, 1, 1), type: PaymentType.GENERAL, color: 'ff0000', name: '국민카드', ownerId: 1),
-      PaymentMethod(systemId: 'test0002', createdAt: DateTime(2022, 1, 1), updatedAt: DateTime(2022, 1, 1), type: PaymentType.PREPAID, color: 'ff0000', name: '페이머니', ownerId: 2),
+      GeneralCard(systemId: 'test0001', createdAt: DateTime(2022, 1, 1), updatedAt: DateTime(2022, 1, 1), color: 'ff0000', name: '국민카드', ownerId: 1),
+      PrepaidCard(systemId: 'test0002', createdAt: DateTime(2022, 1, 1), updatedAt: DateTime(2022, 1, 1), color: 'ff0000', name: '페이머니', ownerId: 2),
     ];
   }
 
@@ -85,5 +87,17 @@ class MockApiProvider implements ApiInterface {
   @override
   Future<void> postPaymentToken(String token) async {
     await Future.delayed(const Duration(seconds: 1));
+  }
+
+  @override
+  Future<List<GeneralCard>> getGeneralCard() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return [];
+  }
+
+  @override
+  Future<List<PrepaidCard>> getPrepaidCard() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return [];
   }
 }
