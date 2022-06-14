@@ -1,4 +1,5 @@
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/payment.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class CardFinPage extends StatelessWidget {
                 text: '돈 쓰러 가기',
                 width: double.infinity,
                 onTap: () {
-                  Get.back();
+                  Get.toNamed(Routes.HOME);
                 },
               ),
             ],

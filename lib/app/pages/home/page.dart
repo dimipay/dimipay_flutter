@@ -267,6 +267,18 @@ class HomePage extends StatelessWidget {
                   child: _topArea(),
                 ),
                 _paymentsArea(),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.REGISTERCARD);
+                          },
+                          child: const Text("테스트용 버튼 (카드 생성)")),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
