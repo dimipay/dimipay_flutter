@@ -6,8 +6,9 @@ part of 'model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) => PaymentMethod(
-      id: json['id'] as String,
+PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) =>
+    PaymentMethod(
+      systemId: json['systemId'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       type: $enumDecode(_$PaymentTypeEnumMap, json['type']),
@@ -16,8 +17,9 @@ PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) => PaymentMetho
       ownerId: json['ownerId'] as String,
     );
 
-Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) => <String, dynamic>{
-      'id': instance.id,
+Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) =>
+    <String, dynamic>{
+      'systemId': instance.systemId,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
       'type': _$PaymentTypeEnumMap[instance.type],
@@ -29,4 +31,5 @@ Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) => <String, d
 const _$PaymentTypeEnumMap = {
   PaymentType.PREPAID: 'PREPAID',
   PaymentType.GENERAL: 'GENERAL',
+  PaymentType.COUPON: 'COUPON',
 };
