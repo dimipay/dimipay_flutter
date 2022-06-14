@@ -48,10 +48,6 @@ class ApiProvider implements ApiInterface {
       'paymentPin': paymentPin,
     };
     await dio.put(url, data: body);
-
-    // if (response.isOk == false) {
-    //   throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
-    // }
   }
 
   @override
@@ -59,10 +55,6 @@ class ApiProvider implements ApiInterface {
     String url = '/payment/method';
     Map<String, String> body = {'cardNumber': cardNumber};
     Response response = await dio.post(url, data: body);
-
-    // if (response.isOk == false) {
-    //   throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
-    // }
 
     return response.data['name']; //국민카드?
   }
@@ -74,10 +66,6 @@ class ApiProvider implements ApiInterface {
       'paymentPin': paymentPin,
     };
     await dio.post(url, data: body);
-
-    // if (response.isOk == false) {
-    //   throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
-    // }
   }
 
   @override
@@ -85,10 +73,6 @@ class ApiProvider implements ApiInterface {
     String url = '/coupons';
 
     Response response = await dio.get(url);
-
-    // if (response.isOk == false) {
-    //   throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
-    // }
 
     return (response.data as List).map<Coupon>((model) => Coupon.fromJson(model)).toList();
   }
@@ -98,10 +82,6 @@ class ApiProvider implements ApiInterface {
     String url = '/notice/current';
     Response response = await dio.get(url);
 
-    // if (response.isOk == false) {
-    //   throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
-    // }
-
     return (response.data as List).map<Notice>((e) => Notice.fromJson(e)).toList();
   }
 
@@ -109,10 +89,6 @@ class ApiProvider implements ApiInterface {
   Future<List<Event>> getOngoingEvents() async {
     String url = '/event/ongoing';
     Response response = await dio.get(url);
-
-    // if (response.isOk == false) {
-    //   throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
-    // }
 
     return (response.data as List).map<Event>((model) => Event.fromJson(model)).toList();
   }
@@ -122,10 +98,6 @@ class ApiProvider implements ApiInterface {
     String url = '/payment/method';
     Response response = await dio.get(url);
 
-    // if (response.isOk == false) {
-    //   throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
-    // }
-
     return (response.data['paymentMethod'] as List?)?.map((model) => PaymentMethod.fromJson(model)).toList() ?? [];
   }
 
@@ -133,10 +105,6 @@ class ApiProvider implements ApiInterface {
   Future<List<Transaction>> getTransaction() async {
     String url = '/transaction/my';
     Response response = await dio.get(url);
-
-    // if (response.isOk == false) {
-    //   throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
-    // }
 
     return (response.data as List).map<Transaction>((model) => Transaction.fromJson(model)).toList();
   }
@@ -146,10 +114,6 @@ class ApiProvider implements ApiInterface {
     String url = '/user/me';
 
     Response response = await dio.get(url);
-
-    // if (response.isOk == false) {
-    //   throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
-    // }
 
     return User.fromJson(response.data['me']);
   }
@@ -167,13 +131,6 @@ class ApiProvider implements ApiInterface {
 
     Response response = await dio.post(url, data: body);
 
-    // if (response.statusCode == 200) {
-    //   if (response.statusCode == 401) {
-    //     throw NetworkExcepton(response.body['message'], code: response.statusCode!);
-    //   }
-    //   throw NetworkExcepton(baseUrl + url, code: response.statusCode!);
-    // }
-
     return response.data['accessToken'];
   }
 
@@ -184,23 +141,5 @@ class ApiProvider implements ApiInterface {
       'token': token,
     };
     await dio.post(url, data: body);
-
-    // if (response.isOk == false) {
-    //   throw NetworkExcepton(baseUrl! + url, code: response.statusCode!);
-    // }
   }
-
-  // getAll() async {
-  //   try {
-  //     var response = await dio.get(baseUrl);
-  //     if (response.statusCode == 200) {
-  //       Map<String, dynamic> jsonResponse = json.decode(response.data);
-  //       List<MyModel> listMyModel = jsonResponse['data'].map<MyModel>((map) {
-  //         return MyModel.fromJson(map);
-  //       }).toList();
-  //       return listMyModel;
-  //     } else
-  //       print('erro -get');
-  //   } catch (_) {}
-  // }
 }
