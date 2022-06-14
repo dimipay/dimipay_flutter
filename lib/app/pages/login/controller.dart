@@ -1,7 +1,7 @@
-import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -52,9 +52,12 @@ class LoginPageController extends GetxController with StateMixin {
           Get.offNamed(Routes.HOME);
         }
       }
-    } on NetworkExcepton catch (e) {
+    } on DioError catch (e) {
+      if (e.response != null && e.response!.statusCode == 401) {
+        DPErrorSnackBar().open(e.response!.data['message']);
+      }
+    } finally {
       change(null, status: RxStatus.success());
-      DPErrorSnackBar().open(e.message);
     }
   }
 }

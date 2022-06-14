@@ -1,7 +1,7 @@
-class NetworkExcepton implements Exception {
+class NetworkException implements Exception {
   final int code;
   final String message;
-  NetworkExcepton(this.message, {this.code = 500});
+  NetworkException(this.message, {this.code = 500});
 
   @override
   String toString() {
