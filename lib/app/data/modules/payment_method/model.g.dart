@@ -12,9 +12,9 @@ PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) =>
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       type: $enumDecode(_$PaymentTypeEnumMap, json['type']),
-      color: json['color'] as String?,
-      name: json['name'] as String?,
-      ownerId: json['ownerId'] as String,
+      color: json['color'] as String,
+      name: json['name'] as String,
+      ownerId: json['ownerId'] as int,
     );
 
 Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) =>

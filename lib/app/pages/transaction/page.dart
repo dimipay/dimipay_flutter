@@ -28,8 +28,8 @@ class TransactionPage extends GetView<TransactionPageController> {
             items: paymentMethods!
                 .map(
                   (paymentMethod) => DPSmallCardPayment(
-                    title: paymentMethod.name ?? '',
-                    color: paymentMethod.color != null ? Color(int.parse('FF${paymentMethod.color!}', radix: 16)) : DPColors.MAIN_THEME,
+                    title: paymentMethod.name,
+                    color: paymentMethod.color != '' ? Color(int.parse('FF${paymentMethod.color}', radix: 16)) : DPColors.MAIN_THEME,
                   ),
                 )
                 .toList(),
