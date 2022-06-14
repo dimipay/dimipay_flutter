@@ -10,12 +10,13 @@ import 'package:get/get.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 String getInintialRoute(int isFirst, {bool debug = false}) {
+  if (isFirst == 0) {
+    return Routes.ONBOARDING; //Onboarding;
+  }
   if (debug) {
     return Routes.TEST;
   }
-  if (isFirst == 0) {
-    return Routes.TEST; //Onboarding;
-  }
+
   if (Get.find<AuthService>().isAuthenticated) {
     return Routes.HOME;
   } else {
