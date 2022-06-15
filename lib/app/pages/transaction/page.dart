@@ -2,8 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
-import 'package:dimipay/app/data/modules/payment_method/controller.dart';
-import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/pages/home/page.dart';
 import 'package:dimipay/app/pages/transaction/controller.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +9,7 @@ import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class TransactionPage extends GetView<TransactionPageController> {
-  final PaymentMethodsController paymentMethodsController = Get.find<PaymentMethodsController>();
-
-  TransactionPage({Key? key}) : super(key: key);
+  const TransactionPage({Key? key}) : super(key: key);
 
   Widget _paymentsArea() {
     return Container(
@@ -22,14 +18,15 @@ class TransactionPage extends GetView<TransactionPageController> {
       ),
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 32),
-      child: paymentMethodsController.obx(
-        (paymentMethods) {
-          return CarouselSlider(
-            items: paymentMethods!
+      child: Obx(
+        () => SizedBox(
+          height: 81,
+          child: CarouselSlider(
+            items: controller.paymentMethods
                 .map(
                   (paymentMethod) => DPSmallCardPayment(
-                    title: paymentMethod.name ?? '',
-                    color: paymentMethod.color != null ? Color(int.parse('FF${paymentMethod.color!}', radix: 16)) : DPColors.MAIN_THEME,
+                    title: paymentMethod.name,
+                    color: paymentMethod.color != '' ? Color(int.parse('FF${paymentMethod.color}', radix: 16)) : DPColors.MAIN_THEME,
                   ),
                 )
                 .toList(),
@@ -41,23 +38,12 @@ class TransactionPage extends GetView<TransactionPageController> {
               viewportFraction: 0.45,
               initialPage: controller.currentIndex,
               onPageChanged: (index, carouselPageChangedReason) {
-                switch (index) {
-                  case 0:
-                    controller.selectedPayment.value = PaymentType.GENERAL;
-                    break;
-                  case 1:
-                    controller.selectedPayment.value = PaymentType.PREPAID;
-                    break;
-                  case 2:
-                    controller.selectedPayment.value = PaymentType.COUPON;
-                    break;
-                }
+                controller.paymentMethodId.value = controller.paymentMethods[index].systemId;
                 HapticHelper.feedback(HapticPatterns.once);
               },
             ),
-          );
-        },
-        onLoading: Container(height: 81),
+          ),
+        ),
       ),
     );
   }

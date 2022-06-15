@@ -6,8 +6,7 @@ part of 'model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) =>
-    PaymentMethod(
+GeneralCard _$GeneralCardFromJson(Map<String, dynamic> json) => GeneralCard(
       systemId: json['systemId'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
@@ -16,7 +15,7 @@ PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) =>
       ownerId: json['ownerId'] as int,
     );
 
-Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) =>
+Map<String, dynamic> _$GeneralCardToJson(GeneralCard instance) =>
     <String, dynamic>{
       'systemId': instance.systemId,
       'createdAt': instance.createdAt.toIso8601String(),
