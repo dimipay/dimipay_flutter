@@ -1,22 +1,27 @@
+import 'package:dimipay/app/data/modules/payment_method/general/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/data/modules/payment_method/prepaid/controller.dart';
 import 'package:get/get.dart';
 
 class TransactionPageController extends GetxController {
-  Rx<PaymentType> selectedPayment = Rx(PaymentType.GENERAL);
+  late Rx<String?> paymentMethodId;
+
+  List<PaymentMethod> get paymentMethods {
+    // ignore: unnecessary_cast
+    return Get.find<PrepaidCardController>().cards.value.cast<PaymentMethod>() + Get.find<GeneralCardController>().cards.value.cast<PaymentMethod>();
+  }
+
   @override
   void onInit() {
     super.onInit();
-    selectedPayment.value = Get.arguments ?? PaymentType.GENERAL;
+    paymentMethodId = Rx(Get.arguments);
   }
 
   int get currentIndex {
-    switch (selectedPayment.value) {
-      case PaymentType.GENERAL:
-        return 0;
-      case PaymentType.PREPAID:
-        return 1;
-      case PaymentType.COUPON:
-        return 2;
+    int index = paymentMethods.indexWhere((element) => element.systemId == paymentMethodId.value);
+    if (index == -1) {
+      return 0;
     }
+    return index;
   }
 }
