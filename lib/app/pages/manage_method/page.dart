@@ -6,15 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class ManageMethodPage extends StatefulWidget {
+class ManageMethodPage extends StatelessWidget {
   const ManageMethodPage({Key? key}) : super(key: key);
 
-  @override
-  State<ManageMethodPage> createState() => _ManageMethodPageState();
-}
-
-class _ManageMethodPageState extends State<ManageMethodPage> {
-  bool ischecked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
