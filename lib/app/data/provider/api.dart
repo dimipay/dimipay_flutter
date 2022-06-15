@@ -52,9 +52,13 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<void> createPaymentMethod(String cardNumber) async {
-    String url = '/payment/method';
-    Map<String, String> body = {'cardNumber': cardNumber};
+  Future<void> createPaymentMethod(String cardNumber, int validYear, int validMonth) async {
+    const String url = '/payment/method';
+    final Map body = {
+      'cardNumber': cardNumber,
+      'validMonth': validMonth,
+      'validYear': validYear,
+    };
     Response response = await dio.post(url, data: body);
 
     return response.data['name']; //국민카드?

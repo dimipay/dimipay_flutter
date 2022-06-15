@@ -14,7 +14,7 @@ class MockApiProvider implements ApiInterface {
   }
 
   @override
-  Future<void> createPaymentMethod(String cardNumber) async {
+  Future<void> createPaymentMethod(String cardNumber, int validYear, int validMonth) async {
     await Future.delayed(const Duration(seconds: 1));
   }
 
