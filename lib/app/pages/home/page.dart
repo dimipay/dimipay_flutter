@@ -243,22 +243,6 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      // paymentMethodsController.obx(
-      //   (state) {
-
-      //     return SingleChildScrollView(
-      //       scrollDirection: Axis.horizontal,
-      //       child: Row(
-      //         children: [
-      //           const SizedBox(width: 32, height: 81),
-      //           _buildPaymentMethods(state!),
-      //           const SizedBox(width: 20),
-      //         ],
-      //       ),
-      //     );
-      //   },
-      //   onLoading: Container(height: 81),
-      // ),
     );
   }
 
