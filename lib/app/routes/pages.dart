@@ -50,7 +50,7 @@ class AppPages {
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
     GetPage(name: Routes.CHANGEPASSWORD, page: () => const ChangePasswordPage(), binding: ChangePasswordPageBinding()),
     GetPage(name: Routes.UNTITLED, page: () => const Untitled()),
-    GetPage(name: Routes.TRANSACTION, page: () => TransactionPage(), binding: TransactionPageBinding()),
+    GetPage(name: Routes.TRANSACTION, page: () => const TransactionPage(), binding: TransactionPageBinding()),
     GetPage(name: Routes.EVENT, page: () => EventPage(), binding: EventPageBinding()),
     GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage()),
     GetPage(name: Routes.ISSUECOUPON, page: () => const IssueCouponPage()),

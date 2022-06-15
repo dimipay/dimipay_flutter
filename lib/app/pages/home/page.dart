@@ -6,8 +6,9 @@ import 'package:dimipay/app/data/modules/event/controller.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/controller.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
-import 'package:dimipay/app/data/modules/payment_method/controller.dart';
+import 'package:dimipay/app/data/modules/payment_method/general/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/data/modules/payment_method/prepaid/controller.dart';
 import 'package:dimipay/app/pages/home/widget/event_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
@@ -19,7 +20,8 @@ class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
   final NoticeController noticeController = Get.find<NoticeController>();
   final EventController eventController = Get.find<EventController>();
-  final PaymentMethodsController paymentMethodsController = Get.find<PaymentMethodsController>();
+  final GeneralCardController generalCardController = Get.find<GeneralCardController>();
+  final PrepaidCardController prepaidCardController = Get.find<PrepaidCardController>();
 
   Widget _logoArea() {
     return Row(
@@ -205,10 +207,10 @@ class HomePage extends StatelessWidget {
           Row(
             children: [
               DPSmallCardPayment(
-                title: paymentMethod.name ?? '',
-                color: paymentMethod.color != null ? Color(int.parse('FF${paymentMethod.color!}', radix: 16)) : DPColors.MAIN_THEME,
+                title: paymentMethod.name,
+                color: paymentMethod.color != '' ? Color(int.parse('FF${paymentMethod.color}', radix: 16)) : DPColors.MAIN_THEME,
                 onTap: () {
-                  Get.toNamed(Routes.TRANSACTION, arguments: paymentMethod.type);
+                  Get.toNamed(Routes.TRANSACTION, arguments: paymentMethod.systemId);
                 },
               ),
               const SizedBox(width: 12),
@@ -225,20 +227,21 @@ class HomePage extends StatelessWidget {
       ),
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 32),
-      child: paymentMethodsController.obx(
-        (state) {
-          return SingleChildScrollView(
+      child: Obx(
+        () => SizedBox(
+          height: 81,
+          child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
                 const SizedBox(width: 32, height: 81),
-                _buildPaymentMethods(state!),
+                // ignore: unnecessary_cast
+                _buildPaymentMethods(prepaidCardController.cards.value.cast<PaymentMethod>() + generalCardController.cards.value.cast<PaymentMethod>()),
                 const SizedBox(width: 20),
               ],
             ),
-          );
-        },
-        onLoading: Container(height: 81),
+          ),
+        ),
       ),
     );
   }
