@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class AuthService extends GetxService {
   final AuthRepository repository;
-  final FlutterSecureStorage _storage = Get.find<FlutterSecureStorage>();
+  final FlutterSecureStorage _storage = const FlutterSecureStorage();
   final Rx<String?> _token = Rx(null);
 
   AuthService(this.repository);
