@@ -16,6 +16,7 @@ import 'package:dimipay/app/pages/home/binding.dart';
 import 'package:dimipay/app/pages/issue_coupon/page.dart';
 import 'package:dimipay/app/pages/login/page.dart';
 import 'package:dimipay/app/pages/login/binding.dart';
+import 'package:dimipay/app/pages/manage_method/binding.dart';
 import 'package:dimipay/app/pages/manage_method/page.dart';
 import 'package:dimipay/app/pages/notification/page.dart';
 import 'package:dimipay/app/pages/pin_auth/page.dart';
@@ -38,7 +39,7 @@ class AppPages {
     GetPage(name: Routes.TEST, page: () => const TestPage()),
     GetPage(name: Routes.HOME, page: () => HomePage(), binding: HomePageBinding()),
     GetPage(name: Routes.ACCOUNTINFO, page: () => AccountInfoPage(), binding: AccountInfoPageBinding()),
-    GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage()),
+    GetPage(name: Routes.MANAGEMETHOD, page: () => ManageMethodPage(), binding: ManageMethodPageBinding()),
     GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage(), binding: RegisterCardPageBinding()),
     GetPage(name: Routes.SELECTCHARGINGMETHOD, page: () => const SelectChargingMethodPage()),
     GetPage(name: Routes.EDITCARDNAME, page: () => EditCardNamePage()),
