@@ -23,7 +23,7 @@ abstract class ApiInterface {
 
   Future<List<Event>> getOngoingEvents();
 
-  Future<void> createPaymentMethod(String cardNumber);
+  Future<void> createPaymentMethod(String cardNumber, int validYear, int validMonth);
 
   Future<void> postPaymentToken(String token);
 

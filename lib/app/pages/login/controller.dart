@@ -9,7 +9,6 @@ class LoginPageController extends GetxController with StateMixin {
   final Rx<String> username = Rx('');
   final Rx<String> password = Rx('');
   final formKey = GlobalKey<FormState>();
-  AuthService authService = Get.find<AuthService>();
 
   @override
   void onInit() {
@@ -42,6 +41,8 @@ class LoginPageController extends GetxController with StateMixin {
   }
 
   Future login() async {
+    AuthService authService = Get.find<AuthService>();
+
     try {
       if (formKey.currentState!.validate()) {
         formKey.currentState!.save();
