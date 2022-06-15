@@ -2,7 +2,6 @@ import 'package:dimipay/app/data/modules/payment_method/general/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/prepaid/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
-import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/coupon/model.dart';
@@ -50,15 +49,6 @@ class MockApiProvider implements ApiInterface {
       Event(title: 'Event 1', description: 'afsfoejfiesj', url: ''),
       Event(title: 'Event 2', description: 'afsfoejfiesj', url: ''),
       Event(title: 'Event 3', description: 'afsfoejfiesj', url: ''),
-    ];
-  }
-
-  @override
-  Future<List<PaymentMethod>> getPaymentMethods() async {
-    await Future.delayed(const Duration(seconds: 1));
-    return [
-      GeneralCard(systemId: 'test0001', createdAt: DateTime(2022, 1, 1), updatedAt: DateTime(2022, 1, 1), color: 'ff0000', name: '국민카드', ownerId: 1),
-      PrepaidCard(systemId: 'test0002', createdAt: DateTime(2022, 1, 1), updatedAt: DateTime(2022, 1, 1), color: 'ff0000', name: '페이머니', ownerId: 2),
     ];
   }
 
