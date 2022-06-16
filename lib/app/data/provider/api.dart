@@ -153,4 +153,10 @@ class ApiProvider implements ApiInterface {
     Response response = await dio.get(url);
     return (response.data['methods'] as List?)?.where((element) => element['type'] == 'PREPAID').map((model) => PrepaidCard.fromJson(model)).toList() ?? [];
   }
+
+  @override
+  Future<void> createPrepaidCard() async {
+    String url = '/payment/create-prepaid';
+    await dio.post(url);
+  }
 }

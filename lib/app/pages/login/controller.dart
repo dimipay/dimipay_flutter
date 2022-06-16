@@ -1,3 +1,4 @@
+import 'package:dimipay/app/data/provider/api.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
@@ -42,16 +43,28 @@ class LoginPageController extends GetxController with StateMixin {
     return null;
   }
 
-  Future login() async {
-    AuthService authService = Get.find<AuthService>();
+  Future<bool> createPrepaidCard() async {
+    try {
+      await ApiProvider().createPrepaidCard();
+      return true;
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 400) {
+        return true;
+      }
+      DPErrorSnackBar().open('페이머니 생성에 실패했어요');
+      authService.logout();
+      rethrow;
+    }
+  }
 
+  Future login() async {
     try {
       if (formKey.currentState!.validate()) {
         formKey.currentState!.save();
         change(null, status: RxStatus.loading());
         await authService.login(username.value, password.value);
-        change(null, status: RxStatus.success());
-        if (authService.isAuthenticated) {
+        bool prepaidResult = await createPrepaidCard();
+        if (prepaidResult && authService.isAuthenticated) {
           final String nextRoute = redirect ?? Routes.HOME;
           Get.offNamed(nextRoute);
         }

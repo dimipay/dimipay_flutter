@@ -90,4 +90,9 @@ class MockApiProvider implements ApiInterface {
     await Future.delayed(const Duration(seconds: 1));
     return [];
   }
+
+  @override
+  Future<void> createPrepaidCard() async {
+    await Future.delayed(const Duration(seconds: 1));
+  }
 }
