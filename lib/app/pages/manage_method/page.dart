@@ -171,7 +171,7 @@ class GeneralCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: card.color != '' ? Color(int.parse('FF${card.color}', radix: 16)) : DPColors.MAIN_THEME,
+        color: card.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${card.color}', radix: 16)),
         borderRadius: BorderRadius.circular(12),
       ),
       width: double.infinity,
@@ -181,7 +181,7 @@ class GeneralCardWidget extends StatelessWidget {
         children: [
           const Text('3510 ···· ···· ····', style: DPTextTheme.DESCRIPTION),
           const SizedBox(height: 4),
-          Text(card.name, style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+          Text(card.name ?? '', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
         ],
       ),
     );

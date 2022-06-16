@@ -207,8 +207,8 @@ class HomePage extends StatelessWidget {
           Row(
             children: [
               DPSmallCardPayment(
-                title: paymentMethod.name,
-                color: paymentMethod.color != '' ? Color(int.parse('FF${paymentMethod.color}', radix: 16)) : DPColors.MAIN_THEME,
+                title: paymentMethod.name ?? '',
+                color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
                 onTap: () {
                   Get.toNamed(Routes.TRANSACTION, arguments: paymentMethod.systemId);
                 },
