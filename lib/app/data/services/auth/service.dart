@@ -1,5 +1,4 @@
 import 'package:dimipay/app/data/services/auth/repository.dart';
-import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
@@ -35,6 +34,5 @@ class AuthService extends GetxService {
 
   Future<void> logout() async {
     await _removeToken();
-    Get.offAllNamed(Routes.LOGIN);
   }
 }

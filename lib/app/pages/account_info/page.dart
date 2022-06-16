@@ -139,9 +139,11 @@ class AccountInfoPage extends StatelessWidget {
               switch (value) {
                 case 'logout':
                   Get.find<AuthService>().logout();
+                  Get.offAllNamed(Routes.LOGIN);
                   break;
                 case 'delete_configs':
                   Get.find<AppConfigService>().clearConfigs();
+                  break;
               }
             },
             itemBuilder: (_) => [
