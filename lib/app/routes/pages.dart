@@ -18,7 +18,6 @@ import 'package:dimipay/app/pages/home/binding.dart';
 import 'package:dimipay/app/pages/issue_coupon/page.dart';
 import 'package:dimipay/app/pages/login/page.dart';
 import 'package:dimipay/app/pages/login/binding.dart';
-import 'package:dimipay/app/pages/manage_method/binding.dart';
 import 'package:dimipay/app/pages/manage_method/page.dart';
 import 'package:dimipay/app/pages/notification/page.dart';
 import 'package:dimipay/app/pages/onboarding/page.dart';
@@ -95,7 +94,7 @@ class AppPages {
       OnboardingPageMiddleware(priority: 0),
       AuthPageMiddleware(priority: 1),
     ]),
-    GetPage(name: Routes.TRANSACTION, page: () => TransactionPage(), binding: TransactionPageBinding(), middlewares: [
+    GetPage(name: Routes.TRANSACTION, page: () => const TransactionPage(), binding: TransactionPageBinding(), middlewares: [
       OnboardingPageMiddleware(priority: 0),
       AuthPageMiddleware(priority: 1),
     ]),
