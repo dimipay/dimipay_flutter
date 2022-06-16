@@ -30,4 +30,6 @@ abstract class ApiInterface {
   Future<void> createPaymentPin(String paymentPin);
 
   Future<void> changePaymentPin(String originalPin, String paymentPin);
+
+  Future<void> createPrepaidCard();
 }
