@@ -2,6 +2,7 @@ import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/data/modules/user/controller.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
+import 'package:dimipay/app/data/services/config/service.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -135,14 +136,22 @@ class AccountInfoPage extends StatelessWidget {
         actions: [
           PopupMenuButton<String>(
             onSelected: (value) {
-              if (value == 'logout') {
-                Get.find<AuthService>().logout();
+              switch (value) {
+                case 'logout':
+                  Get.find<AuthService>().logout();
+                  break;
+                case 'delete_configs':
+                  Get.find<AppConfigService>().clearConfigs();
               }
             },
             itemBuilder: (_) => [
               const PopupMenuItem(
                 value: 'logout',
                 child: Text('로그아웃'),
+              ),
+              const PopupMenuItem(
+                value: 'delete_configs',
+                child: Text('모든 설정 초기화'),
               ),
             ],
           ),

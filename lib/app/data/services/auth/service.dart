@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class AuthService extends GetxService {
   final AuthRepository repository;
-  final FlutterSecureStorage _storage = Get.find<FlutterSecureStorage>();
+  final FlutterSecureStorage _storage = const FlutterSecureStorage();
   final Rx<String?> _token = Rx(null);
 
   AuthService(this.repository);
@@ -31,10 +31,10 @@ class AuthService extends GetxService {
   Future _removeToken() async {
     await _storage.delete(key: 'accessToken');
     _token.value = null;
-    Get.offAllNamed(Routes.LOGIN);
   }
 
   Future<void> logout() async {
     await _removeToken();
+    Get.offAllNamed(Routes.LOGIN);
   }
 }
