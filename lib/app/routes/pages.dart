@@ -1,3 +1,5 @@
+import 'package:dimipay/app/core/middleware/auth.dart';
+import 'package:dimipay/app/core/middleware/onboarding.dart';
 import 'package:dimipay/app/pages/account_info/page.dart';
 import 'package:dimipay/app/pages/account_info/binding.dart';
 import 'package:dimipay/app/pages/biometric_auth/page.dart';
@@ -37,28 +39,93 @@ import 'package:get/get.dart';
 class AppPages {
   static final pages = [
     GetPage(name: Routes.TEST, page: () => const TestPage()),
-    GetPage(name: Routes.HOME, page: () => HomePage(), binding: HomePageBinding()),
-    GetPage(name: Routes.ACCOUNTINFO, page: () => AccountInfoPage(), binding: AccountInfoPageBinding()),
-    GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage()),
-    GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage(), binding: RegisterCardPageBinding()),
-    GetPage(name: Routes.SELECTCHARGINGMETHOD, page: () => const SelectChargingMethodPage()),
-    GetPage(name: Routes.EDITCARDNAME, page: () => EditCardNamePage()),
-    GetPage(name: Routes.CARDFIN, page: () => const CardFinPage()),
-    GetPage(name: Routes.CHARGINGFIN, page: () => const ChargingFinPage()),
-    GetPage(name: Routes.CHARGINGAMOUNT, page: () => ChargingAmountPage()),
-    GetPage(name: Routes.COUPON, page: () => CouponPage(), binding: CouponPageBinding()),
-    GetPage(name: Routes.TRANSACTIONHISTORY, page: () => TransactionHistoryPage(), binding: TransactionBinding()),
+    GetPage(name: Routes.HOME, page: () => HomePage(), binding: HomePageBinding(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.ACCOUNTINFO, page: () => AccountInfoPage(), binding: AccountInfoPageBinding(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage(), binding: RegisterCardPageBinding(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.SELECTCHARGINGMETHOD, page: () => const SelectChargingMethodPage(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.EDITCARDNAME, page: () => EditCardNamePage(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.CARDFIN, page: () => const CardFinPage(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.CHARGINGFIN, page: () => const ChargingFinPage(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.CHARGINGAMOUNT, page: () => ChargingAmountPage(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.COUPON, page: () => CouponPage(), binding: CouponPageBinding(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.TRANSACTIONHISTORY, page: () => TransactionHistoryPage(), binding: TransactionBinding(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
-    GetPage(name: Routes.CHANGEPASSWORD, page: () => const ChangePasswordPage(), binding: ChangePasswordPageBinding()),
-    GetPage(name: Routes.UNTITLED, page: () => const Untitled()),
-    GetPage(name: Routes.TRANSACTION, page: () => TransactionPage(), binding: TransactionPageBinding()),
-    GetPage(name: Routes.EVENT, page: () => EventPage(), binding: EventPageBinding()),
-    GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage()),
-    GetPage(name: Routes.ISSUECOUPON, page: () => const IssueCouponPage()),
-    GetPage(name: Routes.PINAUTH, page: () => const PinAuthPage()),
-    GetPage(name: Routes.BIOMETRICAUTH, page: () => const BiometricAuthPage()),
-    GetPage(name: Routes.PRINTERSETTING, page: () => const PrinterSettingPage()),
-    GetPage(name: Routes.TRANSACTIONFIN, page: () => TransactionFinPage()),
-    GetPage(name: Routes.ONBOARDING, page: () => const OnboardingPage()),
+    GetPage(name: Routes.CHANGEPASSWORD, page: () => const ChangePasswordPage(), binding: ChangePasswordPageBinding(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.UNTITLED, page: () => const Untitled(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.TRANSACTION, page: () => TransactionPage(), binding: TransactionPageBinding(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.EVENT, page: () => EventPage(), binding: EventPageBinding(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.ISSUECOUPON, page: () => const IssueCouponPage(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.PINAUTH, page: () => const PinAuthPage(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.BIOMETRICAUTH, page: () => const BiometricAuthPage(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.PRINTERSETTING, page: () => const PrinterSettingPage(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.TRANSACTIONFIN, page: () => TransactionFinPage(), middlewares: [
+      OnboardingMiddleware(priority: 0),
+      AuthMiddleware(priority: 1),
+    ]),
+    GetPage(name: Routes.ONBOARDING, page: () => OnboardingPage(), middlewares: [
+      AuthMiddleware(priority: 0),
+    ]),
   ];
 }
