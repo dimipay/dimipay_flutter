@@ -1,6 +1,5 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/utils/initializer.dart';
-import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/routes/pages.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -9,14 +8,7 @@ import 'package:get/get.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 String getInintialRoute({bool debug = false}) {
-  if (debug) {
-    return Routes.TEST;
-  }
-  if (Get.find<AuthService>().isAuthenticated) {
-    return Routes.HOME;
-  } else {
-    return Routes.LOGIN;
-  }
+  return debug ? Routes.TEST : Routes.HOME;
 }
 
 Future main() async {

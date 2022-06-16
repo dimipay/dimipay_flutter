@@ -2,12 +2,12 @@ import 'package:dimipay/app/pages/login/controller.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class LoginPage extends GetView<LoginPageController> {
   final FocusNode textFieldFocusNode = FocusNode();
   LoginPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

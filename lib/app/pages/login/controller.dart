@@ -9,6 +9,8 @@ class LoginPageController extends GetxController with StateMixin {
   final Rx<String> username = Rx('');
   final Rx<String> password = Rx('');
   final formKey = GlobalKey<FormState>();
+  final String? redirect = Get.arguments?['redirect'];
+  AuthService authService = Get.find<AuthService>();
 
   @override
   void onInit() {
@@ -50,7 +52,8 @@ class LoginPageController extends GetxController with StateMixin {
         await authService.login(username.value, password.value);
         change(null, status: RxStatus.success());
         if (authService.isAuthenticated) {
-          Get.offNamed(Routes.HOME);
+          final String nextRoute = redirect ?? Routes.HOME;
+          Get.offNamed(nextRoute);
         }
       }
     } on DioError catch (e) {
