@@ -3,10 +3,10 @@ import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OnboardingMiddleware extends GetMiddleware {
+class OnboardingPageMiddleware extends GetMiddleware {
   final AppConfigService config = Get.find<AppConfigService>();
 
-  OnboardingMiddleware({super.priority});
+  OnboardingPageMiddleware({super.priority});
 
   @override
   RouteSettings? redirect(String? route) {

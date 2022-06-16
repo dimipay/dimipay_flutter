@@ -3,10 +3,10 @@ import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AuthMiddleware extends GetMiddleware {
+class AuthPageMiddleware extends GetMiddleware {
   final AuthService authService = Get.find<AuthService>();
 
-  AuthMiddleware({super.priority});
+  AuthPageMiddleware({super.priority});
 
   @override
   RouteSettings? redirect(String? route) {
