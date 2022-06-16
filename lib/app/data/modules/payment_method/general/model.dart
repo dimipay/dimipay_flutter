@@ -7,13 +7,13 @@ part 'model.g.dart';
 @JsonSerializable()
 class GeneralCard extends PaymentMethod {
   GeneralCard({
-    required String systemId,
-    required DateTime createdAt,
-    required DateTime updatedAt,
-    required String color,
-    required String name,
-    required int ownerId,
-  }) : super(systemId: systemId, createdAt: createdAt, updatedAt: updatedAt, color: color, name: name, ownerId: ownerId);
+    required super.systemId,
+    required super.createdAt,
+    required super.updatedAt,
+    required super.color,
+    required super.name,
+    required super.ownerId,
+  });
 
   factory GeneralCard.fromJson(Map<String, dynamic> json) => _$GeneralCardFromJson(json);
   // ignore: annotate_overrides

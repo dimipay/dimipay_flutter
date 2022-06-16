@@ -10,8 +10,8 @@ GeneralCard _$GeneralCardFromJson(Map<String, dynamic> json) => GeneralCard(
       systemId: json['systemId'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      color: json['color'] as String,
-      name: json['name'] as String,
+      color: json['color'] as String?,
+      name: json['name'] as String?,
       ownerId: json['ownerId'] as int,
     );
 

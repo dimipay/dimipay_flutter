@@ -8,8 +8,8 @@ class PaymentMethod {
   String systemId;
   DateTime createdAt;
   DateTime updatedAt;
-  String color;
-  String name;
+  String? color;
+  String? name;
   int ownerId;
   PaymentMethod({
     required this.systemId,
