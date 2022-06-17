@@ -10,11 +10,11 @@ class PrepaidCardController extends GetxController with StateMixin<List<PrepaidC
 
   @override
   void onInit() {
-    getGeneralCards();
+    getPrepaidCards();
     super.onInit();
   }
 
-  Future getGeneralCards() async {
+  Future getPrepaidCards() async {
     change(null, status: RxStatus.loading());
     cards.value = await repository.get();
     change(cards.value, status: RxStatus.success());

@@ -6,6 +6,8 @@ part 'model.g.dart';
 
 @JsonSerializable()
 class PrepaidCard extends PaymentMethod {
+  int balance;
+
   PrepaidCard({
     required super.systemId,
     required super.createdAt,
@@ -13,6 +15,7 @@ class PrepaidCard extends PaymentMethod {
     required super.color,
     required super.name,
     required super.ownerId,
+    required this.balance,
   });
 
   factory PrepaidCard.fromJson(Map<String, dynamic> json) => _$PrepaidCardFromJson(json);
