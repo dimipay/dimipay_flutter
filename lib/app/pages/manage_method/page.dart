@@ -4,6 +4,7 @@ import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/general/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/general/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/prepaid/controller.dart';
+import 'package:dimipay/app/data/modules/payment_method/prepaid/model.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/divided_column.dart';
@@ -102,6 +103,53 @@ class ManageMethodPage extends StatelessWidget {
     );
   }
 
+  Widget _prepaidCard(PrepaidCard card) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 36),
+        Text(card.name ?? "", style: DPTextTheme.SECTION_HEADER),
+        const SizedBox(height: 24),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(card.balance.toString(), style: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontWeight: FontWeight.bold, fontSize: 20, color: DPColors.MAIN_THEME)),
+            DPSmallButton(
+              child: Row(
+                children: [
+                  SvgPicture.asset('asset/images/charge.svg'),
+                  const SizedBox(width: 6),
+                  const Text(
+                    '충전',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Get.toNamed(Routes.SELECTCHARGINGMETHOD);
+              },
+            ),
+          ],
+        ),
+        const SizedBox(height: 24),
+        const Text(
+          '충전해둔 페이머니는 매점에서 현금처럼 사용할 수 있어요',
+          style: DPTextTheme.DESCRIPTION,
+        ),
+        const SizedBox(height: 36),
+      ],
+    );
+  }
+
+  Widget _prepaidCardArea() {
+    return Obx(
+      () => DividedColumn(
+        divider: const Divider(height: 1, thickness: 1, color: DPColors.DARK6),
+        children: prepaidCardController.cards.value.map((e) => _prepaidCard(e)).toList(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,6 +160,7 @@ class ManageMethodPage extends StatelessWidget {
         onRefresh: () async {
           HapticHelper.feedback(HapticPatterns.once);
           await generalCardController.getGeneralCards();
+          await prepaidCardController.getPrepaidCards();
           HapticHelper.feedback(HapticPatterns.once);
         },
         color: DPColors.MAIN_THEME,
@@ -125,35 +174,7 @@ class ManageMethodPage extends StatelessWidget {
               children: [
                 _generalCardArea(),
                 const Divider(height: 1, thickness: 1, color: DPColors.DARK6),
-                const SizedBox(height: 36),
-                const Text('페이머니', style: DPTextTheme.SECTION_HEADER),
-                const SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('2,300원', style: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontWeight: FontWeight.bold, fontSize: 20, color: DPColors.MAIN_THEME)),
-                    DPSmallButton(
-                      child: Row(
-                        children: [
-                          SvgPicture.asset('asset/images/charge.svg'),
-                          const SizedBox(width: 6),
-                          const Text(
-                            '충전',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      onTap: () {
-                        Get.toNamed(Routes.SELECTCHARGINGMETHOD);
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                const Text(
-                  '충전해둔 페이머니는 매점에서 현금처럼 사용할 수 있어요',
-                  style: DPTextTheme.DESCRIPTION,
-                ),
+                _prepaidCardArea(),
               ],
             ),
           ),

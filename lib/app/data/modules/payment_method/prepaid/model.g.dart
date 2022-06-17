@@ -13,6 +13,7 @@ PrepaidCard _$PrepaidCardFromJson(Map<String, dynamic> json) => PrepaidCard(
       color: json['color'] as String?,
       name: json['name'] as String?,
       ownerId: json['ownerId'] as int,
+      balance: json['balance'] as int,
     );
 
 Map<String, dynamic> _$PrepaidCardToJson(PrepaidCard instance) =>
@@ -23,4 +24,5 @@ Map<String, dynamic> _$PrepaidCardToJson(PrepaidCard instance) =>
       'color': instance.color,
       'name': instance.name,
       'ownerId': instance.ownerId,
+      'balance': instance.balance,
     };
