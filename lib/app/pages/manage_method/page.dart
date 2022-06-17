@@ -113,7 +113,7 @@ class ManageMethodPage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(card.balance.toString(), style: TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontWeight: FontWeight.bold, fontSize: 20, color: DPColors.MAIN_THEME)),
+            Text(card.balance.toString(), style: const TextStyle(fontFamily: 'NEXON Lv1 Gothic', fontWeight: FontWeight.bold, fontSize: 20, color: DPColors.MAIN_THEME)),
             DPSmallButton(
               child: Row(
                 children: [
