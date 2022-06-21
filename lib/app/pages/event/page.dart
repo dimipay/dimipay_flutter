@@ -29,15 +29,6 @@ class EventPage extends StatelessWidget {
       (events) => _buildEvents(events!),
       onLoading: const CircularProgressIndicator(color: DPColors.MAIN_THEME),
     );
-    // return Column(
-    //   children: [
-    //     _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
-    //     const SizedBox(height: 24),
-    //     _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
-    //     const SizedBox(height: 24),
-    //     _event('세기말 아이스크림 할인', '아이스크림 전 품목 100원 할인', DateTime(2022, 4, 4)),
-    //   ],
-    // );
   }
 
   @override
