@@ -2,7 +2,6 @@ import 'package:dimipay/app/data/modules/coupon/model.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/general/model.dart';
-import 'package:dimipay/app/data/modules/payment_method/prepaid/model.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
 
@@ -16,8 +15,6 @@ abstract class ApiInterface {
   Future<List<Notice>> getNotice();
 
   Future<List<Transaction>> getTransaction();
-
-  Future<List<PrepaidCard>> getPrepaidCard();
 
   Future<List<GeneralCard>> getGeneralCard();
 

@@ -12,7 +12,7 @@ class GeneralCard extends PaymentMethod {
     required super.updatedAt,
     required super.color,
     required super.name,
-    required super.ownerId,
+    required super.ownerSid,
   });
 
   factory GeneralCard.fromJson(Map<String, dynamic> json) => _$GeneralCardFromJson(json);

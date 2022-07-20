@@ -63,8 +63,7 @@ class LoginPageController extends GetxController with StateMixin {
         formKey.currentState!.save();
         change(null, status: RxStatus.loading());
         await authService.login(username.value, password.value);
-        bool prepaidResult = await createPrepaidCard();
-        if (prepaidResult && authService.isAuthenticated) {
+        if (authService.isAuthenticated) {
           final String nextRoute = redirect ?? Routes.HOME;
           Get.offNamed(nextRoute);
         }
