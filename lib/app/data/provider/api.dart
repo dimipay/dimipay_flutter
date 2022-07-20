@@ -33,7 +33,7 @@ class LogInterceptor extends Interceptor {
 
 class ApiProvider implements ApiInterface {
   final Dio dio = Dio();
-  final baseUrl = 'http://dimipay-api-dev.rycont.ninja';
+  final baseUrl = 'https://dimipay-back-v2-dev-production.up.railway.app';
 
   ApiProvider() {
     dio.options.baseUrl = baseUrl;
@@ -121,7 +121,7 @@ class ApiProvider implements ApiInterface {
     Map body = {
       'username': username,
       'password': password,
-      "pin": "1234",
+      "pin": "135790",
       "deviceUid": "9cf20349-c0af-42d3-820e-f17862c2d923",
       "bioKey": "580a4559-78c7-4d00-a5b7-b501b2c0e112",
     };
