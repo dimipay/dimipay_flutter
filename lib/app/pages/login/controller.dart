@@ -70,9 +70,7 @@ class LoginPageController extends GetxController with StateMixin {
         }
       }
     } on DioError catch (e) {
-      if (e.response != null && e.response!.statusCode == 401) {
-        DPErrorSnackBar().open(e.response!.data['message']);
-      }
+      DPErrorSnackBar().open(e.response!.data['message']);
     } finally {
       change(null, status: RxStatus.success());
     }
