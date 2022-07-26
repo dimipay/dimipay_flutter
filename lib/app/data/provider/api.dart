@@ -132,6 +132,16 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
+  Future<String> googleLogin(String idToken) async {
+    String url = '/auth/login';
+    Map body = {
+      'idToken': idToken,
+    };
+    Response response = await dio.post(url, data: body);
+    return response.data['accessToken'];
+  }
+
+  @override
   Future<void> postPaymentToken(String token) async {
     String url = '/payment/token';
     Map<String, String> body = {

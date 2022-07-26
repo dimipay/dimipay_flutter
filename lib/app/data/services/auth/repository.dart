@@ -8,5 +8,8 @@ class AuthRepository {
   AuthRepository(this.api, this.googleSignInAPI);
 
   Future<String> login(username, password) => api.login(username, password);
-  Future<String> googleLogin() => googleSignInAPI.getIdToken();
+  Future<String> googleLogin() async {
+    final idToken = await googleSignInAPI.getIdToken();
+    return api.googleLogin(idToken);
+  }
 }
