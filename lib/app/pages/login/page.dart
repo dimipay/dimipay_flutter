@@ -57,6 +57,12 @@ class LoginPage extends GetView<LoginPageController> {
               ),
             ),
             const SizedBox(height: 36),
+            DPLargeTextButton(
+              text: "구글 계정으로 로그인",
+              onTap: () {
+                controller.googleLogin();
+              },
+            ),
             controller.obx(
               (_) => Obx(
                 () => DPKeyboardReactiveButton(
