@@ -27,6 +27,11 @@ class AuthService extends GetxService {
     await _setToken(token);
   }
 
+  Future<void> googleLogin() async {
+    String token = await repository.googleLogin();
+    await _setToken(token);
+  }
+
   Future _removeToken() async {
     await _storage.delete(key: 'accessToken');
     _token.value = null;
