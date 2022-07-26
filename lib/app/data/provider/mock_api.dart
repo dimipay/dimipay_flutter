@@ -75,6 +75,12 @@ class MockApiProvider implements ApiInterface {
   }
 
   @override
+  Future<String> googleLogin(String idToken) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return 'test token';
+  }
+
+  @override
   Future<void> postPaymentToken(String token) async {
     await Future.delayed(const Duration(seconds: 1));
   }

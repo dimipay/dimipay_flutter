@@ -9,6 +9,8 @@ import 'package:dimipay/app/data/modules/user/model.dart';
 abstract class ApiInterface {
   Future<String> login(String username, String password);
 
+  Future<String> googleLogin(String idToken);
+
   Future<User> getUserInfo();
 
   Future<List<Coupon>> getCoupons();
