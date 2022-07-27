@@ -68,6 +68,7 @@ class MockApiProvider implements ApiInterface {
     return User(systemId: 'afsfejio', createdAt: DateTime(2022, 1, 1), updatedAt: DateTime(2022, 1, 1), isDisabled: false, accountName: 'uglyonlytoday', name: '장인화');
   }
 
+  @Deprecated('이 api는 더 이상 사용되지 않음')
   @override
   Future<String> login(String username, String password) async {
     await Future.delayed(const Duration(seconds: 1));
@@ -75,7 +76,7 @@ class MockApiProvider implements ApiInterface {
   }
 
   @override
-  Future<String> googleLogin(String idToken) async {
+  Future<String> loginWithGoogle(String idToken) async {
     await Future.delayed(const Duration(seconds: 1));
     return 'test token';
   }

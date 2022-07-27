@@ -1,40 +1,40 @@
+import 'package:dimipay/app/core/utils/google.dart';
 import 'package:dimipay/app/data/services/auth/repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 class AuthService extends GetxService {
   final AuthRepository repository;
+  final GoogleSignInHelper googleSignInHelper = GoogleSignInHelper();
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
-  final Rx<String?> _token = Rx(null);
+  final Rx<String?> _accessToken = Rx(null);
 
   AuthService(this.repository);
 
-  bool get isAuthenticated => _token.value != null;
-  String? get token => _token.value;
+  bool get isAuthenticated => _accessToken.value != null;
+  String? get token => _accessToken.value;
 
   Future<AuthService> init() async {
-    _token.value = await _storage.read(key: 'accessToken');
+    _accessToken.value = await _storage.read(key: 'accessToken');
     return this;
   }
 
   Future _setToken(String token) async {
     await _storage.write(key: 'accessToken', value: token);
-    _token.value = token;
+    _accessToken.value = token;
   }
 
-  Future<void> login(String username, String password) async {
-    String token = await repository.login(username, password);
-    await _setToken(token);
-  }
-
-  Future<void> googleLogin() async {
-    String token = await repository.googleLogin();
-    await _setToken(token);
+  ///returns google idToken
+  Future<String> loginWithGoogle({bool selectAccount = true}) async {
+    String idToken = await googleSignInHelper.authenticate();
+    String accessToken = await repository.loginWithGoogle(idToken);
+    await _setToken(accessToken);
+    return idToken;
   }
 
   Future _removeToken() async {
     await _storage.delete(key: 'accessToken');
-    _token.value = null;
+    _accessToken.value = null;
   }
 
   Future<void> logout() async {
