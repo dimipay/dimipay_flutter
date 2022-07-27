@@ -115,6 +115,7 @@ class ApiProvider implements ApiInterface {
     return User.fromJson(response.data['me']);
   }
 
+  @Deprecated('이 api는 더 이상 사용되지 않음')
   @override
   Future<String> login(String username, String password) async {
     String url = '/auth/login';
@@ -128,6 +129,16 @@ class ApiProvider implements ApiInterface {
 
     Response response = await dio.post(url, data: body);
 
+    return response.data['accessToken'];
+  }
+
+  @override
+  Future<String> loginWithGoogle(String idToken) async {
+    String url = '/auth/login';
+    Map body = {
+      'idToken': idToken,
+    };
+    Response response = await dio.post(url, data: body);
     return response.data['accessToken'];
   }
 

@@ -5,5 +5,6 @@ class AuthRepository {
 
   AuthRepository(this.api);
 
-  Future<String> login(username, password) => api.login(username, password);
+  ///returnes accessToken
+  Future<String> loginWithGoogle(idToken) async => api.loginWithGoogle(idToken);
 }
