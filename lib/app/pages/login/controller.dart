@@ -57,31 +57,12 @@ class LoginPageController extends GetxController with StateMixin {
     }
   }
 
-  Future login() async {
-    try {
-      if (formKey.currentState!.validate()) {
-        formKey.currentState!.save();
-        change(null, status: RxStatus.loading());
-        await authService.login(username.value, password.value);
-        bool prepaidResult = await createPrepaidCard();
-        if (prepaidResult && authService.isAuthenticated) {
-          final String nextRoute = redirect ?? Routes.HOME;
-          Get.offNamed(nextRoute);
-        }
-      }
-    } on DioError catch (e) {
-      DPErrorSnackBar().open(e.response!.data['message']);
-    } finally {
-      change(null, status: RxStatus.success());
-    }
-  }
-
-  Future googleLogin() async {
+  Future loginWithGoogle() async {
     try {
       change(null, status: RxStatus.loading());
-      await authService.googleLogin();
-      bool prepaidResult = await createPrepaidCard();
-      if (prepaidResult && authService.isAuthenticated) {
+      String idToken = await authService.loginWithGoogle();
+      print(idToken);
+      if (authService.isAuthenticated) {
         final String nextRoute = redirect ?? Routes.HOME;
         Get.offNamed(nextRoute);
       }

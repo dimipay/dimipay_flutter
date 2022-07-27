@@ -1,15 +1,10 @@
 import 'package:dimipay/app/data/provider/api_interface.dart';
-import 'package:dimipay/app/data/provider/google_signin_api.dart';
 
 class AuthRepository {
   final ApiInterface api;
-  final GoogleSignInAPI googleSignInAPI;
 
-  AuthRepository(this.api, this.googleSignInAPI);
+  AuthRepository(this.api);
 
-  Future<String> login(username, password) => api.login(username, password);
-  Future<String> googleLogin() async {
-    final idToken = await googleSignInAPI.getIdToken();
-    return api.googleLogin(idToken);
-  }
+  ///returnes accessToken
+  Future<String> loginWithGoogle(idToken) async => api.loginWithGoogle(idToken);
 }
