@@ -75,6 +75,7 @@ class DPTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   final TextInputAction? textInputAction;
   final void Function()? onEditingComplete;
+  final Iterable<String>? autofillHints;
 
   const DPTextFormField({
     Key? key,
@@ -87,6 +88,7 @@ class DPTextFormField extends StatelessWidget {
     this.onChanged,
     this.textInputAction,
     this.onEditingComplete,
+    this.autofillHints,
     this.autofocus = false,
     this.isPassword = false,
   }) : super(key: key);
@@ -94,6 +96,7 @@ class DPTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autofillHints: autofillHints,
       textInputAction: textInputAction,
       obscureText: isPassword,
       enableSuggestions: !isPassword,

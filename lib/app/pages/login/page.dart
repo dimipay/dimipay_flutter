@@ -21,37 +21,41 @@ class LoginPage extends GetView<LoginPageController> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Form(
-                  key: controller.formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        '디미고라이프, 디미고인에서 사용하는 계정으로 로그인 해주세요',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(height: 16),
-                      DPTextFormField(
-                        label: "ID",
-                        validator: controller.usernameValidator,
-                        onChanged: (username) {
-                          controller.username.value = username;
-                        },
-                        textInputAction: TextInputAction.next,
-                      ),
-                      const SizedBox(height: 16),
-                      DPTextFormField(
-                        label: "비밀번호",
-                        isPassword: true,
-                        validator: controller.passwordValidator,
-                        onEditingComplete: controller.login,
-                        textInputAction: TextInputAction.done,
-                        onChanged: (password) {
-                          controller.password.value = password;
-                        },
-                      ),
-                    ],
+                child: AutofillGroup(
+                  child: Form(
+                    key: controller.formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          '디미고라이프, 디미고인에서 사용하는 계정으로 로그인 해주세요',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 16),
+                        DPTextFormField(
+                          label: "id",
+                          autofillHints: const [AutofillHints.name],
+                          validator: controller.usernameValidator,
+                          onChanged: (username) {
+                            controller.username.value = username;
+                          },
+                          textInputAction: TextInputAction.next,
+                        ),
+                        const SizedBox(height: 16),
+                        DPTextFormField(
+                          label: "비밀번호",
+                          autofillHints: const [AutofillHints.password],
+                          isPassword: true,
+                          validator: controller.passwordValidator,
+                          onEditingComplete: controller.login,
+                          textInputAction: TextInputAction.done,
+                          onChanged: (password) {
+                            controller.password.value = password;
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
