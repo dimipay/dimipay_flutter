@@ -47,3 +47,4 @@ app.*.map.json
 
 # Google Sign In related
 GoogleService-Info.plist
+google-services.json
