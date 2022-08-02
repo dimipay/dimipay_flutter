@@ -4,13 +4,15 @@ class DPPaymentCard extends StatelessWidget {
   final Color color;
   final String cardName;
   final String cardNumber;
+  final bool? isHorizontal;
   final double? width;
-  const DPPaymentCard({Key? key, required this.color, required this.cardName, required this.cardNumber, this.width}) : super(key: key);
+  const DPPaymentCard({Key? key, required this.color, required this.cardName, required this.cardNumber, this.isHorizontal=true, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: width,
+      height: isHorizontal! ? 81 : 243,
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -18,6 +20,7 @@ class DPPaymentCard extends StatelessWidget {
         boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.12), offset: Offset(0, 4), blurRadius: 72)],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(cardNumber, style: const TextStyle(fontSize: 16, color: Color.fromRGBO(255, 255, 255, 0.5))),
