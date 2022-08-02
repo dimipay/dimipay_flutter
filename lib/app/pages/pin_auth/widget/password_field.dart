@@ -1,10 +1,15 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:flutter/material.dart';
 
-class PasswordField extends StatelessWidget {
-  const PasswordField({Key? key}) : super(key: key);
+enum PasswordFieldType {
+  alreadyWrite,
+  nowWrite,
+  empty
+}
 
-  //final controller;
+class PasswordField extends StatelessWidget {
+  final PasswordFieldType fieldType;
+  const PasswordField({required this.fieldType});
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +17,16 @@ class PasswordField extends StatelessWidget {
       width: 32,
       height: 40,
       decoration: BoxDecoration(
-        border: Border.all(color: DPColors.MAIN_THEME, width: 2),
+        border: Border.all(color: fieldType == PasswordFieldType.nowWrite ? DPColors.MAIN_THEME : Colors.transparent, width: 2),
         borderRadius: BorderRadius.circular(3),
-        color: DPColors.DARK6,
+        color: fieldType == PasswordFieldType.nowWrite ? Colors.white : DPColors.DARK6,
       ),
-      child: const Center(
-        child: Text(" "),
+      child: Center(
+        child: (
+            fieldType == PasswordFieldType.alreadyWrite ?
+                Container(width: 8, decoration: BoxDecoration(shape: BoxShape.circle, color: DPColors.DARK2)) :
+                const SizedBox()
+        ),
       ),
     );
   }
