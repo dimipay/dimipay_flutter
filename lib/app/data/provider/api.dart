@@ -133,13 +133,26 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<String> loginWithGoogle(String idToken) async {
+  Future<Map> loginWithGoogle(String idToken) async {
     String url = '/auth/login';
     Map body = {
       'idToken': idToken,
     };
     Response response = await dio.post(url, data: body);
-    return response.data['accessToken'];
+    return response.data;
+  }
+
+  @override
+  Future<String> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
+    String url = '/auth/onBoarding';
+    Map body = {
+      'paymentPin': paymentPin,
+      'deviceUid': deviceUid,
+      'bioKey': bioKey,
+    };
+    Response response = await dio.post(url, data: body);
+
+    return response.data['tokens']['accessToken'];
   }
 
   @override
