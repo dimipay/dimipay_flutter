@@ -18,7 +18,7 @@ class OnboardingPageController extends GetxController with StateMixin {
       change(null, status: RxStatus.loading());
       bool isFirstVisit = await authService.loginWithGoogle();
 
-      if (authService.isAuthenticated) {
+      if (authService.isGoogleLoginSuccess) {
         AppConfigService config = Get.find<AppConfigService>();
         config.needOnboarding = false;
         final String nextRoute = redirect ?? Routes.PINAUTH;

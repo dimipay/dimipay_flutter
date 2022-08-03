@@ -43,6 +43,8 @@ class PinAuthPageController extends GetxController with StateMixin {
       change(null, status: RxStatus.loading());
       await authService.onBoardingAuth(password.value);
 
+      authService.removeTempAccessToken();
+
       final String nextRoute = redirect ?? Routes.HOME;
       Get.offNamed(nextRoute);
     } on DioError catch (e) {
