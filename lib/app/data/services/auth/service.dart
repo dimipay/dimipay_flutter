@@ -10,11 +10,14 @@ class AuthService extends GetxService {
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
   final Uuid _uuidObj = const Uuid();
   final Rx<String?> _accessToken = Rx(null);
+  final Rx<String?> _tempAccessToken = Rx(null); // /auth/login API에서 반환되는 AccessToken
 
   AuthService(this.repository);
 
   bool get isAuthenticated => _accessToken.value != null;
+  bool get isGoogleLoginSuccess => _tempAccessToken.value != null;
   String? get token => _accessToken.value;
+  String? get tempToken => _tempAccessToken.value;
 
   Future<AuthService> init() async {
     _accessToken.value = await _storage.read(key: 'accessToken');
@@ -35,12 +38,14 @@ class AuthService extends GetxService {
     //TODO 생체인증 구현시에 biometric_storage 라이브러리 설정도 같이 진행되어야 합니다
   }
 
+  removeTempAccessToken() => _tempAccessToken.value = null;
+
   ///처음으로 디미페이에 로그인 했는지를 bool 형태로 리턴합니다.
   Future<bool> loginWithGoogle({bool selectAccount = true}) async {
     String idToken = await googleSignInHelper.authenticate();
     Map loginResult = await repository.loginWithGoogle(idToken);
 
-    await _setToken(loginResult['accessToken']);
+    _tempAccessToken.value = loginResult['accessToken'];
 
     return loginResult['isFirstVisit'];
   }
@@ -61,6 +66,7 @@ class AuthService extends GetxService {
   Future _removeToken() async {
     await _storage.delete(key: 'accessToken');
     _accessToken.value = null;
+    _tempAccessToken.value = null;
   }
 
   Future<void> logout() async {
