@@ -76,9 +76,13 @@ class MockApiProvider implements ApiInterface {
   }
 
   @override
-  Future<String> loginWithGoogle(String idToken) async {
+  Future<Map> loginWithGoogle(String idToken) async {
     await Future.delayed(const Duration(seconds: 1));
-    return 'test token';
+    return {
+      'isFirstVisit': true,
+      'accessToken': 'testToken',
+      'refreshToken': 'testToken'
+    };
   }
 
   @override
@@ -101,5 +105,11 @@ class MockApiProvider implements ApiInterface {
   @override
   Future<void> createPrepaidCard() async {
     await Future.delayed(const Duration(seconds: 1));
+  }
+
+  @override
+  Future<String> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return 'testToken';
   }
 }

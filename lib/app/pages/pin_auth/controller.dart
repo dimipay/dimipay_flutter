@@ -1,9 +1,17 @@
 import 'package:dimipay/app/pages/pin_auth/widget/password_field.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../data/services/auth/service.dart';
+import '../../routes/routes.dart';
+import '../../widgets/snackbar.dart';
+
 
 class PinAuthPageController extends GetxController with StateMixin {
+  final String? redirect = Get.arguments?['redirect'];
+  AuthService authService = Get.find<AuthService>();
+
   RxString password = "".obs;
 
   clickNumPad(String value) {
@@ -12,9 +20,8 @@ class PinAuthPageController extends GetxController with StateMixin {
     } else {
       password.value = password.value + value;
 
-
+      onBoardingAuth();
     }
-    print(password);
   }
 
   clickBackspace() => password.value = password.value.substring(0, password.value.length-1 == -1 ? 0 : password.value.length-1);
@@ -28,6 +35,20 @@ class PinAuthPageController extends GetxController with StateMixin {
       return PasswordFieldType.nowWrite;
     } else {
       return PasswordFieldType.empty;
+    }
+  }
+
+  onBoardingAuth() async {
+    try {
+      change(null, status: RxStatus.loading());
+      await authService.onBoardingAuth(password.value);
+
+      final String nextRoute = redirect ?? Routes.HOME;
+      Get.offNamed(nextRoute);
+    } on DioError catch (e) {
+      DPErrorSnackBar().open(e.response!.data['message']);
+    } finally {
+      change(null, status: RxStatus.success());
     }
   }
 }

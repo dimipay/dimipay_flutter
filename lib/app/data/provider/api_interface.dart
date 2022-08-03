@@ -10,7 +10,9 @@ abstract class ApiInterface {
   @Deprecated('이 api는 더 이상 사용되지 않음')
   Future<String> login(String username, String password);
 
-  Future<String> loginWithGoogle(String idToken);
+  Future<Map> loginWithGoogle(String idToken);
+
+  Future<String> onBoardingAuth(String paymentPin, String deviceUid, String bioKey);
 
   Future<User> getUserInfo();
 

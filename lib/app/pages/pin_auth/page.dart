@@ -5,6 +5,21 @@ import 'package:dimipay/app/pages/pin_auth/widget/password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+enum PinAuthPageType {
+  register,
+  auth
+}
+
+extension PinAuthPageTypeExtension on PinAuthPageType {
+  String get pageTitle {
+    switch (this) {
+      case PinAuthPageType.auth: return "결제 비밀번호 입력";
+      case PinAuthPageType.register: return "결제 비밀번호 설정";
+      default: return "";
+    }
+  }
+}
+
 class PinAuthPage extends GetView<PinAuthPageController> {
   const PinAuthPage({Key? key}) : super(key: key);
 
@@ -123,6 +138,8 @@ class PinAuthPage extends GetView<PinAuthPageController> {
     List<int> numList = [1,2,3,4,5,6,7,8,9,0];
     numList.shuffle();
 
+    PinAuthPageType pageType = Get.arguments['pageType'] ?? PinAuthPageType.register;
+
 
     return Scaffold(
       body: SafeArea(
@@ -135,8 +152,8 @@ class PinAuthPage extends GetView<PinAuthPageController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "결제 비밀번호 입력",
+                    Text(
+                      pageType.pageTitle,
                       style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 24, height: 1.2, color: DPColors.MAIN_THEME),
                     ),
                     const SizedBox(height: 24),
