@@ -152,12 +152,7 @@ class ApiProvider implements ApiInterface {
       'bioKey': bioKey,
     };
     Response response = await dio.post(url, data: body);
-
-    //TODO : https://w1633148381-ycb663149.slack.com/archives/C02R61548NS/p1659590853338079에 따른 임시방편임
-    if (response.data['tokens'] != null) {
-      return response.data['tokens']['accessToken'];
-    }
-    return response.data['accessToken'];
+    return response.data['tokens']['accessToken'];
   }
 
   @override
