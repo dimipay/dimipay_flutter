@@ -50,6 +50,17 @@
 			<string>_dartobservatory._tcp</string>
 		</array>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-</dict>
+		<true/>
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>com.googleusercontent.apps.651609975413-oc56lhd4n8n21nndg1v729esehmljs0u</string>
+				</array>
+			</dict>
+		</array>
+	</dict>
 </plist>

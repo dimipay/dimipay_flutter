@@ -13,16 +13,15 @@ abstract class Routes {
   static const CHARGINGAMOUNT = "/ChargingFin/ChargingAmount";
   static const COUPON = "/Coupon";
   static const TRANSACTIONHISTORY = '/TransactionHistory';
-  static const LOGIN = "/login";
   static const CHANGEPASSWORD = "/ChangePassword";
   static const UNTITLED = "/Untitled";
   static const TRANSACTION = "/Transaction";
   static const EVENT = "/Event";
   static const NOTIFICATION = "/Notification";
   static const ISSUECOUPON = '/IssueCoupon';
-  static const PINAUTH = "/PINAUTH";
+  static const PIN = "/Pin";
   static const BIOMETRICAUTH = "/BiometricAuth";
   static const PRINTERSETTING = "/PrinterSetting";
   static const TRANSACTIONFIN = "/TransactionFin";
-  static const ONBOARDING = "/Onboarding";
+  static const LOGIN = "/Login";
 }

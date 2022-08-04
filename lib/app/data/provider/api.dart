@@ -15,9 +15,11 @@ class JWTInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     AuthService authService = Get.find<AuthService>();
-    String? token = authService.token;
-    if (token != null) {
-      options.headers['Authorization'] = 'Bearer $token';
+
+    if (authService.isAuthenticated) {
+      options.headers['Authorization'] = 'Bearer ${authService.accessToken}';
+    } else if (authService.isGoogleLoginSuccess) {
+      options.headers['Authorization'] = 'Bearer ${authService.onboardingToken}';
     }
     handler.next(options);
   }
@@ -115,6 +117,7 @@ class ApiProvider implements ApiInterface {
     return User.fromJson(response.data['me']);
   }
 
+  @Deprecated('이 api는 더 이상 사용되지 않음')
   @override
   Future<String> login(String username, String password) async {
     String url = '/auth/login';
@@ -128,6 +131,33 @@ class ApiProvider implements ApiInterface {
 
     Response response = await dio.post(url, data: body);
 
+    return response.data['accessToken'];
+  }
+
+  @override
+  Future<Map> loginWithGoogle(String idToken) async {
+    String url = '/auth/login';
+    Map body = {
+      'idToken': idToken,
+    };
+    Response response = await dio.post(url, data: body);
+    return response.data;
+  }
+
+  @override
+  Future<String> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
+    String url = '/auth/onBoarding';
+    Map body = {
+      'paymentPin': paymentPin,
+      'deviceUid': deviceUid,
+      'bioKey': bioKey,
+    };
+    Response response = await dio.post(url, data: body);
+
+    //TODO : https://w1633148381-ycb663149.slack.com/archives/C02R61548NS/p1659590853338079에 따른 임시방편임
+    if (response.data['tokens'] != null) {
+      return response.data['tokens']['accessToken'];
+    }
     return response.data['accessToken'];
   }
 
