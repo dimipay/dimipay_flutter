@@ -21,7 +21,7 @@ class AccountInfoPage extends StatelessWidget {
 
   Widget _userId() {
     return userController.obx(
-      (state) => Text('@${state!.value!.accountName}', style: DPTextTheme.DESCRIPTION),
+      (state) => Text(state!.value!.accountName, style: DPTextTheme.DESCRIPTION),
       onLoading: const Text('loading...', style: DPTextTheme.DESCRIPTION),
     );
   }
@@ -139,7 +139,7 @@ class AccountInfoPage extends StatelessWidget {
               switch (value) {
                 case 'logout':
                   Get.find<AuthService>().logout();
-                  Get.offAllNamed(Routes.ONBOARDING);
+                  Get.offAllNamed(Routes.LOGIN);
                   break;
                 case 'delete_configs':
                   Get.find<AppConfigService>().clearConfigs();

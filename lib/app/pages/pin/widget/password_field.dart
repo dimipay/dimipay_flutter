@@ -1,11 +1,7 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:flutter/material.dart';
 
-enum PasswordFieldType {
-  alreadyWrite,
-  nowWrite,
-  empty
-}
+enum PasswordFieldType { alreadyWrite, nowWrite, empty }
 
 class PasswordField extends StatelessWidget {
   final PasswordFieldType fieldType;
@@ -22,11 +18,7 @@ class PasswordField extends StatelessWidget {
         color: fieldType == PasswordFieldType.nowWrite ? Colors.white : DPColors.DARK6,
       ),
       child: Center(
-        child: (
-            fieldType == PasswordFieldType.alreadyWrite ?
-                Container(width: 8, decoration: BoxDecoration(shape: BoxShape.circle, color: DPColors.DARK2)) :
-                const SizedBox()
-        ),
+        child: (fieldType == PasswordFieldType.alreadyWrite ? Container(width: 8, decoration: const BoxDecoration(shape: BoxShape.circle, color: DPColors.DARK2)) : const SizedBox()),
       ),
     );
   }

@@ -113,7 +113,7 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.PINAUTH);
+              Get.toNamed(Routes.PIN);
             },
             child: const Text('PINAUTH'),
           ),
