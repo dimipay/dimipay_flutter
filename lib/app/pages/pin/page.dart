@@ -1,27 +1,13 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/pages/pin/controller.dart';
 import 'package:dimipay/app/pages/pin/widget/numberpad_item.dart';
 import 'package:dimipay/app/pages/pin/widget/password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-enum PinPageType { register, auth }
-
-extension PinPageTypeExtension on PinPageType {
-  String get pageTitle {
-    switch (this) {
-      case PinPageType.auth:
-        return "결제 비밀번호 입력";
-      case PinPageType.register:
-        return "결제 비밀번호 설정";
-      default:
-        return "";
-    }
-  }
-}
-
-class PinAuthPage extends GetView<PinPageController> {
-  const PinAuthPage({Key? key}) : super(key: key);
+class PinPage extends GetView<PinPageController> {
+  const PinPage({Key? key}) : super(key: key);
 
   buildPassword() {
     return Obx(() => Row(
@@ -130,12 +116,15 @@ class PinAuthPage extends GetView<PinPageController> {
     );
   }
 
+  String getTitle() {
+    AuthService authService = Get.find<AuthService>();
+    return authService.isFirstVisit ? "결제 비밀번호 설정" : "결제 비밀번호 입력";
+  }
+
   @override
   Widget build(BuildContext context) {
     List<int> numList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     numList.shuffle();
-
-    PinPageType pageType = Get.arguments['pageType'] ?? PinPageType.register;
 
     return Scaffold(
       body: SafeArea(
@@ -149,7 +138,7 @@ class PinAuthPage extends GetView<PinPageController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      pageType.pageTitle,
+                      getTitle(),
                       style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 24, height: 1.2, color: DPColors.MAIN_THEME),
                     ),
                     const SizedBox(height: 24),
