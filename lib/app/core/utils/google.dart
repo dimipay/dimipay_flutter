@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInHelper {
@@ -9,7 +9,9 @@ class GoogleSignInHelper {
   ///중간에 로그인이 취소 될 시 exception 발생
   Future<String> authenticate({bool selectAccount = true}) async {
     if (selectAccount) {
-      if (Platform.isAndroid) {
+      if (kIsWeb) {
+        await _googleSignIn.disconnect();
+      } else if (Platform.isAndroid) {
         await _googleSignIn.signOut();
       } else {
         await _googleSignIn.disconnect();
