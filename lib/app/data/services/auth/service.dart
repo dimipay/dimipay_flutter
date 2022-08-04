@@ -6,25 +6,26 @@ import 'package:uuid/uuid.dart';
 
 class AuthService extends GetxService {
   final AuthRepository repository;
-  final GoogleSignInHelper googleSignInHelper = GoogleSignInHelper();
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
-  final Uuid _uuidObj = const Uuid();
   final Rx<String?> _accessToken = Rx(null);
-  final Rx<String?> _tempAccessToken = Rx(null); // /auth/login API에서 반환되는 AccessToken
+  final Rx<String?> _onboardingToken = Rx(null); // /auth/login API에서 반환되는 AccessToken
 
   AuthService(this.repository);
 
+  /// google sign-in과 onboarding 과정이 완료되었을 경우 true
   bool get isAuthenticated => _accessToken.value != null;
-  bool get isGoogleLoginSuccess => _tempAccessToken.value != null;
-  String? get token => _accessToken.value;
-  String? get tempToken => _tempAccessToken.value;
+
+  /// google sign-in 과정이 완료되었을 경우 true
+  bool get isGoogleLoginSuccess => _onboardingToken.value != null;
+  String? get accessToken => _accessToken.value;
+  String? get onboardingToken => _onboardingToken.value;
 
   Future<AuthService> init() async {
     _accessToken.value = await _storage.read(key: 'accessToken');
     return this;
   }
 
-  Future _setToken(String token) async {
+  Future _setAccessToken(String token) async {
     await _storage.write(key: 'accessToken', value: token);
     _accessToken.value = token;
   }
@@ -38,35 +39,34 @@ class AuthService extends GetxService {
     //TODO 생체인증 구현시에 biometric_storage 라이브러리 설정도 같이 진행되어야 합니다
   }
 
-  removeTempAccessToken() => _tempAccessToken.value = null;
-
   ///처음으로 디미페이에 로그인 했는지를 bool 형태로 리턴합니다.
   Future<bool> loginWithGoogle({bool selectAccount = true}) async {
+    GoogleSignInHelper googleSignInHelper = GoogleSignInHelper();
     String idToken = await googleSignInHelper.authenticate();
     Map loginResult = await repository.loginWithGoogle(idToken);
 
-    _tempAccessToken.value = loginResult['accessToken'];
+    _onboardingToken.value = loginResult['accessToken'];
 
     return loginResult['isFirstVisit'];
   }
 
   Future<String> onBoardingAuth(String paymentPin) async {
-    String deviceUid = _uuidObj.v4();
-    String bioKey = _uuidObj.v4();
+    String deviceUid = const Uuid().v4();
+    String bioKey = const Uuid().v4();
 
-    String accessToken = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
+    _accessToken.value = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
 
-    _setToken(accessToken);
+    _setAccessToken(_accessToken.value!);
     _setDeviceUid(deviceUid);
     _setBioKey(bioKey);
 
-    return await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
+    return _accessToken.value!;
   }
 
   Future _removeToken() async {
     await _storage.delete(key: 'accessToken');
     _accessToken.value = null;
-    _tempAccessToken.value = null;
+    _onboardingToken.value = null;
   }
 
   Future<void> logout() async {

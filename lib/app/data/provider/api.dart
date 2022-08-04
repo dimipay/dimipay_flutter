@@ -15,13 +15,11 @@ class JWTInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     AuthService authService = Get.find<AuthService>();
-    String? token = authService.token;
-    String? tempToken = authService.tempToken;
 
-    if (token != null) {
-      options.headers['Authorization'] = 'Bearer $token';
-    } else if (tempToken != null) {
-      options.headers['Authorization'] = 'Bearer $tempToken';
+    if (authService.isAuthenticated) {
+      options.headers['Authorization'] = 'Bearer ${authService.accessToken}';
+    } else if (authService.isGoogleLoginSuccess) {
+      options.headers['Authorization'] = 'Bearer ${authService.onboardingToken}';
     }
     handler.next(options);
   }
@@ -156,7 +154,11 @@ class ApiProvider implements ApiInterface {
     };
     Response response = await dio.post(url, data: body);
 
-    return response.data['tokens']['accessToken'];
+    //TODO : https://w1633148381-ycb663149.slack.com/archives/C02R61548NS/p1659590853338079에 따른 임시방편임
+    if (response.data['tokens'] != null) {
+      return response.data['tokens']['accessToken'];
+    }
+    return response.data['accessToken'];
   }
 
   @override

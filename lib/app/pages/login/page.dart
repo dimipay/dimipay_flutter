@@ -1,15 +1,12 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
-import 'package:dimipay/app/data/services/config/service.dart';
-import 'package:dimipay/app/pages/onboarding/controller.dart';
-import 'package:dimipay/app/routes/routes.dart';
-import 'package:dimipay/app/widgets/button.dart';
+import 'package:dimipay/app/pages/login/controller.dart';
 import 'package:dimipay/app/widgets/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class OnboardingPage extends GetView<OnboardingPageController> {
-  OnboardingPage({Key? key}) : super(key: key);
+class LoginPage extends GetView<LoginPageController> {
+  LoginPage({Key? key}) : super(key: key);
   final String? redirect = Get.arguments?['redirect'];
 
   @override
@@ -22,19 +19,9 @@ class OnboardingPage extends GetView<OnboardingPageController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset("asset/images/logo2.svg", width: 40),
-                  const Text('DIMIPAY', style: TextStyle(color: Color.fromRGBO(46, 164, 171, 1), fontFamily: 'Montserrat', fontSize: 22)),
-                  const SizedBox(height: 48),
-                  const DPPaymentCard(color: DPColors.MAIN_THEME, cardName: "카드로 결제", cardNumber: "카드결제", isHorizontal: false, width: 153),
-                  const SizedBox(height: 32),
-                  const Text(
-                      "매점, 이젠 터치로 결제",
-                      style: TextStyle(color: DPColors.DARK1, fontFamily: 'NEXON Lv1 Gothic', fontSize: 20, fontWeight: FontWeight.w700)
-                  )
-                ],
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [SvgPicture.asset("asset/images/logo2.svg", width: 40), const Text('DIMIPAY', style: TextStyle(color: Color.fromRGBO(46, 164, 171, 1), fontFamily: 'Montserrat', fontSize: 22)), const SizedBox(height: 48), const DPPaymentCard(color: DPColors.MAIN_THEME, cardName: "카드로 결제", cardNumber: "카드결제", isHorizontal: false, width: 153), const SizedBox(height: 32), const Text("매점, 이젠 터치로 결제", style: TextStyle(color: DPColors.DARK1, fontFamily: 'NEXON Lv1 Gothic', fontSize: 20, fontWeight: FontWeight.w700))],
             )),
             GestureDetector(
               onTap: () => controller.loginWithGoogle(),
@@ -42,13 +29,12 @@ class OnboardingPage extends GetView<OnboardingPageController> {
                 width: double.infinity,
                 height: 53,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    width: 1,
-                    color: DPColors.DARK5,
-                  )
-                ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      width: 1,
+                      color: DPColors.DARK5,
+                    )),
                 child: Center(
                   child: SizedBox(
                     width: 214,
