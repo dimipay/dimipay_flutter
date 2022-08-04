@@ -30,7 +30,14 @@ class AccountInfoPage extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const CircleAvatar(backgroundImage: AssetImage('asset/images/Image11.png'), radius: 24),
+        Obx(() {
+          String? profileImageUrl = userController.user.value?.profileImage;
+          if (profileImageUrl == null) {
+            return const CircleAvatar(backgroundImage: AssetImage('asset/images/Image11.png'), radius: 24);
+          } else {
+            return CircleAvatar(backgroundImage: NetworkImage(profileImageUrl), radius: 24);
+          }
+        }),
         const SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
