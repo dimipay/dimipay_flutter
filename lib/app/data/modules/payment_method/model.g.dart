@@ -13,7 +13,7 @@ PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) =>
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       color: json['color'] as String?,
       name: json['name'] as String?,
-      ownerId: json['ownerId'] as int,
+      ownerSid: json['ownerSid'] as String,
     );
 
 Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) =>
@@ -23,5 +23,5 @@ Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) =>
       'updatedAt': instance.updatedAt.toIso8601String(),
       'color': instance.color,
       'name': instance.name,
-      'ownerId': instance.ownerId,
+      'ownerSid': instance.ownerSid,
     };

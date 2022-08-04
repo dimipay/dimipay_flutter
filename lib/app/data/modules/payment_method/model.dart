@@ -10,14 +10,14 @@ class PaymentMethod {
   DateTime updatedAt;
   String? color;
   String? name;
-  int ownerId;
+  String ownerSid;
   PaymentMethod({
     required this.systemId,
     required this.createdAt,
     required this.updatedAt,
     required this.color,
     required this.name,
-    required this.ownerId,
+    required this.ownerSid,
   });
 
   factory PaymentMethod.fromJson(Map<String, dynamic> json) => _$PaymentMethodFromJson(json);

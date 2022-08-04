@@ -1,5 +1,4 @@
 import 'package:dimipay/app/data/modules/payment_method/general/model.dart';
-import 'package:dimipay/app/data/modules/payment_method/prepaid/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
@@ -92,12 +91,6 @@ class MockApiProvider implements ApiInterface {
 
   @override
   Future<List<GeneralCard>> getGeneralCard() async {
-    await Future.delayed(const Duration(seconds: 1));
-    return [];
-  }
-
-  @override
-  Future<List<PrepaidCard>> getPrepaidCard() async {
     await Future.delayed(const Duration(seconds: 1));
     return [];
   }

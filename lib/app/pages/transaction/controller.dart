@@ -1,6 +1,5 @@
 import 'package:dimipay/app/data/modules/payment_method/general/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
-import 'package:dimipay/app/data/modules/payment_method/prepaid/controller.dart';
 import 'package:get/get.dart';
 
 class TransactionPageController extends GetxController {
@@ -8,7 +7,7 @@ class TransactionPageController extends GetxController {
 
   List<PaymentMethod> get paymentMethods {
     // ignore: unnecessary_cast
-    return Get.find<PrepaidCardController>().cards.value.cast<PaymentMethod>() + Get.find<GeneralCardController>().cards.value.cast<PaymentMethod>();
+    return Get.find<GeneralCardController>().cards.value.cast<PaymentMethod>();
   }
 
   @override
