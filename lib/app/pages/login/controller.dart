@@ -10,7 +10,51 @@ class LoginPageController extends GetxController with StateMixin {
   final String? redirect = Get.arguments?['redirect'];
   AuthService authService = Get.find<AuthService>();
 
-  Future loginWithGoogle() async {
+  @override
+  void onInit() {
+    change(null, status: RxStatus.success());
+    super.onInit();
+  }
+
+  bool get buttonEnabled {
+    if (usernameValidator(username.value) != null) {
+      return false;
+    }
+    if (passwordValidator(password.value) != null) {
+      return false;
+    }
+    return true;
+  }
+
+  String? usernameValidator(String? username) {
+    if (username == null || username.isEmpty) {
+      return '아이디를 입력하세요';
+    }
+    return null;
+  }
+
+  String? passwordValidator(String? password) {
+    if (password == null || password.isEmpty) {
+      return '바밀번호를 입력하세요';
+    }
+    return null;
+  }
+
+  Future<bool> createPrepaidCard() async {
+    try {
+      await ApiProvider().createPrepaidCard();
+      return true;
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 400) {
+        return true;
+      }
+      DPErrorSnackBar().open('페이머니 생성에 실패했어요');
+      authService.logout();
+      rethrow;
+    }
+  }
+
+  Future login() async {
     try {
       change(null, status: RxStatus.loading());
       bool isFirstVisit = await authService.loginWithGoogle();
