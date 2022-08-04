@@ -21,7 +21,7 @@ class AccountInfoPage extends StatelessWidget {
 
   Widget _userId() {
     return userController.obx(
-      (state) => Text('@${state!.value!.accountName}', style: DPTextTheme.DESCRIPTION),
+      (state) => Text(state!.value!.accountName, style: DPTextTheme.DESCRIPTION),
       onLoading: const Text('loading...', style: DPTextTheme.DESCRIPTION),
     );
   }

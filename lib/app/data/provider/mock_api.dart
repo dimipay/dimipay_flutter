@@ -68,10 +68,21 @@ class MockApiProvider implements ApiInterface {
     return User(systemId: 'afsfejio', createdAt: DateTime(2022, 1, 1), updatedAt: DateTime(2022, 1, 1), isDisabled: false, accountName: 'uglyonlytoday', name: '장인화');
   }
 
+  @Deprecated('이 api는 더 이상 사용되지 않음')
   @override
   Future<String> login(String username, String password) async {
     await Future.delayed(const Duration(seconds: 1));
     return 'test token';
+  }
+
+  @override
+  Future<Map> loginWithGoogle(String idToken) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return {
+      'isFirstVisit': true,
+      'accessToken': 'testToken',
+      'refreshToken': 'testToken'
+    };
   }
 
   @override
@@ -94,5 +105,11 @@ class MockApiProvider implements ApiInterface {
   @override
   Future<void> createPrepaidCard() async {
     await Future.delayed(const Duration(seconds: 1));
+  }
+
+  @override
+  Future<String> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return 'testToken';
   }
 }

@@ -1,27 +1,44 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
-import 'package:dimipay/app/pages/pin_auth/widget/numberpad_item.dart';
-import 'package:dimipay/app/pages/pin_auth/widget/password_field.dart';
+import 'package:dimipay/app/pages/pin/controller.dart';
+import 'package:dimipay/app/pages/pin/widget/numberpad_item.dart';
+import 'package:dimipay/app/pages/pin/widget/password_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class PinAuthPage extends StatelessWidget {
+enum PinPageType { register, auth }
+
+extension PinPageTypeExtension on PinPageType {
+  String get pageTitle {
+    switch (this) {
+      case PinPageType.auth:
+        return "결제 비밀번호 입력";
+      case PinPageType.register:
+        return "결제 비밀번호 설정";
+      default:
+        return "";
+    }
+  }
+}
+
+class PinAuthPage extends GetView<PinPageController> {
   const PinAuthPage({Key? key}) : super(key: key);
 
   buildPassword() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: const [
-        PasswordField(),
-        SizedBox(width: 16),
-        PasswordField(),
-        SizedBox(width: 16),
-        PasswordField(),
-        SizedBox(width: 16),
-        PasswordField(),
-      ],
-    );
+    return Obx(() => Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            PasswordField(fieldType: controller.getPwdFieldType(1)),
+            const SizedBox(width: 16),
+            PasswordField(fieldType: controller.getPwdFieldType(2)),
+            const SizedBox(width: 16),
+            PasswordField(fieldType: controller.getPwdFieldType(3)),
+            const SizedBox(width: 16),
+            PasswordField(fieldType: controller.getPwdFieldType(4)),
+          ],
+        ));
   }
 
-  buildNumberPad({List<List<int>>? nums}) {
+  buildNumberPad(List<int> nums) {
     return SizedBox(
       width: 300,
       height: 300,
@@ -30,29 +47,20 @@ class PinAuthPage extends StatelessWidget {
         children: [
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                   child: NumberPadItem(
-                    child: Text(
-                      '4',
-                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
+                    value: "${nums[0]}",
                   ),
                 ),
                 Expanded(
                   child: NumberPadItem(
-                    child: Text(
-                      '1',
-                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
+                    value: "${nums[1]}",
                   ),
                 ),
                 Expanded(
                   child: NumberPadItem(
-                    child: Text(
-                      '8',
-                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
+                    value: "${nums[2]}",
                   ),
                 ),
               ],
@@ -60,29 +68,20 @@ class PinAuthPage extends StatelessWidget {
           ),
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                   child: NumberPadItem(
-                    child: Text(
-                      '2',
-                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
+                    value: "${nums[3]}",
                   ),
                 ),
                 Expanded(
                   child: NumberPadItem(
-                    child: Text(
-                      '5',
-                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
+                    value: "${nums[4]}",
                   ),
                 ),
                 Expanded(
                   child: NumberPadItem(
-                    child: Text(
-                      '7',
-                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
+                    value: "${nums[5]}",
                   ),
                 ),
               ],
@@ -90,29 +89,20 @@ class PinAuthPage extends StatelessWidget {
           ),
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                   child: NumberPadItem(
-                    child: Text(
-                      '6',
-                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
+                    value: "${nums[6]}",
                   ),
                 ),
                 Expanded(
                   child: NumberPadItem(
-                    child: Text(
-                      '3',
-                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
+                    value: "${nums[7]}",
                   ),
                 ),
                 Expanded(
                   child: NumberPadItem(
-                    child: Text(
-                      '9',
-                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
+                    value: "${nums[8]}",
                   ),
                 ),
               ],
@@ -124,16 +114,13 @@ class PinAuthPage extends StatelessWidget {
                 Expanded(
                   child: Container(),
                 ),
-                const Expanded(
+                Expanded(
                   child: NumberPadItem(
-                    child: Text(
-                      '0',
-                      style: TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
+                    value: "${nums[9]}",
                   ),
                 ),
                 Expanded(
-                  child: Container(),
+                  child: GestureDetector(onTap: () => controller.clickBackspace(), child: const Icon(Icons.backspace_outlined, color: DPColors.DARK3, size: 22)),
                 ),
               ],
             ),
@@ -145,6 +132,11 @@ class PinAuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<int> numList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+    numList.shuffle();
+
+    PinPageType pageType = Get.arguments['pageType'] ?? PinPageType.register;
+
     return Scaffold(
       body: SafeArea(
         child: SizedBox(
@@ -156,16 +148,16 @@ class PinAuthPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "결제 비밀번호 입력",
-                      style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 24, height: 1.2, color: DPColors.MAIN_THEME),
+                    Text(
+                      pageType.pageTitle,
+                      style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 24, height: 1.2, color: DPColors.MAIN_THEME),
                     ),
                     const SizedBox(height: 24),
                     buildPassword(),
                   ],
                 ),
               ),
-              buildNumberPad(),
+              buildNumberPad(numList),
               const SizedBox(height: 100),
             ],
           ),

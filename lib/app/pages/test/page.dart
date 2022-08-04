@@ -83,12 +83,6 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.LOGIN);
-            },
-            child: const Text('LOGIN'),
-          ),
-          TextButton(
-            onPressed: () {
               Get.toNamed(Routes.CHANGEPASSWORD);
             },
             child: const Text('CHANGEPASSWORD'),
@@ -119,7 +113,7 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.PINAUTH);
+              Get.toNamed(Routes.PIN);
             },
             child: const Text('PINAUTH'),
           ),
