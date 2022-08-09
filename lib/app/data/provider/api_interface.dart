@@ -11,9 +11,9 @@ abstract class ApiInterface {
 
   Future<Map> loginWithGoogle(String idToken);
 
-  Future<String> onBoardingAuth(String paymentPin, String deviceUid, String bioKey);
+  Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String bioKey);
 
-  Future<String> refreshToken();
+  Future<Map> refreshToken();
 
   Future<User> getUserInfo();
 
