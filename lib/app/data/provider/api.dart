@@ -155,6 +155,13 @@ class ApiProvider implements ApiInterface {
     return response.data['tokens']['accessToken'];
   }
 
+	@override
+  Future<String> refreshToken() async {
+    String url = "/auth/refresh";
+    Response response = await dio.get(url);
+    return response.data['token']['accessToken'];
+  }
+
   @override
   Future<void> postPaymentToken(String token) async {
     String url = '/payment/token';

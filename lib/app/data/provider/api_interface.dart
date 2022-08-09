@@ -13,6 +13,8 @@ abstract class ApiInterface {
 
   Future<String> onBoardingAuth(String paymentPin, String deviceUid, String bioKey);
 
+  Future<String> refreshToken();
+
   Future<User> getUserInfo();
 
   Future<List<Coupon>> getCoupons();
