@@ -19,6 +19,10 @@ class AuthService extends GetxService {
 
   /// google sign-in 과정이 완료되었을 경우 true
   bool get isGoogleLoginSuccess => _onboardingToken.value != null;
+
+  /// accessToken이 만료되었을 경우 True
+  bool get isAccessTokenExpired => _accessToken.value != null;
+
   String? get accessToken => _accessToken.value;
   String? get refreshToken => _refreshToken.value;
   String? get onboardingToken => _onboardingToken.value;
@@ -63,7 +67,10 @@ class AuthService extends GetxService {
     String deviceUid = const Uuid().v4();
     String bioKey = const Uuid().v4();
 
-    _accessToken.value = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
+    Map onboardingResult = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
+
+    _accessToken.value = onboardingResult['token']['accessToken'];
+    _refreshToken.value = onboardingResult['token']['refreshToken'];
 
     _setAccessToken(_accessToken.value!);
     _setRefreshToken(_refreshToken.value!);
@@ -71,6 +78,17 @@ class AuthService extends GetxService {
     _setBioKey(bioKey);
 
     return _accessToken.value!;
+  }
+
+  Future<void> refreshFromToken(Map loginResult) async {
+    if (loginResult.containsKey("code") || loginResult.containsKey("message")) {
+      if (loginResult["code"] == "JWT_EXPIRED") {
+        Map refreshResult = await repository.refreshToken();
+        _accessToken.value = refreshResult['token']['accessToken'];
+        _refreshToken.value = refreshResult['token']['refreshToken'];
+        return;
+      }
+    }
   }
 
   Future _removeToken() async {
