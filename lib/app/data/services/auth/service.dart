@@ -8,6 +8,7 @@ class AuthService extends GetxService {
   final AuthRepository repository;
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
   final Rx<String?> _accessToken = Rx(null);
+  final Rx<String?> _refreshToken = Rx(null);
   final Rx<String?> _onboardingToken = Rx(null); // /auth/login API에서 반환되는 AccessToken
   final Rx<bool> _isFirstVisit = Rx(true);
 
@@ -19,17 +20,24 @@ class AuthService extends GetxService {
   /// google sign-in 과정이 완료되었을 경우 true
   bool get isGoogleLoginSuccess => _onboardingToken.value != null;
   String? get accessToken => _accessToken.value;
+  String? get refreshToken => _refreshToken.value;
   String? get onboardingToken => _onboardingToken.value;
   bool get isFirstVisit => _isFirstVisit.value;
 
   Future<AuthService> init() async {
     _accessToken.value = await _storage.read(key: 'accessToken');
+    _refreshToken.value = await _storage.read(key: 'refreshToken');
     return this;
   }
 
   Future _setAccessToken(String token) async {
     await _storage.write(key: 'accessToken', value: token);
     _accessToken.value = token;
+  }
+
+  Future _setRefreshToken(String token) async {
+    await _storage.write(key: 'refreshToken', value: token);
+    _refreshToken.value = token;
   }
 
   Future _setDeviceUid(String deviceUid) async {
@@ -47,6 +55,7 @@ class AuthService extends GetxService {
     Map loginResult = await repository.loginWithGoogle(idToken);
 
     _onboardingToken.value = loginResult['accessToken'];
+    _refreshToken.value = loginResult['refreshToken'];
     _isFirstVisit.value = loginResult['isFirstVisit'];
   }
 
@@ -57,6 +66,7 @@ class AuthService extends GetxService {
     _accessToken.value = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
 
     _setAccessToken(_accessToken.value!);
+    _setRefreshToken(_refreshToken.value!);
     _setDeviceUid(deviceUid);
     _setBioKey(bioKey);
 
@@ -65,7 +75,9 @@ class AuthService extends GetxService {
 
   Future _removeToken() async {
     await _storage.delete(key: 'accessToken');
+    await _storage.delete(key: 'refreshToken');
     _accessToken.value = null;
+    _refreshToken.value = null;
     _onboardingToken.value = null;
   }
 
