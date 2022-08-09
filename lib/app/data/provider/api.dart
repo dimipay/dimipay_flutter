@@ -144,7 +144,7 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<String> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
+  Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
     String url = '/auth/onBoarding';
     Map body = {
       'paymentPin': paymentPin,
@@ -155,8 +155,8 @@ class ApiProvider implements ApiInterface {
     return response.data['tokens']['accessToken'];
   }
 
-	@override
-  Future<String> refreshToken() async {
+  @override
+  Future<Map> refreshToken() async {
     String url = "/auth/refresh";
     Response response = await dio.get(url);
     return response.data['token']['accessToken'];

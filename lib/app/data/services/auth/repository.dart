@@ -8,5 +8,7 @@ class AuthRepository {
   ///returnes Login Result
   Future<Map> loginWithGoogle(idToken) async => api.loginWithGoogle(idToken);
 
-  Future<String> onBoardingAuth(paymentPin, deviceUid, bioKey) async => api.onBoardingAuth(paymentPin, deviceUid, bioKey);
+  Future<Map> refreshToken() async => api.refreshToken();
+
+  Future<Map> onBoardingAuth(paymentPin, deviceUid, bioKey) async => api.onBoardingAuth(paymentPin, deviceUid, bioKey);
 }

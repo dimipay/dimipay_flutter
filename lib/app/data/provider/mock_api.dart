@@ -81,9 +81,12 @@ class MockApiProvider implements ApiInterface {
   }
 
   @override
-  Future<String> refreshToken() async {
+  Future<Map> refreshToken() async {
     await Future.delayed(const Duration(seconds: 1));
-    return "";
+    return {
+      "code": "OK",
+      "tokens": {"accessToken": "accessToken", "refreshToken": "refreshToken"}
+    };
   }
 
   @override
@@ -103,8 +106,12 @@ class MockApiProvider implements ApiInterface {
   }
 
   @override
-  Future<String> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
+  Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
     await Future.delayed(const Duration(seconds: 1));
-    return 'testToken';
+    return {
+      "code": "OK",
+      "tokens": {"accessToken": "accessToken", "refreshToken": "refreshToken"}
+    };
+    ;
   }
 }
