@@ -11,18 +11,25 @@ import 'package:get/instance_manager.dart';
 import 'dart:developer';
 
 class JWTInterceptor extends Interceptor {
+  AuthService authService = Get.find<AuthService>();
+
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    AuthService authService = Get.find<AuthService>();
-
     if (authService.isAuthenticated) {
       options.headers['Authorization'] = 'Bearer ${authService.accessToken}';
     } else if (authService.isGoogleLoginSuccess) {
       options.headers['Authorization'] = 'Bearer ${authService.onboardingToken}';
-    } else if (authService.isAccessTokenExpired) {
-      options.headers['Authorization'] = 'Bearer ${authService.refreshToken}';
     }
     handler.next(options);
+  }
+
+  @override
+  void onError(DioError err, ErrorInterceptorHandler handler) {
+    if (err.response?.statusCode == 400) {
+      err.requestOptions.headers['Authorization'] = 'Bearer ${authService.refreshToken}';
+      //refreshToken() ???
+    }
+    handler.next(err);
   }
 }
 
