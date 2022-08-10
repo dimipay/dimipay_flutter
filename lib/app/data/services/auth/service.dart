@@ -1,13 +1,17 @@
+import 'dart:async';
 import 'package:dimipay/app/core/utils/google.dart';
 import 'package:dimipay/app/data/services/auth/repository.dart';
+import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 class AuthService extends GetxService {
+  Completer<void>? _refreshTokenApiCompleter;
   final AuthRepository repository;
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
   final Rx<String?> _accessToken = Rx(null);
+  final Rx<String?> _refreshToken = Rx(null);
   final Rx<String?> _onboardingToken = Rx(null); // /auth/login API에서 반환되는 AccessToken
   final Rx<bool> _isFirstVisit = Rx(true);
 
@@ -18,18 +22,26 @@ class AuthService extends GetxService {
 
   /// google sign-in 과정이 완료되었을 경우 true
   bool get isGoogleLoginSuccess => _onboardingToken.value != null;
+
   String? get accessToken => _accessToken.value;
+  String? get refreshToken => _refreshToken.value;
   String? get onboardingToken => _onboardingToken.value;
   bool get isFirstVisit => _isFirstVisit.value;
 
   Future<AuthService> init() async {
     _accessToken.value = await _storage.read(key: 'accessToken');
+    _refreshToken.value = await _storage.read(key: 'refreshToken');
     return this;
   }
 
   Future<void> _setAccessToken(String token) async {
     await _storage.write(key: 'accessToken', value: token);
     _accessToken.value = token;
+  }
+
+  Future<void> _setRefreshToken(String token) async {
+    await _storage.write(key: 'refreshToken', value: token);
+    _refreshToken.value = token;
   }
 
   Future<void> _setDeviceUid(String deviceUid) async {
@@ -54,19 +66,53 @@ class AuthService extends GetxService {
     String deviceUid = const Uuid().v4();
     String bioKey = const Uuid().v4();
 
-    _accessToken.value = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
+    Map onboardingResult = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
 
-    await _setAccessToken(_accessToken.value!);
+    await _setAccessToken(onboardingResult['accessToken']);
+    await _setRefreshToken(onboardingResult['refreshToken']);
     await _setDeviceUid(deviceUid);
     await _setBioKey(bioKey);
 
     return _accessToken.value!;
   }
 
+  Future<void> _refreshAccessToken({FutureOr<void> Function()? onError}) async {
+    // refreshTokenApi의 동시 다발적인 호출을 방지하기 위해 completer를 사용함. 동시 다발적으로 이 함수를 호출해도 api는 1번만 호출 됨.
+    if (_refreshTokenApiCompleter == null || _refreshTokenApiCompleter!.isCompleted) {
+      //첫 호출(null)이거나 이미 완료된 호출일 경우 새 객체 할당
+      _refreshTokenApiCompleter = Completer();
+      try {
+        if (_refreshToken.value == null) {
+          throw Exception();
+        }
+        String newAccessToken = await repository.refreshAccessToken(_refreshToken.value!);
+        await _setAccessToken(newAccessToken);
+        _refreshTokenApiCompleter!.complete();
+      } catch (e) {
+        if (onError != null) {
+          await onError();
+        }
+      }
+    }
+    return _refreshTokenApiCompleter!.future;
+  }
+
+  ///Throws exception and route to loginpage if refresh faild
+  Future<void> refreshAcessToken() async {
+    return _refreshAccessToken(onError: () async {
+      await logout();
+      Get.offAllNamed(Routes.LOGIN);
+      throw Exception('refreshToken is null!');
+    });
+  }
+
   Future<void> _removeToken() async {
     await _storage.delete(key: 'accessToken');
+    await _storage.delete(key: 'refreshToken');
     _accessToken.value = null;
+    _refreshToken.value = null;
     _onboardingToken.value = null;
+    _refreshTokenApiCompleter = null;
   }
 
   Future<void> logout() async {

@@ -10,9 +10,20 @@ import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
 import 'dart:developer';
 
+import 'package:jwt_decoder/jwt_decoder.dart';
+
 class JWTInterceptor extends Interceptor {
+  final Dio _dioInstance;
+
+  // Dependency Injection
+  JWTInterceptor(this._dioInstance);
+
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    if (options.path == '/auth/refresh') {
+      return handler.next(options);
+    }
+
     AuthService authService = Get.find<AuthService>();
 
     if (authService.isAuthenticated) {
@@ -20,7 +31,23 @@ class JWTInterceptor extends Interceptor {
     } else if (authService.isGoogleLoginSuccess) {
       options.headers['Authorization'] = 'Bearer ${authService.onboardingToken}';
     }
-    handler.next(options);
+
+    return handler.next(options);
+  }
+
+  @override
+  void onError(DioError err, ErrorInterceptorHandler handler) async {
+    AuthService authService = Get.find<AuthService>();
+    if (err.response?.statusCode == 401 && authService.accessToken != null) {
+      if (JwtDecoder.isExpired(authService.accessToken!)) {
+        await authService.refreshAcessToken();
+      }
+
+      //api 호출을 다시 시도함
+      final Response response = await _dioInstance.fetch(err.requestOptions);
+      return handler.resolve(response);
+    }
+    return handler.next(err);
   }
 }
 
@@ -38,7 +65,7 @@ class ApiProvider implements ApiInterface {
 
   ApiProvider() {
     dio.options.baseUrl = baseUrl;
-    dio.interceptors.add(JWTInterceptor());
+    dio.interceptors.add(JWTInterceptor(dio));
     dio.interceptors.add(LogInterceptor());
   }
 
@@ -144,7 +171,7 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<String> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
+  Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
     String url = '/auth/onBoarding';
     Map body = {
       'paymentPin': paymentPin,
@@ -152,7 +179,18 @@ class ApiProvider implements ApiInterface {
       'bioKey': bioKey,
     };
     Response response = await dio.post(url, data: body);
-    return response.data['tokens']['accessToken'];
+    return response.data['tokens'];
+  }
+
+  @override
+  Future<String> refreshAccessToken(String refreshToken) async {
+    String url = "/auth/refresh";
+
+    Map<String, dynamic> headers = {
+      'Authorization': 'Bearer $refreshToken',
+    };
+    Response response = await dio.get(url, options: Options(headers: headers));
+    return response.data['accessToken'];
   }
 
   @override
