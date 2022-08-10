@@ -10,6 +10,8 @@ import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
 import 'dart:developer';
 
+import 'package:jwt_decoder/jwt_decoder.dart';
+
 class JWTInterceptor extends Interceptor {
   final Dio _dioInstance;
 
@@ -35,9 +37,11 @@ class JWTInterceptor extends Interceptor {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
-    if (err.response?.statusCode == 401) {
-      AuthService authService = Get.find<AuthService>();
-      await authService.refreshAcessToken();
+    AuthService authService = Get.find<AuthService>();
+    if (err.response?.statusCode == 401 && authService.accessToken != null) {
+      if (JwtDecoder.isExpired(authService.accessToken!)) {
+        await authService.refreshAcessToken();
+      }
 
       //api 호출을 다시 시도함
       final Response response = await _dioInstance.fetch(err.requestOptions);
@@ -179,14 +183,9 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<String?> refreshToken() async {
+  Future<String> refreshAccessToken(String refreshToken) async {
     String url = "/auth/refresh";
-    String? refreshToken = Get.find<AuthService>().refreshToken;
 
-    ///TODO refreshToken이 null일 때 오류 처리하기
-    if (refreshToken == null) {
-      return null;
-    }
     Map<String, dynamic> headers = {
       'Authorization': 'Bearer $refreshToken',
     };

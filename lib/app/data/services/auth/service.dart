@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:dimipay/app/core/utils/google.dart';
 import 'package:dimipay/app/data/services/auth/repository.dart';
 import 'package:dimipay/app/routes/routes.dart';
@@ -78,21 +76,34 @@ class AuthService extends GetxService {
     return _accessToken.value!;
   }
 
-  Future<void> refreshAcessToken() async {
+  Future<void> _refreshAccessToken({FutureOr<void> Function()? onError}) async {
     // refreshTokenApi의 동시 다발적인 호출을 방지하기 위해 completer를 사용함. 동시 다발적으로 이 함수를 호출해도 api는 1번만 호출 됨.
     if (_refreshTokenApiCompleter == null || _refreshTokenApiCompleter!.isCompleted) {
       //첫 호출(null)이거나 이미 완료된 호출일 경우 새 객체 할당
       _refreshTokenApiCompleter = Completer();
       try {
-        String? newAccessToken = await repository.refreshToken();
-        await _setAccessToken(newAccessToken!);
+        if (_refreshToken.value == null) {
+          throw Exception();
+        }
+        String newAccessToken = await repository.refreshAccessToken(_refreshToken.value!);
+        await _setAccessToken(newAccessToken);
         _refreshTokenApiCompleter!.complete();
       } catch (e) {
-        await logout();
-        Get.offAllNamed(Routes.LOGIN);
+        if (onError != null) {
+          await onError();
+        }
       }
     }
     return _refreshTokenApiCompleter!.future;
+  }
+
+  ///Throws exception and route to loginpage if refresh faild
+  Future<void> refreshAcessToken() async {
+    return _refreshAccessToken(onError: () async {
+      await logout();
+      Get.offAllNamed(Routes.LOGIN);
+      throw Exception('refreshToken is null!');
+    });
   }
 
   Future<void> _removeToken() async {

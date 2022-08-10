@@ -17,7 +17,7 @@ abstract class ApiInterface {
   Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String bioKey);
 
   ///returns accessToken
-  Future<String?> refreshToken();
+  Future<String> refreshAccessToken(String refreshToken);
 
   Future<User> getUserInfo();
 
