@@ -88,7 +88,6 @@ class AuthService extends GetxService {
         await _setAccessToken(newAccessToken!);
         _refreshTokenApiCompleter!.complete();
       } catch (e) {
-        log(e.toString());
         await logout();
         Get.offAllNamed(Routes.LOGIN);
       }

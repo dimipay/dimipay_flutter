@@ -163,7 +163,6 @@ class ApiProvider implements ApiInterface {
       'idToken': idToken,
     };
     Response response = await dio.post(url, data: body);
-    log(response.data.toString());
     return response.data;
   }
 
@@ -176,7 +175,6 @@ class ApiProvider implements ApiInterface {
       'bioKey': bioKey,
     };
     Response response = await dio.post(url, data: body);
-    log(response.toString());
     return response.data['tokens'];
   }
 
