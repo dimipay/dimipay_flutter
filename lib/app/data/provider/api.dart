@@ -172,6 +172,19 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
+  Future<void> createGeneralCard(String number, String year, String month, String idNo, String pw) async {
+    String url = "payment/method/general";
+    Map<String, String> body = {
+      "number": number,
+      "year": year,
+      "month": month,
+      "idNo": idNo,
+      "pw": pw,
+    };
+    await dio.post(url, data: body);
+  }
+
+  @override
   Future<void> createPrepaidCard() async {
     String url = '/payment/create-prepaid';
     await dio.post(url);
