@@ -40,4 +40,6 @@ abstract class ApiInterface {
   Future<void> changePaymentPin(String originalPin, String paymentPin);
 
   Future<void> createPrepaidCard();
+
+  Future<void> createGeneralCard(String number, String year, String month, String idNo, String pw);
 }
