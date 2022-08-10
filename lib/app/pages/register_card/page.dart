@@ -47,9 +47,9 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                             child: DPTextField(
                               controller: controller.birthdayFieldController,
                               label: '생년 월일',
-                              maxLength: 4,
+                              maxLength: 6,
                               textInputType: TextInputType.number,
-                              hintText: '4자리로 입력',
+                              hintText: '6자리로 입력',
                             ),
                           ),
                         ],
