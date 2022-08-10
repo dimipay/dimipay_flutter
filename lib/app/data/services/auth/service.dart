@@ -27,16 +27,16 @@ class AuthService extends GetxService {
     return this;
   }
 
-  Future _setAccessToken(String token) async {
+  Future<void> _setAccessToken(String token) async {
     await _storage.write(key: 'accessToken', value: token);
     _accessToken.value = token;
   }
 
-  Future _setDeviceUid(String deviceUid) async {
+  Future<void> _setDeviceUid(String deviceUid) async {
     await _storage.write(key: 'deviceUid', value: deviceUid);
   }
 
-  Future _setBioKey(String bioKey) async {
+  Future<void> _setBioKey(String bioKey) async {
     //TODO 회원가입 플로우의 생체인증 관련 로직이 개발이 안되어있기 때문에 이상태로 놔둡니다. 추후 개발필요.
     //TODO 생체인증 구현시에 biometric_storage 라이브러리 설정도 같이 진행되어야 합니다
   }
@@ -56,14 +56,14 @@ class AuthService extends GetxService {
 
     _accessToken.value = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
 
-    _setAccessToken(_accessToken.value!);
-    _setDeviceUid(deviceUid);
-    _setBioKey(bioKey);
+    await _setAccessToken(_accessToken.value!);
+    await _setDeviceUid(deviceUid);
+    await _setBioKey(bioKey);
 
     return _accessToken.value!;
   }
 
-  Future _removeToken() async {
+  Future<void> _removeToken() async {
     await _storage.delete(key: 'accessToken');
     _accessToken.value = null;
     _onboardingToken.value = null;
