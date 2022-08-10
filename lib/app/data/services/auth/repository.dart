@@ -9,7 +9,7 @@ class AuthRepository {
   Future<Map> loginWithGoogle(idToken) async => api.loginWithGoogle(idToken);
 
   ///returns accessToken
-  Future<String?> refreshToken() async => api.refreshToken();
+  Future<String> refreshAccessToken(String refreshToken) async => api.refreshAccessToken(refreshToken);
 
   ///returns map that contains accessToken and refreshToekn
   ///use ['accessToken'] to get accessToken
