@@ -36,4 +36,6 @@ abstract class ApiInterface {
   Future<void> createPrepaidCard();
 
   Future<void> createGeneralCard(String number, String year, String month, String idNo, String pw);
+
+  Future<void> deleteGeneralCard(String id);
 }
