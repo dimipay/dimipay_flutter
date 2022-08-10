@@ -81,12 +81,9 @@ class MockApiProvider implements ApiInterface {
   }
 
   @override
-  Future<Map> refreshToken() async {
+  Future<String> refreshToken() async {
     await Future.delayed(const Duration(seconds: 1));
-    return {
-      "code": "OK",
-      "tokens": {"accessToken": "accessToken", "refreshToken": "refreshToken"}
-    };
+    return "asfasfasfas";
   }
 
   @override

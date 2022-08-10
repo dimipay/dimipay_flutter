@@ -11,8 +11,17 @@ import 'package:get/instance_manager.dart';
 import 'dart:developer';
 
 class JWTInterceptor extends Interceptor {
+  final Dio _dioInstance;
+
+  // Dependency Injection
+  JWTInterceptor(this._dioInstance);
+
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    if (options.path == '/auth/refresh') {
+      return handler.next(options);
+    }
+
     AuthService authService = Get.find<AuthService>();
 
     if (authService.isAuthenticated) {
@@ -21,17 +30,21 @@ class JWTInterceptor extends Interceptor {
       options.headers['Authorization'] = 'Bearer ${authService.onboardingToken}';
     }
 
-    handler.next(options);
+    return handler.next(options);
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
-    AuthService authService = Get.find<AuthService>();
-    if (err.response?.statusCode == 400) {
-      err.requestOptions.headers['Authorization'] = 'Bearer ${authService.refreshToken}';
-      //refreshToken() ???
+  void onError(DioError err, ErrorInterceptorHandler handler) async {
+    //TODO errorcode 다시 명시하기
+    if (err.response?.statusCode == 400 || err.response?.statusCode == 500) {
+      AuthService authService = Get.find<AuthService>();
+      await authService.refreshAcessToken();
+
+      //api 호출을 다시 시도함
+      final Response response = await _dioInstance.fetch(err.requestOptions);
+      return handler.resolve(response);
     }
-    handler.next(err);
+    return handler.next(err);
   }
 }
 
@@ -49,7 +62,7 @@ class ApiProvider implements ApiInterface {
 
   ApiProvider() {
     dio.options.baseUrl = baseUrl;
-    dio.interceptors.add(JWTInterceptor());
+    dio.interceptors.add(JWTInterceptor(dio));
     dio.interceptors.add(LogInterceptor());
   }
 
@@ -151,12 +164,10 @@ class ApiProvider implements ApiInterface {
       'idToken': idToken,
     };
     Response response = await dio.post(url, data: body);
+    log(response.data.toString());
     return response.data;
   }
 
-  ///returns map that contains accessToken and refreshToekn
-  ///use ['accessToken'] to get accessToken
-  ///use ['refreshToken'] to get refreshToken
   @override
   Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
     String url = '/auth/onBoarding';
@@ -166,14 +177,24 @@ class ApiProvider implements ApiInterface {
       'bioKey': bioKey,
     };
     Response response = await dio.post(url, data: body);
+    log(response.toString());
     return response.data['tokens'];
   }
 
   @override
-  Future<Map> refreshToken() async {
+  Future<String?> refreshToken() async {
     String url = "/auth/refresh";
-    Response response = await dio.get(url);
-    return response.data['token']['accessToken'];
+    String? refreshToken = Get.find<AuthService>().refreshToken;
+
+    ///TODO refreshToken이 null일 때 오류 처리하기
+    if (refreshToken == null) {
+      return null;
+    }
+    Map<String, dynamic> headers = {
+      'Authorization': 'Bearer $refreshToken',
+    };
+    Response response = await dio.get(url, options: Options(headers: headers));
+    return response.data['accessToken'];
   }
 
   @override
