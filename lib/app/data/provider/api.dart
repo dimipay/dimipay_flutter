@@ -14,11 +14,13 @@ class JWTInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     AuthService authService = Get.find<AuthService>();
+
     if (authService.isAuthenticated) {
       options.headers['Authorization'] = 'Bearer ${authService.accessToken}';
     } else if (authService.isGoogleLoginSuccess) {
       options.headers['Authorization'] = 'Bearer ${authService.onboardingToken}';
     }
+
     handler.next(options);
   }
 
@@ -152,6 +154,9 @@ class ApiProvider implements ApiInterface {
     return response.data;
   }
 
+  ///returns map that contains accessToken and refreshToekn
+  ///use ['accessToken'] to get accessToken
+  ///use ['refreshToken'] to get refreshToken
   @override
   Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
     String url = '/auth/onBoarding';
@@ -161,7 +166,7 @@ class ApiProvider implements ApiInterface {
       'bioKey': bioKey,
     };
     Response response = await dio.post(url, data: body);
-    return response.data['tokens']['accessToken'];
+    return response.data['tokens'];
   }
 
   @override
