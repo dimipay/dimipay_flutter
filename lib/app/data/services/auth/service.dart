@@ -1,10 +1,15 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:dimipay/app/core/utils/google.dart';
 import 'package:dimipay/app/data/services/auth/repository.dart';
+import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 class AuthService extends GetxService {
+  Completer<void>? _refreshTokenApiCompleter;
   final AuthRepository repository;
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
   final Rx<String?> _accessToken = Rx(null);
@@ -19,9 +24,6 @@ class AuthService extends GetxService {
 
   /// google sign-in 과정이 완료되었을 경우 true
   bool get isGoogleLoginSuccess => _onboardingToken.value != null;
-
-  /// accessToken이 만료되었을 경우 True
-  bool get isAccessTokenExpired => _accessToken.value != null;
 
   String? get accessToken => _accessToken.value;
   String? get refreshToken => _refreshToken.value;
@@ -59,7 +61,6 @@ class AuthService extends GetxService {
     Map loginResult = await repository.loginWithGoogle(idToken);
 
     _onboardingToken.value = loginResult['accessToken'];
-    _refreshToken.value = loginResult['refreshToken'];
     _isFirstVisit.value = loginResult['isFirstVisit'];
   }
 
@@ -69,26 +70,30 @@ class AuthService extends GetxService {
 
     Map onboardingResult = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
 
-    _accessToken.value = onboardingResult['accessToken'];
-    _refreshToken.value = onboardingResult['refreshToken'];
-
-    await _setAccessToken(_accessToken.value!);
-    await _setRefreshToken(_refreshToken.value!);
+    await _setAccessToken(onboardingResult['accessToken']);
+    await _setRefreshToken(onboardingResult['refreshToken']);
     await _setDeviceUid(deviceUid);
     await _setBioKey(bioKey);
 
     return _accessToken.value!;
   }
 
-  Future<void> refreshAcessToken(Map loginResult) async {
-    if (loginResult.containsKey("code") || loginResult.containsKey("message")) {
-      if (loginResult["code"] == "JWT_EXPIRED") {
-        Map refreshResult = await repository.refreshToken();
-        _accessToken.value = refreshResult['token']['accessToken'];
-        _refreshToken.value = refreshResult['token']['refreshToken'];
-        return;
+  Future<void> refreshAcessToken() async {
+    // refreshTokenApi의 동시 다발적인 호출을 방지하기 위해 completer를 사용함. 동시 다발적으로 이 함수를 호출해도 api는 1번만 호출 됨.
+    if (_refreshTokenApiCompleter == null || _refreshTokenApiCompleter!.isCompleted) {
+      //첫 호출(null)이거나 이미 완료된 호출일 경우 새 객체 할당
+      _refreshTokenApiCompleter = Completer();
+      try {
+        String? newAccessToken = await repository.refreshToken();
+        await _setAccessToken(newAccessToken!);
+        _refreshTokenApiCompleter!.complete();
+      } catch (e) {
+        log(e.toString());
+        await logout();
+        Get.offAllNamed(Routes.LOGIN);
       }
     }
+    return _refreshTokenApiCompleter!.future;
   }
 
   Future<void> _removeToken() async {
@@ -97,6 +102,7 @@ class AuthService extends GetxService {
     _accessToken.value = null;
     _refreshToken.value = null;
     _onboardingToken.value = null;
+    _refreshTokenApiCompleter = null;
   }
 
   Future<void> logout() async {
