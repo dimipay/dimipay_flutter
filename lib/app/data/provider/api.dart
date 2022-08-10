@@ -173,7 +173,7 @@ class ApiProvider implements ApiInterface {
 
   @override
   Future<void> createGeneralCard(String number, String year, String month, String idNo, String pw) async {
-    String url = "payment/method/general";
+    String url = "/payment/method/general";
     Map<String, String> body = {
       "number": number,
       "year": year,
