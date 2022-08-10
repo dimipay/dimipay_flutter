@@ -52,7 +52,7 @@ class AppPages {
       LoginPageMiddleware(),
       PinPageMiddleware(),
     ]),
-    GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage(), binding: RegisterCardPageBinding(), middlewares: [
+    GetPage(name: Routes.REGISTERCARD, page: () => RegisterCardPage(), binding: RegisterCardPageBinding(), middlewares: [
       LoginPageMiddleware(),
       PinPageMiddleware(),
     ]),
