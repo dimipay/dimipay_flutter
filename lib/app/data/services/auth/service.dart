@@ -34,21 +34,21 @@ class AuthService extends GetxService {
     return this;
   }
 
-  Future _setAccessToken(String token) async {
+  Future<void> _setAccessToken(String token) async {
     await _storage.write(key: 'accessToken', value: token);
     _accessToken.value = token;
   }
 
-  Future _setRefreshToken(String token) async {
+  Future<void> _setRefreshToken(String token) async {
     await _storage.write(key: 'refreshToken', value: token);
     _refreshToken.value = token;
   }
 
-  Future _setDeviceUid(String deviceUid) async {
+  Future<void> _setDeviceUid(String deviceUid) async {
     await _storage.write(key: 'deviceUid', value: deviceUid);
   }
 
-  Future _setBioKey(String bioKey) async {
+  Future<void> _setBioKey(String bioKey) async {
     //TODO 회원가입 플로우의 생체인증 관련 로직이 개발이 안되어있기 때문에 이상태로 놔둡니다. 추후 개발필요.
     //TODO 생체인증 구현시에 biometric_storage 라이브러리 설정도 같이 진행되어야 합니다
   }
@@ -69,18 +69,18 @@ class AuthService extends GetxService {
 
     Map onboardingResult = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
 
-    _accessToken.value = onboardingResult['token']['accessToken'];
-    _refreshToken.value = onboardingResult['token']['refreshToken'];
+    _accessToken.value = onboardingResult['accessToken'];
+    _refreshToken.value = onboardingResult['refreshToken'];
 
-    _setAccessToken(_accessToken.value!);
-    _setRefreshToken(_refreshToken.value!);
-    _setDeviceUid(deviceUid);
-    _setBioKey(bioKey);
+    await _setAccessToken(_accessToken.value!);
+    await _setRefreshToken(_refreshToken.value!);
+    await _setDeviceUid(deviceUid);
+    await _setBioKey(bioKey);
 
     return _accessToken.value!;
   }
 
-  Future<void> refreshFromToken(Map loginResult) async {
+  Future<void> refreshAcessToken(Map loginResult) async {
     if (loginResult.containsKey("code") || loginResult.containsKey("message")) {
       if (loginResult["code"] == "JWT_EXPIRED") {
         Map refreshResult = await repository.refreshToken();
@@ -91,7 +91,7 @@ class AuthService extends GetxService {
     }
   }
 
-  Future _removeToken() async {
+  Future<void> _removeToken() async {
     await _storage.delete(key: 'accessToken');
     await _storage.delete(key: 'refreshToken');
     _accessToken.value = null;
