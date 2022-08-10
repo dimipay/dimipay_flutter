@@ -35,8 +35,7 @@ class JWTInterceptor extends Interceptor {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
-    //TODO errorcode 다시 명시하기
-    if (err.response?.statusCode == 400 || err.response?.statusCode == 500) {
+    if (err.response?.statusCode == 401) {
       AuthService authService = Get.find<AuthService>();
       await authService.refreshAcessToken();
 
