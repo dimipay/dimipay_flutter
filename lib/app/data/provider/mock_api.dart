@@ -102,6 +102,11 @@ class MockApiProvider implements ApiInterface {
   }
 
   @override
+  Future<void> deleteGeneralCard(String id) async {
+    await Future.delayed(const Duration(seconds: 1));
+  }
+
+  @override
   Future<String> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
     await Future.delayed(const Duration(seconds: 1));
     return 'testToken';
