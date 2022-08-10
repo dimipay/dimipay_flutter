@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterCardPage extends GetView<RegisterCardPageController> {
-  const RegisterCardPage({Key? key}) : super(key: key);
+  RegisterCardPage({Key? key}) : super(key: key);
+
+  final RegisterCardPageController registerCardPageController = Get.find<RegisterCardPageController>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +24,16 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
                     children: [
+                      DPSmallTextButton(
+                          text: "스캐너",
+                          onTap: () {
+                            registerCardPageController.scanCreditCard();
+                          }),
                       const SizedBox(height: 32),
                       DPTextField(
                         controller: controller.cardNumberFieldController,
                         label: '카드 번호',
-                        textInputType: TextInputType.number,
+                        textInputType: TextInputType.text,
                         maxLength: 16,
                         hintText: '카드 번호 16자리를 입력해주세요',
                       ),
@@ -69,7 +76,9 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
               ),
             ),
             DPKeyboardReactiveButton(
-              onTap: () {},
+              onTap: () {
+                registerCardPageController.createGeneralCard();
+              },
               padding: const EdgeInsets.all(24),
               child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
             ),
