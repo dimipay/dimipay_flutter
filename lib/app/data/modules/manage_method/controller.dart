@@ -1,14 +1,14 @@
 import 'package:credit_card_scanner/credit_card_scanner.dart';
-import 'package:dimipay/app/data/modules/register_card/repository.dart';
+import 'package:dimipay/app/data/modules/manage_method/repository.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RegisterCardPageController extends GetxController {
-  final RegisterCardRepository repository;
-  RegisterCardPageController(this.repository);
+class ManageMethodController extends GetxController {
+  final ManageMethodRepository repository;
+  ManageMethodController(this.repository);
 
   final TextEditingController cardNumberFieldController = TextEditingController();
   final TextEditingController expireDateFieldController = TextEditingController();

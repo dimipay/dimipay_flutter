@@ -1,9 +1,9 @@
 import 'package:dimipay/app/data/provider/api_interface.dart';
 
-class RegisterCardRepository {
+class ManageMethodRepository {
   final ApiInterface api;
 
-  RegisterCardRepository(this.api);
+  ManageMethodRepository(this.api);
 
   Future<Map> createGeneralCard(number, year, month, idNo, pw) => api.createGeneralCard(number, year, month, idNo, pw);
 }
