@@ -43,4 +43,8 @@ class ManageMethodController extends GetxController {
       DPErrorSnackBar().open(e.response!.data['message']);
     }
   }
+
+  Future<void> deleteGeneralCard() async {
+    await repository.deleteGeneralCard();
+  }
 }
