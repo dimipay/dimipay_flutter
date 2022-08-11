@@ -1,4 +1,4 @@
-class OnboardingTokenExpireException implements Exception {
+class OnboardingTokenException implements Exception {
   final String message;
-  OnboardingTokenExpireException(this.message);
+  OnboardingTokenException(this.message);
 }
