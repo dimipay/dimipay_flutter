@@ -168,7 +168,8 @@ class ApiProvider implements ApiInterface {
   Future<List<GeneralCard>> getGeneralCard() async {
     String url = '/payment/method';
     Response response = await dio.get(url);
-    return (response.data['methods'] as List?)?.where((element) => element['type'] == 'GENERAL').map((model) => GeneralCard.fromJson(model)).toList() ?? [];
+    log(response.data.toString());
+    return (response.data as List?)?.map((model) => GeneralCard.fromJson(model)).toList() ?? [];
   }
 
   @override
