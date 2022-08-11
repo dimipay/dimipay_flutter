@@ -5,5 +5,5 @@ class RegisterCardRepository {
 
   RegisterCardRepository(this.api);
 
-  Future<void> createGeneralCard(number, year, month, idNo, pw) => api.createGeneralCard(number, year, month, idNo, pw);
+  Future<Map> createGeneralCard(number, year, month, idNo, pw) => api.createGeneralCard(number, year, month, idNo, pw);
 }
