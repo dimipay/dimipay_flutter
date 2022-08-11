@@ -97,8 +97,9 @@ class MockApiProvider implements ApiInterface {
   }
 
   @override
-  Future<void> createGeneralCard(String number, String year, String month, String idNo, String pw) async {
+  Future<Map> createGeneralCard(String number, String year, String month, String idNo, String pw) async {
     await Future.delayed(const Duration(seconds: 1));
+    return {"code": "OK", "name": "KB국민"};
   }
 
   @override
