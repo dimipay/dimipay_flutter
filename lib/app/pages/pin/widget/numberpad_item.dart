@@ -13,15 +13,19 @@ class NumberPadItem extends GetWidget<PinPageController> {
     return GestureDetector(
       onTap: () {
         if (onTap == null) {
-          controller.clickNumPad(value);
+          controller.clickPad(value);
         } else {
           onTap;
         }
       },
-      child: Center(
-        child: Text(
-          value,
-          style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+      //hitslop 확보를 위한 Container
+      child: Container(
+        color: Colors.transparent,
+        child: Center(
+          child: Text(
+            value,
+            style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+          ),
         ),
       ),
     );

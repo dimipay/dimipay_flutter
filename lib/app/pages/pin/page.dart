@@ -106,7 +106,10 @@ class PinPage extends GetView<PinPageController> {
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(onTap: () => controller.clickBackspace(), child: const Icon(Icons.backspace_outlined, color: DPColors.DARK3, size: 22)),
+                  child: GestureDetector(
+                    onTap: () => controller.clickPad('\b'),
+                    child: const Icon(Icons.backspace_outlined, color: DPColors.DARK3, size: 22),
+                  ),
                 ),
               ],
             ),

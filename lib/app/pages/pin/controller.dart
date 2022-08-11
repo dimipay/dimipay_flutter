@@ -1,4 +1,5 @@
 import 'package:dimipay/app/core/utils/errors.dart';
+import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/pages/pin/widget/password_field.dart';
 import 'package:dimipay/app/routes/routes.dart';
@@ -12,11 +13,22 @@ class PinPageController extends GetxController with StateMixin {
 
   RxString password = "".obs;
 
-  Future<void> clickNumPad(String value) async {
+  void clickPad(String value) {
     //OnboardingAuth api 요청 중 pin을 누르는 경우에 대비함
     if (password.value.length >= 4) {
       return;
     }
+
+    HapticHelper.feedback(HapticPatterns.once);
+
+    if (value.isNum) {
+      _clickNumPad(value);
+    } else if (value == '\b') {
+      _clickBackspace();
+    }
+  }
+
+  Future<void> _clickNumPad(String value) async {
     password.value = password.value + value;
 
     if (password.value.length == 4) {
@@ -25,8 +37,8 @@ class PinPageController extends GetxController with StateMixin {
     }
   }
 
-  void clickBackspace() {
-    if (password.value.isEmpty || password.value.length >= 4) {
+  void _clickBackspace() {
+    if (password.value.isEmpty) {
       return;
     }
     password.value = password.value.substring(0, password.value.length - 1);
