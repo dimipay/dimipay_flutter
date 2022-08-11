@@ -172,7 +172,7 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<void> createGeneralCard(String number, String year, String month, String idNo, String pw) async {
+  Future<Map> createGeneralCard(String number, String year, String month, String idNo, String pw) async {
     String url = "/payment/method/general";
     Map<String, String> body = {
       "number": number,
@@ -181,7 +181,8 @@ class ApiProvider implements ApiInterface {
       "idNo": idNo,
       "pw": pw,
     };
-    await dio.post(url, data: body);
+    Response response = await dio.post(url, data: body);
+    return response.data;
   }
 
   @override
