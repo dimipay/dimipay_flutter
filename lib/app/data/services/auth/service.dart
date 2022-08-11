@@ -15,7 +15,7 @@ class AuthService extends GetxService {
   final Rx<String?> _accessToken = Rx(null);
   final Rx<String?> _refreshToken = Rx(null);
   final Rx<String?> _onboardingToken = Rx(null); // /auth/login API에서 반환되는 AccessToken
-  final Rx<bool> _isFirstVisit = Rx(true);
+  final Rx<bool> _isFirstVisit = Rx(false);
 
   AuthService(this.repository);
 
@@ -67,8 +67,10 @@ class AuthService extends GetxService {
   Future<String> onBoardingAuth(String paymentPin) async {
     String deviceUid = const Uuid().v4();
     String bioKey = const Uuid().v4();
+
     try {
       Map onboardingResult = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
+
       await _setAccessToken(onboardingResult['accessToken']);
       await _setRefreshToken(onboardingResult['refreshToken']);
       await _setDeviceUid(deviceUid);
@@ -81,6 +83,7 @@ class AuthService extends GetxService {
           throw OnboardingTokenException('구글 로그인을 다시 진행해주세요');
       }
     }
+
     return _accessToken.value!;
   }
 
