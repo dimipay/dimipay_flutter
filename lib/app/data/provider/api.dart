@@ -57,6 +57,12 @@ class LogInterceptor extends Interceptor {
     log('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}', name: 'DIO');
     handler.next(response);
   }
+
+  @override
+  void onError(DioError err, ErrorInterceptorHandler handler) {
+    log('RESPONSE[${err.response!.statusCode}] => PATH: ${err.response!.requestOptions.path}', name: 'DIO');
+    handler.next(err);
+  }
 }
 
 class ApiProvider implements ApiInterface {
