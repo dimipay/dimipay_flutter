@@ -1,6 +1,7 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
+import 'package:dimipay/app/data/modules/manage_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/general/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/general/model.dart';
 import 'package:dimipay/app/routes/routes.dart';
@@ -11,6 +12,7 @@ import 'package:get/get.dart';
 
 class ManageMethodPage extends StatelessWidget {
   final GeneralCardController generalCardController = Get.find<GeneralCardController>();
+  final ManageMethodController manageMethodController = Get.find<ManageMethodController>();
 
   ManageMethodPage({Key? key}) : super(key: key);
 
@@ -61,6 +63,9 @@ class ManageMethodPage extends StatelessWidget {
             // ),
             // const SizedBox(width: 24),
             GestureDetector(
+              onTap: () {
+                manageMethodController.deleteGeneralCard();
+              },
               child: Row(
                 children: [
                   SvgPicture.asset('asset/images/delete_card.svg'),
