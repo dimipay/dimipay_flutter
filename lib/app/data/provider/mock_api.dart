@@ -103,7 +103,7 @@ class MockApiProvider implements ApiInterface {
   }
 
   @override
-  Future<void> deleteGeneralCard(String id) async {
+  Future<void> deleteGeneralCard() async {
     await Future.delayed(const Duration(seconds: 1));
   }
 

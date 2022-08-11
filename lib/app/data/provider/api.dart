@@ -186,9 +186,9 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<void> deleteGeneralCard(String id) async {
+  Future<void> deleteGeneralCard() async {
     String url = "/payment/method/";
-    await dio.delete(url, queryParameters: {"id": id});
+    await dio.delete(url);
     return;
   }
 

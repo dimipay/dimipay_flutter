@@ -37,5 +37,5 @@ abstract class ApiInterface {
 
   Future<Map> createGeneralCard(String number, String year, String month, String idNo, String pw);
 
-  Future<void> deleteGeneralCard(String id);
+  Future<void> deleteGeneralCard();
 }
