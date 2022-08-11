@@ -7,7 +7,7 @@ class UserController extends GetxController with StateMixin<Rx<User?>> {
   final UserRepository repository;
   UserController(this.repository);
 
-  late Rx<User?> user;
+  Rx<User?> user = Rx(null);
 
   @override
   void onInit() {
