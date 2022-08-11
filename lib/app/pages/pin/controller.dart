@@ -65,7 +65,7 @@ class PinPageController extends GetxController with StateMixin {
       Get.offNamed(nextRoute);
     } on DioError catch (e) {
       DPErrorSnackBar().open(e.response!.data['message']);
-    } on OnboardingTokenExpireException catch (e) {
+    } on OnboardingTokenException catch (e) {
       DPErrorSnackBar().open(e.message);
       await authService.logout();
       Get.offAllNamed(Routes.LOGIN);

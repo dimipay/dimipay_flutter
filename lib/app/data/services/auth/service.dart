@@ -59,7 +59,6 @@ class AuthService extends GetxService {
   Future<void> loginWithGoogle({bool selectAccount = true}) async {
     GoogleSignInHelper googleSignInHelper = GoogleSignInHelper();
     String idToken = await googleSignInHelper.authenticate();
-    log(idToken.toString());
     Map loginResult = await repository.loginWithGoogle(idToken);
 
     _onboardingToken.value = loginResult['accessToken'];
@@ -80,40 +79,37 @@ class AuthService extends GetxService {
         case 400:
           rethrow;
         case 401:
-          throw OnboardingTokenExpireException('구글 로그인을 다시 진행해주세요');
+          throw OnboardingTokenException('구글 로그인을 다시 진행해주세요');
       }
     }
     return _accessToken.value!;
   }
 
-  Future<void> _refreshAccessToken({FutureOr<void> Function()? onError}) async {
+  Future<void> _refreshAccessToken() async {
     // refreshTokenApi의 동시 다발적인 호출을 방지하기 위해 completer를 사용함. 동시 다발적으로 이 함수를 호출해도 api는 1번만 호출 됨.
     if (_refreshTokenApiCompleter == null || _refreshTokenApiCompleter!.isCompleted) {
-      //첫 호출(null)이거나 이미 완료된 호출일 경우 새 객체 할당
+      //첫 호출(null)이거나 이미 완료된 호출(completed completer)일 경우 새 객체 할당
       _refreshTokenApiCompleter = Completer();
       try {
         if (_refreshToken.value == null) {
-          throw Exception();
+          throw RefreshTokenException();
         }
         String newAccessToken = await repository.refreshAccessToken(_refreshToken.value!);
         await _setAccessToken(newAccessToken);
         _refreshTokenApiCompleter!.complete();
-      } catch (e) {
-        if (onError != null) {
-          await onError();
-        }
+      } catch (_) {
+        await logout();
+        Get.offAllNamed(Routes.LOGIN);
+        throw RefreshTokenException();
       }
     }
-    return _refreshTokenApiCompleter!.future;
+
+    return _refreshTokenApiCompleter?.future;
   }
 
   ///Throws exception and route to loginpage if refresh faild
   Future<void> refreshAcessToken() async {
-    return _refreshAccessToken(onError: () async {
-      await logout();
-      Get.offAllNamed(Routes.LOGIN);
-      throw Exception('refreshToken is null!');
-    });
+    return _refreshAccessToken();
   }
 
   Future<void> _removeToken() async {
