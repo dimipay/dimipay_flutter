@@ -194,12 +194,11 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<void> postPaymentToken(String token) async {
+  Future<Map> getPaymentToken(String paymentMethod) async {
     String url = '/payment/token';
-    Map<String, String> body = {
-      'token': token,
-    };
-    await dio.post(url, data: body);
+    Map<String, String> body = {'paymentMethod"': paymentMethod};
+    Response response = await dio.post(url, data: body);
+    return response.data;
   }
 
   @override
