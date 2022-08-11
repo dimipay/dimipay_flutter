@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:developer';
+import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/core/utils/google.dart';
 import 'package:dimipay/app/data/services/auth/repository.dart';
 import 'package:dimipay/app/routes/routes.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -56,6 +59,7 @@ class AuthService extends GetxService {
   Future<void> loginWithGoogle({bool selectAccount = true}) async {
     GoogleSignInHelper googleSignInHelper = GoogleSignInHelper();
     String idToken = await googleSignInHelper.authenticate();
+    log(idToken.toString());
     Map loginResult = await repository.loginWithGoogle(idToken);
 
     _onboardingToken.value = loginResult['accessToken'];
@@ -65,14 +69,20 @@ class AuthService extends GetxService {
   Future<String> onBoardingAuth(String paymentPin) async {
     String deviceUid = const Uuid().v4();
     String bioKey = const Uuid().v4();
-
-    Map onboardingResult = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
-
-    await _setAccessToken(onboardingResult['accessToken']);
-    await _setRefreshToken(onboardingResult['refreshToken']);
-    await _setDeviceUid(deviceUid);
-    await _setBioKey(bioKey);
-
+    try {
+      Map onboardingResult = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
+      await _setAccessToken(onboardingResult['accessToken']);
+      await _setRefreshToken(onboardingResult['refreshToken']);
+      await _setDeviceUid(deviceUid);
+      await _setBioKey(bioKey);
+    } on DioError catch (e) {
+      switch (e.response?.statusCode) {
+        case 400:
+          rethrow;
+        case 401:
+          throw OnboardingTokenExpireException('구글 로그인을 다시 진행해주세요');
+      }
+    }
     return _accessToken.value!;
   }
 

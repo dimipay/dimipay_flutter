@@ -1,3 +1,4 @@
+import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/pages/pin/widget/password_field.dart';
 import 'package:dimipay/app/routes/routes.dart';
@@ -52,6 +53,10 @@ class PinPageController extends GetxController with StateMixin {
       Get.offNamed(nextRoute);
     } on DioError catch (e) {
       DPErrorSnackBar().open(e.response!.data['message']);
+    } on OnboardingTokenExpireException catch (e) {
+      DPErrorSnackBar().open(e.message);
+      await authService.logout();
+      Get.offAllNamed(Routes.LOGIN);
     } finally {
       change(null, status: RxStatus.success());
     }
