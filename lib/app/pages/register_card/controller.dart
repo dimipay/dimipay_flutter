@@ -23,31 +23,52 @@ class RegisterCardPageController extends GetxController with StateMixin {
   final Rx<DateTime?> birthday = Rx(null);
   final Rx<String?> password = Rx(null);
 
+  String formatCardNumber(String rawData) {
+    String formatedData = '';
+    for (int i = 0; i < rawData.length; i++) {
+      if (i != 0 && i % 4 == 0) {
+        formatedData += '-';
+      }
+      formatedData += rawData[i];
+    }
+    return formatedData;
+  }
+
+  String formatExpireDate(String rawData) {
+    String formatedData = '';
+    for (int i = 0; i < rawData.length; i++) {
+      if (i == 2) {
+        formatedData += '/';
+      }
+      formatedData += rawData[i];
+    }
+    return formatedData;
+  }
+
   @override
   void onInit() {
     change(null, status: RxStatus.success());
     cardNumberFieldController.addListener(() {
       String data = cardNumberFieldController.text;
-      String formatedData = data.replaceAll('-', '');
-
-      if (data.isNotEmpty && data.lastIndexOf('-') == data.length - 1) {
-        data = data.substring(0, data.length - 1);
-        cardNumberFieldController.text = data;
+      String rawData = data.replaceAll('-', '');
+      String formatedData = formatCardNumber(rawData);
+      if (data != formatedData) {
+        cardNumberFieldController.text = formatedData;
         cardNumberFieldController.selection = TextSelection.fromPosition(TextPosition(offset: cardNumberFieldController.text.length));
         return;
       }
-      if (data.length == 5 || data.length == 10 || data.length == 15) {
-        // ignore: prefer_interpolation_to_compose_strings
-        data = data.substring(0, data.length - 1) + '-' + data.substring(data.length - 1);
-        cardNumberFieldController.text = data;
-        cardNumberFieldController.selection = TextSelection.fromPosition(TextPosition(offset: cardNumberFieldController.text.length));
-        return;
-      }
-      cardNumber.value = data.length == 19 ? formatedData : null;
+      cardNumber.value = data.length == 19 ? rawData : null;
     });
     expiredDateFieldController.addListener(() {
       String data = expiredDateFieldController.text;
-      expiredAt.value = data.length == 4 ? DateTime(int.parse(data.substring(2)), int.parse(data.substring(0, 2))) : null;
+      String rawData = data.replaceAll('/', '');
+      String formatedData = formatExpireDate(rawData);
+      if (data != formatedData) {
+        expiredDateFieldController.text = formatedData;
+        expiredDateFieldController.selection = TextSelection.fromPosition(TextPosition(offset: expiredDateFieldController.text.length));
+        return;
+      }
+      expiredAt.value = data.length == 5 ? DateTime(int.parse(rawData.substring(2)), int.parse(rawData.substring(0, 2))) : null;
     });
     birthdayFieldController.addListener(() {
       String data = birthdayFieldController.text;
