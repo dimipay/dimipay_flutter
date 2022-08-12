@@ -6,7 +6,7 @@ import 'package:dimipay/app/data/modules/event/controller.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/controller.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
-import 'package:dimipay/app/data/modules/payment_method/general/controller.dart';
+import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/pages/home/widget/event_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
   final NoticeController noticeController = Get.find<NoticeController>();
   final EventController eventController = Get.find<EventController>();
-  final GeneralCardController generalCardController = Get.find<GeneralCardController>();
+  final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
 
   Widget _logoArea() {
     return Row(
@@ -234,7 +234,7 @@ class HomePage extends StatelessWidget {
               children: [
                 const SizedBox(width: 32, height: 81),
                 // ignore: unnecessary_cast
-                _buildPaymentMethods(generalCardController.cards.value.cast<PaymentMethod>()),
+                _buildPaymentMethods(paymentMethodController.paymentMethods.value),
                 const SizedBox(width: 20),
               ],
             ),

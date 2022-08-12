@@ -51,6 +51,7 @@ dependencies:
   google_sign_in: ^5.4.0
   uuid: ^3.0.6
   credit_card_scanner: ^1.0.5
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
