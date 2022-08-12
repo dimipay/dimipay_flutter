@@ -37,6 +37,7 @@ class JWTInterceptor extends Interceptor {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
     AuthService authService = Get.find<AuthService>();
+    //refresh api가 401시 무한 루프 방지
     if (err.response?.requestOptions.path == '/auth/refresh') {
       return handler.next(err);
     }
