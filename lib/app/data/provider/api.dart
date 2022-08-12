@@ -176,7 +176,7 @@ class ApiProvider implements ApiInterface {
     required DateTime ownerBirthday,
     required DateTime expireAt,
   }) async {
-    String url = "/payment/method/general";
+    String url = "/payment/method";
     Map<String, String> body = {
       "number": cardNumber,
       "year": DateFormat('yyyy').format(expireAt).substring(2),
