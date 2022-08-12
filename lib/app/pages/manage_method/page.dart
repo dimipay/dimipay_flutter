@@ -3,13 +3,14 @@ import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/pages/manage_method/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/divided_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class ManageMethodPage extends StatelessWidget {
+class ManageMethodPage extends GetView<ManageMethodPageController> {
   final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
 
   ManageMethodPage({Key? key}) : super(key: key);
@@ -51,9 +52,7 @@ class ManageMethodPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             GestureDetector(
-              onTap: () {
-                paymentMethodController.deleteGeneralCard();
-              },
+              onTap: controller.deletePaymentMethod,
               child: Row(
                 children: [
                   SvgPicture.asset('asset/images/delete_card.svg'),
