@@ -166,7 +166,7 @@ class ApiProvider implements ApiInterface {
     String url = '/payment/method';
     Response response = await dio.get(url);
     print(response.data);
-    return (response.data as List).map((model) => PaymentMethod.fromJson(model)).toList() ?? [];
+    return (response.data as List).map<PaymentMethod>((model) => PaymentMethod.fromJson(model)).toList();
   }
 
   @override
