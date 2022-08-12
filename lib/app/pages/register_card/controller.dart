@@ -18,12 +18,23 @@ class RegisterCardPageController extends GetxController with StateMixin {
   final TextEditingController passwordFieldController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
-	final FocusScopeNode formFocusScopeNode = FocusScopeNode();
+  final FocusScopeNode formFocusScopeNode = FocusScopeNode();
 
   final Rx<String?> cardNumber = Rx(null);
   final Rx<DateTime?> expiredAt = Rx(null);
   final Rx<DateTime?> birthday = Rx(null);
   final Rx<String?> password = Rx(null);
+
+  @override
+  void onInit() {
+    change(null, status: RxStatus.success());
+    cardNumberFieldController.addListener(onCardNumberChange);
+    expiredDateFieldController.addListener(onExpireDateChange);
+    birthdayFieldController.addListener(onBirthdayChange);
+    passwordFieldController.addListener(onPasswordChange);
+
+    super.onInit();
+  }
 
   String formatCardNumber(String rawData) {
     String formatedData = '';
@@ -34,6 +45,23 @@ class RegisterCardPageController extends GetxController with StateMixin {
       formatedData += rawData[i];
     }
     return formatedData;
+  }
+
+  void onCardNumberChange() {
+    String data = cardNumberFieldController.text;
+    String rawData = data.replaceAll('-', '');
+    String formatedData = formatCardNumber(rawData);
+    if (data != formatedData) {
+      cardNumberFieldController.text = formatedData;
+      cardNumberFieldController.selection = TextSelection.fromPosition(TextPosition(offset: cardNumberFieldController.text.length));
+      return;
+    }
+    if (data.length == 19) {
+      cardNumber.value = rawData;
+      formFocusScopeNode.nextFocus();
+    } else {
+      cardNumber.value = null;
+    }
   }
 
   String formatExpireDate(String rawData) {
@@ -47,61 +75,41 @@ class RegisterCardPageController extends GetxController with StateMixin {
     return formatedData;
   }
 
-  @override
-  void onInit() {
-    change(null, status: RxStatus.success());
-    cardNumberFieldController.addListener(() {
-      String data = cardNumberFieldController.text;
-      String rawData = data.replaceAll('-', '');
-      String formatedData = formatCardNumber(rawData);
-      if (data != formatedData) {
-        cardNumberFieldController.text = formatedData;
-        cardNumberFieldController.selection = TextSelection.fromPosition(TextPosition(offset: cardNumberFieldController.text.length));
-        return;
-      }
-      if (data.length == 19) {
-        cardNumber.value = rawData;
-        formFocusScopeNode.nextFocus();
-      } else {
-        cardNumber.value = null;
-      }
-    });
-    expiredDateFieldController.addListener(() {
-      String data = expiredDateFieldController.text;
-      String rawData = data.replaceAll('/', '');
-      String formatedData = formatExpireDate(rawData);
-      if (data != formatedData) {
-        expiredDateFieldController.text = formatedData;
-        expiredDateFieldController.selection = TextSelection.fromPosition(TextPosition(offset: expiredDateFieldController.text.length));
-        return;
-      }
-      if (data.length == 5) {
-        expiredAt.value = DateTime(int.parse(rawData.substring(2)), int.parse(rawData.substring(0, 2)));
-        formFocusScopeNode.nextFocus();
-      } else {
-        expiredAt.value = null;
-      }
-    });
-    birthdayFieldController.addListener(() {
-      String data = birthdayFieldController.text;
-      if (data.length == 6) {
-        birthday.value = DateTime.parse("00$data");
-        formFocusScopeNode.nextFocus();
-      } else {
-        birthday.value = null;
-      }
-    });
-    passwordFieldController.addListener(() {
-      String data = passwordFieldController.text;
-      if (data.length == 2) {
-        password.value = data;
-        formFocusScopeNode.nextFocus();
-      } else {
-        password.value = null;
-      }
-    });
+  void onExpireDateChange() {
+    String data = expiredDateFieldController.text;
+    String rawData = data.replaceAll('/', '');
+    String formatedData = formatExpireDate(rawData);
+    if (data != formatedData) {
+      expiredDateFieldController.text = formatedData;
+      expiredDateFieldController.selection = TextSelection.fromPosition(TextPosition(offset: expiredDateFieldController.text.length));
+      return;
+    }
+    if (data.length == 5) {
+      expiredAt.value = DateTime(int.parse(rawData.substring(2)), int.parse(rawData.substring(0, 2)));
+      formFocusScopeNode.nextFocus();
+    } else {
+      expiredAt.value = null;
+    }
+  }
 
-    super.onInit();
+  void onBirthdayChange() {
+    String data = birthdayFieldController.text;
+    if (data.length == 6) {
+      birthday.value = DateTime.parse("00$data");
+      formFocusScopeNode.nextFocus();
+    } else {
+      birthday.value = null;
+    }
+  }
+
+  void onPasswordChange() {
+    String data = passwordFieldController.text;
+    if (data.length == 2) {
+      password.value = data;
+      formFocusScopeNode.nextFocus();
+    } else {
+      password.value = null;
+    }
   }
 
   bool get inputValidity {
