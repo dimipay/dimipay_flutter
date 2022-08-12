@@ -1,13 +1,11 @@
-import 'package:dimipay/app/data/modules/manage_method/controller.dart';
+import 'package:dimipay/app/pages/register_card/controller.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RegisterCardPage extends GetView<ManageMethodController> {
-  RegisterCardPage({Key? key}) : super(key: key);
-
-  final ManageMethodController manageMethodController = Get.find<ManageMethodController>();
+class RegisterCardPage extends GetView<RegisterCardPageController> {
+  const RegisterCardPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,7 @@ class RegisterCardPage extends GetView<ManageMethodController> {
                       DPSmallTextButton(
                           text: "스캐너",
                           onTap: () {
-                            manageMethodController.scanCreditCard();
+                            controller.scanCreditCard();
                           }),
                       const SizedBox(height: 32),
                       DPTextField(
@@ -77,7 +75,7 @@ class RegisterCardPage extends GetView<ManageMethodController> {
             ),
             DPKeyboardReactiveButton(
               onTap: () {
-                manageMethodController.createGeneralCard();
+                controller.createGeneralCard();
               },
               padding: const EdgeInsets.all(24),
               child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
