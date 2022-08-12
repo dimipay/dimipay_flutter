@@ -22,62 +22,61 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Form(
                     key: controller.formKey,
-                    child: Column(
-                      children: [
-                        DPSmallTextButton(
-                          text: "스캐너",
-                          onTap: controller.scanCreditCard,
-                        ),
-                        const SizedBox(height: 32),
-                        DPTextFormField(
-                          enableInteractiveSelection: false,
-                          controller: controller.cardNumberFieldController,
-                          textInputType: TextInputType.number,
-                          textInputAction: TextInputAction.next,
-                          label: '카드 번호',
-                          hintText: '0000-0000-0000-0000',
-                          maxLength: 19,
-                        ),
-                        const SizedBox(height: 18),
-                        Row(
-                          children: [
-                            Flexible(
-                              child: DPTextFormField(
-                                enableInteractiveSelection: false,
-                                controller: controller.expiredDateFieldController,
-                                textInputType: TextInputType.number,
-                                textInputAction: TextInputAction.next,
-                                label: '유효기간',
-                                hintText: 'MM/YY',
-                                maxLength: 5,
+                    child: FocusScope(
+                      node: controller.formFocusScopeNode,
+                      child: Column(
+                        children: [
+                          DPSmallTextButton(
+                            text: "스캐너",
+                            onTap: controller.scanCreditCard,
+                          ),
+                          const SizedBox(height: 32),
+                          DPTextFormField(
+                            enableInteractiveSelection: false,
+                            controller: controller.cardNumberFieldController,
+                            textInputType: TextInputType.number,
+                            label: '카드 번호',
+                            hintText: '0000-0000-0000-0000',
+                            maxLength: 19,
+                          ),
+                          const SizedBox(height: 18),
+                          Row(
+                            children: [
+                              Flexible(
+                                child: DPTextFormField(
+                                  enableInteractiveSelection: false,
+                                  controller: controller.expiredDateFieldController,
+                                  textInputType: TextInputType.number,
+                                  label: '유효기간',
+                                  hintText: 'MM/YY',
+                                  maxLength: 5,
+                                ),
                               ),
-                            ),
-                            const SizedBox(width: 18),
-                            Flexible(
-                              child: DPTextFormField(
-                                enableInteractiveSelection: false,
-                                controller: controller.birthdayFieldController,
-                                textInputType: TextInputType.number,
-                                textInputAction: TextInputAction.next,
-                                label: '생년 월일',
-                                hintText: '6자리',
-                                maxLength: 6,
+                              const SizedBox(width: 18),
+                              Flexible(
+                                child: DPTextFormField(
+                                  enableInteractiveSelection: false,
+                                  controller: controller.birthdayFieldController,
+                                  textInputType: TextInputType.number,
+                                  label: '생년 월일',
+                                  hintText: '6자리',
+                                  maxLength: 6,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 18),
-                        DPTextFormField(
-                          enableInteractiveSelection: false,
-                          controller: controller.passwordFieldController,
-                          textInputType: TextInputType.number,
-                          isPassword: true,
-                          textInputAction: TextInputAction.done,
-                          label: '카드 비밀번호',
-                          hintText: '앞 2자리',
-                          maxLength: 2,
-                        ),
-                      ],
+                            ],
+                          ),
+                          const SizedBox(height: 18),
+                          DPTextFormField(
+                            enableInteractiveSelection: false,
+                            controller: controller.passwordFieldController,
+                            textInputType: TextInputType.number,
+                            isPassword: true,
+                            label: '카드 비밀번호',
+                            hintText: '앞 2자리',
+                            maxLength: 2,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

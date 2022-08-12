@@ -18,6 +18,8 @@ class RegisterCardPageController extends GetxController with StateMixin {
   final TextEditingController passwordFieldController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
+	final FocusScopeNode formFocusScopeNode = FocusScopeNode();
+
   final Rx<String?> cardNumber = Rx(null);
   final Rx<DateTime?> expiredAt = Rx(null);
   final Rx<DateTime?> birthday = Rx(null);
@@ -57,7 +59,12 @@ class RegisterCardPageController extends GetxController with StateMixin {
         cardNumberFieldController.selection = TextSelection.fromPosition(TextPosition(offset: cardNumberFieldController.text.length));
         return;
       }
-      cardNumber.value = data.length == 19 ? rawData : null;
+      if (data.length == 19) {
+        cardNumber.value = rawData;
+        formFocusScopeNode.nextFocus();
+      } else {
+        cardNumber.value = null;
+      }
     });
     expiredDateFieldController.addListener(() {
       String data = expiredDateFieldController.text;
@@ -68,15 +75,30 @@ class RegisterCardPageController extends GetxController with StateMixin {
         expiredDateFieldController.selection = TextSelection.fromPosition(TextPosition(offset: expiredDateFieldController.text.length));
         return;
       }
-      expiredAt.value = data.length == 5 ? DateTime(int.parse(rawData.substring(2)), int.parse(rawData.substring(0, 2))) : null;
+      if (data.length == 5) {
+        expiredAt.value = DateTime(int.parse(rawData.substring(2)), int.parse(rawData.substring(0, 2)));
+        formFocusScopeNode.nextFocus();
+      } else {
+        expiredAt.value = null;
+      }
     });
     birthdayFieldController.addListener(() {
       String data = birthdayFieldController.text;
-      birthday.value = data.length == 6 ? DateTime.parse("00$data") : null;
+      if (data.length == 6) {
+        birthday.value = DateTime.parse("00$data");
+        formFocusScopeNode.nextFocus();
+      } else {
+        birthday.value = null;
+      }
     });
     passwordFieldController.addListener(() {
       String data = passwordFieldController.text;
-      password.value = data.length == 2 ? data : null;
+      if (data.length == 2) {
+        password.value = data;
+        formFocusScopeNode.nextFocus();
+      } else {
+        password.value = null;
+      }
     });
 
     super.onInit();
