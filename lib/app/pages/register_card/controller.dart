@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:credit_card_scanner/credit_card_scanner.dart';
+import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
@@ -10,78 +12,43 @@ import 'package:get/get.dart';
 class RegisterCardPageController extends GetxController with StateMixin {
   final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
 
+  final TextEditingController cardNumberFieldController = TextEditingController();
+  final TextEditingController expiredDateFieldController = TextEditingController();
+  final TextEditingController birthdayFieldController = TextEditingController();
+  final TextEditingController passwordFieldController = TextEditingController();
+
   final formKey = GlobalKey<FormState>();
-  final Rx<String> cardNumber = Rx("");
-  final Rx<String> expiredDate = Rx("");
-  final Rx<String> birthday = Rx("");
-  final Rx<String> password = Rx("");
+  final Rx<String?> cardNumber = Rx(null);
+  final Rx<DateTime?> expiredAt = Rx(null);
+  final Rx<DateTime?> birthday = Rx(null);
+  final Rx<String?> password = Rx(null);
 
   @override
   void onInit() {
     change(null, status: RxStatus.success());
+    cardNumberFieldController.addListener(() {
+      String data = cardNumberFieldController.text;
+      cardNumber.value = data.length == 16 ? cardNumberFieldController.text : null;
+    });
+    expiredDateFieldController.addListener(() {
+      String data = expiredDateFieldController.text;
+      expiredAt.value = data.length == 4 ? DateTime(int.parse(data.substring(2)), int.parse(data.substring(0, 2))) : null;
+    });
+    birthdayFieldController.addListener(() {
+      String data = birthdayFieldController.text;
+      birthday.value = data.length == 6 ? DateTime.parse("00$data") : null;
+    });
+    passwordFieldController.addListener(() {
+      String data = passwordFieldController.text;
+      password.value = data.length == 2 ? data : null;
+    });
+
     super.onInit();
   }
 
-  bool get buttonEnabled {
-    if (cardNumberValidator(cardNumber.value) != null) {
-      return false;
-    }
-    if (expiredDateValidator(expiredDate.value) != null) {
-      return false;
-    }
-    if (birthdayValidator(birthday.value) != null) {
-      return false;
-    }
-    if (passwordValidator(password.value) != null) {
-      return false;
-    }
-    return true;
+  bool get inputValidity {
+    return cardNumber.value != null && expiredAt.value != null && birthday.value != null && password.value != null;
   }
-
-  String? cardNumberValidator(String? cardNumber) {
-    if (cardNumber == null || cardNumber.isEmpty) {
-      return "카드 번호를 입력하세요";
-    }
-    if (cardNumber.length != 16) {
-      return "카드 번호 16자리를 입력해주세요";
-    }
-    return null;
-  }
-
-  String? expiredDateValidator(String? expiredDate) {
-    if (expiredDate == null || expiredDate.isEmpty) {
-      return "만료기한를 입력하세요";
-    }
-    if (expiredDate.length != 4) {
-      return "만료기한 4자리를 입력해주세요";
-    }
-    return null;
-  }
-
-  String? birthdayValidator(String? birthday) {
-    if (birthday == null || birthday.isEmpty) {
-      return "생년월일를 입력하세요";
-    }
-    if (birthday.length != 6) {
-      return "생년월일 6자리를 입력해주세요";
-    }
-    return null;
-  }
-
-  String? passwordValidator(String? password) {
-    if (password == null || password.isEmpty) {
-      return "카드 비밀번호 앞 2자리를 입력하세요";
-    }
-    if (password.length != 2) {
-      return "카드 비밀번호 앞 2자리를 입력해주세요";
-    }
-    return null;
-  }
-
-  final TextEditingController cardNumberFieldController = TextEditingController();
-  final TextEditingController expiredDateFieldController = TextEditingController();
-  //final TextEditingController birthdayFieldController = TextEditingController();
-  //final TextEditingController passwordFieldController = TextEditingController();
 
   Future<void> scanCreditCard() async {
     final CardDetails? cardInfo = await CardScanner.scanCard(
@@ -90,8 +57,6 @@ class RegisterCardPageController extends GetxController with StateMixin {
       ),
     );
 
-    print(cardInfo!.map);
-
     if (cardInfo != null) {
       cardNumberFieldController.text = cardInfo.cardNumber;
       expiredDateFieldController.text = cardInfo.expiryDate.replaceAll("/", "");
@@ -99,23 +64,19 @@ class RegisterCardPageController extends GetxController with StateMixin {
   }
 
   Future<void> createGeneralCard() async {
-    //String cardNumber = cardNumberFieldController.text.replaceAll('-', '');
-    //String password = passwordFieldController.text;
-    // ignore: prefer_interpolation_to_compose_strings
-    //DateTime ownerBirthday = DateTime.parse('00' + birthdayFieldController.text);
-    //DateTime expireAt = DateTime(int.parse(expireDateFieldController.text.substring(2)), int.parse(expireDateFieldController.text.substring(0, 2)));
     try {
-      if (formKey.currentState!.validate()) {
-        formKey.currentState!.save();
+      if (inputValidity) {
         change(null, status: RxStatus.loading());
         await paymentMethodController.createGeneralCard(
-          cardNumber: cardNumber.value,
-          password: password.value,
-          ownerBirthday: DateTime.parse("00${birthday.value}"),
-          expireAt: DateTime(int.parse(expiredDate.value.substring(2)), int.parse(expiredDate.value.substring(0, 2))),
+          cardNumber: cardNumber.value!,
+          password: password.value!,
+          ownerBirthday: birthday.value!,
+          expireAt: expiredAt.value!,
         );
 
         Get.back();
+
+        DPSnackBar.open('카드를 성공적으로 등록했어요', backgroundColor: DPColors.MAIN_THEME, textColor: Colors.white, hapticFeedback: HapticPatterns.success);
       }
     } on DioError catch (e) {
       log(e.response.toString());
