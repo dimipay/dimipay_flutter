@@ -25,22 +25,17 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                     child: Column(
                       children: [
                         DPSmallTextButton(
-                            text: "스캐너",
-                            onTap: () {
-                              controller.scanCreditCard();
-                            }),
+                          text: "스캐너",
+                          onTap: controller.scanCreditCard,
+                        ),
                         const SizedBox(height: 32),
                         DPTextFormField(
                           controller: controller.cardNumberFieldController,
-                          validator: controller.cardNumberValidator,
-                          onChanged: (cardNumber) {
-                            controller.cardNumber.value = cardNumber;
-                          },
+                          textInputType: TextInputType.number,
                           textInputAction: TextInputAction.next,
                           label: '카드 번호',
-                          textInputType: TextInputType.number,
-                          maxLength: 16,
                           hintText: '카드 번호 16자리를 입력해주세요',
+                          maxLength: 16,
                         ),
                         const SizedBox(height: 18),
                         Row(
@@ -48,46 +43,35 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                             Flexible(
                               child: DPTextFormField(
                                 controller: controller.expiredDateFieldController,
-                                validator: controller.expiredDateValidator,
-                                onChanged: (expiredDate) {
-                                  controller.expiredDate.value = expiredDate;
-                                },
+                                textInputType: TextInputType.number,
                                 textInputAction: TextInputAction.next,
                                 label: '유효기간',
-                                maxLength: 4,
-                                textInputType: TextInputType.number,
                                 hintText: 'MM/YY',
+                                maxLength: 4,
                               ),
                             ),
                             const SizedBox(width: 18),
                             Flexible(
                               child: DPTextFormField(
-                                validator: controller.birthdayValidator,
-                                onChanged: (birthday) {
-                                  controller.birthday.value = birthday;
-                                },
+                                controller: controller.birthdayFieldController,
+                                textInputType: TextInputType.number,
                                 textInputAction: TextInputAction.next,
                                 label: '생년 월일',
-                                maxLength: 6,
-                                textInputType: TextInputType.number,
                                 hintText: '6자리로 입력',
+                                maxLength: 6,
                               ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 18),
                         DPTextFormField(
-                          validator: controller.passwordValidator,
-                          onChanged: (password) {
-                            controller.password.value = password;
-                          },
-                          textInputAction: TextInputAction.done,
-                          onEditingComplete: controller.createGeneralCard,
-                          label: '비밀번호',
-                          isPassword: true,
-                          maxLength: 2,
+                          controller: controller.passwordFieldController,
                           textInputType: TextInputType.number,
+                          isPassword: true,
+                          textInputAction: TextInputAction.done,
+                          label: '비밀번호',
                           hintText: '앞 2자리를 입력해주세요',
+                          maxLength: 2,
                         ),
                       ],
                     ),
@@ -96,21 +80,24 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
               ),
             ),
             controller.obx(
-                (_) => Obx(() => DPKeyboardReactiveButton(
-                      disabled: !controller.buttonEnabled,
-                      onTap: controller.buttonEnabled ? controller.createGeneralCard : null,
-                      padding: const EdgeInsets.all(24),
-                      child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
-                    )),
-                onLoading: const DPKeyboardReactiveButton(
-                  disabled: true,
-                  padding: EdgeInsets.all(24),
-                  child: SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
-                  ),
-                ))
+              (_) => Obx(
+                () => DPKeyboardReactiveButton(
+                  disabled: !controller.inputValidity,
+                  onTap: controller.createGeneralCard,
+                  padding: const EdgeInsets.all(24),
+                  child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+                ),
+              ),
+              onLoading: const DPKeyboardReactiveButton(
+                disabled: true,
+                padding: EdgeInsets.all(24),
+                child: SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                ),
+              ),
+            )
           ],
         ),
       ),
