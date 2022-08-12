@@ -34,13 +34,6 @@ class JWTInterceptor extends Interceptor {
     return handler.next(options);
   }
 
-  Future<void> _refreshAccessToken() async {
-    AuthService authService = Get.find<AuthService>();
-    if (JwtDecoder.isExpired(authService.accessToken!)) {
-      await authService.refreshAcessToken();
-    }
-  }
-
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
     AuthService authService = Get.find<AuthService>();
@@ -49,9 +42,9 @@ class JWTInterceptor extends Interceptor {
       return handler.next(err);
     }
 
-    if (err.response?.statusCode == 401 && authService.accessToken != null) {
+    if (err.response?.statusCode == 401 && authService.accessToken != null && JwtDecoder.isExpired(authService.accessToken!)) {
       try {
-        await _refreshAccessToken();
+        await authService.refreshAcessToken();
 
         //api 호출을 다시 시도함
         final Response response = await _dioInstance.fetch(err.requestOptions);
