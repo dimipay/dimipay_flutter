@@ -13,6 +13,7 @@ class DPTextField extends StatelessWidget {
   final void Function(String)? onChanged;
   final TextInputAction? textInputAction;
   final void Function()? onEditingComplete;
+  final bool? enableInteractiveSelection;
 
   const DPTextField({
     Key? key,
@@ -24,6 +25,7 @@ class DPTextField extends StatelessWidget {
     this.onChanged,
     this.textInputAction,
     this.onEditingComplete,
+    this.enableInteractiveSelection,
     this.autofocus = false,
     this.isPassword = false,
   }) : super(key: key);
@@ -31,6 +33,7 @@ class DPTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      enableInteractiveSelection: enableInteractiveSelection,
       obscureText: isPassword,
       enableSuggestions: !isPassword,
       autocorrect: !isPassword,
@@ -75,6 +78,7 @@ class DPTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   final TextInputAction? textInputAction;
   final void Function()? onEditingComplete;
+  final bool? enableInteractiveSelection;
 
   const DPTextFormField({
     Key? key,
@@ -87,6 +91,7 @@ class DPTextFormField extends StatelessWidget {
     this.onChanged,
     this.textInputAction,
     this.onEditingComplete,
+    this.enableInteractiveSelection,
     this.autofocus = false,
     this.isPassword = false,
   }) : super(key: key);
@@ -94,6 +99,7 @@ class DPTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enableInteractiveSelection: enableInteractiveSelection,
       textInputAction: textInputAction,
       obscureText: isPassword,
       enableSuggestions: !isPassword,
