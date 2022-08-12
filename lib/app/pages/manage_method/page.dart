@@ -138,9 +138,9 @@ class GeneralCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('3510 ···· ···· ····', style: DPTextTheme.DESCRIPTION),
-          const SizedBox(height: 4),
+          const SizedBox(height: 16),
           Text(card.name ?? '', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 48),
         ],
       ),
     );
