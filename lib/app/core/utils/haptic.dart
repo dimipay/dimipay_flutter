@@ -7,7 +7,7 @@ class HapticPattern {
 
 class HapticPatterns {
   static final error = HapticPattern([0, 150, 300]);
-  static final transactionSuccess = HapticPattern([300, 500]);
+  static final success = HapticPattern([300, 500]);
   static final once = HapticPattern([0]);
 }
 
