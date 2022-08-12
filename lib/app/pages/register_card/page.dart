@@ -30,18 +30,20 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                         ),
                         const SizedBox(height: 32),
                         DPTextFormField(
+                          enableInteractiveSelection: false,
                           controller: controller.cardNumberFieldController,
                           textInputType: TextInputType.number,
                           textInputAction: TextInputAction.next,
                           label: '카드 번호',
                           hintText: '카드 번호 16자리를 입력해주세요',
-                          maxLength: 16,
+                          maxLength: 19,
                         ),
                         const SizedBox(height: 18),
                         Row(
                           children: [
                             Flexible(
                               child: DPTextFormField(
+                                enableInteractiveSelection: false,
                                 controller: controller.expiredDateFieldController,
                                 textInputType: TextInputType.number,
                                 textInputAction: TextInputAction.next,
@@ -53,6 +55,7 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                             const SizedBox(width: 18),
                             Flexible(
                               child: DPTextFormField(
+                                enableInteractiveSelection: false,
                                 controller: controller.birthdayFieldController,
                                 textInputType: TextInputType.number,
                                 textInputAction: TextInputAction.next,
@@ -65,6 +68,7 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                         ),
                         const SizedBox(height: 18),
                         DPTextFormField(
+                          enableInteractiveSelection: false,
                           controller: controller.passwordFieldController,
                           textInputType: TextInputType.number,
                           isPassword: true,

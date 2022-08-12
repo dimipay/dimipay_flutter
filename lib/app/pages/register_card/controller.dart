@@ -28,7 +28,22 @@ class RegisterCardPageController extends GetxController with StateMixin {
     change(null, status: RxStatus.success());
     cardNumberFieldController.addListener(() {
       String data = cardNumberFieldController.text;
-      cardNumber.value = data.length == 16 ? cardNumberFieldController.text : null;
+      String formatedData = data.replaceAll('-', '');
+
+      if (data.isNotEmpty && data.lastIndexOf('-') == data.length - 1) {
+        data = data.substring(0, data.length - 1);
+        cardNumberFieldController.text = data;
+        cardNumberFieldController.selection = TextSelection.fromPosition(TextPosition(offset: cardNumberFieldController.text.length));
+        return;
+      }
+      if (data.length == 5 || data.length == 10 || data.length == 15) {
+        // ignore: prefer_interpolation_to_compose_strings
+        data = data.substring(0, data.length - 1) + '-' + data.substring(data.length - 1);
+        cardNumberFieldController.text = data;
+        cardNumberFieldController.selection = TextSelection.fromPosition(TextPosition(offset: cardNumberFieldController.text.length));
+        return;
+      }
+      cardNumber.value = data.length == 19 ? formatedData : null;
     });
     expiredDateFieldController.addListener(() {
       String data = expiredDateFieldController.text;
