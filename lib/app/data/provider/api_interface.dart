@@ -1,7 +1,7 @@
 import 'package:dimipay/app/data/modules/coupon/model.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
-import 'package:dimipay/app/data/modules/payment_method/general/model.dart';
+import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
 
@@ -25,13 +25,20 @@ abstract class ApiInterface {
 
   Future<List<Notice>> getNotice();
 
-  Future<List<Transaction>> getTransaction();
-
-  Future<List<GeneralCard>> getGeneralCard();
-
   Future<List<Event>> getOngoingEvents();
 
-  Future<void> createPaymentMethod(String cardNumber, int validYear, int validMonth);
+  Future<List<Transaction>> getTransaction();
+
+  Future<List<PaymentMethod>> getPaymentMethods();
+
+  Future<PaymentMethod> createPaymentMethod({
+    required String cardNumber,
+    required String password,
+    required DateTime ownerBirthday,
+    required DateTime expireAt,
+  });
+
+  Future<void> deletePaymentMethod();
 
   Future<Map> getPaymentToken(String paymentMethod);
 
@@ -40,6 +47,4 @@ abstract class ApiInterface {
   Future<void> changePaymentPin(String originalPin, String paymentPin);
 
   Future<void> createPrepaidCard();
-
-  Future<void> createGeneralCard(String number, String year, String month, String idNo, String pw);
 }

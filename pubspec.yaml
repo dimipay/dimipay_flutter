@@ -50,6 +50,8 @@ dependencies:
   hive_flutter: ^1.1.0
   google_sign_in: ^5.4.0
   uuid: ^3.0.6
+  credit_card_scanner: ^1.0.5
+  intl: ^0.17.0
   jwt_decoder: ^2.0.1
 
 dev_dependencies:
