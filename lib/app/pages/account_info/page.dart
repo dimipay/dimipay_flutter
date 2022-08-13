@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/data/modules/user/controller.dart';

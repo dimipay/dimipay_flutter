@@ -1,14 +1,9 @@
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
-import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:get/get.dart';
 
 class TransactionPageController extends GetxController {
   late Rx<String?> paymentMethodId;
-
-  List<PaymentMethod> get paymentMethods {
-    // ignore: unnecessary_cast
-    return Get.find<PaymentMethodController>().paymentMethods.value;
-  }
+  PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
 
   @override
   void onInit() {
@@ -17,7 +12,7 @@ class TransactionPageController extends GetxController {
   }
 
   int get currentIndex {
-    int index = paymentMethods.indexWhere((element) => element.systemId == paymentMethodId.value);
+    int index = paymentMethodController.paymentMethods.indexWhere((element) => element.systemId == paymentMethodId.value);
     if (index == -1) {
       return 0;
     }

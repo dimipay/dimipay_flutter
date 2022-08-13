@@ -234,7 +234,7 @@ class HomePage extends StatelessWidget {
               children: [
                 const SizedBox(width: 32, height: 81),
                 // ignore: unnecessary_cast
-                _buildPaymentMethods(paymentMethodController.paymentMethods.value),
+                _buildPaymentMethods(paymentMethodController.paymentMethods),
                 const SizedBox(width: 20),
               ],
             ),
