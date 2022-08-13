@@ -1,7 +1,7 @@
 import 'package:dimipay/app/data/modules/coupon/model.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
-import 'package:dimipay/app/data/modules/payment_method/general/model.dart';
+import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
 import 'package:dimipay/app/data/provider/api_interface.dart';
@@ -10,6 +10,8 @@ import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
 import 'dart:developer';
 import 'package:jwt_decoder/jwt_decoder.dart';
+
+import 'package:intl/intl.dart';
 
 class JWTInterceptor extends Interceptor {
   final Dio _dioInstance;
@@ -61,13 +63,15 @@ class JWTInterceptor extends Interceptor {
 class LogInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    log('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}', name: 'DIO');
+    log('${response.requestOptions.method}[${response.statusCode}] => PATH: ${response.requestOptions.path}', name: 'DIO');
     handler.next(response);
   }
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    log('RESPONSE[${err.response!.statusCode}] => PATH: ${err.response!.requestOptions.path}', name: 'DIO');
+    if (err.response != null) {
+      log('${err.response!.requestOptions.method}[${err.response!.statusCode}] => PATH: ${err.response!.requestOptions.path}', name: 'DIO');
+    }
     handler.next(err);
   }
 }
@@ -90,19 +94,6 @@ class ApiProvider implements ApiInterface {
       'paymentPin': paymentPin,
     };
     await dio.put(url, data: body);
-  }
-
-  @override
-  Future<void> createPaymentMethod(String cardNumber, int validYear, int validMonth) async {
-    const String url = '/payment/method';
-    final Map body = {
-      'cardNumber': cardNumber,
-      'validMonth': validMonth,
-      'validYear': validYear,
-    };
-    Response response = await dio.post(url, data: body);
-
-    return response.data['name']; //국민카드?
   }
 
   @override
@@ -215,23 +206,36 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<List<GeneralCard>> getGeneralCard() async {
+  Future<List<PaymentMethod>> getPaymentMethods() async {
     String url = '/payment/method';
     Response response = await dio.get(url);
-    return (response.data['methods'] as List?)?.where((element) => element['type'] == 'GENERAL').map((model) => GeneralCard.fromJson(model)).toList() ?? [];
+    return (response.data as List).map<PaymentMethod>((model) => PaymentMethod.fromJson(model)).toList();
   }
 
   @override
-  Future<void> createGeneralCard(String number, String year, String month, String idNo, String pw) async {
-    String url = "payment/method/general";
+  Future<PaymentMethod> createPaymentMethod({
+    required String cardNumber,
+    required String password,
+    required DateTime ownerBirthday,
+    required DateTime expireAt,
+  }) async {
+    String url = "/payment/method";
     Map<String, String> body = {
-      "number": number,
-      "year": year,
-      "month": month,
-      "idNo": idNo,
-      "pw": pw,
+      "number": cardNumber,
+      "year": DateFormat('yyyy').format(expireAt).substring(2),
+      "month": DateFormat('MM').format(expireAt),
+      "idNo": DateFormat('yyyyMMdd').format(ownerBirthday).substring(2),
+      "pw": password,
     };
-    await dio.post(url, data: body);
+    Response response = await dio.post(url, data: body);
+    return PaymentMethod.fromJson(response.data);
+  }
+
+  @override
+  Future<void> deletePaymentMethod() async {
+    String url = "/payment/method/";
+    await dio.delete(url);
+    return;
   }
 
   @override

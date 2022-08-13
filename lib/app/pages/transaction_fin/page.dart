@@ -7,7 +7,7 @@ import 'package:lottie/lottie.dart';
 
 class TransactionFinPage extends StatelessWidget {
   TransactionFinPage({Key? key}) : super(key: key) {
-    HapticHelper.feedback(HapticPatterns.transactionSuccess);
+    HapticHelper.feedback(HapticPatterns.success);
   }
 
   @override

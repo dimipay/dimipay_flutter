@@ -1,16 +1,17 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
-import 'package:dimipay/app/data/modules/payment_method/general/controller.dart';
-import 'package:dimipay/app/data/modules/payment_method/general/model.dart';
+import 'package:dimipay/app/data/modules/payment_method/controller.dart';
+import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/pages/manage_method/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/divided_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class ManageMethodPage extends StatelessWidget {
-  final GeneralCardController generalCardController = Get.find<GeneralCardController>();
+class ManageMethodPage extends GetView<ManageMethodPageController> {
+  final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
 
   ManageMethodPage({Key? key}) : super(key: key);
 
@@ -42,25 +43,16 @@ class ManageMethodPage extends StatelessWidget {
     );
   }
 
-  Widget _generalCard(GeneralCard card) {
+  Widget _generalCard(PaymentMethod paymentMethod) {
     return Column(
       children: [
-        GeneralCardWidget(card),
+        GeneralCardWidget(paymentMethod),
         const SizedBox(height: 24),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            // GestureDetector(
-            //   child: Row(
-            //     children: [
-            //       SvgPicture.asset('asset/images/change_card.svg'),
-            //       const SizedBox(width: 6),
-            //       const Text('카드 변경', style: DPTextTheme.REGULAR),
-            //     ],
-            //   ),
-            // ),
-            // const SizedBox(width: 24),
             GestureDetector(
+              onTap: controller.deletePaymentMethod,
               child: Row(
                 children: [
                   SvgPicture.asset('asset/images/delete_card.svg'),
@@ -84,12 +76,12 @@ class ManageMethodPage extends StatelessWidget {
         const SizedBox(height: 24),
         Obx(
           () {
-            if (generalCardController.cards.value.isEmpty) {
+            if (paymentMethodController.paymentMethods.value.isEmpty) {
               return _registerCardWidget();
             } else {
               return DividedColumn(
                 divider: const SizedBox(height: 36),
-                children: [for (var generalCard in generalCardController.cards.value) _generalCard(generalCard)],
+                children: [for (var generalCard in paymentMethodController.paymentMethods.value) _generalCard(generalCard)],
               );
             }
           },
@@ -108,7 +100,7 @@ class ManageMethodPage extends StatelessWidget {
       body: RefreshIndicator(
         onRefresh: () async {
           HapticHelper.feedback(HapticPatterns.once);
-          await generalCardController.getGeneralCards();
+          await paymentMethodController.fetchPaymentMethods();
           HapticHelper.feedback(HapticPatterns.once);
         },
         color: DPColors.MAIN_THEME,
@@ -131,7 +123,7 @@ class ManageMethodPage extends StatelessWidget {
 }
 
 class GeneralCardWidget extends StatelessWidget {
-  final GeneralCard card;
+  final PaymentMethod card;
   const GeneralCardWidget(this.card, {Key? key}) : super(key: key);
 
   @override
@@ -146,9 +138,9 @@ class GeneralCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('3510 ···· ···· ····', style: DPTextTheme.DESCRIPTION),
-          const SizedBox(height: 4),
+          const SizedBox(height: 16),
           Text(card.name ?? '', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 48),
         ],
       ),
     );
