@@ -1,28 +1,29 @@
 import 'package:dimipay/app/data/modules/coupon/model.dart';
 import 'package:dimipay/app/data/modules/coupon/repository.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class CouponController extends GetxController with StateMixin<List<Coupon>> {
   final CouponRepository repository;
+
   CouponController(this.repository);
-  Rx<List<Coupon>> coupons = Rx([]);
+
+  final Rx<List<Coupon>> _coupons = Rx([]);
+  List<Coupon> get coupons => _coupons.value;
 
   @override
   void onInit() {
-    getCoupons();
+    fetchCoupons();
     super.onInit();
   }
 
-  Future getCoupons() async {
-    change(null, status: RxStatus.loading());
-    coupons.value = await repository.get();
-    change(coupons.value, status: RxStatus.success());
-  }
-
-  Future<void> refreshCoupons() async {
-    HapticFeedback.mediumImpact();
-    await getCoupons();
-    HapticFeedback.mediumImpact();
+  Future fetchCoupons() async {
+    try {
+      change(coupons, status: RxStatus.loading());
+      _coupons.value = await repository.get();
+      change(coupons, status: RxStatus.success());
+    } catch (e) {
+      change(coupons, status: RxStatus.error());
+      rethrow;
+    }
   }
 }
