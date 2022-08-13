@@ -1,5 +1,5 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
-import 'package:dimipay/app/core/utils/initializer.dart';
+import 'package:dimipay/app/core/utils/loader.dart';
 import 'package:dimipay/app/routes/pages.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ String getInintialRoute({bool debug = false}) {
 Future main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  await AppInitializer().init();
+  await AppLoader().load();
   FlutterNativeSplash.remove();
   runApp(
     GetMaterialApp(
