@@ -184,7 +184,7 @@ class HomePage extends StatelessWidget {
             _noticeArea(),
             Obx(
               () {
-                if (noticeController.notices.value.isNotEmpty && eventController.events.value.isNotEmpty) {
+                if (noticeController.notices.value.isNotEmpty && eventController.events.isNotEmpty) {
                   return _topDivider();
                 } else {
                   return Container();
