@@ -2,12 +2,13 @@ import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/data/modules/transaction/controller.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
+import 'package:dimipay/app/pages/history/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class TransactionHistoryPage extends StatelessWidget {
-  TransactionHistoryPage({Key? key}) : super(key: key);
+class HistoryPage extends GetView<HistoryPageController> {
+  HistoryPage({Key? key}) : super(key: key);
   final TransactionController transactionController = Get.find<TransactionController>();
 
   Widget _buildTransactions(List<Transaction> transactions) {
@@ -45,7 +46,7 @@ class TransactionHistoryPage extends StatelessWidget {
       body: SafeArea(
         child: RefreshIndicator(
           color: DPColors.MAIN_THEME,
-          onRefresh: transactionController.refreshData,
+          onRefresh: controller.refreshData,
           child: Column(
             children: [
               Expanded(

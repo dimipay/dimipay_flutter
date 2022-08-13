@@ -13,6 +13,8 @@ import 'package:dimipay/app/pages/coupon/binding.dart';
 import 'package:dimipay/app/pages/edit_card_name/page.dart';
 import 'package:dimipay/app/pages/event/page.dart';
 import 'package:dimipay/app/pages/event/binding.dart';
+import 'package:dimipay/app/pages/history/binding.dart';
+import 'package:dimipay/app/pages/history/page.dart';
 import 'package:dimipay/app/pages/home/page.dart';
 import 'package:dimipay/app/pages/home/binding.dart';
 import 'package:dimipay/app/pages/issue_coupon/page.dart';
@@ -31,8 +33,6 @@ import 'package:dimipay/app/pages/test/page.dart';
 import 'package:dimipay/app/pages/transaction/binding.dart';
 import 'package:dimipay/app/pages/transaction/page.dart';
 import 'package:dimipay/app/pages/transaction_fin/page.dart';
-import 'package:dimipay/app/pages/transaction_history/binding.dart';
-import 'package:dimipay/app/pages/transaction_history/page.dart';
 import 'package:dimipay/app/pages/untitled/page.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:get/get.dart';
@@ -80,7 +80,7 @@ class AppPages {
       LoginPageMiddleware(),
       PinPageMiddleware(),
     ]),
-    GetPage(name: Routes.TRANSACTIONHISTORY, page: () => TransactionHistoryPage(), binding: TransactionBinding(), middlewares: [
+    GetPage(name: Routes.HISTORY, page: () => HistoryPage(), binding: HistoryPageBinding(), middlewares: [
       LoginPageMiddleware(),
       PinPageMiddleware(),
     ]),
