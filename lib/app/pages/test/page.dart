@@ -23,7 +23,7 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.ACCOUNTINFO);
+              Get.toNamed(Routes.USER);
             },
             child: const Text('ACCOUNTINFO'),
           ),
