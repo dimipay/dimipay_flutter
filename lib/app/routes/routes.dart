@@ -12,7 +12,7 @@ abstract class Routes {
   static const CHARGINGFIN = '/ChargingFin';
   static const CHARGINGAMOUNT = "/ChargingFin/ChargingAmount";
   static const COUPON = "/Coupon";
-  static const TRANSACTIONHISTORY = '/TransactionHistory';
+  static const HISTORY = '/History';
   static const CHANGEPASSWORD = "/ChangePassword";
   static const UNTITLED = "/Untitled";
   static const TRANSACTION = "/Transaction";

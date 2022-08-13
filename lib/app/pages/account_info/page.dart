@@ -116,7 +116,7 @@ class AccountInfoPage extends StatelessWidget {
   Widget _transactionHistoryArea() {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(Routes.TRANSACTIONHISTORY);
+        Get.toNamed(Routes.HISTORY);
       },
       child: Container(
         color: Colors.white,
