@@ -140,7 +140,6 @@ class AccountInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log(Get.find<AuthService>().accessToken ?? '');
     return Scaffold(
       appBar: AppBar(
         actions: [

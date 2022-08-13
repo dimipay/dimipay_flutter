@@ -145,7 +145,6 @@ class RegisterCardPageController extends GetxController with StateMixin {
         DPSnackBar.open('카드를 성공적으로 등록했어요', backgroundColor: DPColors.MAIN_THEME, textColor: Colors.white, hapticFeedback: HapticPatterns.success);
       }
     } on DioError catch (e) {
-      log(e.response.toString());
       DPErrorSnackBar().open(e.response!.data['message']);
     } finally {
       change(null, status: RxStatus.success());

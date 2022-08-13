@@ -165,7 +165,6 @@ class ApiProvider implements ApiInterface {
   Future<List<PaymentMethod>> getPaymentMethods() async {
     String url = '/payment/method';
     Response response = await dio.get(url);
-    print(response.data);
     return (response.data as List).map<PaymentMethod>((model) => PaymentMethod.fromJson(model)).toList();
   }
 
@@ -185,8 +184,7 @@ class ApiProvider implements ApiInterface {
       "pw": password,
     };
     Response response = await dio.post(url, data: body);
-    print(response.data);
-    return PaymentMethod(color: null, createdAt: DateTime.now(), name: null, ownerSid: '', systemId: '', updatedAt: DateTime.now());
+    return PaymentMethod.fromJson(response.data);
   }
 
   @override
