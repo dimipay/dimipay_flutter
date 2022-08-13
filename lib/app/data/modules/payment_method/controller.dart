@@ -2,11 +2,12 @@ import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/repository.dart';
 import 'package:get/get.dart';
 
-class PaymentMethodController extends GetxController {
+class PaymentMethodController extends GetxController with StateMixin<List<PaymentMethod>> {
   final PaymentMethodRepository repository;
   PaymentMethodController(this.repository);
 
-  final Rx<List<PaymentMethod>> paymentMethods = Rx([]);
+  final Rx<List<PaymentMethod>> _paymentMethods = Rx([]);
+  List<PaymentMethod> get paymentMethods => _paymentMethods.value;
 
   @override
   void onInit() {
@@ -21,18 +22,24 @@ class PaymentMethodController extends GetxController {
     required DateTime expireAt,
   }) async {
     PaymentMethod newPaymentMethod = await repository.createPaymentMethod(cardNumber: cardNumber, password: password, ownerBirthday: ownerBirthday, expireAt: expireAt);
-    paymentMethods.value.add(newPaymentMethod);
-    paymentMethods.refresh();
+    _paymentMethods.value.add(newPaymentMethod);
+    _paymentMethods.refresh();
   }
 
-  Future<List<PaymentMethod>> fetchPaymentMethods() async {
-    paymentMethods.value = await repository.getPaymentMethods();
-    return paymentMethods.value;
+  Future<void> fetchPaymentMethods() async {
+    try {
+      change(paymentMethods, status: RxStatus.loading());
+      _paymentMethods.value = await repository.getPaymentMethods();
+      change(paymentMethods, status: RxStatus.success());
+    } catch (e) {
+      change(paymentMethods, status: RxStatus.error());
+      rethrow;
+    }
   }
 
   Future<void> deleteGeneralCard() async {
     await repository.deletePaymentMethod();
-    paymentMethods.value.clear();
-    paymentMethods.refresh();
+    _paymentMethods.value.clear();
+    _paymentMethods.refresh();
   }
 }

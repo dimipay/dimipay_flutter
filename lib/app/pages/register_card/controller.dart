@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:credit_card_scanner/credit_card_scanner.dart';
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
