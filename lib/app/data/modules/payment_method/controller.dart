@@ -21,9 +21,8 @@ class PaymentMethodController extends GetxController {
     required DateTime expireAt,
   }) async {
     PaymentMethod newPaymentMethod = await repository.createPaymentMethod(cardNumber: cardNumber, password: password, ownerBirthday: ownerBirthday, expireAt: expireAt);
-    // paymentMethods.value.add(newPaymentMethod);
-    // paymentMethods.refresh();
-    await fetchPaymentMethods();
+    paymentMethods.value.add(newPaymentMethod);
+    paymentMethods.refresh();
   }
 
   Future<List<PaymentMethod>> fetchPaymentMethods() async {
