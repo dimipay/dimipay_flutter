@@ -3,25 +3,26 @@ import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/data/modules/user/controller.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/data/services/config/service.dart';
+import 'package:dimipay/app/pages/user/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class AccountInfoPage extends StatelessWidget {
-  AccountInfoPage({Key? key}) : super(key: key);
+class UserPage extends GetView<UserPageController> {
+  UserPage({Key? key}) : super(key: key);
   final UserController userController = Get.find<UserController>();
 
   Widget _userName() {
     return userController.obx(
-      (state) => Text(state!.value!.name, style: DPTextTheme.REGULAR_IMPORTANT),
+      (state) => Text(state!.name, style: DPTextTheme.REGULAR_IMPORTANT),
       onLoading: const Text('loading...', style: DPTextTheme.REGULAR_IMPORTANT),
     );
   }
 
   Widget _userId() {
     return userController.obx(
-      (state) => Text(state!.value!.accountName, style: DPTextTheme.DESCRIPTION),
+      (state) => Text(state!.accountName, style: DPTextTheme.DESCRIPTION),
       onLoading: const Text('loading...', style: DPTextTheme.DESCRIPTION),
     );
   }
@@ -31,7 +32,7 @@ class AccountInfoPage extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Obx(() {
-          String? profileImageUrl = userController.user.value?.profileImage;
+          String? profileImageUrl = userController.user?.profileImage;
           if (profileImageUrl == null) {
             return const CircleAvatar(backgroundImage: AssetImage('asset/images/Image11.png'), radius: 24);
           } else {
@@ -169,7 +170,7 @@ class AccountInfoPage extends StatelessWidget {
       body: SafeArea(
         child: RefreshIndicator(
           color: DPColors.MAIN_THEME,
-          onRefresh: userController.refreshData,
+          onRefresh: controller.refreshData,
           child: Container(
             height: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 32),

@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
             DPIconButton(
               'asset/images/profile.svg',
               onTap: () {
-                Get.toNamed(Routes.ACCOUNTINFO);
+                Get.toNamed(Routes.USER);
               },
             ),
           ],

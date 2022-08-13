@@ -1,7 +1,5 @@
 import 'package:dimipay/app/core/middleware/login_page.dart';
 import 'package:dimipay/app/core/middleware/pin_page.dart';
-import 'package:dimipay/app/pages/account_info/page.dart';
-import 'package:dimipay/app/pages/account_info/binding.dart';
 import 'package:dimipay/app/pages/biometric_auth/page.dart';
 import 'package:dimipay/app/pages/card_fin/page.dart';
 import 'package:dimipay/app/pages/change_password/page.dart';
@@ -34,6 +32,8 @@ import 'package:dimipay/app/pages/transaction/binding.dart';
 import 'package:dimipay/app/pages/transaction/page.dart';
 import 'package:dimipay/app/pages/transaction_fin/page.dart';
 import 'package:dimipay/app/pages/untitled/page.dart';
+import 'package:dimipay/app/pages/user/binding.dart';
+import 'package:dimipay/app/pages/user/page.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:get/get.dart';
 
@@ -44,7 +44,7 @@ class AppPages {
       LoginPageMiddleware(),
       PinPageMiddleware(),
     ]),
-    GetPage(name: Routes.ACCOUNTINFO, page: () => AccountInfoPage(), binding: AccountInfoPageBinding(), middlewares: [
+    GetPage(name: Routes.USER, page: () => UserPage(), binding: UserPageBinding(), middlewares: [
       LoginPageMiddleware(),
       PinPageMiddleware(),
     ]),
