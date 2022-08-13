@@ -2,10 +2,13 @@ import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/notice/repository.dart';
 import 'package:get/get.dart';
 
-class NoticeController extends GetxController with StateMixin<List<Notice>?> {
+class NoticeController extends GetxController with StateMixin<List<Notice>> {
   final NoticeRepository repository;
+
   NoticeController(this.repository);
-  Rx<List<Notice>> notices = Rx([]);
+
+  final Rx<List<Notice>> _notices = Rx([]);
+  List<Notice> get notices => _notices.value;
 
   @override
   void onInit() {
@@ -14,8 +17,13 @@ class NoticeController extends GetxController with StateMixin<List<Notice>?> {
   }
 
   Future getNotice() async {
-    change(null, status: RxStatus.loading());
-    notices.value = await repository.get();
-    change(notices.value, status: RxStatus.success());
+    try {
+      change(notices, status: RxStatus.loading());
+      _notices.value = await repository.get();
+      change(notices, status: RxStatus.success());
+    } catch (e) {
+      change(notices, status: RxStatus.error());
+      rethrow;
+    }
   }
 }
