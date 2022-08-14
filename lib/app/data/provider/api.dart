@@ -147,23 +147,6 @@ class ApiProvider implements ApiInterface {
     return User.fromJson(response.data['me']);
   }
 
-  @Deprecated('이 api는 더 이상 사용되지 않음')
-  @override
-  Future<String> login(String username, String password) async {
-    String url = '/auth/login';
-    Map body = {
-      'username': username,
-      'password': password,
-      "pin": "135790",
-      "deviceUid": "9cf20349-c0af-42d3-820e-f17862c2d923",
-      "bioKey": "580a4559-78c7-4d00-a5b7-b501b2c0e112",
-    };
-
-    Response response = await dio.post(url, data: body);
-
-    return response.data['accessToken'];
-  }
-
   @override
   Future<Map> loginWithGoogle(String idToken) async {
     String url = '/auth/login';
@@ -236,11 +219,5 @@ class ApiProvider implements ApiInterface {
     String url = "/payment/method/";
     await dio.delete(url);
     return;
-  }
-
-  @override
-  Future<void> createPrepaidCard() async {
-    String url = '/payment/create-prepaid';
-    await dio.post(url);
   }
 }

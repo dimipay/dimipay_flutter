@@ -6,8 +6,6 @@ import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
 
 abstract class ApiInterface {
-  @Deprecated('이 api는 더 이상 사용되지 않음')
-  Future<String> login(String username, String password);
 
   Future<Map> loginWithGoogle(String idToken);
 
@@ -46,5 +44,4 @@ abstract class ApiInterface {
 
   Future<void> changePaymentPin(String originalPin, String paymentPin);
 
-  Future<void> createPrepaidCard();
 }
