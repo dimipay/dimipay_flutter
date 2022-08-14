@@ -5,8 +5,6 @@ PODS:
   - AppAuth/Core (1.5.0)
   - AppAuth/ExternalUserAgent (1.5.0):
     - AppAuth/Core
-  - biometric_storage (0.0.1):
-    - Flutter
   - credit_card_scanner (0.0.1):
     - Flutter
     - GoogleMLKit/TextRecognition
@@ -90,11 +88,12 @@ PODS:
     - Flutter
   - PromisesObjC (2.1.1)
   - Protobuf (3.21.5)
+  - screen_brightness_ios (0.1.0):
+    - Flutter
   - shared_preferences_ios (0.0.1):
     - Flutter
 
 DEPENDENCIES:
-  - biometric_storage (from `.symlinks/plugins/biometric_storage/ios`)
   - credit_card_scanner (from `.symlinks/plugins/credit_card_scanner/ios`)
   - Flutter (from `Flutter`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
@@ -102,6 +101,7 @@ DEPENDENCIES:
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
+  - screen_brightness_ios (from `.symlinks/plugins/screen_brightness_ios/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
 
 SPEC REPOS:
@@ -125,8 +125,6 @@ SPEC REPOS:
     - Protobuf
 
 EXTERNAL SOURCES:
-  biometric_storage:
-    :path: ".symlinks/plugins/biometric_storage/ios"
   credit_card_scanner:
     :path: ".symlinks/plugins/credit_card_scanner/ios"
   Flutter:
@@ -141,12 +139,13 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/google_sign_in_ios/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
+  screen_brightness_ios:
+    :path: ".symlinks/plugins/screen_brightness_ios/ios"
   shared_preferences_ios:
     :path: ".symlinks/plugins/shared_preferences_ios/ios"
 
 SPEC CHECKSUMS:
   AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
-  biometric_storage: 1400f1382af3a4cc2bf05340e13c3d8de873ceb9
   credit_card_scanner: 2c3c58d821ec493cb42cf7c782dc461f516c212b
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
@@ -170,6 +169,7 @@ SPEC CHECKSUMS:
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   Protobuf: 7504b04fffcf6662ad629694db8231f5e744327f
+  screen_brightness_ios: 715ca807df953bf676d339f11464e438143ee625
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
 
 PODFILE CHECKSUM: 4e8f8b2be68aeea4c0d5beb6ff1e79fface1d048
