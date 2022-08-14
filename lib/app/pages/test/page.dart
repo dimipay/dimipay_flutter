@@ -41,12 +41,6 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.SELECTCHARGINGMETHOD);
-            },
-            child: const Text("SELECTCHARGINGMETHOD"),
-          ),
-          TextButton(
-            onPressed: () {
               Get.toNamed(Routes.EDITCARDNAME);
             },
             child: const Text("EDITCARDNAME"),
@@ -59,18 +53,6 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.CHARGINGFIN);
-            },
-            child: const Text("CHARGINGFIN"),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.CHARGINGAMOUNT);
-            },
-            child: const Text("CHARGINGAMOUNT"),
-          ),
-          TextButton(
-            onPressed: () {
               Get.toNamed(Routes.COUPON);
             },
             child: const Text('COUPONLIST'),
@@ -80,18 +62,6 @@ class TestPage extends StatelessWidget {
               Get.toNamed(Routes.HISTORY);
             },
             child: const Text('TRANSACTIONHISTORY'),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.CHANGEPASSWORD);
-            },
-            child: const Text('CHANGEPASSWORD'),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.UNTITLED);
-            },
-            child: const Text('UNTITLED'),
           ),
           TextButton(
             onPressed: () {

@@ -2,10 +2,6 @@ import 'package:dimipay/app/core/middleware/login_page.dart';
 import 'package:dimipay/app/core/middleware/pin_page.dart';
 import 'package:dimipay/app/pages/biometric_auth/page.dart';
 import 'package:dimipay/app/pages/card_fin/page.dart';
-import 'package:dimipay/app/pages/change_password/page.dart';
-import 'package:dimipay/app/pages/change_password/binding.dart';
-import 'package:dimipay/app/pages/charging_amount/page.dart';
-import 'package:dimipay/app/pages/charging_fin/page.dart';
 import 'package:dimipay/app/pages/coupon/page.dart';
 import 'package:dimipay/app/pages/coupon/binding.dart';
 import 'package:dimipay/app/pages/edit_card_name/page.dart';
@@ -26,12 +22,10 @@ import 'package:dimipay/app/pages/pin/page.dart';
 import 'package:dimipay/app/pages/printer_setting/page.dart';
 import 'package:dimipay/app/pages/register_card/page.dart';
 import 'package:dimipay/app/pages/register_card/binding.dart';
-import 'package:dimipay/app/pages/select_charging_method/page.dart';
 import 'package:dimipay/app/pages/test/page.dart';
 import 'package:dimipay/app/pages/transaction/binding.dart';
 import 'package:dimipay/app/pages/transaction/page.dart';
 import 'package:dimipay/app/pages/transaction_fin/page.dart';
-import 'package:dimipay/app/pages/untitled/page.dart';
 import 'package:dimipay/app/pages/user/binding.dart';
 import 'package:dimipay/app/pages/user/page.dart';
 import 'package:dimipay/app/routes/routes.dart';
@@ -56,10 +50,6 @@ class AppPages {
       LoginPageMiddleware(),
       PinPageMiddleware(),
     ]),
-    GetPage(name: Routes.SELECTCHARGINGMETHOD, page: () => const SelectChargingMethodPage(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
-    ]),
     GetPage(name: Routes.EDITCARDNAME, page: () => EditCardNamePage(), middlewares: [
       LoginPageMiddleware(),
       PinPageMiddleware(),
@@ -68,27 +58,11 @@ class AppPages {
       LoginPageMiddleware(),
       PinPageMiddleware(),
     ]),
-    GetPage(name: Routes.CHARGINGFIN, page: () => const ChargingFinPage(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
-    ]),
-    GetPage(name: Routes.CHARGINGAMOUNT, page: () => ChargingAmountPage(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
-    ]),
     GetPage(name: Routes.COUPON, page: () => CouponPage(), binding: CouponPageBinding(), middlewares: [
       LoginPageMiddleware(),
       PinPageMiddleware(),
     ]),
     GetPage(name: Routes.HISTORY, page: () => HistoryPage(), binding: HistoryPageBinding(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
-    ]),
-    GetPage(name: Routes.CHANGEPASSWORD, page: () => const ChangePasswordPage(), binding: ChangePasswordPageBinding(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
-    ]),
-    GetPage(name: Routes.UNTITLED, page: () => const Untitled(), middlewares: [
       LoginPageMiddleware(),
       PinPageMiddleware(),
     ]),
