@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 
 class AppLoader {
   Future<void> load() async {
-    await Get.putAsync<AuthService>(() => AuthService(AuthRepository(ApiProvider())).init());
-    await Get.putAsync<AppConfigService>(() => AppConfigService().init());
+    await Future.wait([
+      Get.putAsync<AuthService>(() => AuthService(AuthRepository(ApiProvider())).init()),
+      Get.putAsync<AppConfigService>(() => AppConfigService().init()),
+    ]);
   }
 }
