@@ -10,7 +10,7 @@ class NumberPadItem extends GetWidget<PinPageController> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         if (onTap == null) {
           controller.clickPad(value);
