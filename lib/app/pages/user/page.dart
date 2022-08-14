@@ -31,14 +31,17 @@ class UserPage extends GetView<UserPageController> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Obx(() {
-          String? profileImageUrl = userController.user?.profileImage;
-          if (profileImageUrl == null) {
-            return const CircleAvatar(backgroundImage: AssetImage('asset/images/Image11.png'), radius: 24);
-          } else {
-            return CircleAvatar(backgroundImage: NetworkImage(profileImageUrl), radius: 24);
-          }
-        }),
+        userController.obx(
+          (state) {
+            String? profileImageUrl = userController.user?.profileImage;
+            if (profileImageUrl == null) {
+              return const CircleAvatar(backgroundColor: DPColors.DARK6, radius: 24);
+            } else {
+              return CircleAvatar(backgroundImage: NetworkImage(profileImageUrl), backgroundColor: DPColors.DARK6, radius: 24);
+            }
+          },
+          onLoading: const CircleAvatar(backgroundColor: DPColors.DARK6, radius: 24),
+        ),
         const SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
