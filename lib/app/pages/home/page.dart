@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/data/modules/coupon/controller.dart';
@@ -8,6 +9,7 @@ import 'package:dimipay/app/data/modules/notice/controller.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/pages/home/widget/event_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';

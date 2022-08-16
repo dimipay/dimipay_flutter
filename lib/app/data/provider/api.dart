@@ -87,11 +87,11 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<void> changePaymentPin(String originalPin, String paymentPin) async {
+  Future<void> changePin(String originalPin, String newPin) async {
     String url = '/payment/pin';
     Map<String, String> body = {
       'originalPin': originalPin,
-      'paymentPin': paymentPin,
+      'resetPin': newPin,
     };
     await dio.put(url, data: body);
   }
@@ -219,5 +219,22 @@ class ApiProvider implements ApiInterface {
     String url = "/payment/method/";
     await dio.delete(url);
     return;
+  }
+
+  @override
+  Future<bool> checkPin(String pin) async {
+    String url = "/payment/check";
+    Map<String, String> body = {
+      "pin": pin,
+    };
+    try {
+      await dio.post(url, data: body);
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 403) {
+        return false;
+      }
+      rethrow;
+    }
+    return true;
   }
 }

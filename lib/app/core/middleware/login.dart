@@ -3,13 +3,13 @@ import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PinPageMiddleware extends GetMiddleware {
+class LoginMiddleware extends GetMiddleware {
   final AuthService authService = Get.find<AuthService>();
 
-  PinPageMiddleware({super.priority});
+  LoginMiddleware({super.priority});
 
   @override
   RouteSettings? redirect(String? route) {
-    return authService.isAuthenticated ? null : RouteSettings(name: Routes.PIN, arguments: {'redirect': route});
+    return authService.isGoogleLoginSuccess || authService.isAuthenticated ? null : RouteSettings(name: Routes.LOGIN, arguments: {'redirect': route});
   }
 }
