@@ -1,4 +1,5 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/pages/pin/controller.dart';
 import 'package:dimipay/app/pages/pin/widget/numberpad_item.dart';
 import 'package:dimipay/app/pages/pin/widget/password_field.dart';
@@ -197,9 +198,18 @@ class PinPage extends GetView<PinPageController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      controller.title.value,
-                      style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 24, height: 1.2, color: DPColors.MAIN_THEME),
+                    Obx(
+                      () => Text(
+                        controller.title.value,
+                        style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 24, height: 1.2, color: DPColors.MAIN_THEME),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Obx(
+                      () => Text(
+                        controller.subTitle.value,
+                        style: DPTextTheme.DESCRIPTION,
+                      ),
                     ),
                     const SizedBox(height: 24),
                     buildPassword(),
