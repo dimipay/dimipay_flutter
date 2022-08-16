@@ -220,4 +220,20 @@ class ApiProvider implements ApiInterface {
     await dio.delete(url);
     return;
   }
+
+  @override
+  Future<bool> checkPin(String pin) async {
+    String url = "/payment/check";
+    try {
+      Map<String, String> body = {
+        "pin": pin,
+      };
+      await dio.post(url, data: body);
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 403) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

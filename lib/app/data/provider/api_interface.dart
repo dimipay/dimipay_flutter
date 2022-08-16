@@ -44,4 +44,6 @@ abstract class ApiInterface {
 
   Future<void> changePaymentPin(String originalPin, String paymentPin);
 
+	Future<bool> checkPin(String pin);
+
 }
