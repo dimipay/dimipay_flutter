@@ -16,6 +16,7 @@ class AuthService extends GetxService {
   final Rx<String?> _refreshToken = Rx(null);
   final Rx<String?> _onboardingToken = Rx(null); // /auth/login API에서 반환되는 AccessToken
   final Rx<bool> _isFirstVisit = Rx(false);
+  String? pin;
 
   AuthService(this.repository);
 
@@ -121,6 +122,7 @@ class AuthService extends GetxService {
     _refreshToken.value = null;
     _onboardingToken.value = null;
     _refreshTokenApiCompleter = null;
+    pin = null;
   }
 
   Future<void> logout() async {
