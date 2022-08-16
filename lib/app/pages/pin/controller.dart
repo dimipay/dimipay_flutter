@@ -9,7 +9,7 @@ import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-enum PinPageType { PINAUTH, ONBOARDING }
+enum PinPageType { PINAUTH, ONBOARDING, CHANGEPIN }
 
 class PinPageController extends GetxController with StateMixin {
   final String? redirect = Get.arguments?['redirect'];
@@ -84,16 +84,45 @@ class PinPageController extends GetxController with StateMixin {
     }
   }
 
+  Future<void> _changePin() async {
+    String originalPin = await _validatePin();
+    title.value = '새로운 핀 번호';
+    while (true) {
+      password.value = '';
+      String newPin = await _inputPin();
+
+      subTitle.value = '다시 한번 입력해주세요';
+      password.value = '';
+      String newPinCheck = await _inputPin();
+
+      if (newPin != newPinCheck) {
+        DPErrorSnackBar().open('핀 번호가 일치하지 않아요.');
+        continue;
+      }
+
+      try {
+        await ApiProvider().changePin(originalPin, newPin);
+        authService.pin = newPin;
+        Get.back();
+        break;
+      } on DioError catch (e) {
+        DPErrorSnackBar().open(e.response?.data['message'] ?? '');
+      }
+    }
+  }
+
   @override
   void onInit() {
     _inputPinProcess();
-
     switch (pinPageType) {
       case PinPageType.PINAUTH:
         _pinAuth();
         break;
       case PinPageType.ONBOARDING:
         _onBoardingAuth();
+        break;
+      case PinPageType.CHANGEPIN:
+        _changePin();
         break;
     }
     super.onInit();
