@@ -46,14 +46,17 @@ class AppPages {
     GetPage(name: Routes.MANAGEMETHOD, page: () => ManageMethodPage(), binding: ManageMethodPageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
+      PinAuthMiddleware(),
     ]),
     GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage(), binding: RegisterCardPageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
+      PinAuthMiddleware(),
     ]),
     GetPage(name: Routes.EDITCARDNAME, page: () => EditCardNamePage(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
+      PinAuthMiddleware(),
     ]),
     GetPage(name: Routes.CARDFIN, page: () => const CardFinPage(), middlewares: [
       LoginMiddleware(),
@@ -89,17 +92,14 @@ class AppPages {
     ]),
     GetPage(name: Routes.BIOMETRICAUTH, page: () => const BiometricAuthPage(), middlewares: [
       LoginMiddleware(),
-      PinAuthMiddleware(),
       OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.PRINTERSETTING, page: () => const PrinterSettingPage(), middlewares: [
       LoginMiddleware(),
-      PinAuthMiddleware(),
       OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.TRANSACTIONFIN, page: () => TransactionFinPage(), middlewares: [
       LoginMiddleware(),
-      PinAuthMiddleware(),
       OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
