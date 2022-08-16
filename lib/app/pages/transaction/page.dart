@@ -39,6 +39,7 @@ class TransactionPage extends GetView<TransactionPageController> {
                   enlargeCenterPage: true,
                   enlargeStrategy: CenterPageEnlargeStrategy.scale,
                   viewportFraction: 0.45,
+                  scrollPhysics: const AlwaysScrollableScrollPhysics(),
                   initialPage: controller.currentIndex,
                   onPageChanged: (index, carouselPageChangedReason) => controller.onPaymentMethodChanged(index),
                 ),
