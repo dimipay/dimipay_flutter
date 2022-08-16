@@ -1,5 +1,5 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
-import 'package:dimipay/app/data/services/auth/service.dart';
+import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/pages/pin/controller.dart';
 import 'package:dimipay/app/pages/pin/widget/numberpad_item.dart';
 import 'package:dimipay/app/pages/pin/widget/password_field.dart';
@@ -13,13 +13,14 @@ class PinPage extends GetView<PinPageController> {
     return Obx(() => Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            PasswordField(fieldType: controller.getPwdFieldType(1)),
+            // ignore: prefer_is_empty
+            PasswordField(filled: controller.password.value.length >= 1),
             const SizedBox(width: 16),
-            PasswordField(fieldType: controller.getPwdFieldType(2)),
+            PasswordField(filled: controller.password.value.length >= 2),
             const SizedBox(width: 16),
-            PasswordField(fieldType: controller.getPwdFieldType(3)),
+            PasswordField(filled: controller.password.value.length >= 3),
             const SizedBox(width: 16),
-            PasswordField(fieldType: controller.getPwdFieldType(4)),
+            PasswordField(filled: controller.password.value.length >= 4),
           ],
         ));
   }
@@ -36,17 +37,32 @@ class PinPage extends GetView<PinPageController> {
               children: [
                 Expanded(
                   child: NumberPadItem(
+                    onTap: controller.onClickPad,
                     value: "${nums[0]}",
+                    child: Text(
+                      "${nums[0]}",
+                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
                   ),
                 ),
                 Expanded(
                   child: NumberPadItem(
+                    onTap: controller.onClickPad,
                     value: "${nums[1]}",
+                    child: Text(
+                      "${nums[1]}",
+                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
                   ),
                 ),
                 Expanded(
                   child: NumberPadItem(
+                    onTap: controller.onClickPad,
                     value: "${nums[2]}",
+                    child: Text(
+                      "${nums[2]}",
+                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
                   ),
                 ),
               ],
@@ -57,17 +73,32 @@ class PinPage extends GetView<PinPageController> {
               children: [
                 Expanded(
                   child: NumberPadItem(
+                    onTap: controller.onClickPad,
                     value: "${nums[3]}",
+                    child: Text(
+                      "${nums[3]}",
+                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
                   ),
                 ),
                 Expanded(
                   child: NumberPadItem(
+                    onTap: controller.onClickPad,
                     value: "${nums[4]}",
+                    child: Text(
+                      "${nums[4]}",
+                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
                   ),
                 ),
                 Expanded(
                   child: NumberPadItem(
+                    onTap: controller.onClickPad,
                     value: "${nums[5]}",
+                    child: Text(
+                      "${nums[5]}",
+                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
                   ),
                 ),
               ],
@@ -78,17 +109,32 @@ class PinPage extends GetView<PinPageController> {
               children: [
                 Expanded(
                   child: NumberPadItem(
+                    onTap: controller.onClickPad,
                     value: "${nums[6]}",
+                    child: Text(
+                      "${nums[6]}",
+                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
                   ),
                 ),
                 Expanded(
                   child: NumberPadItem(
+                    onTap: controller.onClickPad,
                     value: "${nums[7]}",
+                    child: Text(
+                      "${nums[7]}",
+                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
                   ),
                 ),
                 Expanded(
                   child: NumberPadItem(
+                    onTap: controller.onClickPad,
                     value: "${nums[8]}",
+                    child: Text(
+                      "${nums[8]}",
+                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
                   ),
                 ),
               ],
@@ -102,12 +148,18 @@ class PinPage extends GetView<PinPageController> {
                 ),
                 Expanded(
                   child: NumberPadItem(
+                    onTap: controller.onClickPad,
                     value: "${nums[9]}",
+                    child: Text(
+                      "${nums[9]}",
+                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                    ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () => controller.clickPad('\b'),
+                  child: NumberPadItem(
+                    onTap: controller.onClickPad,
+                    value: "\b",
                     child: Container(
                       color: Colors.transparent,
                       child: Center(
@@ -130,11 +182,6 @@ class PinPage extends GetView<PinPageController> {
     );
   }
 
-  String getTitle() {
-    AuthService authService = Get.find<AuthService>();
-    return authService.isFirstVisit ? "결제 비밀번호 설정" : "결제 비밀번호 입력";
-  }
-
   @override
   Widget build(BuildContext context) {
     List<int> numList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
@@ -151,9 +198,18 @@ class PinPage extends GetView<PinPageController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      getTitle(),
-                      style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 24, height: 1.2, color: DPColors.MAIN_THEME),
+                    Obx(
+                      () => Text(
+                        controller.title.value,
+                        style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 24, height: 1.2, color: DPColors.MAIN_THEME),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Obx(
+                      () => Text(
+                        controller.subTitle.value,
+                        style: DPTextTheme.DESCRIPTION,
+                      ),
                     ),
                     const SizedBox(height: 24),
                     buildPassword(),

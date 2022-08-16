@@ -6,7 +6,6 @@ import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
 
 abstract class ApiInterface {
-
   Future<Map> loginWithGoogle(String idToken);
 
   ///returns map that contains accessToken and refreshToekn
@@ -42,6 +41,7 @@ abstract class ApiInterface {
 
   Future<void> createPaymentPin(String paymentPin);
 
-  Future<void> changePaymentPin(String originalPin, String paymentPin);
+  Future<bool> checkPin(String pin);
 
+  Future<void> changePin(String originalPin, String newPin);
 }

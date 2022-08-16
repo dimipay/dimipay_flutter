@@ -1,5 +1,6 @@
-import 'package:dimipay/app/core/middleware/login_page.dart';
-import 'package:dimipay/app/core/middleware/pin_page.dart';
+import 'package:dimipay/app/core/middleware/login.dart';
+import 'package:dimipay/app/core/middleware/onboarding.dart';
+import 'package:dimipay/app/core/middleware/pin_auth.dart';
 import 'package:dimipay/app/pages/biometric_auth/page.dart';
 import 'package:dimipay/app/pages/card_fin/page.dart';
 import 'package:dimipay/app/pages/coupon/page.dart';
@@ -35,67 +36,71 @@ class AppPages {
   static final pages = [
     GetPage(name: Routes.TEST, page: () => const TestPage()),
     GetPage(name: Routes.HOME, page: () => HomePage(), binding: HomePageBinding(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.USER, page: () => UserPage(), binding: UserPageBinding(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.MANAGEMETHOD, page: () => ManageMethodPage(), binding: ManageMethodPageBinding(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+      PinAuthMiddleware(),
     ]),
     GetPage(name: Routes.REGISTERCARD, page: () => const RegisterCardPage(), binding: RegisterCardPageBinding(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+      PinAuthMiddleware(),
     ]),
     GetPage(name: Routes.EDITCARDNAME, page: () => EditCardNamePage(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+      PinAuthMiddleware(),
     ]),
     GetPage(name: Routes.CARDFIN, page: () => const CardFinPage(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.COUPON, page: () => CouponPage(), binding: CouponPageBinding(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.HISTORY, page: () => HistoryPage(), binding: HistoryPageBinding(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.TRANSACTION, page: () => TransactionPage(), binding: TransactionPageBinding(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+      PinAuthMiddleware(),
     ]),
     GetPage(name: Routes.EVENT, page: () => EventPage(), binding: EventPageBinding(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.ISSUECOUPON, page: () => const IssueCouponPage(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.PIN, page: () => const PinPage(), binding: PinPageBinding(), middlewares: [
-      LoginPageMiddleware(),
+      LoginMiddleware(),
     ]),
     GetPage(name: Routes.BIOMETRICAUTH, page: () => const BiometricAuthPage(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.PRINTERSETTING, page: () => const PrinterSettingPage(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.TRANSACTIONFIN, page: () => TransactionFinPage(), middlewares: [
-      LoginPageMiddleware(),
-      PinPageMiddleware(),
+      LoginMiddleware(),
+      OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
   ];
