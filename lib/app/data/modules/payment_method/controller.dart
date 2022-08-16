@@ -6,13 +6,18 @@ class PaymentMethodController extends GetxController with StateMixin<List<Paymen
   final PaymentMethodRepository repository;
   PaymentMethodController(this.repository);
 
-  final Rx<List<PaymentMethod>> _paymentMethods = Rx([]);
-  List<PaymentMethod> get paymentMethods => _paymentMethods.value;
+  final Rx<List<PaymentMethod>?> _paymentMethods = Rx(null);
+  List<PaymentMethod>? get paymentMethods => _paymentMethods.value;
 
   @override
-  void onInit() {
-    fetchPaymentMethods();
+  void onInit() async {
     super.onInit();
+    fetchPaymentMethods();
+  }
+
+  Future<PaymentMethodController> init() async {
+    await fetchPaymentMethods();
+    return this;
   }
 
   Future<void> createGeneralCard({
@@ -22,7 +27,7 @@ class PaymentMethodController extends GetxController with StateMixin<List<Paymen
     required DateTime expireAt,
   }) async {
     PaymentMethod newPaymentMethod = await repository.createPaymentMethod(cardNumber: cardNumber, password: password, ownerBirthday: ownerBirthday, expireAt: expireAt);
-    _paymentMethods.value.add(newPaymentMethod);
+    _paymentMethods.value?.add(newPaymentMethod);
     _paymentMethods.refresh();
   }
 
@@ -39,7 +44,7 @@ class PaymentMethodController extends GetxController with StateMixin<List<Paymen
 
   Future<void> deleteGeneralCard() async {
     await repository.deletePaymentMethod();
-    _paymentMethods.value.clear();
+    _paymentMethods.value?.clear();
     _paymentMethods.refresh();
   }
 }

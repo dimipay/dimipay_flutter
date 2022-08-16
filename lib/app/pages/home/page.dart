@@ -9,7 +9,6 @@ import 'package:dimipay/app/data/modules/notice/controller.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
-import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/pages/home/widget/event_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
@@ -210,7 +209,7 @@ class HomePage extends StatelessWidget {
                 title: paymentMethod.name ?? '',
                 color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
                 onTap: () {
-                  Get.toNamed(Routes.TRANSACTION, arguments: paymentMethod.systemId);
+                  Get.toNamed(Routes.TRANSACTION, arguments: paymentMethod);
                 },
               ),
               const SizedBox(width: 12),
@@ -236,7 +235,7 @@ class HomePage extends StatelessWidget {
               children: [
                 const SizedBox(width: 32, height: 81),
                 // ignore: unnecessary_cast
-                _buildPaymentMethods(paymentMethodController.paymentMethods),
+                paymentMethodController.paymentMethods != null ? _buildPaymentMethods(paymentMethodController.paymentMethods!) : Container(),
                 const SizedBox(width: 20),
               ],
             ),
