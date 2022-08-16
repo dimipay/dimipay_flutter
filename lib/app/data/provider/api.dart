@@ -91,7 +91,7 @@ class ApiProvider implements ApiInterface {
     String url = '/payment/pin';
     Map<String, String> body = {
       'originalPin': originalPin,
-      'paymentPin': newPin,
+      'resetPin': newPin,
     };
     await dio.put(url, data: body);
   }
