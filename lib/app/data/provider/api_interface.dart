@@ -37,7 +37,7 @@ abstract class ApiInterface {
 
   Future<void> deletePaymentMethod();
 
-  Future<Map> getPaymentToken(String paymentMethod);
+  Future<Map> getPaymentToken(String pin, PaymentMethod paymentMethod);
 
   Future<void> createPaymentPin(String paymentPin);
 
