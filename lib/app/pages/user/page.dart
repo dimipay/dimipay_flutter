@@ -3,6 +3,7 @@ import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/data/modules/user/controller.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/data/services/config/service.dart';
+import 'package:dimipay/app/pages/pin/controller.dart';
 import 'package:dimipay/app/pages/user/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -152,6 +153,9 @@ class UserPage extends GetView<UserPageController> {
                   Get.find<AuthService>().logout();
                   Get.offAllNamed(Routes.LOGIN);
                   break;
+                case 'change_pin':
+                  Get.toNamed(Routes.PIN, arguments: {'pinPageType': PinPageType.CHANGEPIN});
+                  break;
                 case 'delete_configs':
                   Get.find<AppConfigService>().clearConfigs();
                   break;
@@ -161,6 +165,10 @@ class UserPage extends GetView<UserPageController> {
               const PopupMenuItem(
                 value: 'logout',
                 child: Text('로그아웃'),
+              ),
+              const PopupMenuItem(
+                value: 'change_pin',
+                child: Text('핀 변경'),
               ),
               const PopupMenuItem(
                 value: 'delete_configs',
