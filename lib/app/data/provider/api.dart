@@ -181,10 +181,11 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<Map> getPaymentToken(String paymentMethod) async {
+  Future<Map> getPaymentToken(String pin, PaymentMethod paymentMethod) async {
     String url = '/payment/token';
-    Map<String, String> body = {'paymentMethod"': paymentMethod};
-    Response response = await dio.post(url, data: body);
+    Map<String, String> body = {'paymentMethod"': paymentMethod.systemId};
+    Map<String, String> headers = {'Dimipay-Transaction-Token': pin};
+    Response response = await dio.post(url, data: body, options: Options(headers: headers));
     return response.data;
   }
 
