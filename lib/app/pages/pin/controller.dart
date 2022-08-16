@@ -45,6 +45,7 @@ class PinPageController extends GetxController with StateMixin {
       title.value = '결제 핀 등록';
       while (true) {
         password.value = '';
+        subTitle.value = '';
         String pin1 = await _inputPin();
 
         subTitle.value = '다시 한번 입력해주세요';
@@ -89,6 +90,7 @@ class PinPageController extends GetxController with StateMixin {
     title.value = '새로운 핀 번호';
     while (true) {
       password.value = '';
+      subTitle.value = '';
       String newPin = await _inputPin();
 
       subTitle.value = '다시 한번 입력해주세요';
