@@ -36,7 +36,6 @@ dependencies:
   get: ^4.6.5
   flutter_svg: ^1.0.0
   flutter_keyboard_visibility: ^5.1.1
-  qr_flutter: ^4.0.0
   flutter_secure_storage: ^5.0.2
   flutter_native_splash: ^2.1.6
   flutter_launcher_icons: ^0.9.2
@@ -53,6 +52,7 @@ dependencies:
   intl: ^0.17.0
   jwt_decoder: ^2.0.1
   screen_brightness: ^0.2.1
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:
