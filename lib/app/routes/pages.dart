@@ -18,14 +18,14 @@ import 'package:dimipay/app/pages/login/page.dart';
 import 'package:dimipay/app/pages/manage_method/binding.dart';
 import 'package:dimipay/app/pages/manage_method/page.dart';
 import 'package:dimipay/app/pages/notification/page.dart';
+import 'package:dimipay/app/pages/pay/binding.dart';
+import 'package:dimipay/app/pages/pay/page.dart';
 import 'package:dimipay/app/pages/pin/binding.dart';
 import 'package:dimipay/app/pages/pin/page.dart';
 import 'package:dimipay/app/pages/printer_setting/page.dart';
 import 'package:dimipay/app/pages/register_card/page.dart';
 import 'package:dimipay/app/pages/register_card/binding.dart';
 import 'package:dimipay/app/pages/test/page.dart';
-import 'package:dimipay/app/pages/transaction/binding.dart';
-import 'package:dimipay/app/pages/transaction/page.dart';
 import 'package:dimipay/app/pages/transaction_fin/page.dart';
 import 'package:dimipay/app/pages/user/binding.dart';
 import 'package:dimipay/app/pages/user/page.dart';
@@ -70,7 +70,7 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.TRANSACTION, page: () => TransactionPage(), binding: TransactionPageBinding(), middlewares: [
+    GetPage(name: Routes.PAY, page: () => PayPage(), binding: PayPageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
       PinAuthMiddleware(),

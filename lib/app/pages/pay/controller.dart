@@ -11,7 +11,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
-class TransactionPageController extends GetxController with StateMixin {
+class PayPageController extends GetxController with StateMixin {
   PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
   AuthService authService = Get.find<AuthService>();
   PaymentMethod? currentPaymentMethod;

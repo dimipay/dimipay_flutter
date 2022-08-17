@@ -2,13 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/pages/home/page.dart';
-import 'package:dimipay/app/pages/transaction/controller.dart';
+import 'package:dimipay/app/pages/pay/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
-class TransactionPage extends GetView<TransactionPageController> {
-  TransactionPage({Key? key}) : super(key: key);
+class PayPage extends GetView<PayPageController> {
+  PayPage({Key? key}) : super(key: key);
   final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
 
   Widget _paymentsArea() {
