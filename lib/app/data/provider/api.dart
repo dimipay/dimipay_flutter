@@ -78,7 +78,7 @@ class LogInterceptor extends Interceptor {
 
 class ApiProvider implements ApiInterface {
   final Dio dio = Dio();
-  final baseUrl = 'https://dimipay-back-v2-dev-production.up.railway.app';
+  final baseUrl = 'https://port-0-dimipay-back-v2-huy2w25l6w99bi1.gksl1.cloudtype.app';
 
   ApiProvider() {
     dio.options.baseUrl = baseUrl;
@@ -183,9 +183,11 @@ class ApiProvider implements ApiInterface {
   @override
   Future<Map> getPaymentToken(String pin, PaymentMethod paymentMethod) async {
     String url = '/payment/token';
-    Map<String, String> body = {'paymentMethod"': paymentMethod.systemId};
-    Map<String, String> headers = {'Dimipay-Transaction-Token': pin};
-    Response response = await dio.post(url, data: body, options: Options(headers: headers));
+    Map<String, String> body = {
+      'paymentMethod': paymentMethod.systemId,
+      "pin": pin,
+    };
+    Response response = await dio.post(url, data: body);
     return response.data;
   }
 
