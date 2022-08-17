@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:typed_data';
 
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
@@ -13,11 +15,12 @@ class TransactionPageController extends GetxController with StateMixin {
   PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
   AuthService authService = Get.find<AuthService>();
   PaymentMethod? currentPaymentMethod;
-  Rx<String?> paymentToken = Rx(null);
+  Rx<Uint8List?> paymentToken = Rx(null);
 
   Future<void> fetchPaymentToken(PaymentMethod paymentMethod) async {
     try {
       Map res = await ApiProvider().getPaymentToken(authService.pin!, paymentMethod);
+      paymentToken.value = base64Decode(res['codeBuffer']);
     } on DioError catch (e) {
       log(e.response!.data.toString());
     }
@@ -35,6 +38,9 @@ class TransactionPageController extends GetxController with StateMixin {
     }
     change(null, status: RxStatus.success());
     currentPaymentMethod = Get.arguments ?? paymentMethodController.paymentMethods!.elementAt(0);
+    if (currentPaymentMethod != null) {
+      fetchPaymentToken(currentPaymentMethod!);
+    }
     setBrightness(1);
   }
 
