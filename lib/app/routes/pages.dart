@@ -98,7 +98,7 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.TRANSACTIONFIN, page: () => TransactionFinPage(), middlewares: [
+    GetPage(name: Routes.PAYRESULT, page: () => TransactionFinPage(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
