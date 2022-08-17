@@ -65,9 +65,9 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.TRANSACTION);
+              Get.toNamed(Routes.PAY);
             },
-            child: const Text('TRANSACTION'),
+            child: const Text('PAY'),
           ),
           TextButton(
             onPressed: () {
