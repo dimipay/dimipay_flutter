@@ -5,7 +5,6 @@ import 'package:dimipay/app/pages/home/page.dart';
 import 'package:dimipay/app/pages/transaction/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 
 class TransactionPage extends GetView<TransactionPageController> {
@@ -85,11 +84,7 @@ class TransactionPage extends GetView<TransactionPageController> {
                             ),
                           );
                         } else {
-                          return QrImage(
-                            data: controller.paymentToken.value!,
-                            version: 4,
-                            size: 240.0,
-                          );
+                          return Image.memory(controller.paymentToken.value!);
                         }
                       },
                     ),
