@@ -76,12 +76,14 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
         const SizedBox(height: 24),
         Obx(
           () {
-            if (paymentMethodController.paymentMethods.isEmpty) {
+            if (paymentMethodController.paymentMethods == null) {
+              return Container();
+            } else if (paymentMethodController.paymentMethods!.isEmpty) {
               return _registerCardWidget();
             } else {
               return DividedColumn(
                 divider: const SizedBox(height: 36),
-                children: [for (var generalCard in paymentMethodController.paymentMethods) _generalCard(generalCard)],
+                children: [for (var generalCard in paymentMethodController.paymentMethods!) _generalCard(generalCard)],
               );
             }
           },

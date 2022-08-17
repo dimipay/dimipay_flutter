@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-class TransactionFinPage extends StatelessWidget {
-  TransactionFinPage({Key? key}) : super(key: key) {
+class PayResultPage extends StatelessWidget {
+  PayResultPage({Key? key}) : super(key: key) {
     HapticHelper.feedback(HapticPatterns.success);
   }
 

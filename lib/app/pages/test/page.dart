@@ -65,9 +65,9 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.TRANSACTION);
+              Get.toNamed(Routes.PAY);
             },
-            child: const Text('TRANSACTION'),
+            child: const Text('PAY'),
           ),
           TextButton(
             onPressed: () {
@@ -101,9 +101,9 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.TRANSACTIONFIN);
+              Get.toNamed(Routes.PAYRESULT);
             },
-            child: const Text('TRANSACTIONFIN'),
+            child: const Text('PAYRESULT'),
           ),
           TextButton(
             onPressed: () {
