@@ -46,24 +46,26 @@ class PinPageController extends GetxController with StateMixin {
       while (true) {
         password.value = '';
         subTitle.value = '';
-        String pin1 = await _inputPin();
+        String pin = await _inputPin();
 
         subTitle.value = '다시 한번 입력해주세요';
         password.value = '';
-        String pin2 = await _inputPin();
+        String pinCheck = await _inputPin();
 
-        if (pin1 == pin2) {
-          try {
-            await authService.onBoardingAuth(pin1);
-            authService.pin = pin2;
-            Get.offNamed(redirect ?? Routes.HOME);
-          } on OnboardingTokenException catch (e) {
-            DPErrorSnackBar().open(e.message);
-            await authService.logout();
-            Get.offNamed(Routes.LOGIN);
-          }
+        if (pin != pinCheck) {
+          DPErrorSnackBar().open('핀 번호가 일치하지 않아요.');
+          continue;
         }
-        DPErrorSnackBar().open('핀 번호가 일치하지 않아요.');
+
+        try {
+          await authService.onBoardingAuth(pin);
+          authService.pin = pinCheck;
+          Get.offNamed(redirect ?? Routes.HOME);
+        } on OnboardingTokenException catch (e) {
+          DPErrorSnackBar().open(e.message);
+          await authService.logout();
+          Get.offNamed(Routes.LOGIN);
+        }
       }
     } else {
       title.value = '핀 번호 입력';
