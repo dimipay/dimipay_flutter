@@ -154,7 +154,7 @@ class UserPage extends GetView<UserPageController> {
                   Get.offAllNamed(Routes.LOGIN);
                   break;
                 case 'change_pin':
-                  Get.toNamed(Routes.PIN, arguments: {'pinPageType': PinPageType.CHANGEPIN});
+                  Get.toNamed(Routes.PIN, arguments: {'pinPageType': PinPageType.changePin});
                   break;
                 case 'delete_configs':
                   Get.find<AppConfigService>().clearConfigs();

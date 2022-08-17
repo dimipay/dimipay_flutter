@@ -9,11 +9,11 @@ import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-enum PinPageType { PINAUTH, ONBOARDING, CHANGEPIN }
+enum PinPageType { pinAuth, onBoarding, changePin }
 
 class PinPageController extends GetxController with StateMixin {
   final String? redirect = Get.arguments?['redirect'];
-  final PinPageType pinPageType = Get.arguments?['pinPageType'] ?? PinPageType.PINAUTH;
+  final PinPageType pinPageType = Get.arguments?['pinPageType'] ?? PinPageType.pinAuth;
   AuthService authService = Get.find<AuthService>();
   Completer<String> _inputPinCompleter = Completer();
   Completer<String> _inputPadCompleter = Completer();
@@ -119,13 +119,13 @@ class PinPageController extends GetxController with StateMixin {
   void onInit() {
     _inputPinProcess();
     switch (pinPageType) {
-      case PinPageType.PINAUTH:
+      case PinPageType.pinAuth:
         _pinAuth();
         break;
-      case PinPageType.ONBOARDING:
+      case PinPageType.onBoarding:
         _onBoardingAuth();
         break;
-      case PinPageType.CHANGEPIN:
+      case PinPageType.changePin:
         _changePin();
         break;
     }
