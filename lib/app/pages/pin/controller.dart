@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/provider/api.dart';
@@ -7,6 +8,7 @@ import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 enum PinPageType { pinAuth, onBoarding, changePin }
@@ -108,6 +110,7 @@ class PinPageController extends GetxController with StateMixin {
         await ApiProvider().changePin(originalPin, newPin);
         authService.pin = newPin;
         Get.back();
+        DPSnackBar.open('핀이 변경되었어요.', backgroundColor: DPColors.MAIN_THEME, textColor: Colors.white, hapticFeedback: HapticPatterns.success);
         break;
       } on DioError catch (e) {
         DPErrorSnackBar().open(e.response?.data['message'] ?? '');
