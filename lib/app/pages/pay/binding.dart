@@ -1,13 +1,13 @@
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/repository.dart';
 import 'package:dimipay/app/data/provider/api.dart';
-import 'package:dimipay/app/pages/transaction/controller.dart';
+import 'package:dimipay/app/pages/pay/controller.dart';
 import 'package:get/get.dart';
 
-class TransactionPageBinding implements Bindings {
+class PayPageBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<TransactionPageController>(() => TransactionPageController());
+    Get.lazyPut<PayPageController>(() => PayPageController());
     Get.lazyPut<PaymentMethodController>(() => PaymentMethodController(PaymentMethodRepository(ApiProvider())));
   }
 }
