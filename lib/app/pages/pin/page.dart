@@ -28,7 +28,7 @@ class PinPage extends GetView<PinPageController> {
   buildNumberPad(List<int> nums) {
     return SizedBox(
       width: 300,
-      height: 300,
+      height: 280,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -188,6 +188,7 @@ class PinPage extends GetView<PinPageController> {
     numList.shuffle();
 
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,
@@ -204,7 +205,7 @@ class PinPage extends GetView<PinPageController> {
                         style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 24, height: 1.2, color: DPColors.MAIN_THEME),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
                     Obx(
                       () => Text(
                         controller.subTitle.value,
@@ -216,8 +217,9 @@ class PinPage extends GetView<PinPageController> {
                   ],
                 ),
               ),
-              buildNumberPad(numList),
               const SizedBox(height: 100),
+              buildNumberPad(numList),
+              const SizedBox(height: 40),
             ],
           ),
         ),
