@@ -20,13 +20,13 @@ import 'package:dimipay/app/pages/manage_method/page.dart';
 import 'package:dimipay/app/pages/notification/page.dart';
 import 'package:dimipay/app/pages/pay/binding.dart';
 import 'package:dimipay/app/pages/pay/page.dart';
+import 'package:dimipay/app/pages/pay_result/page.dart';
 import 'package:dimipay/app/pages/pin/binding.dart';
 import 'package:dimipay/app/pages/pin/page.dart';
 import 'package:dimipay/app/pages/printer_setting/page.dart';
 import 'package:dimipay/app/pages/register_card/page.dart';
 import 'package:dimipay/app/pages/register_card/binding.dart';
 import 'package:dimipay/app/pages/test/page.dart';
-import 'package:dimipay/app/pages/transaction_fin/page.dart';
 import 'package:dimipay/app/pages/user/binding.dart';
 import 'package:dimipay/app/pages/user/page.dart';
 import 'package:dimipay/app/routes/routes.dart';
@@ -98,7 +98,7 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.PAYRESULT, page: () => TransactionFinPage(), middlewares: [
+    GetPage(name: Routes.PAYRESULT, page: () => PayResultPage(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
