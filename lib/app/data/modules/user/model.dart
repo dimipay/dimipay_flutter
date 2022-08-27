@@ -5,13 +5,13 @@ part 'model.g.dart';
 
 @JsonSerializable()
 class User {
-  String systemId;
   DateTime createdAt;
   DateTime updatedAt;
-  bool isDisabled;
   String accountName;
   String name;
 
+  String? systemId;
+  bool? isDisabled;
   bool? isTeacher;
   String? profileImage;
   String? studentNumber;

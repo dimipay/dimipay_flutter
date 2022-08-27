@@ -144,7 +144,7 @@ class ApiProvider implements ApiInterface {
 
     Response response = await dio.get(url);
 
-    return User.fromJson(response.data['me']);
+    return User.fromJson(response.data);
   }
 
   @override
