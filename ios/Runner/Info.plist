@@ -37,12 +37,12 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-    <string>디미페이의 결제 수단으로 사용할 카드를 카메라를 이용해 자동 등록할 시에 사용합니다.</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_dartobservatory._tcp</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>디미페이의 결제 수단으로 사용할 카드를 카메라를 이용해 자동 등록할 시에 사용합니다.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
