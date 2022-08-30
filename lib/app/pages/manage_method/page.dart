@@ -71,8 +71,6 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 32),
-        const Text('실물카드', style: DPTextTheme.SECTION_HEADER),
         const SizedBox(height: 24),
         Obx(
           () {
