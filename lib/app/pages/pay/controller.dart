@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
@@ -10,10 +9,10 @@ import 'package:get/get.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
 class PayPageController extends GetxController with StateMixin {
-  PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
-  AuthService authService = Get.find<AuthService>();
+  final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
+  final AuthService authService = Get.find<AuthService>();
+  final Rx<String?> paymentToken = Rx(null);
   PaymentMethod? currentPaymentMethod;
-  Rx<String?> paymentToken = Rx(null);
   int get currentIndex => paymentMethodController.paymentMethods!.indexOf(currentPaymentMethod!);
 
   @override
