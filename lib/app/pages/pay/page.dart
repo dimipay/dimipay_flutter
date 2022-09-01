@@ -5,6 +5,7 @@ import 'package:dimipay/app/pages/home/page.dart';
 import 'package:dimipay/app/pages/pay/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PayPage extends GetView<PayPageController> {
@@ -77,14 +78,18 @@ class PayPage extends GetView<PayPageController> {
                               baseColor: const Color.fromARGB(255, 232, 232, 232),
                               highlightColor: const Color.fromARGB(255, 250, 250, 250),
                               child: Container(
-                                width: 240,
-                                height: 240,
+                                width: 200,
+                                height: 200,
                                 color: Colors.black,
                               ),
                             ),
                           );
                         } else {
-                          return Image.memory(controller.paymentToken.value!);
+                          return QrImage(
+                            data: controller.paymentToken.value!,
+                            size: 200,
+                            version: 1,
+                          );
                         }
                       },
                     ),
