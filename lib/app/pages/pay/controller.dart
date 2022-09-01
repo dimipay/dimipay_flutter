@@ -14,31 +14,17 @@ class PayPageController extends GetxController with StateMixin {
   AuthService authService = Get.find<AuthService>();
   PaymentMethod? currentPaymentMethod;
   Rx<String?> paymentToken = Rx(null);
+  int get currentIndex => paymentMethodController.paymentMethods!.indexOf(currentPaymentMethod!);
 
-  Future refreshPaymentToken(int expireAt) async {
-    await Future.delayed(Duration(seconds: expireAt));
-    fetchPaymentToken(currentPaymentMethod!);
-  }
-
-  Future<void> fetchPaymentToken(PaymentMethod paymentMethod) async {
-    try {
-      paymentToken.value = null;
-      Map res = await ApiProvider().getPaymentToken(authService.pin!, paymentMethod);
-      paymentToken.value = res['code'];
-      int expireAt = res['exp'];
-      refreshPaymentToken(expireAt);
-    } on DioError catch (e) {
-      log(e.response!.data.toString());
-    }
-  }
-
-  void onPaymentMethodChanged(int index) {
-    HapticHelper.feedback(HapticPatterns.once);
-    currentPaymentMethod = paymentMethodController.paymentMethods![index];
-    fetchPaymentToken(currentPaymentMethod!);
+  @override
+  void onInit() {
+    change(null, status: RxStatus.loading());
+    _init();
+    super.onInit();
   }
 
   Future<void> _init() async {
+    setBrightness(1);
     if (paymentMethodController.paymentMethods == null) {
       await paymentMethodController.fetchPaymentMethods();
     }
@@ -47,14 +33,6 @@ class PayPageController extends GetxController with StateMixin {
     if (currentPaymentMethod != null) {
       fetchPaymentToken(currentPaymentMethod!);
     }
-    setBrightness(1);
-  }
-
-  @override
-  void onInit() {
-    change(null, status: RxStatus.loading());
-    _init();
-    super.onInit();
   }
 
   Future<void> setBrightness(double brightness) async {
@@ -73,13 +51,32 @@ class PayPageController extends GetxController with StateMixin {
     }
   }
 
+  Future<void> fetchPaymentToken(PaymentMethod paymentMethod) async {
+    try {
+      paymentToken.value = null;
+      Map res = await ApiProvider().getPaymentToken(authService.pin!, paymentMethod);
+      paymentToken.value = res['code'];
+      int expireAt = res['exp'];
+      refreshPaymentToken(expireAt: expireAt);
+    } on DioError catch (e) {
+      log(e.response!.data.toString());
+    }
+  }
+
+  Future refreshPaymentToken({int expireAt = 0}) async {
+    await Future.delayed(Duration(seconds: expireAt));
+    fetchPaymentToken(currentPaymentMethod!);
+  }
+
+  void onPaymentMethodChanged(int index) {
+    HapticHelper.feedback(HapticPatterns.once);
+    currentPaymentMethod = paymentMethodController.paymentMethods![index];
+    fetchPaymentToken(currentPaymentMethod!);
+  }
+
   @override
   void onClose() async {
     await resetBrightness();
     super.onClose();
-  }
-
-  int get currentIndex {
-    return paymentMethodController.paymentMethods!.indexOf(currentPaymentMethod!);
   }
 }
