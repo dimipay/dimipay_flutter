@@ -176,7 +176,7 @@ class ApiProvider implements ApiInterface {
     Map<String, dynamic> headers = {
       'Authorization': 'Bearer $refreshToken',
     };
-    Response response = await dio.get(url, options: Options(headers: headers));
+    Response response = await dio.post(url, options: Options(headers: headers));
     return response.data['accessToken'];
   }
 
