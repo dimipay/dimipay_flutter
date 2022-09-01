@@ -10,18 +10,55 @@ import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:local_auth/local_auth.dart';
 
 enum PinPageType { pinAuth, onBoarding, changePin }
 
 class PinPageController extends GetxController with StateMixin {
   final String? redirect = Get.arguments?['redirect'];
   final PinPageType pinPageType = Get.arguments?['pinPageType'] ?? PinPageType.pinAuth;
-  AuthService authService = Get.find<AuthService>();
+  final AuthService authService = Get.find<AuthService>();
+  final Rx<String> password = "".obs;
+  final Rx<String> title = Rx("핀 번호 입력");
+  final Rx<String> subTitle = Rx('');
+  final LocalAuthentication localAuth = LocalAuthentication();
+
+  Rx<List<BiometricType>> availableBiometrics = Rx([]);
   Completer<String> _inputPinCompleter = Completer();
   Completer<String> _inputPadCompleter = Completer();
-  Rx<String> password = "".obs;
-  Rx<String> title = Rx("핀 번호 입력");
-  Rx<String> subTitle = Rx('');
+
+  bool get faceIdAvailable => availableBiometrics.value.contains(BiometricType.face);
+
+  @override
+  void onInit() {
+    _updateAvailableBiometrics();
+    _inputPinProcess();
+    switch (pinPageType) {
+      case PinPageType.pinAuth:
+        _pinAuth();
+        break;
+      case PinPageType.onBoarding:
+        _onBoardingAuth();
+        break;
+      case PinPageType.changePin:
+        _changePin();
+        break;
+    }
+    super.onInit();
+  }
+
+  Future<void> _updateAvailableBiometrics() async {
+    availableBiometrics.value = await localAuth.getAvailableBiometrics();
+  }
+
+  Future<void> biometricAuth() async {
+    bool res = await localAuth.authenticate(localizedReason: '생체 인증을 사용하세요.', options: const AuthenticationOptions(biometricOnly: true));
+    _updateAvailableBiometrics();
+    if (res) {
+      await authService.loadBioKey();
+      Get.offNamed(redirect ?? Routes.HOME);
+    }
+  }
 
   Future<String> _validatePin() async {
     title.value = '핀 번호 입력';
@@ -38,6 +75,7 @@ class PinPageController extends GetxController with StateMixin {
   }
 
   Future<void> _pinAuth() async {
+    biometricAuth();
     authService.pin = await _validatePin();
     Get.offNamed(redirect ?? Routes.HOME);
   }
@@ -116,23 +154,6 @@ class PinPageController extends GetxController with StateMixin {
         DPErrorSnackBar().open(e.response?.data['message'] ?? '');
       }
     }
-  }
-
-  @override
-  void onInit() {
-    _inputPinProcess();
-    switch (pinPageType) {
-      case PinPageType.pinAuth:
-        _pinAuth();
-        break;
-      case PinPageType.onBoarding:
-        _onBoardingAuth();
-        break;
-      case PinPageType.changePin:
-        _changePin();
-        break;
-    }
-    super.onInit();
   }
 
   void onClickPad(String value) {
