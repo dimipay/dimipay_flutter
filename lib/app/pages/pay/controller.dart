@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:developer';
-import 'dart:typed_data';
 
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
@@ -15,12 +13,20 @@ class PayPageController extends GetxController with StateMixin {
   PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
   AuthService authService = Get.find<AuthService>();
   PaymentMethod? currentPaymentMethod;
-  Rx<Uint8List?> paymentToken = Rx(null);
+  Rx<String?> paymentToken = Rx(null);
+
+  Future refreshPaymentToken(int expireAt) async {
+    await Future.delayed(Duration(seconds: expireAt));
+    fetchPaymentToken(currentPaymentMethod!);
+  }
 
   Future<void> fetchPaymentToken(PaymentMethod paymentMethod) async {
     try {
+      paymentToken.value = null;
       Map res = await ApiProvider().getPaymentToken(authService.pin!, paymentMethod);
-      paymentToken.value = base64Decode(res['codeBuffer']);
+      paymentToken.value = res['code'];
+      int expireAt = res['exp'];
+      refreshPaymentToken(expireAt);
     } on DioError catch (e) {
       log(e.response!.data.toString());
     }
@@ -29,7 +35,7 @@ class PayPageController extends GetxController with StateMixin {
   void onPaymentMethodChanged(int index) {
     HapticHelper.feedback(HapticPatterns.once);
     currentPaymentMethod = paymentMethodController.paymentMethods![index];
-    fetchPaymentToken(paymentMethodController.paymentMethods![index]);
+    fetchPaymentToken(currentPaymentMethod!);
   }
 
   Future<void> _init() async {
