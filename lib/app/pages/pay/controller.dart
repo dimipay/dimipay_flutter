@@ -20,6 +20,7 @@ class PayPageController extends GetxController with StateMixin {
   PaymentMethod? currentPaymentMethod;
   Rx<String?> paymentToken = Rx(null);
   PayResultSSEController payStream = Get.find<PayResultSSEController>();
+  int get currentIndex => paymentMethodController.paymentMethods!.indexOf(currentPaymentMethod!);
 
   @override
   void onInit() {
@@ -95,9 +96,5 @@ class PayPageController extends GetxController with StateMixin {
     tokenRefreshTimer?.cancel();
     await resetBrightness();
     super.onClose();
-  }
-
-  int get currentIndex {
-    return paymentMethodController.paymentMethods!.indexOf(currentPaymentMethod!);
   }
 }
