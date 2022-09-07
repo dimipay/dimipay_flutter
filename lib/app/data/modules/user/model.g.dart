@@ -19,12 +19,12 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'systemId': instance.systemId,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
-      'isDisabled': instance.isDisabled,
       'accountName': instance.accountName,
       'name': instance.name,
+      'systemId': instance.systemId,
+      'isDisabled': instance.isDisabled,
       'isTeacher': instance.isTeacher,
       'profileImage': instance.profileImage,
       'studentNumber': instance.studentNumber,
