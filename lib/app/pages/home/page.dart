@@ -9,6 +9,7 @@ import 'package:dimipay/app/data/modules/notice/controller.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/data/services/local_auth/service.dart';
 import 'package:dimipay/app/pages/home/widget/event_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
@@ -21,6 +22,8 @@ class HomePage extends StatelessWidget {
   final NoticeController noticeController = Get.find<NoticeController>();
   final EventController eventController = Get.find<EventController>();
   final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
+
+  final LocalAuthService localAuthService = Get.find<LocalAuthService>();
 
   Widget _logoArea() {
     return Row(
@@ -41,7 +44,8 @@ class HomePage extends StatelessWidget {
             const SizedBox(width: 12),
             DPIconButton(
               'asset/images/profile.svg',
-              onTap: () {
+              onTap: () async {
+                await localAuthService.localAuth();
                 Get.toNamed(Routes.USER);
               },
             ),
