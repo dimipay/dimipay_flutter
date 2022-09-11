@@ -184,7 +184,7 @@ class ApiProvider implements ApiInterface {
   Future<Map> getPaymentToken(String pin, PaymentMethod paymentMethod) async {
     String url = '/payment/token';
     Map<String, String> body = {
-      'paymentMethod': paymentMethod.id,
+      'id': paymentMethod.id,
       "pin": pin,
     };
     Response response = await dio.post(url, data: body);
@@ -214,6 +214,7 @@ class ApiProvider implements ApiInterface {
       "pw": password,
     };
     Response response = await dio.post(url, data: body);
+    print(response.data);
     return PaymentMethod.fromJson(response.data);
   }
 
