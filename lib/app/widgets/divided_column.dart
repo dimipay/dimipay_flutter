@@ -8,14 +8,16 @@ class DividedColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> dividedChildren = [];
-    if (divider != null) {
-      for (var child in children) {
-        dividedChildren.add(child);
-        dividedChildren.add(divider!);
+    if (children.isNotEmpty) {
+      if (divider != null) {
+        for (var child in children) {
+          dividedChildren.add(child);
+          dividedChildren.add(divider!);
+        }
+        dividedChildren.removeLast();
+      } else {
+        dividedChildren = children;
       }
-      dividedChildren.removeLast();
-    } else {
-      dividedChildren = children;
     }
     return Column(
       children: dividedChildren,
