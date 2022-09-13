@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'dart:async';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
@@ -9,15 +9,17 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
+/// TODO getx worker 적용
 class PayPageController extends GetxController with StateMixin {
   PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
+  Timer? tokenRefreshTimer;
   AuthService authService = Get.find<AuthService>();
   PaymentMethod? currentPaymentMethod;
   Rx<String?> paymentToken = Rx(null);
 
-  Future refreshPaymentToken(int expireAt) async {
-    await Future.delayed(Duration(seconds: expireAt));
-    fetchPaymentToken(currentPaymentMethod!);
+  Future refreshPaymentToken(DateTime expireAt) async {
+    tokenRefreshTimer?.cancel();
+    tokenRefreshTimer = Timer(expireAt.difference(DateTime.now()), () => fetchPaymentToken(currentPaymentMethod!));
   }
 
   Future<void> fetchPaymentToken(PaymentMethod paymentMethod) async {
@@ -25,7 +27,7 @@ class PayPageController extends GetxController with StateMixin {
       paymentToken.value = null;
       Map res = await ApiProvider().getPaymentToken(authService.pin!, paymentMethod);
       paymentToken.value = res['code'];
-      int expireAt = res['exp'];
+      DateTime expireAt = DateTime.parse(res['exp']);
       refreshPaymentToken(expireAt);
     } on DioError catch (e) {
       log(e.response!.data.toString());
@@ -76,6 +78,7 @@ class PayPageController extends GetxController with StateMixin {
   @override
   void onClose() async {
     await resetBrightness();
+    tokenRefreshTimer?.cancel();
     super.onClose();
   }
 

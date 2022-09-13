@@ -28,11 +28,23 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('등록된 카드가 없어요.', style: DPTextTheme.DESCRIPTION),
-            const SizedBox(height: 8),
+            Obx(
+              () {
+                if (paymentMethodController.paymentMethods?.isEmpty == null) {
+                  return Column(
+                    children: const [
+                      Text('등록된 카드가 없어요.', style: DPTextTheme.DESCRIPTION),
+                      SizedBox(height: 8),
+                    ],
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            ),
             Row(
               children: [
-                SvgPicture.asset('asset/images/add.svg'),
+                SvgPicture.asset('asset/images/add.svg', width: 18),
                 const SizedBox(width: 6),
                 const Text('카드 등록', style: DPTextTheme.DESCRIPTION_IMPORTANT_COLOR),
               ],
@@ -52,7 +64,7 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             GestureDetector(
-              onTap: controller.deletePaymentMethod,
+              onTap: () => controller.deletePaymentMethod(paymentMethod),
               child: Row(
                 children: [
                   SvgPicture.asset('asset/images/delete_card.svg'),
@@ -76,12 +88,16 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
           () {
             if (paymentMethodController.paymentMethods == null) {
               return Container();
-            } else if (paymentMethodController.paymentMethods!.isEmpty) {
-              return _registerCardWidget();
             } else {
-              return DividedColumn(
-                divider: const SizedBox(height: 36),
-                children: [for (var generalCard in paymentMethodController.paymentMethods!) _generalCard(generalCard)],
+              return Column(
+                children: [
+                  _registerCardWidget(),
+                  const SizedBox(height: 36),
+                  DividedColumn(
+                    divider: const SizedBox(height: 36),
+                    children: [for (var generalCard in paymentMethodController.paymentMethods!) _generalCard(generalCard)],
+                  ),
+                ],
               );
             }
           },
