@@ -5,19 +5,17 @@ part 'model.g.dart';
 
 @JsonSerializable()
 class PaymentMethod {
-  String systemId;
+  String id;
   DateTime createdAt;
   DateTime updatedAt;
   String? color;
   String? name;
-  String ownerSid;
   PaymentMethod({
-    required this.systemId,
+    required this.id,
     required this.createdAt,
     required this.updatedAt,
     required this.color,
     required this.name,
-    required this.ownerSid,
   });
 
   factory PaymentMethod.fromJson(Map<String, dynamic> json) => _$PaymentMethodFromJson(json);

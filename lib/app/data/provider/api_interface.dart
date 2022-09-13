@@ -35,7 +35,9 @@ abstract class ApiInterface {
     required DateTime expireAt,
   });
 
-  Future<void> deletePaymentMethod();
+  Future<void> deletePaymentMethod({
+    required PaymentMethod paymentMethod,
+  });
 
   Future<Map> getPaymentToken(String pin, PaymentMethod paymentMethod);
 
