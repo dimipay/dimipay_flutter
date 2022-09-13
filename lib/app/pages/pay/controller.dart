@@ -15,8 +15,8 @@ class PayPageController extends GetxController with StateMixin {
   PaymentMethod? currentPaymentMethod;
   Rx<String?> paymentToken = Rx(null);
 
-  Future refreshPaymentToken(int expireAt) async {
-    await Future.delayed(Duration(seconds: expireAt));
+  Future refreshPaymentToken(DateTime expireAt) async {
+    await Future.delayed(expireAt.difference(DateTime.now()));
     fetchPaymentToken(currentPaymentMethod!);
   }
 
@@ -25,7 +25,7 @@ class PayPageController extends GetxController with StateMixin {
       paymentToken.value = null;
       Map res = await ApiProvider().getPaymentToken(authService.pin!, paymentMethod);
       paymentToken.value = res['code'];
-      int expireAt = res['exp'];
+      DateTime expireAt = DateTime.parse(res['exp']);
       refreshPaymentToken(expireAt);
     } on DioError catch (e) {
       log(e.response!.data.toString());
