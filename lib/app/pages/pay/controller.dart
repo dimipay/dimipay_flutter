@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'dart:async';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
@@ -11,13 +11,14 @@ import 'package:screen_brightness/screen_brightness.dart';
 
 class PayPageController extends GetxController with StateMixin {
   PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
+  Timer? tokenRefreshTimer;
   AuthService authService = Get.find<AuthService>();
   PaymentMethod? currentPaymentMethod;
   Rx<String?> paymentToken = Rx(null);
 
   Future refreshPaymentToken(DateTime expireAt) async {
-    await Future.delayed(expireAt.difference(DateTime.now()));
-    fetchPaymentToken(currentPaymentMethod!);
+    tokenRefreshTimer?.cancel();
+    tokenRefreshTimer = Timer(expireAt.difference(DateTime.now()), () => fetchPaymentToken(currentPaymentMethod!));
   }
 
   Future<void> fetchPaymentToken(PaymentMethod paymentMethod) async {
@@ -76,6 +77,7 @@ class PayPageController extends GetxController with StateMixin {
   @override
   void onClose() async {
     await resetBrightness();
+    tokenRefreshTimer?.cancel();
     super.onClose();
   }
 
