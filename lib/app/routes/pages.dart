@@ -98,10 +98,11 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.PAYRESULT, page: () => PayResultPage(), middlewares: [
+    GetPage(name: Routes.PAYSUCCESS, page: () => PaySuccessPage(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
+    GetPage(name: Routes.PAYPENDING, page: () => PayPendingPage()),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
   ];
 }
