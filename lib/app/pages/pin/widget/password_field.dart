@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class PasswordField extends StatelessWidget {
   final bool filled;
-  const PasswordField({required this.filled});
+
+  const PasswordField({super.key, required this.filled});
 
   @override
   Widget build(BuildContext context) {
