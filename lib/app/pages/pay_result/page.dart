@@ -1,3 +1,4 @@
+import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/widgets/button.dart';
@@ -5,8 +6,32 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-class PayResultPage extends StatelessWidget {
-  PayResultPage({Key? key}) : super(key: key) {
+class PayPendingPage extends StatelessWidget {
+  PayPendingPage({Key? key}) : super(key: key) {
+    HapticHelper.feedback(HapticPatterns.success);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              CircularProgressIndicator(color: DPColors.MAIN_THEME),
+              SizedBox(height: 24),
+              Text('결제를 진행중이에요', style: DPTextTheme.SECTION_HEADER),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PaySuccessPage extends StatelessWidget {
+  PaySuccessPage({Key? key}) : super(key: key) {
     HapticHelper.feedback(HapticPatterns.success);
   }
 
