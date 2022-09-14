@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:async';
 import 'package:dimipay/app/core/utils/haptic.dart';
@@ -6,60 +5,11 @@ import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/data/provider/api.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
+import 'package:dimipay/app/data/services/sse/service.dart';
+import 'package:dimipay/app/routes/routes.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:screen_brightness/screen_brightness.dart';
-
-class PayResultSSEController {
-  late StreamSubscription<String>? stream;
-  void Function()? onWaiting;
-  void Function()? onPending;
-  void Function()? onApproved;
-  void Function()? onError;
-
-  void onStreamData(String data) {
-    data = data.substring(6);
-    Map response = json.decode(data);
-
-    switch (response['status']) {
-      case 'WAITING':
-        if (onWaiting != null) {
-          onWaiting!();
-        }
-        break;
-      case 'PENDING':
-        if (onPending != null) {
-          onPending!();
-        }
-        break;
-      case 'APPROVED':
-        if (onApproved != null) {
-          onApproved!();
-        }
-        break;
-      case 'ERROR':
-        if (onError != null) {
-          onError!();
-        }
-        break;
-    }
-  }
-
-  Future<PayResultSSEController> init() async {
-    stream = (await ApiProvider().payResult())?.listen(null);
-    if (stream == null) {
-      throw Exception();
-    }
-    log('payResult stream connected');
-    stream!.onData(onStreamData);
-    return this;
-  }
-
-  void close() {
-    log('close stream');
-    stream?.cancel();
-  }
-}
 
 /// TODO getx worker 적용
 class PayPageController extends GetxController with StateMixin {
@@ -68,7 +18,7 @@ class PayPageController extends GetxController with StateMixin {
   AuthService authService = Get.find<AuthService>();
   PaymentMethod? currentPaymentMethod;
   Rx<String?> paymentToken = Rx(null);
-  PayResultSSEController payStream = PayResultSSEController();
+  PayResultSSEController payStream = Get.find<PayResultSSEController>();
 
   @override
   void onInit() {
@@ -78,6 +28,13 @@ class PayPageController extends GetxController with StateMixin {
 
   Future<void> _initStream() async {
     await payStream.init();
+    payStream.onPending = (() {
+      Get.offNamed(Routes.PAYPENDING);
+    });
+    payStream.onApproved = (() {
+      Get.offNamed(Routes.PAYSUCCESS);
+      payStream.close();
+    });
   }
 
   Future<void> _init() async {
@@ -99,7 +56,6 @@ class PayPageController extends GetxController with StateMixin {
       Map res = await ApiProvider().getPaymentToken(authService.pin!, paymentMethod);
       paymentToken.value = res['code'];
       DateTime expireAt = DateTime.parse(res['exp']);
-      refreshPaymentToken(expireAt);
     } on DioError catch (e) {
       log(e.response!.data.toString());
     }
@@ -135,8 +91,8 @@ class PayPageController extends GetxController with StateMixin {
 
   @override
   void onClose() async {
-    await resetBrightness();
     tokenRefreshTimer?.cancel();
+    await resetBrightness();
     super.onClose();
   }
 
