@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:dimipay/app/data/modules/coupon/model.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
@@ -214,7 +217,6 @@ class ApiProvider implements ApiInterface {
       "pw": password,
     };
     Response response = await dio.post(url, data: body);
-    print(response.data);
     return PaymentMethod.fromJson(response.data);
   }
 
@@ -245,5 +247,19 @@ class ApiProvider implements ApiInterface {
       rethrow;
     }
     return true;
+  }
+
+  @override
+  Future<Stream<String>?> payResult() async {
+    String url = "/payment/response";
+    Response response = await dio.get<ResponseBody>(
+      url,
+      options: Options(
+        headers: {"Accept": "text/event-stream"},
+        responseType: ResponseType.stream,
+      ),
+    );
+
+    return utf8.decoder.bind(response.data?.stream);
   }
 }

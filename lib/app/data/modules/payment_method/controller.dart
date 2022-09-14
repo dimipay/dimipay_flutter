@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/repository.dart';
 import 'package:get/get.dart';
