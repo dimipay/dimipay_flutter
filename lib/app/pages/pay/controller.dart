@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:async';
 import 'package:dimipay/app/core/utils/haptic.dart';
@@ -9,6 +10,57 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
+class PayResultSSEController {
+  late StreamSubscription<String>? stream;
+  void Function()? onWaiting;
+  void Function()? onPending;
+  void Function()? onApproved;
+  void Function()? onError;
+
+  void onStreamData(String data) {
+    data = data.substring(6);
+    Map response = json.decode(data);
+
+    switch (response['status']) {
+      case 'WAITING':
+        if (onWaiting != null) {
+          onWaiting!();
+        }
+        break;
+      case 'PENDING':
+        if (onPending != null) {
+          onPending!();
+        }
+        break;
+      case 'APPROVED':
+        if (onApproved != null) {
+          onApproved!();
+        }
+        break;
+      case 'ERROR':
+        if (onError != null) {
+          onError!();
+        }
+        break;
+    }
+  }
+
+  Future<PayResultSSEController> init() async {
+    stream = (await ApiProvider().payResult())?.listen(null);
+    if (stream == null) {
+      throw Exception();
+    }
+    log('payResult stream connected');
+    stream!.onData(onStreamData);
+    return this;
+  }
+
+  void close() {
+    log('close stream');
+    stream?.cancel();
+  }
+}
+
 /// TODO getx worker 적용
 class PayPageController extends GetxController with StateMixin {
   PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
@@ -16,10 +68,29 @@ class PayPageController extends GetxController with StateMixin {
   AuthService authService = Get.find<AuthService>();
   PaymentMethod? currentPaymentMethod;
   Rx<String?> paymentToken = Rx(null);
+  PayResultSSEController payStream = PayResultSSEController();
 
-  Future refreshPaymentToken(DateTime expireAt) async {
-    tokenRefreshTimer?.cancel();
-    tokenRefreshTimer = Timer(expireAt.difference(DateTime.now()), () => fetchPaymentToken(currentPaymentMethod!));
+  @override
+  void onInit() {
+    _init();
+    super.onInit();
+  }
+
+  Future<void> _initStream() async {
+    await payStream.init();
+  }
+
+  Future<void> _init() async {
+    if (paymentMethodController.paymentMethods == null) {
+      await paymentMethodController.fetchPaymentMethods();
+    }
+    change(null, status: RxStatus.success());
+    currentPaymentMethod = Get.arguments ?? paymentMethodController.paymentMethods!.elementAt(0);
+    if (currentPaymentMethod != null) {
+      fetchPaymentToken(currentPaymentMethod!);
+    }
+    _initStream();
+    setBrightness(1);
   }
 
   Future<void> fetchPaymentToken(PaymentMethod paymentMethod) async {
@@ -34,29 +105,16 @@ class PayPageController extends GetxController with StateMixin {
     }
   }
 
+  Future refreshPaymentToken(DateTime expireAt) async {
+    tokenRefreshTimer?.cancel();
+    Duration awaitTime = expireAt.difference(DateTime.now());
+    tokenRefreshTimer = Timer(awaitTime, () => fetchPaymentToken(currentPaymentMethod!));
+  }
+
   void onPaymentMethodChanged(int index) {
     HapticHelper.feedback(HapticPatterns.once);
     currentPaymentMethod = paymentMethodController.paymentMethods![index];
     fetchPaymentToken(currentPaymentMethod!);
-  }
-
-  Future<void> _init() async {
-    if (paymentMethodController.paymentMethods == null) {
-      await paymentMethodController.fetchPaymentMethods();
-    }
-    change(null, status: RxStatus.success());
-    currentPaymentMethod = Get.arguments ?? paymentMethodController.paymentMethods!.elementAt(0);
-    if (currentPaymentMethod != null) {
-      fetchPaymentToken(currentPaymentMethod!);
-    }
-    setBrightness(1);
-  }
-
-  @override
-  void onInit() {
-    change(null, status: RxStatus.loading());
-    _init();
-    super.onInit();
   }
 
   Future<void> setBrightness(double brightness) async {

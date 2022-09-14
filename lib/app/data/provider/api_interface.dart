@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dimipay/app/data/modules/coupon/model.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
@@ -46,4 +48,6 @@ abstract class ApiInterface {
   Future<bool> checkPin(String pin);
 
   Future<void> changePin(String originalPin, String newPin);
+
+  Future<Stream<String>?> payResult();
 }
