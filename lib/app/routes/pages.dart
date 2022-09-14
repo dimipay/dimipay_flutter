@@ -20,7 +20,8 @@ import 'package:dimipay/app/pages/manage_method/page.dart';
 import 'package:dimipay/app/pages/notification/page.dart';
 import 'package:dimipay/app/pages/pay/binding.dart';
 import 'package:dimipay/app/pages/pay/page.dart';
-import 'package:dimipay/app/pages/pay_result/page.dart';
+import 'package:dimipay/app/pages/pay_pending/page.dart';
+import 'package:dimipay/app/pages/pay_success/page.dart';
 import 'package:dimipay/app/pages/pin/binding.dart';
 import 'package:dimipay/app/pages/pin/page.dart';
 import 'package:dimipay/app/pages/printer_setting/page.dart';
@@ -102,7 +103,7 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.PAYPENDING, page: () => PayPendingPage()),
+    GetPage(name: Routes.PAYPENDING, page: () => const PayPendingPage()),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
   ];
 }
