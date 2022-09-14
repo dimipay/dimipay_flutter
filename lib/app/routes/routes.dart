@@ -11,7 +11,8 @@ abstract class Routes {
   static const COUPON = "/coupon";
   static const HISTORY = '/history';
   static const PAY = "/pay";
-  static const PAYRESULT = "/payResult";
+  static const PAYSUCCESS = "/payResult/success";
+  static const PAYPENDING = "/payResult/pending";
   static const EVENT = "/event";
   static const NOTIFICATION = "/notification";
   static const ISSUECOUPON = '/issueCoupon';
