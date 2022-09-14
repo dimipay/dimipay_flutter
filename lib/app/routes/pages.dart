@@ -99,11 +99,24 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.PAYSUCCESS, page: () => PaySuccessPage(), middlewares: [
-      LoginMiddleware(),
-      OnboardingMiddleware(),
-    ]),
-    GetPage(name: Routes.PAYPENDING, page: () => const PayPendingPage()),
+    GetPage(
+      name: Routes.PAYSUCCESS,
+      page: () => PaySuccessPage(),
+      middlewares: [
+        LoginMiddleware(),
+        OnboardingMiddleware(),
+      ],
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: Routes.PAYPENDING,
+      page: () => const PayPendingPage(),
+      middlewares: [
+        LoginMiddleware(),
+        OnboardingMiddleware(),
+      ],
+      transition: Transition.noTransition,
+    ),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
   ];
 }
