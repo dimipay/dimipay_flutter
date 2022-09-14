@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
@@ -8,18 +9,34 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
+/// TODO getx worker 적용
 class PayPageController extends GetxController with StateMixin {
-  final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
-  final AuthService authService = Get.find<AuthService>();
-  final Rx<String?> paymentToken = Rx(null);
+  PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
+  AuthService authService = Get.find<AuthService>();
   PaymentMethod? currentPaymentMethod;
-  int get currentIndex => paymentMethodController.paymentMethods!.indexOf(currentPaymentMethod!);
+  Rx<String?> paymentToken = Rx(null);
 
-  @override
-  void onInit() {
-    change(null, status: RxStatus.loading());
-    _init();
-    super.onInit();
+  Future refreshPaymentToken(int expireAt) async {
+    await Future.delayed(Duration(seconds: expireAt));
+    fetchPaymentToken(currentPaymentMethod!);
+  }
+
+  Future<void> fetchPaymentToken(PaymentMethod paymentMethod) async {
+    try {
+      paymentToken.value = null;
+      Map res = await ApiProvider().getPaymentToken(authService.pin!, paymentMethod);
+      paymentToken.value = res['code'];
+      int expireAt = res['exp'];
+      refreshPaymentToken(expireAt);
+    } on DioError catch (e) {
+      log(e.response!.data.toString());
+    }
+  }
+
+  void onPaymentMethodChanged(int index) {
+    HapticHelper.feedback(HapticPatterns.once);
+    currentPaymentMethod = paymentMethodController.paymentMethods![index];
+    fetchPaymentToken(currentPaymentMethod!);
   }
 
   Future<void> _init() async {
@@ -76,6 +93,7 @@ class PayPageController extends GetxController with StateMixin {
   @override
   void onClose() async {
     await resetBrightness();
+    tokenRefreshTimer?.cancel();
     super.onClose();
   }
 }

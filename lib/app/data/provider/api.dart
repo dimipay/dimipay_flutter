@@ -184,7 +184,7 @@ class ApiProvider implements ApiInterface {
   Future<Map> getPaymentToken(String pin, PaymentMethod paymentMethod) async {
     String url = '/payment/token';
     Map<String, String> body = {
-      'paymentMethod': paymentMethod.systemId,
+      'id': paymentMethod.id,
       "pin": pin,
     };
     Response response = await dio.post(url, data: body);
@@ -214,13 +214,19 @@ class ApiProvider implements ApiInterface {
       "pw": password,
     };
     Response response = await dio.post(url, data: body);
+    print(response.data);
     return PaymentMethod.fromJson(response.data);
   }
 
   @override
-  Future<void> deletePaymentMethod() async {
+  Future<void> deletePaymentMethod({
+    required PaymentMethod paymentMethod,
+  }) async {
     String url = "/payment/method/";
-    await dio.delete(url);
+    Map<String, String> body = {
+      'id': paymentMethod.id,
+    };
+    await dio.delete(url, data: body);
     return;
   }
 
