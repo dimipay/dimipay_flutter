@@ -6,7 +6,8 @@ import 'package:dimipay/app/pages/face_sign/page.dart';
 import 'package:dimipay/app/pages/card_fin/page.dart';
 import 'package:dimipay/app/pages/coupon/page.dart';
 import 'package:dimipay/app/pages/coupon/binding.dart';
-import 'package:dimipay/app/pages/edit_card_name/page.dart';
+import 'package:dimipay/app/pages/edit_card/binding.dart';
+import 'package:dimipay/app/pages/edit_card/page.dart';
 import 'package:dimipay/app/pages/event/page.dart';
 import 'package:dimipay/app/pages/event/binding.dart';
 import 'package:dimipay/app/pages/history/binding.dart';
@@ -56,7 +57,11 @@ class AppPages {
       OnboardingMiddleware(),
       PinAuthMiddleware(),
     ]),
+<<<<<<< HEAD
     GetPage(name: Routes.EDITCARD, page: () => EditCardNamePage(), middlewares: [
+=======
+    GetPage(name: Routes.EDITCARD, page: () => EditCardPage(), binding: EditCardPageBinding(), middlewares: [
+>>>>>>> cb7a314 (editCard page 구현)
       LoginMiddleware(),
       OnboardingMiddleware(),
       PinAuthMiddleware(),
