@@ -254,6 +254,8 @@ class ApiProvider implements ApiInterface {
     return;
   }
 
+  ///TODO paymentMethod patch 구현
+
   @override
   Future<void> checkPin(String pin) async {
     String url = "/payment/check";
