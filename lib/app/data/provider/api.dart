@@ -214,7 +214,6 @@ class ApiProvider implements ApiInterface {
       "pw": password,
     };
     Response response = await dio.post(url, data: body);
-    print(response.data);
     return PaymentMethod.fromJson(response.data);
   }
 
@@ -229,6 +228,8 @@ class ApiProvider implements ApiInterface {
     await dio.delete(url, data: body);
     return;
   }
+
+  ///TODO paymentMethod patch 구현
 
   @override
   Future<bool> checkPin(String pin) async {

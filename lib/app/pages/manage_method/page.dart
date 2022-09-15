@@ -58,7 +58,10 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
   Widget _generalCard(PaymentMethod paymentMethod) {
     return Column(
       children: [
-        GeneralCardWidget(paymentMethod),
+        GeneralCardWidget(
+          paymentMethod,
+          onTap: () => Get.toNamed(Routes.EDITCARD, arguments: {'paymentMethod': paymentMethod}),
+        ),
         const SizedBox(height: 24),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -140,24 +143,28 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
 
 class GeneralCardWidget extends StatelessWidget {
   final PaymentMethod card;
-  const GeneralCardWidget(this.card, {Key? key}) : super(key: key);
+  final void Function()? onTap;
+  const GeneralCardWidget(this.card, {Key? key, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: card.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${card.color}', radix: 16)),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      width: double.infinity,
-      padding: const EdgeInsets.all(18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 16),
-          Text(card.name ?? '', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 48),
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: card.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${card.color}', radix: 16)),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        width: double.infinity,
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 16),
+            Text(card.name ?? '', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 48),
+          ],
+        ),
       ),
     );
   }
