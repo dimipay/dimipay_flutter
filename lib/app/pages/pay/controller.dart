@@ -56,6 +56,7 @@ class PayPageController extends GetxController with StateMixin {
       Map res = await ApiProvider().getPaymentToken(authService.pin!, paymentMethod);
       paymentToken.value = res['code'];
       DateTime expireAt = DateTime.parse(res['exp']);
+      refreshPaymentToken(expireAt);
     } on DioError catch (e) {
       log(e.response!.data.toString());
     }
