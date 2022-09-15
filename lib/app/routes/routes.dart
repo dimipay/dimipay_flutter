@@ -6,7 +6,7 @@ abstract class Routes {
   static const USER = '/me';
   static const MANAGEMETHOD = '/paymentMethods';
   static const REGISTERCARD = '/registerCard';
-  static const EDITCARDNAME = '/editCardName';
+  static const EDITCARD = '/editCard';
   static const CARDFIN = '/cardFin';
   static const COUPON = "/coupon";
   static const HISTORY = '/history';

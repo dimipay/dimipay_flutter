@@ -41,9 +41,9 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.EDITCARDNAME);
+              Get.toNamed(Routes.EDITCARD);
             },
-            child: const Text("EDITCARDNAME"),
+            child: const Text("EDITCARD"),
           ),
           TextButton(
             onPressed: () {
