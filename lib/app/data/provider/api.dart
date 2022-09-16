@@ -188,7 +188,8 @@ class ApiProvider implements ApiInterface {
     String url = '/payment/token';
     Map<String, String> body = {
       'id': paymentMethod.id,
-      "pin": pin,
+      if (pin != "") "pin": pin,
+      if (bioKey != "") "bioKey": bioKey,
     };
     Response response = await dio.post(url, data: body);
     return response.data;
