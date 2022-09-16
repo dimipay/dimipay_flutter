@@ -6,6 +6,7 @@ import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
+import 'package:image_picker/image_picker.dart';
 
 abstract class ApiInterface {
   Future<Map> loginWithGoogle(String idToken);
@@ -50,4 +51,8 @@ abstract class ApiInterface {
   Future<void> changePin(String originalPin, String newPin);
 
   Future<Stream<String>?> payResult();
+
+  Future<Map> registerFaceSign(XFile image);
+
+  Future<void> deleteFaceSign();
 }

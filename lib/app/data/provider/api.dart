@@ -11,6 +11,7 @@ import 'package:dimipay/app/data/provider/api_interface.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
+import 'package:image_picker/image_picker.dart';
 import 'dart:developer';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
@@ -267,5 +268,18 @@ class ApiProvider implements ApiInterface {
         }
       },
     ));
+  }
+
+  Future<Map> registerFaceSign(XFile image) async {
+    String url = "/auth/face";
+    final formData = FormData.fromMap({'image': await MultipartFile.fromFile(image.path)});
+    Response response = await dio.post(url, data: formData);
+    return response.data;
+  }
+
+  Future<Map> deleteFaceSign() async {
+    String url = "/auth/face";
+    Response response = await dio.delete(url);
+    return response.data;
   }
 }
