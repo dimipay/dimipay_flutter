@@ -30,11 +30,10 @@ class PayPageController extends GetxController with StateMixin {
   Future<void> _initStream() async {
     await payStream.init();
     payStream.onPending = (() {
-      Get.offNamed(Routes.PAYPENDING);
+      Get.toNamed(Routes.PAYPENDING);
     });
     payStream.onApproved = (() {
-      Get.offNamed(Routes.PAYSUCCESS);
-      payStream.close();
+      Get.toNamed(Routes.PAYSUCCESS);
     });
   }
 
