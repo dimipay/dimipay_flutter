@@ -110,7 +110,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.PAYPENDING,
-      page: () => const PayPendingPage(),
+      page: () => PayPendingPage(),
       middlewares: [
         LoginMiddleware(),
         OnboardingMiddleware(),

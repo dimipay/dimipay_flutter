@@ -1,9 +1,12 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:flutter/material.dart';
 
 class PayPendingPage extends StatelessWidget {
-  const PayPendingPage({super.key});
+  PayPendingPage({super.key}) {
+    HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.heavy);
+  }
 
   @override
   Widget build(BuildContext context) {
