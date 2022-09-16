@@ -184,7 +184,7 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<Map> getPaymentToken(String pin, PaymentMethod paymentMethod) async {
+  Future<Map> getPaymentToken(String pin, String bioKey, PaymentMethod paymentMethod) async {
     String url = '/payment/token';
     Map<String, String> body = {
       'id': paymentMethod.id,
