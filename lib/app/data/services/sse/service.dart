@@ -4,13 +4,12 @@ import 'dart:developer';
 import 'package:dimipay/app/data/provider/api.dart' as api_provider;
 import 'package:get/state_manager.dart';
 
-class PayResultSSEController extends GetxService {
+class PayResultSSEController extends GetxController {
   StreamSubscription<String>? _stream;
   void Function()? onWaiting;
   void Function()? onPending;
   void Function()? onApproved;
   void Function()? onError;
-  final baseUrl = 'https://port-0-dimipay-back-v2-huy2w25l6w99bi1.gksl1.cloudtype.app';
 
   bool get streamOpened => _stream != null;
 
@@ -30,7 +29,7 @@ class PayResultSSEController extends GetxService {
           onPending!();
         }
         break;
-      case 'APPROVED':
+      case 'CONFIRMED':
         if (onApproved != null) {
           onApproved!();
         }
@@ -55,8 +54,10 @@ class PayResultSSEController extends GetxService {
     _stream!.onData(onStreamData);
   }
 
-  void close() {
+  @override
+  void onClose() {
     log('close stream');
     _stream?.cancel();
+    super.onClose();
   }
 }
