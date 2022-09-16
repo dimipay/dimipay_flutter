@@ -8,7 +8,7 @@ import 'package:lottie/lottie.dart';
 
 class PaySuccessPage extends StatelessWidget {
   PaySuccessPage({Key? key}) : super(key: key) {
-    HapticHelper.feedback(HapticPatterns.success);
+    HapticHelper.feedback(HapticPatterns.success, hapticType: HapticType.heavy);
   }
 
   @override
