@@ -50,8 +50,6 @@ class PinPageController extends GetxController with StateMixin {
     final res = await _localAuthService.localAuth();
     _localAuthService.updateAvailableBiometrics();
 
-    print(res);
-
     if (res) {
       await authService.loadBioKey();
       Get.offNamed(redirect ?? Routes.HOME);
