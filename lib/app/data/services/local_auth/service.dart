@@ -1,7 +1,5 @@
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:local_auth/error_codes.dart' as auth_error;
 
 class LocalAuthService extends GetxService {
   final LocalAuthentication _localAuth = LocalAuthentication();
