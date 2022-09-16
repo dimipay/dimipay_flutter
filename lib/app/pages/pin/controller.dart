@@ -5,12 +5,12 @@ import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/provider/api.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
+import 'package:dimipay/app/data/services/local_auth/service.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:local_auth/local_auth.dart';
 
 enum PinPageType { pinAuth, onBoarding, changePin }
 
@@ -21,17 +21,16 @@ class PinPageController extends GetxController with StateMixin {
   final Rx<String> password = "".obs;
   final Rx<String> title = Rx("핀 번호 입력");
   final Rx<String> subTitle = Rx('');
-  final LocalAuthentication localAuth = LocalAuthentication();
 
-  Rx<List<BiometricType>> availableBiometrics = Rx([]);
+  final LocalAuthService _localAuthService = LocalAuthService();
+
   Completer<String> _inputPinCompleter = Completer();
   Completer<String> _inputPadCompleter = Completer();
-
-  bool get faceIdAvailable => availableBiometrics.value.contains(BiometricType.face);
+  bool get faceIdAvailable => _localAuthService.faceIdAvailable;
 
   @override
   void onInit() {
-    _updateAvailableBiometrics();
+    _localAuthService.updateAvailableBiometrics();
     _inputPinProcess();
     switch (pinPageType) {
       case PinPageType.pinAuth:
@@ -47,13 +46,12 @@ class PinPageController extends GetxController with StateMixin {
     super.onInit();
   }
 
-  Future<void> _updateAvailableBiometrics() async {
-    availableBiometrics.value = await localAuth.getAvailableBiometrics();
-  }
-
   Future<void> biometricAuth() async {
-    bool res = await localAuth.authenticate(localizedReason: '생체 인증을 사용하세요.', options: const AuthenticationOptions(biometricOnly: true));
-    _updateAvailableBiometrics();
+    final res = await _localAuthService.localAuth();
+    _localAuthService.updateAvailableBiometrics();
+
+    print(res);
+
     if (res) {
       await authService.loadBioKey();
       Get.offNamed(redirect ?? Routes.HOME);
@@ -75,7 +73,7 @@ class PinPageController extends GetxController with StateMixin {
   }
 
   Future<void> _pinAuth() async {
-    biometricAuth();
+    await biometricAuth();
     authService.pin = await _validatePin();
     Get.offNamed(redirect ?? Routes.HOME);
   }
