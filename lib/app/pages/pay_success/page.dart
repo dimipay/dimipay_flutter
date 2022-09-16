@@ -33,7 +33,9 @@ class PaySuccessPage extends StatelessWidget {
                 text: '확인',
                 width: double.infinity,
                 onTap: () {
-                  Get.until((route) => Get.currentRoute == Routes.HOME);
+                  Get.offNamedUntil(Routes.HOME, (route) {
+                    return false;
+                  });
                 },
               ),
             ],
