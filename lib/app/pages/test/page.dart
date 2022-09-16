@@ -101,9 +101,15 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.PAYRESULT);
+              Get.toNamed(Routes.PAYSUCCESS);
             },
-            child: const Text('PAYRESULT'),
+            child: const Text('PAYSUCCESS'),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.PAYPENDING);
+            },
+            child: const Text('PAYPENDING'),
           ),
           TextButton(
             onPressed: () {
