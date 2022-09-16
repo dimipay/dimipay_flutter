@@ -261,6 +261,12 @@ class ApiProvider implements ApiInterface {
       ),
     );
 
-    return utf8.decoder.bind(response.data?.stream);
+    return utf8.decoder.bind(response.data?.stream).transform(StreamTransformer.fromHandlers(
+      handleData: (data, sink) {
+        if (data != ':\n\n') {
+          sink.add(data);
+        }
+      },
+    ));
   }
 }

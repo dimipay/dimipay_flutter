@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
@@ -62,7 +61,6 @@ class PinPageController extends GetxController with StateMixin {
       password.value = '';
       String pin = await _inputPin();
       bool res = await ApiProvider().checkPin(pin);
-      log(res.toString());
       if (res) {
         return pin;
       }
