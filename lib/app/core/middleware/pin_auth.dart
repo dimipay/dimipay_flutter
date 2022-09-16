@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/pages/pin/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
