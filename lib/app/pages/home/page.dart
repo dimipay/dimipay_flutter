@@ -23,8 +23,6 @@ class HomePage extends StatelessWidget {
   final EventController eventController = Get.find<EventController>();
   final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
 
-  final LocalAuthService localAuthService = Get.find<LocalAuthService>();
-
   Widget _logoArea() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,7 +43,6 @@ class HomePage extends StatelessWidget {
             DPIconButton(
               'asset/images/profile.svg',
               onTap: () async {
-                await localAuthService.localAuth();
                 Get.toNamed(Routes.USER);
               },
             ),
