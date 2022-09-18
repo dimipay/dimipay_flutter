@@ -44,7 +44,7 @@ class FaceSignController extends GetxController with StateMixin {
       try {
         print(checkFileSize(image.path));
         final result = await repository.register(image);
-        return (result == 'OK');
+        return (result["code"] == 'OK');
       } on DioError catch (e) {
         print(e.response!.data);
         rethrow;
