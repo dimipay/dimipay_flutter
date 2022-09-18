@@ -6,13 +6,13 @@ abstract class Routes {
   static const USER = '/me';
   static const MANAGEMETHOD = '/paymentMethods';
   static const REGISTERCARD = '/registerCard';
-  static const EDITCARDNAME = '/editCardName';
+  static const EDITCARD = '/editCard';
   static const CARDFIN = '/cardFin';
   static const COUPON = "/coupon";
   static const HISTORY = '/history';
   static const PAY = "/pay";
-  static const PAYSUCCESS = "/payResult/success";
-  static const PAYPENDING = "/payResult/pending";
+  static const PAYSUCCESS = "/pay/success";
+  static const PAYPENDING = "/pay/pending";
   static const EVENT = "/event";
   static const NOTIFICATION = "/notification";
   static const ISSUECOUPON = '/issueCoupon';
