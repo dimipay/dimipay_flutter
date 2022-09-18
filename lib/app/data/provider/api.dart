@@ -270,6 +270,7 @@ class ApiProvider implements ApiInterface {
     ));
   }
 
+  @override
   Future<Map> registerFaceSign(XFile image) async {
     String url = "/auth/face";
     final formData = FormData.fromMap({'image': await MultipartFile.fromFile(image.path)});
@@ -277,6 +278,7 @@ class ApiProvider implements ApiInterface {
     return response.data;
   }
 
+  @override
   Future<Map> deleteFaceSign() async {
     String url = "/auth/face";
     Response response = await dio.delete(url);
