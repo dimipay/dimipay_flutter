@@ -10,9 +10,9 @@ class BiometricAuthPageController extends GetxController {
   void registerFaceSign() async {
     try {
       final result = await faceSignController.registerFaceSign();
-      if (result == "OK") {
+
+      if (result) {
         DPSnackBar.open("얼굴 등록에 성공했어요.");
-        Get.back();
       } else {
         DPErrorSnackBar().open('얼굴 등록에 실패했어요.');
       }
