@@ -1,4 +1,6 @@
-import 'package:dimipay/app/data/modules/coupon/model.dart';
+import 'dart:io';
+
+import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/data/modules/faceSign/repository.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
@@ -11,28 +13,44 @@ class FaceSignController extends GetxController with StateMixin {
 
   FaceSignController(this.repository);
 
-  Future<void> registerFaceSign() async {
+  checkFileSize(path) {
+    var fileSizeLimit = 1024;
+    File f = new File(path);
+    var s = f.lengthSync();
+    print(s); // returns in bytes
+    var fileSizeInKB = s / 1024;
+    // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
+    var fileSizeInMB = fileSizeInKB / 1024;
+
+    if (fileSizeInKB > fileSizeLimit) {
+      print("File size greater than the limit");
+      return false;
+    } else {
+      print("file can be selected");
+      return true;
+    }
+  }
+
+  Future<bool> registerFaceSign() async {
     XFile? image;
 
     if (_isCamera.value) {
-      image = await ImagePicker().pickImage(source: ImageSource.camera);
+      image = await ImagePicker().pickImage(source: ImageSource.camera, maxHeight: 2048, maxWidth: 1024);
     } else {
       image = await ImagePicker().pickImage(source: ImageSource.gallery);
     }
 
     if (image != null) {
       try {
+        print(checkFileSize(image.path));
         final result = await repository.register(image);
-        if (result["code"] == "OK") {
-          DPSnackBar.open("얼굴 등록에 성공했어요.");
-        } else {
-          DPErrorSnackBar().open('얼굴 등록에 실패했습니다.');
-        }
+        return (result == 'OK');
       } on DioError catch (e) {
+        print(e.response!.data);
         rethrow;
       }
     } else {
-      DPSnackBar.open('No image selected');
+      throw FaceSginException('선택된 이미지가 없습니다.');
     }
   }
 
