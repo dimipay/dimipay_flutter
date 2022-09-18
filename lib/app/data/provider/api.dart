@@ -184,13 +184,16 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<Map> getPaymentToken(String pin, String bioKey, PaymentMethod paymentMethod) async {
+  Future<Map> getPaymentToken({required PaymentMethod paymentMethod, String? pin, String? bioKey}) async {
     String url = '/payment/token';
     Map<String, String> body = {
       'id': paymentMethod.id,
-      if (pin != "") "pin": pin,
-      if (bioKey != "") "bioKey": bioKey,
     };
+    if (pin != null) {
+      body['pin'] = pin;
+    } else if (bioKey != null) {
+      body['bioKey'] = bioKey;
+    }
     Response response = await dio.post(url, data: body);
     return response.data;
   }

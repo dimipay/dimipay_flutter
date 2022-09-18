@@ -19,8 +19,12 @@ class LocalAuthService extends GetxService {
   Future<bool> localAuth() async {
     final bool didAuthenticate = await _localAuth.authenticate(
       localizedReason: '생체 인증을 사용하세요',
-      options: const AuthenticationOptions(biometricOnly: true),
+      options: const AuthenticationOptions(
+        biometricOnly: true,
+        sensitiveTransaction: false,
+      ),
     );
+    updateAvailableBiometrics();
     return didAuthenticate;
   }
 

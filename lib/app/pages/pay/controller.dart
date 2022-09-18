@@ -53,7 +53,7 @@ class PayPageController extends GetxController with StateMixin {
   Future<void> fetchPaymentToken(PaymentMethod paymentMethod) async {
     try {
       paymentToken.value = null;
-      Map res = await ApiProvider().getPaymentToken(authService.pin ?? "", authService.bioKey ?? "", paymentMethod);
+      Map res = await ApiProvider().getPaymentToken(paymentMethod: paymentMethod, pin: authService.pin, bioKey: authService.bioKey);
       paymentToken.value = res['code'];
       DateTime expireAt = DateTime.parse(res['exp']);
       refreshPaymentToken(expireAt);

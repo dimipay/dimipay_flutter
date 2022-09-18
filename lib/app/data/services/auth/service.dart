@@ -55,7 +55,6 @@ class AuthService extends GetxService {
 
   Future<void> _setBioKey(String bioKey) async {
     await _storage.write(key: 'bioKey', value: bioKey);
-    _bioKey = bioKey;
   }
 
   Future<void> loadBioKey() async {
@@ -131,6 +130,7 @@ class AuthService extends GetxService {
     _refreshToken.value = null;
     _onboardingToken.value = null;
     _refreshTokenApiCompleter = null;
+    _bioKey = null;
     pin = null;
   }
 

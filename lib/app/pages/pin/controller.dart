@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
@@ -21,7 +22,7 @@ class PinPageController extends GetxController with StateMixin {
   final Rx<String> title = Rx("핀 번호 입력");
   final Rx<String> subTitle = Rx('');
 
-  final LocalAuthService _localAuthService = LocalAuthService();
+  final LocalAuthService _localAuthService = Get.find<LocalAuthService>();
 
   Completer<String> _inputPinCompleter = Completer();
   Completer<String> _inputPadCompleter = Completer();
@@ -29,7 +30,6 @@ class PinPageController extends GetxController with StateMixin {
 
   @override
   void onInit() {
-    _localAuthService.updateAvailableBiometrics();
     _inputPinProcess();
     switch (pinPageType) {
       case PinPageType.pinAuth:
@@ -47,7 +47,6 @@ class PinPageController extends GetxController with StateMixin {
 
   Future<void> biometricAuth() async {
     final res = await _localAuthService.localAuth();
-    _localAuthService.updateAvailableBiometrics();
 
     if (res) {
       await authService.loadBioKey();
@@ -69,6 +68,7 @@ class PinPageController extends GetxController with StateMixin {
   }
 
   Future<void> _pinAuth() async {
+    _localAuthService.updateAvailableBiometrics();
     await biometricAuth();
     authService.pin = await _validatePin();
     Get.offNamed(redirect ?? Routes.HOME);
@@ -93,7 +93,7 @@ class PinPageController extends GetxController with StateMixin {
 
         try {
           await authService.onBoardingAuth(pin);
-          authService.pin = pinCheck;
+          authService.pin = pin;
           Get.offNamed(redirect ?? Routes.HOME);
         } on OnboardingTokenException catch (e) {
           DPErrorSnackBar().open(e.message);
