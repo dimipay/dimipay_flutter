@@ -1,11 +1,15 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/pages/biometric_auth/controller.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class BiometricAuthPage extends StatelessWidget {
-  const BiometricAuthPage({Key? key}) : super(key: key);
+  BiometricAuthPage({Key? key}) : super(key: key);
+
+  final BiometricAuthPageController _controller = Get.find<BiometricAuthPageController>();
 
 //Widget _buildCard(String assetName, String title, {String? description}) {
 //     return ClipRRect(
@@ -120,7 +124,9 @@ class BiometricAuthPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: DPMediumTextButton(
-                      onTap: () {},
+                      onTap: () {
+                        Get.back();
+                      },
                       text: "다음에",
                       color: DPColors.DARK4,
                     ),
@@ -130,8 +136,18 @@ class BiometricAuthPage extends StatelessWidget {
                   ),
                   Expanded(
                     child: DPMediumTextButton(
-                      onTap: () {},
+                      onTap: _controller.registerFaceSign,
                       text: "사용하기",
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  Expanded(
+                    child: DPMediumTextButton(
+                      color: DPColors.ERROR,
+                      onTap: _controller.deleteFaceSign,
+                      text: "삭제하기",
                     ),
                   ),
                 ],

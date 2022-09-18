@@ -1,6 +1,7 @@
 import 'package:dimipay/app/core/middleware/login.dart';
 import 'package:dimipay/app/core/middleware/onboarding.dart';
 import 'package:dimipay/app/core/middleware/pin_auth.dart';
+import 'package:dimipay/app/pages/biometric_auth/binding.dart';
 import 'package:dimipay/app/pages/biometric_auth/page.dart';
 import 'package:dimipay/app/pages/card_fin/page.dart';
 import 'package:dimipay/app/pages/coupon/page.dart';
@@ -91,7 +92,7 @@ class AppPages {
     GetPage(name: Routes.PIN, page: () => const PinPage(), binding: PinPageBinding(), middlewares: [
       LoginMiddleware(),
     ]),
-    GetPage(name: Routes.BIOMETRICAUTH, page: () => const BiometricAuthPage(), middlewares: [
+    GetPage(name: Routes.BIOMETRICAUTH, page: () => BiometricAuthPage(), binding: BiometricAuthPageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
