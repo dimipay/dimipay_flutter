@@ -89,9 +89,9 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.BIOMETRICAUTH);
+              Get.toNamed(Routes.FACESIGN);
             },
-            child: const Text('BiometricAuthPage'),
+            child: const Text('FACESIGN'),
           ),
           TextButton(
             onPressed: () {

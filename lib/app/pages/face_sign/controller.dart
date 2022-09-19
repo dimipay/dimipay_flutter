@@ -4,7 +4,7 @@ import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-class BiometricAuthPageController extends GetxController {
+class FaceSignPageController extends GetxController {
   FaceSignController faceSignController = Get.find<FaceSignController>();
 
   void registerFaceSign() async {
