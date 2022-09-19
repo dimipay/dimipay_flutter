@@ -72,6 +72,7 @@ class AuthService extends GetxService {
 
   Future<String> onBoardingAuth(String paymentPin) async {
     String deviceUid = const Uuid().v4();
+
     String bioKey = const Uuid().v4();
 
     try {
@@ -80,7 +81,9 @@ class AuthService extends GetxService {
       await _setAccessToken(onboardingResult['accessToken']);
       await _setRefreshToken(onboardingResult['refreshToken']);
       await _setDeviceUid(deviceUid);
-      await _setBioKey(bioKey);
+      if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+        await _setBioKey(bioKey);
+      }
     } on DioError catch (e) {
       switch (e.response?.statusCode) {
         case 400:
