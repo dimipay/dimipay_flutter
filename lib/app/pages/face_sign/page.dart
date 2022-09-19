@@ -1,15 +1,15 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
-import 'package:dimipay/app/pages/biometric_auth/controller.dart';
+import 'package:dimipay/app/pages/face_sign/controller.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class BiometricAuthPage extends StatelessWidget {
-  BiometricAuthPage({Key? key}) : super(key: key);
+class FaceSignPage extends StatelessWidget {
+  FaceSignPage({Key? key}) : super(key: key);
 
-  final BiometricAuthPageController _controller = Get.find<BiometricAuthPageController>();
+  final FaceSignPageController _controller = Get.find<FaceSignPageController>();
 
 //Widget _buildCard(String assetName, String title, {String? description}) {
 //     return ClipRRect(

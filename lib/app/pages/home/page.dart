@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
             DPIconButton(
               'asset/images/face_sign.svg',
               onTap: () {
-                Get.toNamed(Routes.BIOMETRICAUTH);
+                Get.toNamed(Routes.FACESIGN);
               },
             ),
             const SizedBox(width: 12),
