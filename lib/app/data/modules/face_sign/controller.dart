@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dimipay/app/core/utils/errors.dart';
@@ -15,18 +16,17 @@ class FaceSignController extends GetxController with StateMixin {
 
   checkFileSize(path) {
     var fileSizeLimit = 1024;
-    File f = new File(path);
+    File f = File(path);
     var s = f.lengthSync();
-    print(s); // returns in bytes
     var fileSizeInKB = s / 1024;
     // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
     var fileSizeInMB = fileSizeInKB / 1024;
 
     if (fileSizeInKB > fileSizeLimit) {
-      print("File size greater than the limit");
+      log("File size greater than the limit");
       return false;
     } else {
-      print("file can be selected");
+      log("file can be selected");
       return true;
     }
   }
