@@ -1,5 +1,5 @@
 import 'package:dimipay/app/core/utils/errors.dart';
-import 'package:dimipay/app/data/modules/faceSign/controller.dart';
+import 'package:dimipay/app/data/modules/face_sign/controller.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
