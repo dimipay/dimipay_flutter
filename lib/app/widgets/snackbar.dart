@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DPSnackBar {
-  static void open(String title, {Color backgroundColor = DPColors.DARK5, Color textColor = DPColors.DARK1, HapticPattern? hapticFeedback}) {
+  static void open(String title, {Color backgroundColor = DPColors.MAIN_THEME, Color textColor = Colors.white, HapticPattern? hapticFeedback}) {
     if (hapticFeedback != null) {
       HapticHelper.feedback(hapticFeedback);
     }

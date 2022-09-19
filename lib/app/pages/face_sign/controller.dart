@@ -1,4 +1,5 @@
 import 'package:dimipay/app/core/utils/errors.dart';
+import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/face_sign/controller.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
@@ -12,7 +13,7 @@ class FaceSignPageController extends GetxController {
       final result = await faceSignController.registerFaceSign();
 
       if (result) {
-        DPSnackBar.open("얼굴 등록에 성공했어요.");
+        DPSnackBar.open("얼굴 등록에 성공했어요.", hapticFeedback: HapticPatterns.success);
       } else {
         DPErrorSnackBar().open('얼굴 등록에 실패했어요.');
       }
@@ -26,7 +27,7 @@ class FaceSignPageController extends GetxController {
   void deleteFaceSign() async {
     try {
       await faceSignController.deleteFaceSign();
-      DPSnackBar.open("얼굴 삭제에 성공했어요.");
+      DPSnackBar.open("등록된 얼굴을 삭제했어요.");
       Get.back();
     } on DioError catch (e) {
       DPErrorSnackBar().open(e.response!.data["message"]);

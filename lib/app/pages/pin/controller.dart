@@ -108,7 +108,7 @@ class PinPageController extends GetxController with StateMixin {
         await ApiProvider().changePin(originalPin, newPin);
         authService.pin = newPin;
         Get.back();
-        DPSnackBar.open('핀이 변경되었어요.', backgroundColor: DPColors.MAIN_THEME, textColor: Colors.white, hapticFeedback: HapticPatterns.success);
+        DPSnackBar.open('핀이 변경되었어요.', hapticFeedback: HapticPatterns.success);
         break;
       } on DioError catch (e) {
         DPErrorSnackBar().open(e.response?.data['message'] ?? '');

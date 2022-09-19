@@ -14,23 +14,6 @@ class FaceSignController extends GetxController with StateMixin {
 
   FaceSignController(this.repository);
 
-  checkFileSize(path) {
-    var fileSizeLimit = 1024;
-    File f = File(path);
-    var s = f.lengthSync();
-    var fileSizeInKB = s / 1024;
-    // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
-    var fileSizeInMB = fileSizeInKB / 1024;
-
-    if (fileSizeInKB > fileSizeLimit) {
-      log("File size greater than the limit");
-      return false;
-    } else {
-      log("file can be selected");
-      return true;
-    }
-  }
-
   Future<bool> registerFaceSign() async {
     XFile? image;
 
