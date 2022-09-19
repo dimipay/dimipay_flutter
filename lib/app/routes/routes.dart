@@ -17,7 +17,7 @@ abstract class Routes {
   static const NOTIFICATION = "/notification";
   static const ISSUECOUPON = '/issueCoupon';
   static const PIN = "/pin";
-  static const BIOMETRICAUTH = "/biometricAuth";
+  static const FACESIGN = "/faceSign";
   static const PRINTERSETTING = "/printerSetting";
   static const LOGIN = "/login";
 }
