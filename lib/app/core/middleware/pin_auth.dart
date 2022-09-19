@@ -11,6 +11,6 @@ class PinAuthMiddleware extends GetMiddleware {
 
   @override
   RouteSettings? redirect(String? route) {
-    return authService.pin != null ? null : RouteSettings(name: Routes.PIN, arguments: {'redirect': route, 'pinPageType': PinPageType.pinAuth});
+    return (authService.pin != null || authService.bioKey != null) ? null : RouteSettings(name: Routes.PIN, arguments: {'redirect': route, 'pinPageType': PinPageType.pinAuth});
   }
 }

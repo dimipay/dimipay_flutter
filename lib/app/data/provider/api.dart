@@ -81,7 +81,7 @@ class LogInterceptor extends Interceptor {
 
 class ApiProvider implements ApiInterface {
   final Dio dio = Dio();
-  final baseUrl = 'https://api.dimipay.rf.gd/';
+  final baseUrl = 'https://api.dimipay.rf.gd';
 
   ApiProvider() {
     dio.options.baseUrl = baseUrl;
@@ -184,12 +184,16 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<Map> getPaymentToken(String pin, PaymentMethod paymentMethod) async {
+  Future<Map> getPaymentToken({required PaymentMethod paymentMethod, String? pin, String? bioKey}) async {
     String url = '/payment/token';
     Map<String, String> body = {
       'id': paymentMethod.id,
-      "pin": pin,
     };
+    if (pin != null) {
+      body['pin'] = pin;
+    } else if (bioKey != null) {
+      body['bioKey'] = bioKey;
+    }
     Response response = await dio.post(url, data: body);
     return response.data;
   }

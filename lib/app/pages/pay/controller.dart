@@ -1,5 +1,5 @@
-import 'dart:developer';
 import 'dart:async';
+import 'dart:developer';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
@@ -19,6 +19,7 @@ class PayPageController extends GetxController with StateMixin {
   PaymentMethod? currentPaymentMethod;
   Rx<String?> paymentToken = Rx(null);
   PayResultSSEController payStream = Get.find<PayResultSSEController>();
+  int get currentIndex => paymentMethodController.paymentMethods!.indexOf(currentPaymentMethod!);
 
   @override
   void onInit() {
@@ -52,7 +53,7 @@ class PayPageController extends GetxController with StateMixin {
   Future<void> fetchPaymentToken(PaymentMethod paymentMethod) async {
     try {
       paymentToken.value = null;
-      Map res = await ApiProvider().getPaymentToken(authService.pin!, paymentMethod);
+      Map res = await ApiProvider().getPaymentToken(paymentMethod: paymentMethod, pin: authService.pin, bioKey: authService.bioKey);
       paymentToken.value = res['code'];
       DateTime expireAt = DateTime.parse(res['exp']);
       refreshPaymentToken(expireAt);
@@ -94,9 +95,5 @@ class PayPageController extends GetxController with StateMixin {
     tokenRefreshTimer?.cancel();
     await resetBrightness();
     super.onClose();
-  }
-
-  int get currentIndex {
-    return paymentMethodController.paymentMethods!.indexOf(currentPaymentMethod!);
   }
 }

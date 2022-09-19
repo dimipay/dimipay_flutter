@@ -4,6 +4,7 @@ import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/provider/api.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
+import 'package:dimipay/app/data/services/local_auth/service.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
@@ -15,12 +16,42 @@ enum PinPageType { pinAuth, onBoarding, changePin }
 class PinPageController extends GetxController with StateMixin {
   final String? redirect = Get.arguments?['redirect'];
   final PinPageType pinPageType = Get.arguments?['pinPageType'] ?? PinPageType.pinAuth;
-  AuthService authService = Get.find<AuthService>();
+  final AuthService authService = Get.find<AuthService>();
+  final Rx<String> password = "".obs;
+  final Rx<String> title = Rx("핀 번호 입력");
+  final Rx<String> subTitle = Rx('');
+
+  final LocalAuthService _localAuthService = Get.find<LocalAuthService>();
+
   Completer<String> _inputPinCompleter = Completer();
   Completer<String> _inputPadCompleter = Completer();
-  Rx<String> password = "".obs;
-  Rx<String> title = Rx("핀 번호 입력");
-  Rx<String> subTitle = Rx('');
+  bool get faceIdAvailable => _localAuthService.faceIdAvailable;
+
+  @override
+  void onInit() {
+    _inputPinProcess();
+    switch (pinPageType) {
+      case PinPageType.pinAuth:
+        _pinAuth();
+        break;
+      case PinPageType.onBoarding:
+        _onBoardingAuth();
+        break;
+      case PinPageType.changePin:
+        _changePin();
+        break;
+    }
+    super.onInit();
+  }
+
+  Future<void> biometricAuth() async {
+    final res = await _localAuthService.localAuth();
+
+    if (res) {
+      await authService.loadBioKey();
+      Get.offNamed(redirect ?? Routes.HOME);
+    }
+  }
 
   Future<String> _validatePin() async {
     title.value = '핀 번호 입력';
@@ -36,6 +67,8 @@ class PinPageController extends GetxController with StateMixin {
   }
 
   Future<void> _pinAuth() async {
+    _localAuthService.updateAvailableBiometrics();
+    await biometricAuth();
     authService.pin = await _validatePin();
     Get.offNamed(redirect ?? Routes.HOME);
   }
@@ -59,7 +92,7 @@ class PinPageController extends GetxController with StateMixin {
 
         try {
           await authService.onBoardingAuth(pin);
-          authService.pin = pinCheck;
+          authService.pin = pin;
           Get.offNamed(redirect ?? Routes.HOME);
         } on OnboardingTokenException catch (e) {
           DPErrorSnackBar().open(e.message);
@@ -114,23 +147,6 @@ class PinPageController extends GetxController with StateMixin {
         DPErrorSnackBar().open(e.response?.data['message'] ?? '');
       }
     }
-  }
-
-  @override
-  void onInit() {
-    _inputPinProcess();
-    switch (pinPageType) {
-      case PinPageType.pinAuth:
-        _pinAuth();
-        break;
-      case PinPageType.onBoarding:
-        _onBoardingAuth();
-        break;
-      case PinPageType.changePin:
-        _changePin();
-        break;
-    }
-    super.onInit();
   }
 
   void onClickPad(String value) {

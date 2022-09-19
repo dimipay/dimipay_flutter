@@ -17,6 +17,7 @@ class AuthService extends GetxService {
   final Rx<String?> _onboardingToken = Rx(null); // /auth/login API에서 반환되는 AccessToken
   final Rx<bool> _isFirstVisit = Rx(false);
   String? pin;
+  String? _bioKey;
 
   AuthService(this.repository);
 
@@ -29,6 +30,7 @@ class AuthService extends GetxService {
   String? get accessToken => _accessToken.value;
   String? get refreshToken => _refreshToken.value;
   String? get onboardingToken => _onboardingToken.value;
+  String? get bioKey => _bioKey;
   bool get isFirstVisit => _isFirstVisit.value;
 
   Future<AuthService> init() async {
@@ -52,8 +54,11 @@ class AuthService extends GetxService {
   }
 
   Future<void> _setBioKey(String bioKey) async {
-    //TODO 회원가입 플로우의 생체인증 관련 로직이 개발이 안되어있기 때문에 이상태로 놔둡니다. 추후 개발필요.
-    //TODO 생체인증 구현시에 biometric_storage 라이브러리 설정도 같이 진행되어야 합니다
+    await _storage.write(key: 'bioKey', value: bioKey);
+  }
+
+  Future<void> loadBioKey() async {
+    _bioKey = await _storage.read(key: 'bioKey');
   }
 
   Future<void> loginWithGoogle({bool selectAccount = true}) async {
@@ -67,6 +72,7 @@ class AuthService extends GetxService {
 
   Future<String> onBoardingAuth(String paymentPin) async {
     String deviceUid = const Uuid().v4();
+
     String bioKey = const Uuid().v4();
 
     try {
@@ -75,7 +81,9 @@ class AuthService extends GetxService {
       await _setAccessToken(onboardingResult['accessToken']);
       await _setRefreshToken(onboardingResult['refreshToken']);
       await _setDeviceUid(deviceUid);
-      await _setBioKey(bioKey);
+      if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+        await _setBioKey(bioKey);
+      }
     } on DioError catch (e) {
       switch (e.response?.statusCode) {
         case 400:
@@ -118,10 +126,14 @@ class AuthService extends GetxService {
   Future<void> _removeToken() async {
     await _storage.delete(key: 'accessToken');
     await _storage.delete(key: 'refreshToken');
+    await _storage.delete(key: 'bioKey');
+    await _storage.delete(key: 'deviceUid');
+
     _accessToken.value = null;
     _refreshToken.value = null;
     _onboardingToken.value = null;
     _refreshTokenApiCompleter = null;
+    _bioKey = null;
     pin = null;
   }
 

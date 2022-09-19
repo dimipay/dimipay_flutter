@@ -4,6 +4,7 @@ import 'package:dimipay/app/pages/pin/controller.dart';
 import 'package:dimipay/app/pages/pin/widget/numberpad_item.dart';
 import 'package:dimipay/app/pages/pin/widget/password_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class PinPage extends GetView<PinPageController> {
@@ -144,7 +145,20 @@ class PinPage extends GetView<PinPageController> {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(),
+                  child: Obx(
+                    () {
+                      if (controller.faceIdAvailable && controller.pinPageType == PinPageType.pinAuth) {
+                        return GestureDetector(
+                          onTap: controller.biometricAuth,
+                          child: Center(
+                            child: SvgPicture.asset('asset/images/face_id.svg', height: 28),
+                          ),
+                        );
+                      } else {
+                        return Container();
+                      }
+                    },
+                  ),
                 ),
                 Expanded(
                   child: NumberPadItem(

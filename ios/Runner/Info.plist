@@ -42,7 +42,9 @@
 		<string>_dartobservatory._tcp</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-	<string>디미페이의 결제 수단으로 사용할 카드를 카메라를 이용해 자동 등록할 시에 사용합니다.</string>
+	<string>디미페이의 결제 수단으로 사용할 카드를 카메라로 스캔할 때 사용됩니다.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>디미페이의 결제 pin을 생체인증으로 해제할 때 사용됩니다.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
