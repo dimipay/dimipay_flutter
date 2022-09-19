@@ -1,5 +1,4 @@
 import 'package:dimipay/app/routes/routes.dart';
-import 'package:dimipay/app/widgets/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,7 +37,7 @@ class TestPage extends StatelessWidget {
           linkToRoute(Routes.PAYSUCCESS),
           linkToRoute(Routes.EVENT),
           linkToRoute(Routes.PIN),
-          linkToRoute(Routes.BIOMETRICAUTH),
+          linkToRoute(Routes.FACESIGN),
           linkToRoute(Routes.PRINTERSETTING),
         ],
       ),
