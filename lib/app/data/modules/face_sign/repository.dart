@@ -6,6 +6,6 @@ class FaceSignRepository {
 
   FaceSignRepository(this.api);
 
-  Future<Map> register(XFile image) => api.registerFaceSign(image);
+  Future<void> register(XFile image) => api.registerFaceSign(image);
   Future<void> delete() => api.deleteFaceSign();
 }
