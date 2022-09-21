@@ -1,4 +1,4 @@
-import 'package:dimipay/app/core/utils/errors.dart';
+import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/face_sign/repository.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
@@ -11,24 +11,26 @@ class FaceSignController extends GetxController with StateMixin {
 
   FaceSignController(this.repository);
 
-  Future<bool> registerFaceSign() async {
-    XFile? image;
-
+  Future<XFile?> _pickImage() async {
     if (_isCamera.value) {
-      image = await ImagePicker().pickImage(source: ImageSource.camera, maxHeight: 2048, maxWidth: 1024);
+      return await ImagePicker().pickImage(source: ImageSource.camera, maxHeight: 2048, maxWidth: 1024);
     } else {
-      image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      return await ImagePicker().pickImage(source: ImageSource.gallery);
+    }
+  }
+
+  Future<void> registerFaceSign() async {
+    XFile? image = await _pickImage();
+
+    if (image == null) {
+      return;
     }
 
-    if (image != null) {
-      try {
-        final result = await repository.register(image);
-        return (result["code"] == 'OK');
-      } on DioError catch (e) {
-        rethrow;
-      }
-    } else {
-      throw FaceSginException('선택된 이미지가 없습니다.');
+    try {
+      await repository.register(image);
+      DPSnackBar.open("얼굴 등록에 성공했어요.", hapticFeedback: HapticPatterns.success);
+    } on DioError catch (e) {
+      DPErrorSnackBar().open(e.response!.data["message"]);
     }
   }
 
