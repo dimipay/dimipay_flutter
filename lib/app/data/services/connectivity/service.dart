@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 class ConnectivityService extends GetxService {
   final RxBool isConnected = true.obs;
+  final RxBool once = false.obs;
 
   Future<ConnectivityService> init() async {
     _init();
@@ -25,9 +26,11 @@ class ConnectivityService extends GetxService {
 
   void moveToNoConnectionPage() {
     if (!isConnected.value) {
-      Get.offNamed(Routes.NOCONNECTION);
-    } else {
-      Get.offNamed(Routes.HOME);
+      once.value = true;
+      Get.toNamed(Routes.NOCONNECTION);
+    } else if (once.value) {
+      once.value = false;
+      Get.back();
     }
   }
 
