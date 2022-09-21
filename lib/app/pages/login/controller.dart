@@ -55,7 +55,9 @@ class GyroScopeController extends GetxController {
 
   @override
   void onInit() async {
-    Sensormanager
+    // gyroscopeEvents.listen((GyroscopeEvent event) {
+    // 	vector.value = conv(Vector3(x: event.x, y: event.y, z: event.z));
+    // });
     super.onInit();
   }
 }
