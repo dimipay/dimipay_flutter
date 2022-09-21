@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 class FaceSignPageController extends GetxController {
   FaceSignController faceSignController = Get.find<FaceSignController>();
+  Rx<bool> isRegistered = false.obs;
 
   void registerFaceSign() async {
     try {
