@@ -74,6 +74,5 @@ class LoginPage extends GetView<LoginPageController> {
         ],
       ),
     );
-    ;
   }
 }
