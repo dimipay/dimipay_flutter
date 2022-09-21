@@ -9,7 +9,7 @@ abstract class DPTextTheme {
   static const HEADER2 = TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 24, height: 1.3, color: DPColors.DARK1);
   static const HEADER3 = TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 20, height: 1.3, color: DPColors.DARK1);
   static const PAGE_HEADER = TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 20, height: 1.3, color: DPColors.DARK1);
-  static const PAGE_DESCRIPTION = TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.3, color: Color(0xFFABB0B0));
+  static const PAGE_DESCRIPTION = TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.5, color: Color(0xFFABB0B0));
   static const SECTION_HEADER = TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 18, height: 1.3, color: DPColors.DARK1);
   static const REGULAR = TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.3, color: DPColors.DARK1);
   static const READABLE = TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w500, fontSize: 20, height: 1.3, color: DPColors.DARK1);
