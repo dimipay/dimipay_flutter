@@ -5,6 +5,5 @@ class LoginPageBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<LoginPageController>(() => LoginPageController());
-    Get.lazyPut<GyroScopeController>(() => GyroScopeController());
   }
 }
