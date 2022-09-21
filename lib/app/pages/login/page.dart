@@ -1,5 +1,4 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
-import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/pages/login/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -74,5 +73,6 @@ class LoginPage extends GetView<LoginPageController> {
         ],
       ),
     );
+    ;
   }
 }
