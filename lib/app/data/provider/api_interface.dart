@@ -52,7 +52,7 @@ abstract class ApiInterface {
 
   Future<Stream<String>?> payResult();
 
-  Future<Map> registerFaceSign(XFile image);
+  Future<void> registerFaceSign(XFile image);
 
   Future<void> deleteFaceSign();
 }
