@@ -11,40 +11,6 @@ class FaceSignPage extends StatelessWidget {
 
   final FaceSignPageController _controller = Get.find<FaceSignPageController>();
 
-//Widget _buildCard(String assetName, String title, {String? description}) {
-//     return ClipRRect(
-//       borderRadius: const BorderRadius.all(Radius.circular(12)),
-//       child: Container(
-//         color: DPColors.DARK6,
-//         child: Padding(
-//           padding: const EdgeInsets.all(18),
-//           child: Row(
-//             children: [
-//               SvgPicture.asset(assetName),
-//               const SizedBox(width: 12),
-//               Expanded(
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Text(title, style: DPTextTheme.REGULAR),
-//                     description == null
-//                         ? Container()
-//                         : Column(
-//                             children: [
-//                               const SizedBox(height: 6),
-//                               Text(description, style: DPTextTheme.DESCRIPTION),
-//                             ],
-//                           ),
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-
   @override
   Widget build(BuildContext context) {
     return _controller.isRegistered.value ? FaceSignDeletePage(controller: _controller) : FaceSignRegisterPage(controller: _controller);
