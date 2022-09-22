@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'dart:developer';
 import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/provider/api.dart';
@@ -8,7 +8,6 @@ import 'package:dimipay/app/data/services/local_auth/service.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 enum PinPageType { pinAuth, onBoarding, changePin }
@@ -20,6 +19,7 @@ class PinPageController extends GetxController with StateMixin {
   final Rx<String> password = "".obs;
   final Rx<String> title = Rx("핀 번호 입력");
   final Rx<String> subTitle = Rx('');
+  final Rx<bool> isPinLocked = Rx(false);
 
   final LocalAuthService _localAuthService = Get.find<LocalAuthService>();
 
@@ -58,11 +58,15 @@ class PinPageController extends GetxController with StateMixin {
     while (true) {
       password.value = '';
       String pin = await _inputPin();
-      bool res = await ApiProvider().checkPin(pin);
-      if (res) {
+      try {
+        await ApiProvider().checkPin(pin);
         return pin;
+      } on IncorrectPinException catch (e) {
+        DPErrorSnackBar().open('핀 번호가 올바르지 않아요.');
+      } on PinLockException catch (_) {
+        isPinLocked.value = true;
+        DPErrorSnackBar().open('핀 시도 횟수를 초과했어요.');
       }
-      DPErrorSnackBar().open('핀 번호가 올바르지 않아요.');
     }
   }
 
@@ -109,8 +113,11 @@ class PinPageController extends GetxController with StateMixin {
           await authService.onBoardingAuth(pin);
           authService.pin = pin;
           Get.offNamed(redirect ?? Routes.HOME);
-        } on DioError catch (_) {
+        } on IncorrectPinException catch (_) {
           DPErrorSnackBar().open('핀 번호가 올바르지 않아요.');
+        } on PinLockException catch (e) {
+          isPinLocked.value = true;
+          DPErrorSnackBar().open('핀 시도 횟수를 초과했어요.');
         } on OnboardingTokenException catch (e) {
           DPErrorSnackBar().open(e.message);
           await authService.logout();
@@ -164,17 +171,13 @@ class PinPageController extends GetxController with StateMixin {
   Future<void> _inputPinProcess() async {
     while (true) {
       String value = await _inputPad();
-      //OnboardingAuth api 요청 중 pin을 누르는 경우에 대비함
-      if (password.value.length >= 4) {
-        continue;
-      }
-
       if (value.isNum) {
-        password.value = password.value + value;
-      } else if (value == '\b') {
-        if (password.value.isEmpty) {
+        //OnboardingAuth api 요청 중 pin을 누르는 경우에 대비함
+        if (password.value.length >= 4) {
           continue;
         }
+        password.value = password.value + value;
+      } else if (value == '\b') {
         password.value = password.value.substring(0, password.value.length - 1);
       }
       if (password.value.length == 4) {
