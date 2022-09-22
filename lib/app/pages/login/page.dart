@@ -1,6 +1,7 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/pages/login/controller.dart';
+import 'package:dimipay/app/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -15,9 +16,13 @@ class LoginPage extends GetView<LoginPageController> {
       backgroundColor: DPColors.DARK6,
       body: Column(
         children: [
-          Expanded(
-            child: Container(
-              color: Colors.transparent,
+          const Expanded(
+            child: Center(
+              child: DPCard(
+                cardName: '국민카드',
+                cardNumber: '1234',
+                color: DPColors.MAIN_THEME,
+              ),
             ),
           ),
           BottomArea(controller: controller),
