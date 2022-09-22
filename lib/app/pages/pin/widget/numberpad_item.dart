@@ -5,7 +5,7 @@ class NumberPadItem extends StatelessWidget {
   final Widget child;
   final bool disabled;
   final void Function(String value)? onTap;
-  NumberPadItem({Key? key, required this.child, required this.value, this.onTap, this.disabled = false}) : super(key: key) {}
+  const NumberPadItem({Key? key, required this.child, required this.value, this.onTap, this.disabled = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

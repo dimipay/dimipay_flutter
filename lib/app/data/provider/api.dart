@@ -33,7 +33,6 @@ class JWTInterceptor extends Interceptor {
     if (authService.isAuthenticated) {
       options.headers['Authorization'] = 'Bearer ${authService.accessToken}';
     } else if (authService.isGoogleLoginSuccess) {
-      log(authService.onboardingToken.toString());
       options.headers['Authorization'] = 'Bearer ${authService.onboardingToken}';
     }
 
