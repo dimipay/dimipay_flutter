@@ -5,6 +5,9 @@ PODS:
   - AppAuth/Core (1.5.0)
   - AppAuth/ExternalUserAgent (1.5.0):
     - AppAuth/Core
+  - connectivity_plus (0.0.1):
+    - Flutter
+    - ReachabilitySwift
   - credit_card_scanner (0.0.1):
     - Flutter
     - GoogleMLKit/TextRecognition
@@ -92,6 +95,7 @@ PODS:
     - Flutter
   - PromisesObjC (2.1.1)
   - Protobuf (3.21.5)
+  - ReachabilitySwift (5.0.0)
   - screen_brightness_ios (0.1.0):
     - Flutter
   - sensors_plus (0.0.1):
@@ -102,6 +106,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - credit_card_scanner (from `.symlinks/plugins/credit_card_scanner/ios`)
   - Flutter (from `Flutter`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
@@ -135,8 +140,11 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
+    - ReachabilitySwift
 
 EXTERNAL SOURCES:
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
   credit_card_scanner:
     :path: ".symlinks/plugins/credit_card_scanner/ios"
   Flutter:
@@ -166,6 +174,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
+  connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
   credit_card_scanner: 2c3c58d821ec493cb42cf7c782dc461f516c212b
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
@@ -191,6 +200,7 @@ SPEC CHECKSUMS:
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   Protobuf: 7504b04fffcf6662ad629694db8231f5e744327f
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   screen_brightness_ios: 715ca807df953bf676d339f11464e438143ee625
   sensors_plus: 5717760720f7e6acd96fdbd75b7428f5ad755ec2
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
