@@ -57,6 +57,7 @@ dependencies:
   qr_flutter: ^4.0.0
   local_auth: ^2.1.2
   image_picker: ^0.8.5+3
+  url_launcher: ^6.1.5
 
 dev_dependencies:
   flutter_test:

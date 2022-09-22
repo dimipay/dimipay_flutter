@@ -6,6 +6,7 @@ import 'package:dimipay/app/pages/pin/widget/password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PinPage extends GetView<PinPageController> {
   const PinPage({Key? key}) : super(key: key);
@@ -225,13 +226,29 @@ class PinPage extends GetView<PinPageController> {
                         style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 24, height: 1.2, color: DPColors.MAIN_THEME),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 16),
                     Obx(
                       () => Text(
                         controller.subTitle.value,
                         style: DPTextTheme.DESCRIPTION,
+                        textAlign: TextAlign.center,
                       ),
                     ),
+                    const SizedBox(height: 8),
+                    Obx(() {
+                      if (controller.isPinLocked.value) {
+                        return GestureDetector(
+                          onTap: () => launchUrl(Uri.parse('http://pf.kakao.com/_Rxanxlxj/chat')),
+                          child: const Text(
+                            '핀 복구하기',
+                            style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w600, fontSize: 16, height: 1.2, color: DPColors.MAIN_THEME, decoration: TextDecoration.underline),
+                            textAlign: TextAlign.center,
+                          ),
+                        );
+                      } else {
+                        return Container();
+                      }
+                    }),
                     const SizedBox(height: 24),
                     buildPassword(),
                   ],
