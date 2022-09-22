@@ -73,24 +73,18 @@ class AuthService extends GetxService {
   Future<String> onBoardingAuth(String paymentPin) async {
     String deviceUid = const Uuid().v4();
 
-    String bioKey = const Uuid().v4();
+    String? bioKey;
+    if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+      bioKey = const Uuid().v4();
+    }
 
-    try {
-      Map onboardingResult = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
+    Map onboardingResult = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
 
-      await _setAccessToken(onboardingResult['accessToken']);
-      await _setRefreshToken(onboardingResult['refreshToken']);
-      await _setDeviceUid(deviceUid);
-      if (GetPlatform.isAndroid || GetPlatform.isIOS) {
-        await _setBioKey(bioKey);
-      }
-    } on DioError catch (e) {
-      switch (e.response?.statusCode) {
-        case 400:
-          rethrow;
-        case 401:
-          throw OnboardingTokenException('구글 로그인을 다시 진행해주세요');
-      }
+    await _setAccessToken(onboardingResult['accessToken']);
+    await _setRefreshToken(onboardingResult['refreshToken']);
+    await _setDeviceUid(deviceUid);
+    if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+      await _setBioKey(bioKey!);
     }
 
     return _accessToken.value!;
