@@ -61,10 +61,12 @@ class PinPageController extends GetxController with StateMixin {
         await ApiProvider().checkPin(pin);
         return pin;
       } on IncorrectPinException catch (e) {
-        DPErrorSnackBar().open('핀 번호가 올바르지 않아요.');
+        HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.vibrate);
+        subTitle.value = '핀 번호가 올바르지 않아요.\n남은 시도 횟수 : ${e.left}';
       } on PinLockException catch (_) {
         isPinLocked.value = true;
-        DPErrorSnackBar().open('핀 시도 횟수를 초과했어요.');
+        HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.vibrate);
+        subTitle.value = '핀 입력 횟수를 초과했어요.';
       }
     }
   }
