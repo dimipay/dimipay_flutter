@@ -5,6 +5,14 @@ import 'package:get/get.dart';
 class UserPageController extends GetxController {
   UserController userController = Get.find<UserController>();
 
+  @override
+  void onInit() {
+    if (userController.user == null) {
+      userController.fetchUser();
+    }
+    super.onInit();
+  }
+
   Future<void> refreshData() async {
     HapticFeedback.mediumImpact();
     await userController.fetchUser();
