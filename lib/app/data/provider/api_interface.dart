@@ -46,13 +46,13 @@ abstract class ApiInterface {
 
   Future<void> createPaymentPin(String paymentPin);
 
-  Future<bool> checkPin(String pin);
+  Future<void> checkPin(String pin);
 
   Future<void> changePin(String originalPin, String newPin);
 
   Future<Stream<String>?> payResult();
 
-  Future<Map> registerFaceSign(XFile image);
+  Future<void> registerFaceSign(XFile image);
 
   Future<void> deleteFaceSign();
 }
