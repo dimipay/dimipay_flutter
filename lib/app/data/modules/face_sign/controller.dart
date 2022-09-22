@@ -1,7 +1,4 @@
-import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/data/modules/face_sign/repository.dart';
-import 'package:dimipay/app/widgets/snackbar.dart';
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -11,33 +8,25 @@ class FaceSignController extends GetxController with StateMixin {
 
   FaceSignController(this.repository);
 
-  Future<bool> registerFaceSign() async {
-    XFile? image;
-
+  Future<XFile?> _pickImage() async {
     if (_isCamera.value) {
-      image = await ImagePicker().pickImage(source: ImageSource.camera, maxHeight: 2048, maxWidth: 1024);
+      return await ImagePicker().pickImage(source: ImageSource.camera, maxHeight: 2048, maxWidth: 1024);
     } else {
-      image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    }
-
-    if (image != null) {
-      try {
-        final result = await repository.register(image);
-        return (result["code"] == 'OK');
-      } on DioError catch (e) {
-        rethrow;
-      }
-    } else {
-      throw FaceSginException('선택된 이미지가 없습니다.');
+      return await ImagePicker().pickImage(source: ImageSource.gallery);
     }
   }
 
-  Future<void> deleteFaceSign() async {
-    try {
-      await repository.delete();
-      DPSnackBar.open('얼굴 삭제가 완료되었습니다.');
-    } on DioError catch (e) {
-      rethrow;
+  Future<void> registerFaceSign() async {
+    XFile? image = await _pickImage();
+
+    if (image == null) {
+      throw Exception('선택된 사진이 없어요.');
     }
+
+    await repository.register(image);
+  }
+
+  Future<void> deleteFaceSign() async {
+    await repository.delete();
   }
 }
