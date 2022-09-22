@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class FaceSignPage extends StatelessWidget {
+class FaceSignPage extends GetView<FaceSignPageController> {
   FaceSignPage({Key? key}) : super(key: key);
-
-  final FaceSignPageController _controller = Get.find<FaceSignPageController>();
 
   @override
   Widget build(BuildContext context) {
-    return _controller.isRegistered.value ? FaceSignDeletePage(controller: _controller) : FaceSignRegisterPage(controller: _controller);
+    return Obx(
+      () => controller.isFacesignRegistered.value ? FaceSignDeletePage(controller: controller) : FaceSignRegisterPage(controller: controller),
+    );
   }
 }
 
@@ -144,7 +144,7 @@ class FaceSignDeletePage extends StatelessWidget {
       appBar: AppBar(),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -168,7 +168,7 @@ class FaceSignDeletePage extends StatelessWidget {
                 text: "Face Sign 등록 해제",
                 color: DPColors.ERROR,
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 16),
             ],
           ),
         ),
