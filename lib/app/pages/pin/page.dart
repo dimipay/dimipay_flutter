@@ -6,6 +6,7 @@ import 'package:dimipay/app/pages/pin/widget/password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PinPage extends GetView<PinPageController> {
   const PinPage({Key? key}) : super(key: key);
@@ -27,171 +28,177 @@ class PinPage extends GetView<PinPageController> {
   }
 
   buildNumberPad(List<int> nums) {
-    return SizedBox(
-      width: 300,
-      height: 280,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: NumberPadItem(
-                    onTap: controller.onClickPad,
-                    value: "${nums[0]}",
-                    child: Text(
-                      "${nums[0]}",
-                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: NumberPadItem(
-                    onTap: controller.onClickPad,
-                    value: "${nums[1]}",
-                    child: Text(
-                      "${nums[1]}",
-                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: NumberPadItem(
-                    onTap: controller.onClickPad,
-                    value: "${nums[2]}",
-                    child: Text(
-                      "${nums[2]}",
-                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: NumberPadItem(
-                    onTap: controller.onClickPad,
-                    value: "${nums[3]}",
-                    child: Text(
-                      "${nums[3]}",
-                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: NumberPadItem(
-                    onTap: controller.onClickPad,
-                    value: "${nums[4]}",
-                    child: Text(
-                      "${nums[4]}",
-                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: NumberPadItem(
-                    onTap: controller.onClickPad,
-                    value: "${nums[5]}",
-                    child: Text(
-                      "${nums[5]}",
-                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: NumberPadItem(
-                    onTap: controller.onClickPad,
-                    value: "${nums[6]}",
-                    child: Text(
-                      "${nums[6]}",
-                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: NumberPadItem(
-                    onTap: controller.onClickPad,
-                    value: "${nums[7]}",
-                    child: Text(
-                      "${nums[7]}",
-                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: NumberPadItem(
-                    onTap: controller.onClickPad,
-                    value: "${nums[8]}",
-                    child: Text(
-                      "${nums[8]}",
-                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Obx(
-                    () {
-                      if (controller.faceIdAvailable && controller.pinPageType == PinPageType.pinAuth) {
-                        return GestureDetector(
-                          onTap: controller.biometricAuth,
-                          child: Center(
-                            child: SvgPicture.asset('asset/images/face_id.svg', height: 28),
-                          ),
-                        );
-                      } else {
-                        return Container();
-                      }
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: NumberPadItem(
-                    onTap: controller.onClickPad,
-                    value: "${nums[9]}",
-                    child: Text(
-                      "${nums[9]}",
-                      style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: NumberPadItem(
-                    onTap: controller.onClickPad,
-                    value: "\b",
-                    child: Container(
-                      color: Colors.transparent,
-                      child: Center(
-                        child: Obx(
-                          () => Icon(
-                            Icons.backspace_outlined,
-                            color: controller.password.value.isEmpty ? DPColors.DARK5 : DPColors.DARK1,
-                            size: 22,
-                          ),
-                        ),
+    return Obx(
+      () => SizedBox(
+        width: 300,
+        height: 280,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: NumberPadItem(
+                      onTap: controller.onClickPad,
+                      value: "${nums[0]}",
+                      disabled: controller.isPinLocked.value,
+                      child: Text(
+                        "${nums[0]}",
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
                       ),
                     ),
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: NumberPadItem(
+                      onTap: controller.onClickPad,
+                      value: "${nums[1]}",
+                      disabled: controller.isPinLocked.value,
+                      child: Text(
+                        "${nums[1]}",
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: NumberPadItem(
+                      onTap: controller.onClickPad,
+                      value: "${nums[2]}",
+                      disabled: controller.isPinLocked.value,
+                      child: Text(
+                        "${nums[2]}",
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: NumberPadItem(
+                      onTap: controller.onClickPad,
+                      value: "${nums[3]}",
+                      disabled: controller.isPinLocked.value,
+                      child: Text(
+                        "${nums[3]}",
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: NumberPadItem(
+                      onTap: controller.onClickPad,
+                      value: "${nums[4]}",
+                      disabled: controller.isPinLocked.value,
+                      child: Text(
+                        "${nums[4]}",
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: NumberPadItem(
+                      onTap: controller.onClickPad,
+                      value: "${nums[5]}",
+                      disabled: controller.isPinLocked.value,
+                      child: Text(
+                        "${nums[5]}",
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: NumberPadItem(
+                      onTap: controller.onClickPad,
+                      value: "${nums[6]}",
+                      disabled: controller.isPinLocked.value,
+                      child: Text(
+                        "${nums[6]}",
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: NumberPadItem(
+                      onTap: controller.onClickPad,
+                      value: "${nums[7]}",
+                      disabled: controller.isPinLocked.value,
+                      child: Text(
+                        "${nums[7]}",
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: NumberPadItem(
+                      onTap: controller.onClickPad,
+                      value: "${nums[8]}",
+                      disabled: controller.isPinLocked.value,
+                      child: Text(
+                        "${nums[8]}",
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Obx(
+                      () {
+                        if (controller.faceIdAvailable && controller.pinPageType == PinPageType.pinAuth) {
+                          return GestureDetector(
+                            onTap: controller.biometricAuth,
+                            child: Center(
+                              child: SvgPicture.asset('asset/images/face_id.svg', height: 28),
+                            ),
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: NumberPadItem(
+                      onTap: controller.onClickPad,
+                      value: "${nums[9]}",
+                      disabled: controller.isPinLocked.value,
+                      child: Text(
+                        "${nums[9]}",
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: NumberPadItem(
+                      onTap: controller.onClickPad,
+                      value: "\b",
+                      disabled: controller.password.value.isEmpty,
+                      child: const Icon(
+                        Icons.backspace_outlined,
+                        color: DPColors.DARK1,
+                        size: 22,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -219,13 +226,29 @@ class PinPage extends GetView<PinPageController> {
                         style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 24, height: 1.2, color: DPColors.MAIN_THEME),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 16),
                     Obx(
                       () => Text(
                         controller.subTitle.value,
                         style: DPTextTheme.DESCRIPTION,
+                        textAlign: TextAlign.center,
                       ),
                     ),
+                    const SizedBox(height: 8),
+                    Obx(() {
+                      if (controller.isPinLocked.value) {
+                        return GestureDetector(
+                          onTap: () => launchUrl(Uri.parse('http://pf.kakao.com/_Rxanxlxj/chat')),
+                          child: const Text(
+                            '핀 복구하기',
+                            style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w600, fontSize: 16, height: 1.2, color: DPColors.MAIN_THEME, decoration: TextDecoration.underline),
+                            textAlign: TextAlign.center,
+                          ),
+                        );
+                      } else {
+                        return Container();
+                      }
+                    }),
                     const SizedBox(height: 24),
                     buildPassword(),
                   ],
