@@ -18,6 +18,7 @@ import 'package:dimipay/app/pages/login/binding.dart';
 import 'package:dimipay/app/pages/login/page.dart';
 import 'package:dimipay/app/pages/manage_method/binding.dart';
 import 'package:dimipay/app/pages/manage_method/page.dart';
+import 'package:dimipay/app/pages/no_connection/page.dart';
 import 'package:dimipay/app/pages/notification/page.dart';
 import 'package:dimipay/app/pages/pay/binding.dart';
 import 'package:dimipay/app/pages/pay/page.dart';
@@ -119,5 +120,6 @@ class AppPages {
       transition: Transition.noTransition,
     ),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
+    GetPage(name: Routes.NOCONNECTION, page: () => const NoConnectionPage()),
   ];
 }
