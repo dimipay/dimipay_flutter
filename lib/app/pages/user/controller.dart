@@ -7,7 +7,9 @@ class UserPageController extends GetxController {
 
   @override
   void onInit() {
-    userController.fetchUser();
+    if (userController.user == null) {
+      userController.fetchUser();
+    }
     super.onInit();
   }
 

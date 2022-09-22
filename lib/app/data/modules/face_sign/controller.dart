@@ -1,7 +1,4 @@
-import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/face_sign/repository.dart';
-import 'package:dimipay/app/widgets/snackbar.dart';
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -23,23 +20,13 @@ class FaceSignController extends GetxController with StateMixin {
     XFile? image = await _pickImage();
 
     if (image == null) {
-      return;
+      throw Exception('선택된 사진이 없어요.');
     }
 
-    try {
-      await repository.register(image);
-      DPSnackBar.open("얼굴 등록에 성공했어요.", hapticFeedback: HapticPatterns.success);
-    } on DioError catch (e) {
-      DPErrorSnackBar().open(e.response!.data["message"]);
-    }
+    await repository.register(image);
   }
 
   Future<void> deleteFaceSign() async {
-    try {
-      await repository.delete();
-      DPSnackBar.open('얼굴 삭제가 완료되었습니다.');
-    } on DioError catch (e) {
-      rethrow;
-    }
+    await repository.delete();
   }
 }
