@@ -170,11 +170,11 @@ class PinPageController extends GetxController with StateMixin {
   Future<void> _inputPinProcess() async {
     while (true) {
       String value = await _inputPad();
+      //OnboardingAuth api 요청 중 pin을 누르는 경우에 대비함
+      if (password.value.length >= 4) {
+        continue;
+      }
       if (value.isNum) {
-        //OnboardingAuth api 요청 중 pin을 누르는 경우에 대비함
-        if (password.value.length >= 4) {
-          continue;
-        }
         password.value = password.value + value;
       } else if (value == '\b') {
         password.value = password.value.substring(0, password.value.length - 1);
