@@ -51,12 +51,12 @@ class LoginPage extends GetView<LoginPageController> {
                             decoration: BoxDecoration(
                               color: Colors.red,
                               gradient: RadialGradient(
-                                radius: 1.8,
+                                radius: 3,
                                 colors: [
-                                  Colors.white.withOpacity(0.4),
+                                  Colors.white.withOpacity(0.5),
                                   Colors.white.withOpacity(0.0),
                                 ],
-                                center: Alignment(0.3 * gyroScopeController.v.x + 0.1, -0.7 * gyroScopeController.v.y - 1),
+                                center: Alignment(0.3 * gyroScopeController.v.x + 0.2, -1 * gyroScopeController.v.y - 2),
                               ),
                             ),
                           ),
