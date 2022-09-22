@@ -117,7 +117,7 @@ class PinPageController extends GetxController with StateMixin {
         } on IncorrectPinException catch (e) {
           HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.vibrate);
           subTitle.value = '핀 번호가 올바르지 않아요.\n남은 시도 횟수 : ${e.left}';
-        } on PinLockException catch (e) {
+        } on PinLockException catch (_) {
           isPinLocked.value = true;
           isPinLocked.value = true;
           HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.vibrate);

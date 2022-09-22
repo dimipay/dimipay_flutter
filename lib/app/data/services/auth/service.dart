@@ -3,7 +3,6 @@ import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/core/utils/google.dart';
 import 'package:dimipay/app/data/services/auth/repository.dart';
 import 'package:dimipay/app/routes/routes.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';

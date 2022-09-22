@@ -93,7 +93,7 @@ class AppPages {
     GetPage(name: Routes.PIN, page: () => const PinPage(), binding: PinPageBinding(), middlewares: [
       LoginMiddleware(),
     ]),
-    GetPage(name: Routes.FACESIGN, page: () => FaceSignPage(), binding: FaceSignPageBinding(), middlewares: [
+    GetPage(name: Routes.FACESIGN, page: () => const FaceSignPage(), binding: FaceSignPageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
