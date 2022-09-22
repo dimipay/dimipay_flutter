@@ -24,6 +24,7 @@ class TestPage extends StatelessWidget {
       body: ListView(
         children: [
           linkToRoute(Routes.HOME),
+          linkToRoute(Routes.LOGIN),
           linkToRoute(Routes.USER),
           linkToRoute(Routes.MANAGEMETHOD),
           linkToRoute(Routes.REGISTERCARD),
