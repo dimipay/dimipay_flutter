@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 class LoginPage extends GetView<LoginPageController> {
   LoginPage({Key? key}) : super(key: key);
+  final GyroScopeController gyroScopeController = Get.find<GyroScopeController>();
   final String? redirect = Get.arguments?['redirect'];
 
   @override
@@ -16,12 +17,54 @@ class LoginPage extends GetView<LoginPageController> {
       backgroundColor: DPColors.DARK6,
       body: Column(
         children: [
-          const Expanded(
-            child: Center(
-              child: DPCard(
-                cardName: '국민카드',
-                cardNumber: '1234',
-                color: DPColors.MAIN_THEME,
+          Expanded(
+            child: GestureDetector(
+              onPanUpdate: (details) {
+                gyroScopeController.onDrag(details.delta.dx, details.delta.dy);
+              },
+              child: Container(
+                color: Colors.transparent,
+                width: double.infinity,
+                height: double.infinity,
+                child: Center(
+                  child: Obx(
+                    () => Transform(
+                      transform: Matrix4.identity()
+                        ..setEntry(3, 2, 0.001) // perspective
+                        ..rotateX(0.2 * gyroScopeController.v.x)
+                        ..rotateY(-0.2 * gyroScopeController.v.y)
+                        ..rotateX(-0.7)
+                        ..rotateY(0.3)
+                        ..rotateZ(-0.8),
+                      alignment: FractionalOffset.center,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          const DPCard(
+                            cardName: '디미페이',
+                            cardNumber: '1234',
+                            color: DPColors.MAIN_THEME,
+                          ),
+                          Container(
+                            width: 320,
+                            height: 180,
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              gradient: RadialGradient(
+                                radius: 1.8,
+                                colors: [
+                                  Colors.white.withOpacity(0.4),
+                                  Colors.white.withOpacity(0.0),
+                                ],
+                                center: Alignment(0.3 * gyroScopeController.v.x + 0.1, -0.7 * gyroScopeController.v.y - 1),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
