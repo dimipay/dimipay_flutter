@@ -114,11 +114,14 @@ class PinPageController extends GetxController with StateMixin {
           await authService.onBoardingAuth(pin);
           authService.pin = pin;
           Get.offNamed(redirect ?? Routes.HOME);
-        } on IncorrectPinException catch (_) {
-          DPErrorSnackBar().open('핀 번호가 올바르지 않아요.');
+        } on IncorrectPinException catch (e) {
+          HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.vibrate);
+          subTitle.value = '핀 번호가 올바르지 않아요.\n남은 시도 횟수 : ${e.left}';
         } on PinLockException catch (e) {
           isPinLocked.value = true;
-          DPErrorSnackBar().open('핀 시도 횟수를 초과했어요.');
+          isPinLocked.value = true;
+          HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.vibrate);
+          subTitle.value = '핀 입력 횟수를 초과했어요.';
         } on OnboardingTokenException catch (e) {
           DPErrorSnackBar().open(e.message);
           await authService.logout();
