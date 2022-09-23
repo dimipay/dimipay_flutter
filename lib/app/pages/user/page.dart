@@ -141,6 +141,29 @@ class UserPage extends GetView<UserPageController> {
     );
   }
 
+  Widget _faceSignManageArea() {
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(Routes.FACESIGN);
+      },
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            const SizedBox(height: 36),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('페이스사인 관리하기', style: DPTextTheme.SECTION_HEADER),
+                SvgPicture.asset('asset/images/face_sign.svg'),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -192,6 +215,7 @@ class UserPage extends GetView<UserPageController> {
                   _topArea(),
                   const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
                   _transactionHistoryArea(),
+                  _faceSignManageArea(),
                 ],
               ),
             ),
