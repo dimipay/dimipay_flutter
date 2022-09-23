@@ -56,7 +56,7 @@ class LoginPage extends GetView<LoginPageController> {
                                   Colors.white.withOpacity(0.5),
                                   Colors.white.withOpacity(0.0),
                                 ],
-                                center: Alignment(0.3 * gyroScopeController.v.x + 0.2, -1 * gyroScopeController.v.y - 2),
+                                center: Alignment(0.3 * gyroScopeController.v.x + 0.2, -1 * gyroScopeController.v.y - 2.8),
                               ),
                             ),
                           ),
