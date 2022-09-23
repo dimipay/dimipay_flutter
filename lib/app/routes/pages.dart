@@ -70,7 +70,7 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.HISTORY, page: () => HistoryPage(), binding: HistoryPageBinding(), middlewares: [
+    GetPage(name: Routes.HISTORY, page: () => const HistoryPage(), binding: HistoryPageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
