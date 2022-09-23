@@ -210,7 +210,6 @@ class PinPage extends GetView<PinPageController> {
 
     return Scaffold(
       appBar: AppBar(),
-      appBar: AppBar(),
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,
@@ -256,8 +255,6 @@ class PinPage extends GetView<PinPageController> {
                 ),
               ),
               const SizedBox(height: 100),
-              buildNumberPad(numList),
-              const SizedBox(height: 40),
               buildNumberPad(numList),
               const SizedBox(height: 40),
             ],

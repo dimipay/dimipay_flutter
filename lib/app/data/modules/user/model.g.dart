@@ -7,10 +7,10 @@ part of 'model.dart';
 // **************************************************************************
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
-      systemId: json['systemId'] as String??,
+      systemId: json['systemId'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      isDisabled: json['isDisabled'] as bool??,
+      isDisabled: json['isDisabled'] as bool?,
       accountName: json['accountName'] as String,
       name: json['name'] as String,
       faceSignRegistered: json['faceSignRegistered'] as bool,
