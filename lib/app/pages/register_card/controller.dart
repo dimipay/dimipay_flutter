@@ -1,6 +1,7 @@
 import 'package:credit_card_scanner/credit_card_scanner.dart';
-import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
+import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -130,16 +131,14 @@ class RegisterCardPageController extends GetxController with StateMixin {
     try {
       if (inputValidity) {
         change(null, status: RxStatus.loading());
-        await paymentMethodController.createGeneralCard(
+        PaymentMethod paymentMethod = await paymentMethodController.createPaymentMethod(
           cardNumber: cardNumber.value!,
           password: password.value!,
           ownerBirthday: birthday.value!,
           expireAt: expiredAt.value!,
         );
 
-        Get.back();
-
-        DPSnackBar.open('카드를 성공적으로 등록했어요', hapticFeedback: HapticPatterns.success);
+        Get.offNamed(Routes.EDITCARD, arguments: {'creatingCard': true, 'paymentMethod': paymentMethod});
       }
     } on DioError catch (e) {
       DPErrorSnackBar().open(e.response!.data['message']);
