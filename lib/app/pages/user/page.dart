@@ -49,7 +49,6 @@ class UserPage extends GetView<UserPageController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _userName(),
-            const SizedBox(height: 4),
             _userId(),
           ],
         ),
