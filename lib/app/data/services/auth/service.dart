@@ -11,6 +11,7 @@ class AuthService extends GetxService {
   Completer<void>? _refreshTokenApiCompleter;
   final AuthRepository repository;
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
+  final GoogleSignInHelper googleSignInHelper = GoogleSignInHelper();
   final Rx<String?> _accessToken = Rx(null);
   final Rx<String?> _refreshToken = Rx(null);
   final Rx<String?> _onboardingToken = Rx(null); // /auth/login API에서 반환되는 AccessToken
@@ -61,7 +62,6 @@ class AuthService extends GetxService {
   }
 
   Future<void> loginWithGoogle({bool selectAccount = true}) async {
-    GoogleSignInHelper googleSignInHelper = GoogleSignInHelper();
     String idToken = await googleSignInHelper.authenticate();
     Map loginResult = await repository.loginWithGoogle(idToken);
 
