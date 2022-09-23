@@ -3,14 +3,13 @@ import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
-import 'package:dimipay/app/pages/manage_method/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/divided_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class ManageMethodPage extends GetView<ManageMethodPageController> {
+class ManageMethodPage extends StatelessWidget {
   final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
 
   ManageMethodPage({Key? key}) : super(key: key);
@@ -63,21 +62,6 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
           onTap: () => Get.toNamed(Routes.EDITCARD, arguments: {'paymentMethod': paymentMethod}),
         ),
         const SizedBox(height: 24),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            GestureDetector(
-              onTap: () => controller.deletePaymentMethod(paymentMethod),
-              child: Row(
-                children: [
-                  SvgPicture.asset('asset/images/delete_card.svg'),
-                  const SizedBox(width: 6),
-                  const Text('카드 삭제', style: DPTextTheme.REGULAR),
-                ],
-              ),
-            ),
-          ],
-        ),
       ],
     );
   }
