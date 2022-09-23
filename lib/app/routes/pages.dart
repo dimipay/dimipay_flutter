@@ -57,11 +57,7 @@ class AppPages {
       OnboardingMiddleware(),
       PinAuthMiddleware(),
     ]),
-<<<<<<< HEAD
-    GetPage(name: Routes.EDITCARD, page: () => EditCardNamePage(), middlewares: [
-=======
     GetPage(name: Routes.EDITCARD, page: () => EditCardPage(), binding: EditCardPageBinding(), middlewares: [
->>>>>>> cb7a314 (editCard page 구현)
       LoginMiddleware(),
       OnboardingMiddleware(),
       PinAuthMiddleware(),
