@@ -38,6 +38,8 @@ abstract class ApiInterface {
     required DateTime expireAt,
   });
 
+  Future<void> patchPaymentMethod({required PaymentMethod paymentMethod});
+
   Future<void> deletePaymentMethod({
     required PaymentMethod paymentMethod,
   });
