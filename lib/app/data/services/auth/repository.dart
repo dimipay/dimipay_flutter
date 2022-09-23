@@ -14,5 +14,5 @@ class AuthRepository {
   ///returns map that contains accessToken and refreshToekn
   ///use ['accessToken'] to get accessToken
   ///use ['refreshToken'] to get refreshToken
-  Future<Map> onBoardingAuth(paymentPin, deviceUid, bioKey) async => api.onBoardingAuth(paymentPin, deviceUid, bioKey);
+  Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String? bioKey) async => api.onBoardingAuth(paymentPin, deviceUid, bioKey);
 }
