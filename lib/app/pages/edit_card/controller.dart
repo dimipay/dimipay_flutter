@@ -1,3 +1,4 @@
+import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
@@ -30,9 +31,15 @@ class EditCardPageController extends GetxController with StateMixin {
       await paymentMethodController.patchPaymentMethod(paymentMethod);
       change(null, status: RxStatus.success());
       Get.back();
-      DPSnackBar.open('${paymentMethod.name}을(를) 결제수단에 추가했어요.');
+      DPSnackBar.open('${paymentMethod.name}을(를) 결제수단에 추가했어요.', hapticFeedback: HapticPatterns.success);
     } on DioError catch (e) {
       DPErrorSnackBar().open(e.response!.data['message']);
     }
+  }
+
+  Future<void> deleteCard() async {
+    await paymentMethodController.deleteGeneralCard(paymentMethod);
+    Get.back();
+    DPSnackBar.open('카드를 삭제했어요', hapticFeedback: HapticPatterns.success);
   }
 }
