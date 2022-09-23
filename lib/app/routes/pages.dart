@@ -120,6 +120,6 @@ class AppPages {
       transition: Transition.noTransition,
     ),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
-    GetPage(name: Routes.NOCONNECTION, page: () => const NoConnectionPage()),
+    GetPage(name: Routes.NOCONNECTION, page: () => const NoConnectionPage(), transition: Transition.noTransition),
   ];
 }

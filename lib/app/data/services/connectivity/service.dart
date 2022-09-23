@@ -6,14 +6,11 @@ class ConnectivityService extends GetxService {
   final RxBool isConnected = true.obs;
   final RxBool once = false.obs;
 
-  Future<ConnectivityService> init() async {
-    _init();
-    return this;
-  }
-
-  void _init() {
+  @override
+  void onInit() {
     ever(isConnected, (_) => moveToNoConnectionPage());
     Connectivity().onConnectivityChanged.listen(checkConnection);
+    super.onInit();
   }
 
   void checkConnection(ConnectivityResult result) async {
