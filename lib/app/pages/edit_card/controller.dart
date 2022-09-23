@@ -10,9 +10,11 @@ class EditCardPageController extends GetxController with StateMixin {
   final Rx<String> cardName = Rx('');
   final TextEditingController textEditingController = TextEditingController();
   final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
+  final bool creatingCard = Get.arguments['creatingCard'] == true;
 
   @override
   void onInit() {
+    change(null, status: RxStatus.success());
     textEditingController.text = paymentMethod.name ?? '';
     textEditingController.addListener(() {
       cardName.value = textEditingController.text;
@@ -28,6 +30,7 @@ class EditCardPageController extends GetxController with StateMixin {
       await paymentMethodController.patchPaymentMethod(paymentMethod);
       change(null, status: RxStatus.success());
       Get.back();
+      DPSnackBar.open('${paymentMethod.name}을(를) 결제수단에 추가했어요.');
     } on DioError catch (e) {
       DPErrorSnackBar().open(e.response!.data['message']);
     }

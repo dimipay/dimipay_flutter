@@ -72,12 +72,21 @@ class EditCardPage extends GetView<EditCardPageController> {
               ),
             ),
             const SizedBox(height: 24),
-            Obx(
-              () => DPKeyboardReactiveButton(
+            controller.obx(
+              (_) => DPKeyboardReactiveButton(
                 disabled: controller.cardName.value.isEmpty,
                 onTap: controller.submit,
                 padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
                 child: const Text('확인', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+              ),
+              onLoading: const DPKeyboardReactiveButton(
+                disabled: true,
+                padding: EdgeInsets.all(24),
+                child: SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                ),
               ),
             ),
           ],
