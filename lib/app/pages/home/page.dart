@@ -29,13 +29,6 @@ class HomePage extends StatelessWidget {
         const Text('DIMIPAY', style: TextStyle(color: Color.fromRGBO(46, 164, 171, 1), fontFamily: 'Montserrat', fontSize: 26)),
         Row(
           children: [
-            DPIconButton(
-              'asset/images/face_sign.svg',
-              onTap: () {
-                Get.toNamed(Routes.FACESIGN);
-              },
-            ),
-            const SizedBox(width: 12),
             Obx(
               () => DPIconButton(
                 'asset/images/event.svg',
