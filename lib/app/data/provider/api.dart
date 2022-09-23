@@ -252,10 +252,18 @@ class ApiProvider implements ApiInterface {
       'id': paymentMethod.id,
     };
     await dio.delete(url, data: body);
-    return;
   }
 
-  ///TODO paymentMethod patch 구현
+  Future<void> patchPaymentMethod({required PaymentMethod paymentMethod}) async {
+    String url = "/payment/method/";
+
+    Map body = {
+      'id': paymentMethod.id,
+      'name': paymentMethod.name,
+      'color': paymentMethod.color,
+    };
+    await dio.patch(url, data: body);
+  }
 
   @override
   Future<void> checkPin(String pin) async {

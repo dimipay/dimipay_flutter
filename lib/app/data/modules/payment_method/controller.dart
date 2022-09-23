@@ -38,6 +38,18 @@ class PaymentMethodController extends GetxController with StateMixin<List<Paymen
     }
   }
 
+  Future<void> patchPaymentMethod(PaymentMethod paymentMethod) async {
+    try {
+      change(paymentMethods, status: RxStatus.loading());
+      await repository.patchPaymentMethod(paymentMethod: paymentMethod);
+      _paymentMethods.refresh();
+      change(paymentMethods, status: RxStatus.success());
+    } catch (e) {
+      change(paymentMethods, status: RxStatus.error());
+      rethrow;
+    }
+  }
+
   Future<void> deleteGeneralCard(PaymentMethod paymentMethod) async {
     await repository.deletePaymentMethod(paymentMethod: paymentMethod);
     _paymentMethods.value?.remove(paymentMethod);
