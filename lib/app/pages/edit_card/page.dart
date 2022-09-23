@@ -13,6 +13,7 @@ class EditCardPage extends GetView<EditCardPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: !controller.creatingCard,
         actions: controller.creatingCard
             ? null
             : [
