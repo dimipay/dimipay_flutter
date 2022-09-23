@@ -98,7 +98,7 @@ class ManageMethodPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('결제 수단'),
+        title: const Text('카드'),
       ),
       body: RefreshIndicator(
         onRefresh: () async {
