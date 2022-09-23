@@ -16,6 +16,7 @@ Future main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await AppLoader().load();
   FlutterNativeSplash.remove();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   runApp(
     GetMaterialApp(
       title: '디미페이',
