@@ -17,7 +17,7 @@ class PayPage extends GetView<PayPageController> {
       ),
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 32),
-      child: controller.obx(
+      child: controller.paymentMethodController.obx(
         (state) => Obx(
           () {
             return SizedBox(

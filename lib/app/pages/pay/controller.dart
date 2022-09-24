@@ -53,7 +53,7 @@ class PayPageController extends GetxController with StateMixin<String> {
       paymentToken.value = res['code'];
       DateTime expireAt = DateTime.parse(res['exp']);
       refreshPaymentToken(expireAt);
-      change(paymentToken.value, status: RxStatus.loading());
+      change(paymentToken.value, status: RxStatus.success());
     } on DioError catch (e) {
       log(e.response!.data.toString());
     }
