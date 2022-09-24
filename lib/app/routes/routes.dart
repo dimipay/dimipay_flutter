@@ -17,4 +17,6 @@ abstract class Routes {
   static const PIN = "/pin";
   static const LOGIN = "/login";
   static const NOCONNECTION = "/noConnection";
+  static const COUPON = "/coupon";
+  static const ISSUECOUPON = '/issueCoupon';
 }

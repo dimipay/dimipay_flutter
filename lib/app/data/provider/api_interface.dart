@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dimipay/app/data/modules/coupon/model.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
@@ -48,4 +49,6 @@ abstract class ApiInterface {
   Future<void> changePin(String originalPin, String newPin);
 
   Future<Stream<String>?> payResult();
+
+  Future<List<Coupon>> getCoupons();
 }
