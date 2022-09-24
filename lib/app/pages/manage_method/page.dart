@@ -1,18 +1,16 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
-import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/pages/manage_method/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/divided_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class ManageMethodPage extends StatelessWidget {
-  final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
-
-  ManageMethodPage({Key? key}) : super(key: key);
+class ManageMethodPage extends GetView<ManageMethodPageController> {
+  const ManageMethodPage({Key? key}) : super(key: key);
 
   Widget _registerCardWidget() {
     return GestureDetector(
@@ -29,7 +27,7 @@ class ManageMethodPage extends StatelessWidget {
           children: [
             Obx(
               () {
-                if (paymentMethodController.paymentMethods?.isEmpty == null) {
+                if (controller.paymentMethodController.paymentMethods?.isEmpty == null) {
                   return Column(
                     children: const [
                       Text('등록된 카드가 없어요.', style: DPTextTheme.DESCRIPTION),
@@ -73,7 +71,7 @@ class ManageMethodPage extends StatelessWidget {
         const SizedBox(height: 24),
         Obx(
           () {
-            if (paymentMethodController.paymentMethods == null) {
+            if (controller.paymentMethodController.paymentMethods == null) {
               return Container();
             } else {
               return Column(
@@ -82,7 +80,7 @@ class ManageMethodPage extends StatelessWidget {
                   const SizedBox(height: 36),
                   DividedColumn(
                     divider: const SizedBox(height: 36),
-                    children: [for (var generalCard in paymentMethodController.paymentMethods!) _generalCard(generalCard)],
+                    children: [for (var generalCard in controller.paymentMethodController.paymentMethods!) _generalCard(generalCard)],
                   ),
                 ],
               );
@@ -103,7 +101,7 @@ class ManageMethodPage extends StatelessWidget {
       body: RefreshIndicator(
         onRefresh: () async {
           HapticHelper.feedback(HapticPatterns.once);
-          await paymentMethodController.fetchPaymentMethods();
+          await controller.paymentMethodController.fetchPaymentMethods();
           HapticHelper.feedback(HapticPatterns.once);
         },
         color: DPColors.MAIN_THEME,

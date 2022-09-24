@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dimipay/app/core/theme/color_theme.dart';
-import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/pages/home/page.dart';
 import 'package:dimipay/app/pages/pay/controller.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +8,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PayPage extends GetView<PayPageController> {
-  PayPage({Key? key}) : super(key: key);
-  final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
+  const PayPage({Key? key}) : super(key: key);
 
   Widget _paymentsArea() {
     return Container(
@@ -25,7 +23,7 @@ class PayPage extends GetView<PayPageController> {
             return SizedBox(
               height: 81,
               child: CarouselSlider(
-                items: paymentMethodController.paymentMethods!
+                items: controller.paymentMethodController.paymentMethods!
                     .map(
                       (paymentMethod) => DPSmallCardPayment(
                         title: paymentMethod.name ?? '',

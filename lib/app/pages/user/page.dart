@@ -71,14 +71,13 @@ class UserPage extends GetView<UserPageController> {
   }
 
   Widget _menuArea() {
-    PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
     return Obx(
       () => Column(
         children: [
           UserPageListItem(
             title: '카드',
             onTap: () => Get.toNamed(Routes.MANAGEMETHOD),
-            trailingText: '${(paymentMethodController.paymentMethods?.length ?? '').toString()}개',
+            trailingText: '${(controller.paymentMethodController.paymentMethods?.length ?? '').toString()}개',
           ),
           UserPageListItem(
             title: '결제기록',
