@@ -15,15 +15,16 @@ class PaymentMethodController extends GetxController with StateMixin<List<Paymen
     fetchPaymentMethods();
   }
 
-  Future<void> createGeneralCard({
+  Future<PaymentMethod> createPaymentMethod({
     required String cardNumber,
     required String password,
     required DateTime ownerBirthday,
     required DateTime expireAt,
   }) async {
-    PaymentMethod newPaymentMethod = await repository.createPaymentMethod(cardNumber: cardNumber, password: password, ownerBirthday: ownerBirthday, expireAt: expireAt);
-    _paymentMethods.value?.add(newPaymentMethod);
+    PaymentMethod paymentMethod = await repository.createPaymentMethod(cardNumber: cardNumber, password: password, ownerBirthday: ownerBirthday, expireAt: expireAt);
+    _paymentMethods.value?.add(paymentMethod);
     _paymentMethods.refresh();
+    return paymentMethod;
   }
 
   Future<void> fetchPaymentMethods() async {
@@ -31,6 +32,18 @@ class PaymentMethodController extends GetxController with StateMixin<List<Paymen
       change(paymentMethods, status: RxStatus.loading());
       _paymentMethods.value = await repository.getPaymentMethods();
 
+      change(paymentMethods, status: RxStatus.success());
+    } catch (e) {
+      change(paymentMethods, status: RxStatus.error());
+      rethrow;
+    }
+  }
+
+  Future<void> patchPaymentMethod(PaymentMethod paymentMethod) async {
+    try {
+      change(paymentMethods, status: RxStatus.loading());
+      await repository.patchPaymentMethod(paymentMethod: paymentMethod);
+      _paymentMethods.refresh();
       change(paymentMethods, status: RxStatus.success());
     } catch (e) {
       change(paymentMethods, status: RxStatus.error());

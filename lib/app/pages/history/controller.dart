@@ -2,12 +2,24 @@ import 'package:dimipay/app/data/modules/transaction/controller.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class HistoryPageController extends GetxController {
+class HistoryPageController extends GetxController with StateMixin {
   TransactionController transactionController = Get.find<TransactionController>();
+
+  @override
+  void onInit() async {
+    super.onInit();
+    fetch();
+  }
 
   Future<void> refreshData() async {
     HapticFeedback.mediumImpact();
-    await transactionController.fetchTransaction();
+    fetch();
     HapticFeedback.mediumImpact();
+  }
+
+  Future<void> fetch() async {
+    change(null, status: RxStatus.loading());
+    transactionController.fetchTransaction();
+    change(null, status: RxStatus.success());
   }
 }

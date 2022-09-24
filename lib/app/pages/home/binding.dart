@@ -9,6 +9,7 @@ import 'package:dimipay/app/data/modules/user/repository.dart';
 import 'package:dimipay/app/data/provider/api.dart';
 import 'package:dimipay/app/data/modules/event/controller.dart';
 import 'package:dimipay/app/data/modules/event/repository.dart';
+import 'package:dimipay/app/data/services/connectivity/service.dart';
 import 'package:get/get.dart';
 
 class HomePageBinding implements Bindings {
@@ -18,6 +19,7 @@ class HomePageBinding implements Bindings {
     Get.put<CouponController>(CouponController(CouponRepository(ApiProvider())));
     Get.put<EventController>(EventController(EventRepository(ApiProvider())));
     Get.put<PaymentMethodController>(PaymentMethodController(PaymentMethodRepository(ApiProvider())));
+    Get.put<ConnectivityService>(ConnectivityService());
     Get.lazyPut<NoticeController>(() => NoticeController(NoticeRepository(ApiProvider())));
   }
 }

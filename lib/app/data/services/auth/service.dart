@@ -3,7 +3,6 @@ import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/core/utils/google.dart';
 import 'package:dimipay/app/data/services/auth/repository.dart';
 import 'package:dimipay/app/routes/routes.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -12,6 +11,7 @@ class AuthService extends GetxService {
   Completer<void>? _refreshTokenApiCompleter;
   final AuthRepository repository;
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
+  final GoogleSignInHelper googleSignInHelper = GoogleSignInHelper();
   final Rx<String?> _accessToken = Rx(null);
   final Rx<String?> _refreshToken = Rx(null);
   final Rx<String?> _onboardingToken = Rx(null); // /auth/login API에서 반환되는 AccessToken
@@ -62,7 +62,6 @@ class AuthService extends GetxService {
   }
 
   Future<void> loginWithGoogle({bool selectAccount = true}) async {
-    GoogleSignInHelper googleSignInHelper = GoogleSignInHelper();
     String idToken = await googleSignInHelper.authenticate();
     Map loginResult = await repository.loginWithGoogle(idToken);
 
@@ -73,24 +72,18 @@ class AuthService extends GetxService {
   Future<String> onBoardingAuth(String paymentPin) async {
     String deviceUid = const Uuid().v4();
 
-    String bioKey = const Uuid().v4();
+    String? bioKey;
+    if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+      bioKey = const Uuid().v4();
+    }
 
-    try {
-      Map onboardingResult = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
+    Map onboardingResult = await repository.onBoardingAuth(paymentPin, deviceUid, bioKey);
 
-      await _setAccessToken(onboardingResult['accessToken']);
-      await _setRefreshToken(onboardingResult['refreshToken']);
-      await _setDeviceUid(deviceUid);
-      if (GetPlatform.isAndroid || GetPlatform.isIOS) {
-        await _setBioKey(bioKey);
-      }
-    } on DioError catch (e) {
-      switch (e.response?.statusCode) {
-        case 400:
-          rethrow;
-        case 401:
-          throw OnboardingTokenException('구글 로그인을 다시 진행해주세요');
-      }
+    await _setAccessToken(onboardingResult['accessToken']);
+    await _setRefreshToken(onboardingResult['refreshToken']);
+    await _setDeviceUid(deviceUid);
+    if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+      await _setBioKey(bioKey!);
     }
 
     return _accessToken.value!;

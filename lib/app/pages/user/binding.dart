@@ -1,3 +1,5 @@
+import 'package:dimipay/app/data/modules/payment_method/controller.dart';
+import 'package:dimipay/app/data/modules/payment_method/repository.dart';
 import 'package:dimipay/app/data/modules/user/controller.dart';
 import 'package:dimipay/app/data/modules/user/repository.dart';
 import 'package:dimipay/app/data/provider/api.dart';
@@ -9,5 +11,6 @@ class UserPageBinding implements Bindings {
   void dependencies() {
     Get.lazyPut<UserController>(() => UserController(UserRepository(ApiProvider())));
     Get.lazyPut<UserPageController>(() => UserPageController());
+		Get.lazyPut<PaymentMethodController>(() => PaymentMethodController(PaymentMethodRepository(ApiProvider())));
   }
 }

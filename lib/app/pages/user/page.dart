@@ -1,14 +1,15 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/user/controller.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
-import 'package:dimipay/app/data/services/config/service.dart';
 import 'package:dimipay/app/pages/pin/controller.dart';
 import 'package:dimipay/app/pages/user/controller.dart';
+import 'package:dimipay/app/pages/user/widget/menu_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UserPage extends GetView<UserPageController> {
   UserPage({Key? key}) : super(key: key);
@@ -48,7 +49,6 @@ class UserPage extends GetView<UserPageController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _userName(),
-            const SizedBox(height: 4),
             _userId(),
           ],
         ),
@@ -57,86 +57,55 @@ class UserPage extends GetView<UserPageController> {
   }
 
   Widget _topArea() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 16),
-        _profileArea(),
-        const SizedBox(height: 36),
-        Row(
-          children: [
-            Flexible(
-              child: GestureDetector(
-                onTap: () {
-                  Get.toNamed(Routes.MANAGEMETHOD);
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: DPColors.DARK6,
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 24),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset("asset/images/card.svg"),
-                      const SizedBox(width: 8),
-                      const Text(
-                        "결제수단",
-                        style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w600, fontSize: 16, height: 1.2, color: DPColors.MAIN_THEME),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 12),
-            Flexible(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: DPColors.DARK6,
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 24),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset("asset/images/inquiry.svg"),
-                    const SizedBox(width: 8),
-                    const Text(
-                      "문의",
-                      style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w600, fontSize: 16, height: 1.2, color: DPColors.MAIN_THEME),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 36),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 24),
+          _profileArea(),
+          const SizedBox(height: 32),
+        ],
+      ),
     );
   }
 
-  Widget _transactionHistoryArea() {
-    return GestureDetector(
-      onTap: () {
-        Get.toNamed(Routes.HISTORY);
-      },
-      child: Container(
-        color: Colors.white,
-        child: Column(
-          children: [
-            const SizedBox(height: 36),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('결제기록', style: DPTextTheme.SECTION_HEADER),
-                SvgPicture.asset('asset/images/arrow_right.svg'),
-              ],
-            )
-          ],
-        ),
+  Widget _menuArea() {
+    PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
+    return Obx(
+      () => Column(
+        children: [
+          UserPageListItem(
+            title: '카드',
+            onTap: () => Get.toNamed(Routes.MANAGEMETHOD),
+            trailingText: '${(paymentMethodController.paymentMethods?.length ?? '').toString()}개',
+          ),
+          UserPageListItem(
+            title: '결제기록',
+            onTap: () => Get.toNamed(Routes.HISTORY),
+          ),
+          UserPageListItem(
+            title: '페이스사인',
+            trailingText: userController.user?.faceSignRegistered == true ? '등록 됨' : '등록 안됨',
+            onTap: () => Get.toNamed(Routes.FACESIGN),
+          ),
+          UserPageListItem(
+            title: '핀 변경',
+            onTap: () => Get.toNamed(Routes.PIN, arguments: {'pinPageType': PinPageType.changePin}),
+          ),
+          UserPageListItem(
+            title: '문의',
+            onTap: () => launchUrl(Uri.parse('http://pf.kakao.com/_Rxanxlxj/chat')),
+          ),
+          UserPageListItem(
+            title: '로그아웃',
+            trailing: false,
+            onTap: () {
+              Get.find<AuthService>().logout();
+              Get.offAllNamed(Routes.LOGIN);
+            },
+          ),
+        ],
       ),
     );
   }
@@ -144,56 +113,25 @@ class UserPage extends GetView<UserPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              switch (value) {
-                case 'logout':
-                  Get.find<AuthService>().logout();
-                  Get.offAllNamed(Routes.LOGIN);
-                  break;
-                case 'change_pin':
-                  Get.toNamed(Routes.PIN, arguments: {'pinPageType': PinPageType.changePin});
-                  break;
-                case 'delete_configs':
-                  Get.find<AppConfigService>().clearConfigs();
-                  break;
-              }
-            },
-            itemBuilder: (_) => [
-              const PopupMenuItem(
-                value: 'logout',
-                child: Text('로그아웃'),
-              ),
-              const PopupMenuItem(
-                value: 'change_pin',
-                child: Text('핀 변경'),
-              ),
-              const PopupMenuItem(
-                value: 'delete_configs',
-                child: Text('모든 설정 초기화'),
-              ),
-            ],
-          ),
-        ],
-      ),
+      appBar: AppBar(),
       body: SafeArea(
         child: RefreshIndicator(
           color: DPColors.MAIN_THEME,
           onRefresh: controller.refreshData,
-          child: Container(
-            height: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: Column(
-                children: [
-                  _topArea(),
-                  const Divider(color: DPColors.DARK6, height: 1, thickness: 1),
-                  _transactionHistoryArea(),
-                ],
-              ),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                _topArea(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 32),
+                  child: Divider(color: DPColors.DARK6, height: 1, thickness: 1),
+                ),
+                const SizedBox(height: 16),
+                _menuArea(),
+                const SizedBox(height: 200),
+              ],
             ),
           ),
         ),

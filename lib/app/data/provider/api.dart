@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/data/modules/coupon/model.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
@@ -14,7 +14,6 @@ import 'package:get/instance_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:developer';
 import 'package:jwt_decoder/jwt_decoder.dart';
-
 import 'package:intl/intl.dart';
 
 class JWTInterceptor extends Interceptor {
@@ -82,7 +81,7 @@ class LogInterceptor extends Interceptor {
 
 class ApiProvider implements ApiInterface {
   final Dio dio = Dio();
-  final baseUrl = 'https://api.dimipay.rf.gd';
+  final baseUrl = 'https://dev.api.dimipay.io';
 
   ApiProvider() {
     dio.options.baseUrl = baseUrl;
@@ -162,15 +161,33 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String bioKey) async {
+  Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String? bioKey) async {
     String url = '/auth/onBoarding';
     Map body = {
       'paymentPin': paymentPin,
       'deviceUid': deviceUid,
-      'bioKey': bioKey,
     };
-    Response response = await dio.post(url, data: body);
-    return response.data['tokens'];
+    if (bioKey != null) {
+      body['bioKey'] = bioKey;
+    }
+    try {
+      Response response = await dio.post(url, data: body);
+      return response.data['tokens'];
+    } on DioError catch (e) {
+      switch (e.response?.statusCode) {
+        case 400:
+          switch (e.response?.data['code']) {
+            case 'ERR_PIN_MISMATCH':
+              throw IncorrectPinException(e.response?.data['message'], e.response?.data['left']);
+            case 'PIN_LOCKED':
+              throw PinLockException(e.response?.data['message']);
+          }
+          break;
+        case 401:
+          throw OnboardingTokenException('구글 로그인을 다시 진행해주세요');
+      }
+    }
+    return {};
   }
 
   @override
@@ -230,15 +247,27 @@ class ApiProvider implements ApiInterface {
     required PaymentMethod paymentMethod,
   }) async {
     String url = "/payment/method/";
+
     Map<String, String> body = {
       'id': paymentMethod.id,
     };
     await dio.delete(url, data: body);
-    return;
   }
 
   @override
-  Future<bool> checkPin(String pin) async {
+  Future<void> patchPaymentMethod({required PaymentMethod paymentMethod}) async {
+    String url = "/payment/method/";
+
+    Map body = {
+      'id': paymentMethod.id,
+      'name': paymentMethod.name,
+      'color': paymentMethod.color,
+    };
+    await dio.patch(url, data: body);
+  }
+
+  @override
+  Future<void> checkPin(String pin) async {
     String url = "/payment/check";
     Map<String, String> body = {
       "pin": pin,
@@ -246,12 +275,15 @@ class ApiProvider implements ApiInterface {
     try {
       await dio.post(url, data: body);
     } on DioError catch (e) {
-      if (e.response?.statusCode == 403) {
-        return false;
+      if (e.response?.statusCode == 400) {
+        switch (e.response?.data['code']) {
+          case 'ERR_PIN_MISMATCH':
+            throw IncorrectPinException(e.response?.data['message'], e.response?.data['left']);
+          case 'PIN_LOCKED':
+            throw PinLockException(e.response?.data['message']);
+        }
       }
-      rethrow;
     }
-    return true;
   }
 
   @override
@@ -275,11 +307,10 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<Map> registerFaceSign(XFile image) async {
+  Future<void> registerFaceSign(XFile image) async {
     String url = "/auth/face";
     final formData = FormData.fromMap({'image': await MultipartFile.fromFile(image.path)});
-    Response response = await dio.post(url, data: formData);
-    return response.data;
+    await dio.post(url, data: formData);
   }
 
   @override

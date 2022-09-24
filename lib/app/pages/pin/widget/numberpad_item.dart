@@ -1,18 +1,17 @@
-import 'package:dimipay/app/pages/pin/controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class NumberPadItem extends GetWidget<PinPageController> {
+class NumberPadItem extends StatelessWidget {
   final String value;
   final Widget child;
+  final bool disabled;
   final void Function(String value)? onTap;
-  const NumberPadItem({Key? key, required this.child, required this.value, this.onTap}) : super(key: key);
+  const NumberPadItem({Key? key, required this.child, required this.value, this.onTap, this.disabled = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (onTap != null) {
+        if (onTap != null && !disabled) {
           onTap!(value);
         }
       },
@@ -20,7 +19,10 @@ class NumberPadItem extends GetWidget<PinPageController> {
       child: Container(
         color: Colors.transparent,
         child: Center(
-          child: child,
+          child: Opacity(
+            opacity: disabled ? 0.2 : 1,
+            child: child,
+          ),
         ),
       ),
     );

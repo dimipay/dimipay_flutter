@@ -119,7 +119,7 @@ class DPKeyboardReactiveButton extends StatelessWidget {
                     child: Material(
                       color: color,
                       child: InkWell(
-                        onTap: onTap,
+                        onTap: disabled ? null : onTap,
                         child: Container(
                           width: width,
                           padding: innerPadding,

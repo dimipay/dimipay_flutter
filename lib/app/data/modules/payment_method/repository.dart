@@ -6,7 +6,8 @@ class PaymentMethodRepository {
 
   PaymentMethodRepository(this.api);
 
-  Future<PaymentMethod> createPaymentMethod({required String cardNumber, required String password, required DateTime ownerBirthday, required DateTime expireAt}) => api.createPaymentMethod(cardNumber: cardNumber, password: password, expireAt: expireAt, ownerBirthday: ownerBirthday);
-  Future<void> deletePaymentMethod({required PaymentMethod paymentMethod}) => api.deletePaymentMethod(paymentMethod: paymentMethod);
   Future<List<PaymentMethod>> getPaymentMethods() => api.getPaymentMethods();
+  Future<PaymentMethod> createPaymentMethod({required String cardNumber, required String password, required DateTime ownerBirthday, required DateTime expireAt}) => api.createPaymentMethod(cardNumber: cardNumber, password: password, expireAt: expireAt, ownerBirthday: ownerBirthday);
+  Future<void> patchPaymentMethod({required PaymentMethod paymentMethod}) => api.patchPaymentMethod(paymentMethod: paymentMethod);
+  Future<void> deletePaymentMethod({required PaymentMethod paymentMethod}) => api.deletePaymentMethod(paymentMethod: paymentMethod);
 }
