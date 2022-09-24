@@ -9,7 +9,6 @@ class User {
   DateTime updatedAt;
   String accountName;
   String name;
-  bool faceSignRegistered;
 
   String? systemId;
   bool? isDisabled;
@@ -22,7 +21,6 @@ class User {
     required this.isDisabled,
     required this.accountName,
     required this.name,
-    required this.faceSignRegistered,
     this.profileImage,
   });
 
