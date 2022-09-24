@@ -1,8 +1,6 @@
 import 'package:dimipay/app/core/middleware/login.dart';
 import 'package:dimipay/app/core/middleware/onboarding.dart';
 import 'package:dimipay/app/core/middleware/pin_auth.dart';
-import 'package:dimipay/app/pages/face_sign/binding.dart';
-import 'package:dimipay/app/pages/face_sign/page.dart';
 import 'package:dimipay/app/pages/card_fin/page.dart';
 import 'package:dimipay/app/pages/edit_card/binding.dart';
 import 'package:dimipay/app/pages/edit_card/page.dart';
@@ -81,10 +79,6 @@ class AppPages {
     ]),
     GetPage(name: Routes.PIN, page: () => const PinPage(), binding: PinPageBinding(), middlewares: [
       LoginMiddleware(),
-    ]),
-    GetPage(name: Routes.FACESIGN, page: () => const FaceSignPage(), binding: FaceSignPageBinding(), middlewares: [
-      LoginMiddleware(),
-      OnboardingMiddleware(),
     ]),
     GetPage(
       name: Routes.PAYSUCCESS,

@@ -295,18 +295,4 @@ class ApiProvider implements ApiInterface {
       },
     ));
   }
-
-  @override
-  Future<void> registerFaceSign(XFile image) async {
-    String url = "/auth/face";
-    final formData = FormData.fromMap({'image': await MultipartFile.fromFile(image.path)});
-    await dio.post(url, data: formData);
-  }
-
-  @override
-  Future<Map> deleteFaceSign() async {
-    String url = "/auth/face";
-    Response response = await dio.delete(url);
-    return response.data;
-  }
 }

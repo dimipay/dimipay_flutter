@@ -19,7 +19,6 @@ abstract class ApiInterface {
 
   Future<User> getUserInfo();
 
-
   Future<List<Notice>> getNotice();
 
   Future<List<Event>> getOngoingEvents();
@@ -50,8 +49,4 @@ abstract class ApiInterface {
   Future<void> changePin(String originalPin, String newPin);
 
   Future<Stream<String>?> payResult();
-
-  Future<void> registerFaceSign(XFile image);
-
-  Future<void> deleteFaceSign();
 }
