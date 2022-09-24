@@ -33,7 +33,7 @@ import 'package:get/get.dart';
 class AppPages {
   static final pages = [
     GetPage(name: Routes.TEST, page: () => const TestPage()),
-    GetPage(name: Routes.HOME, page: () => HomePage(), binding: HomePageBinding(), middlewares: [
+    GetPage(name: Routes.HOME, page: () => const HomePage(), binding: HomePageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
@@ -41,7 +41,7 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.MANAGEMETHOD, page: () => ManageMethodPage(), binding: ManageMethodPageBinding(), middlewares: [
+    GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage(), binding: ManageMethodPageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
       PinAuthMiddleware(),
@@ -64,7 +64,7 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.PAY, page: () => PayPage(), binding: PayPageBinding(), middlewares: [
+    GetPage(name: Routes.PAY, page: () => const PayPage(), binding: PayPageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
       PinAuthMiddleware(),

@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
 /// TODO getx worker 적용
-class PayPageController extends GetxController with StateMixin {
+class PayPageController extends GetxController with StateMixin<String> {
   PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
   Timer? tokenRefreshTimer;
   AuthService authService = Get.find<AuthService>();
@@ -27,7 +27,6 @@ class PayPageController extends GetxController with StateMixin {
     if (paymentMethodController.paymentMethods == null) {
       await paymentMethodController.fetchPaymentMethods();
     }
-    change(null, status: RxStatus.success());
     currentPaymentMethod = Get.arguments ?? paymentMethodController.paymentMethods!.elementAt(0);
     if (currentPaymentMethod != null) {
       fetchPaymentToken(currentPaymentMethod!);
@@ -48,11 +47,13 @@ class PayPageController extends GetxController with StateMixin {
 
   Future<void> fetchPaymentToken(PaymentMethod paymentMethod) async {
     try {
+      change(null, status: RxStatus.loading());
       paymentToken.value = null;
       Map res = await ApiProvider().getPaymentToken(paymentMethod: paymentMethod, pin: authService.pin, bioKey: authService.bioKey);
       paymentToken.value = res['code'];
       DateTime expireAt = DateTime.parse(res['exp']);
       refreshPaymentToken(expireAt);
+      change(paymentToken.value, status: RxStatus.loading());
     } on DioError catch (e) {
       log(e.response!.data.toString());
     }

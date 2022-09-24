@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 class PaymentMethodController extends GetxController with StateMixin<List<PaymentMethod>> {
   final PaymentMethodRepository repository;
+
   PaymentMethodController(this.repository);
 
   final Rx<List<PaymentMethod>?> _paymentMethods = Rx(null);
