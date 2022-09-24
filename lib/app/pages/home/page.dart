@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
@@ -35,44 +34,48 @@ class HomePage extends GetView<HomePageController> {
     );
   }
 
-  Widget _notice(Notice notice) {
-    return Row(
-      children: [
-        SvgPicture.asset('asset/images/notice.svg', color: DPColors.MAIN_THEME),
-        const SizedBox(width: 24),
-        Flexible(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                notice.title,
-                style: DPTextTheme.REGULAR_IMPORTANT,
-              ),
-              const SizedBox(height: 4),
-              Text(
-                notice.description,
-                style: DPTextTheme.DESCRIPTION,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _noticeArea() {
-    return controller.noticeController.obx(
-      (notices) {
+  Widget _buildNotice() {
+    return Obx(
+      () {
+        List<Notice>? notices = controller.noticeController.notices;
         if (notices != null) {
           return Column(
             children: [
-              for (Notice notice in notices) _notice(notice),
+              for (Notice notice in notices)
+                Row(
+                  children: [
+                    SvgPicture.asset('asset/images/notice.svg', color: DPColors.MAIN_THEME),
+                    const SizedBox(width: 24),
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            notice.title,
+                            style: DPTextTheme.REGULAR_IMPORTANT,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            notice.description,
+                            style: DPTextTheme.DESCRIPTION,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                )
             ],
           );
         } else {
           return Container();
         }
       },
+    );
+  }
+
+  Widget _noticeArea() {
+    return controller.noticeController.obx(
+      (_) => _buildNotice(),
       onLoading: Container(),
     );
   }
@@ -87,56 +90,59 @@ class HomePage extends GetView<HomePageController> {
     return a.endsAt!.isBefore(b.endsAt!) ? 1 : 0;
   }
 
-  Widget _buildEvents(List<Event> events) {
-    if (events.isEmpty) {
-      return Container();
-    } else {
-      List<Event> previewingEvents = List.from(events);
-      previewingEvents.sort(_compEvent);
-      previewingEvents = previewingEvents.sublist(0, min(3, previewingEvents.length));
-      return GestureDetector(
-        onTap: () => Get.toNamed(Routes.EVENT),
-        child: Container(
-          color: Colors.white,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: [
-                      const Text(
-                        '이벤트',
-                        style: DPTextTheme.SECTION_HEADER,
-                      ),
-                      const SizedBox(width: 12),
-                      Text(
-                        '${events.length}개',
-                        style: DPTextTheme.DESCRIPTION,
-                      ),
-                    ],
-                  ),
-                  SvgPicture.asset('asset/images/arrow_right.svg', semanticsLabel: 'arrow_right'),
-                ],
-              ),
-              const SizedBox(height: 24),
-              Column(
-                children: previewingEvents
-                    .map((event) => Column(children: [
-                          EventItem(title: event.title, description: event.description, expireDate: event.endsAt),
-                        ]))
-                    .toList(),
-              )
-            ],
+  Widget _buildEvents() {
+    return Obx(() {
+      List<Event> events = controller.eventController.events!;
+      if (events.isEmpty) {
+        return Container();
+      } else {
+        List<Event> previewingEvents = List.from(events);
+        previewingEvents.sort(_compEvent);
+        previewingEvents = previewingEvents.sublist(0, min(3, previewingEvents.length));
+        return GestureDetector(
+          onTap: () => Get.toNamed(Routes.EVENT),
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: [
+                        const Text(
+                          '이벤트',
+                          style: DPTextTheme.SECTION_HEADER,
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          '${events.length}개',
+                          style: DPTextTheme.DESCRIPTION,
+                        ),
+                      ],
+                    ),
+                    SvgPicture.asset('asset/images/arrow_right.svg', semanticsLabel: 'arrow_right'),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                Column(
+                  children: previewingEvents
+                      .map((event) => Column(children: [
+                            EventItem(title: event.title, description: event.description, expireDate: event.endsAt),
+                          ]))
+                      .toList(),
+                )
+              ],
+            ),
           ),
-        ),
-      );
-    }
+        );
+      }
+    });
   }
 
   Widget _eventsArea() {
     return controller.eventController.obx(
-      (events) => _buildEvents(events!),
+      (_) => _buildEvents(),
       onLoading: Container(),
     );
   }
@@ -177,32 +183,34 @@ class HomePage extends GetView<HomePageController> {
     );
   }
 
-  Widget _buildPaymentMethods(List<PaymentMethod> paymentMethods) {
-    return SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          const SizedBox(width: 32, height: 81),
-          Row(
-            children: [
-              for (PaymentMethod paymentMethod in paymentMethods)
-                Row(
-                  children: [
-                    DPSmallCardPayment(
-                      title: paymentMethod.name ?? '',
-                      color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
-                      onTap: () {
-                        Get.toNamed(Routes.PAY, arguments: paymentMethod);
-                      },
-                    ),
-                    const SizedBox(width: 12),
-                  ],
-                ),
-            ],
-          ),
-          const SizedBox(width: 20),
-        ],
+  Widget _buildPaymentMethods() {
+    return Obx(
+      () => SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            const SizedBox(width: 32, height: 81),
+            Row(
+              children: [
+                for (PaymentMethod paymentMethod in controller.paymentMethodController.paymentMethods!)
+                  Row(
+                    children: [
+                      DPSmallCardPayment(
+                        title: paymentMethod.name ?? '',
+                        color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
+                        onTap: () {
+                          Get.toNamed(Routes.PAY, arguments: paymentMethod);
+                        },
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+              ],
+            ),
+            const SizedBox(width: 20),
+          ],
+        ),
       ),
     );
   }
@@ -217,7 +225,7 @@ class HomePage extends GetView<HomePageController> {
       child: SizedBox(
         height: 81,
         child: controller.paymentMethodController.obx(
-          (paymentMethods) => _buildPaymentMethods(paymentMethods!),
+          (_) => _buildPaymentMethods(),
           onLoading: Container(),
         ),
       ),

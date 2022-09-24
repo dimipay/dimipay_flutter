@@ -38,38 +38,36 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
     );
   }
 
-  Widget _generalCard(PaymentMethod paymentMethod) {
-    return Column(
-      children: [
-        GeneralCardWidget(
-          paymentMethod,
-          onTap: () => Get.toNamed(Routes.EDITCARD, arguments: {'paymentMethod': paymentMethod}),
-        ),
-        const SizedBox(height: 24),
-      ],
+  Widget _buildCards() {
+    return Obx(
+      () => DividedColumn(
+        divider: const SizedBox(height: 36),
+        children: [
+          for (var paymentMethod in controller.paymentMethodController.paymentMethods!)
+            Column(
+              children: [
+                GeneralCardWidget(
+                  paymentMethod,
+                  onTap: () => Get.toNamed(Routes.EDITCARD, arguments: {'paymentMethod': paymentMethod}),
+                ),
+                const SizedBox(height: 24),
+              ],
+            ),
+        ],
+      ),
     );
   }
 
-  Widget _generalCardArea() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 24),
-        controller.paymentMethodController.obx(
-          (paymentMethods) => Column(
-            children: [
-              _registerCardWidget(),
-              const SizedBox(height: 36),
-              DividedColumn(
-                divider: const SizedBox(height: 36),
-                children: [for (var generalCard in paymentMethods!) _generalCard(generalCard)],
-              ),
-            ],
-          ),
-          onLoading: Container(),
-        ),
-        const SizedBox(height: 36),
-      ],
+  Widget _cardsArea() {
+    return controller.paymentMethodController.obx(
+      (paymentMethods) => Column(
+        children: [
+          _registerCardWidget(),
+          const SizedBox(height: 36),
+          _buildCards(),
+        ],
+      ),
+      onLoading: Container(),
     );
   }
 
@@ -94,7 +92,9 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _generalCardArea(),
+                const SizedBox(height: 24),
+                _cardsArea(),
+                const SizedBox(height: 36),
               ],
             ),
           ),
