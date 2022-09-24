@@ -3,14 +3,13 @@ import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
-import 'package:dimipay/app/pages/manage_method/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/divided_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class ManageMethodPage extends GetView<ManageMethodPageController> {
+class ManageMethodPage extends StatelessWidget {
   final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
 
   ManageMethodPage({Key? key}) : super(key: key);
@@ -58,23 +57,11 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
   Widget _generalCard(PaymentMethod paymentMethod) {
     return Column(
       children: [
-        GeneralCardWidget(paymentMethod),
-        const SizedBox(height: 24),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            GestureDetector(
-              onTap: () => controller.deletePaymentMethod(paymentMethod),
-              child: Row(
-                children: [
-                  SvgPicture.asset('asset/images/delete_card.svg'),
-                  const SizedBox(width: 6),
-                  const Text('카드 삭제', style: DPTextTheme.REGULAR),
-                ],
-              ),
-            ),
-          ],
+        GeneralCardWidget(
+          paymentMethod,
+          onTap: () => Get.toNamed(Routes.EDITCARD, arguments: {'paymentMethod': paymentMethod}),
         ),
+        const SizedBox(height: 24),
       ],
     );
   }
@@ -111,7 +98,7 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('결제 수단'),
+        title: const Text('카드'),
       ),
       body: RefreshIndicator(
         onRefresh: () async {
@@ -140,24 +127,28 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
 
 class GeneralCardWidget extends StatelessWidget {
   final PaymentMethod card;
-  const GeneralCardWidget(this.card, {Key? key}) : super(key: key);
+  final void Function()? onTap;
+  const GeneralCardWidget(this.card, {Key? key, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: card.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${card.color}', radix: 16)),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      width: double.infinity,
-      padding: const EdgeInsets.all(18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 16),
-          Text(card.name ?? '', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 48),
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: card.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${card.color}', radix: 16)),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        width: double.infinity,
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 16),
+            Text(card.name ?? '', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 48),
+          ],
+        ),
       ),
     );
   }

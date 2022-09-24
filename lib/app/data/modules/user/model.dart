@@ -9,12 +9,11 @@ class User {
   DateTime updatedAt;
   String accountName;
   String name;
+  bool faceSignRegistered;
 
   String? systemId;
   bool? isDisabled;
-  bool? isTeacher;
   String? profileImage;
-  String? studentNumber;
 
   User({
     required this.systemId,
@@ -23,9 +22,8 @@ class User {
     required this.isDisabled,
     required this.accountName,
     required this.name,
-    this.isTeacher,
+    required this.faceSignRegistered,
     this.profileImage,
-    this.studentNumber,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

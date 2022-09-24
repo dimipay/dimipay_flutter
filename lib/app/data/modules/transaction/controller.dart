@@ -8,12 +8,6 @@ class TransactionController extends GetxController with StateMixin<List<Transact
   final Rx<List<Transaction>> _transactions = Rx([]);
   List<Transaction> get transactions => _transactions.value;
 
-  @override
-  void onInit() {
-    fetchTransaction();
-    super.onInit();
-  }
-
   Future fetchTransaction() async {
     try {
       change(transactions, status: RxStatus.loading());

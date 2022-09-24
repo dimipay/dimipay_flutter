@@ -14,7 +14,7 @@ abstract class ApiInterface {
   ///returns map that contains accessToken and refreshToekn
   ///use ['accessToken'] to get accessToken
   ///use ['refreshToken'] to get refreshToken
-  Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String bioKey);
+  Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String? bioKey);
 
   ///returns accessToken
   Future<String> refreshAccessToken(String refreshToken);
@@ -38,6 +38,8 @@ abstract class ApiInterface {
     required DateTime expireAt,
   });
 
+  Future<void> patchPaymentMethod({required PaymentMethod paymentMethod});
+
   Future<void> deletePaymentMethod({
     required PaymentMethod paymentMethod,
   });
@@ -46,13 +48,13 @@ abstract class ApiInterface {
 
   Future<void> createPaymentPin(String paymentPin);
 
-  Future<bool> checkPin(String pin);
+  Future<void> checkPin(String pin);
 
   Future<void> changePin(String originalPin, String newPin);
 
   Future<Stream<String>?> payResult();
 
-  Future<Map> registerFaceSign(XFile image);
+  Future<void> registerFaceSign(XFile image);
 
   Future<void> deleteFaceSign();
 }

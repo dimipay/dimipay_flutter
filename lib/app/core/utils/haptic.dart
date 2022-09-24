@@ -4,6 +4,7 @@ enum HapticType {
   light,
   medium,
   heavy,
+  vibrate,
 }
 
 class HapticPattern {
@@ -31,6 +32,8 @@ abstract class HapticHelper {
       case HapticType.heavy:
         haptic = HapticFeedback.heavyImpact;
         break;
+      case HapticType.vibrate:
+        haptic = HapticFeedback.vibrate;
     }
 
     for (var tick in pattern.ticks) {

@@ -9,6 +9,7 @@ import 'package:url_strategy/url_strategy.dart';
 class AppLoader {
   Future<void> load() async {
     setPathUrlStrategy();
+
     await Future.wait([
       Get.putAsync<AuthService>(() => AuthService(AuthRepository(ApiProvider())).init()),
       Get.putAsync<AppConfigService>(() => AppConfigService().init()),

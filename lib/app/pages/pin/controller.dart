@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/provider/api.dart';
@@ -8,7 +7,6 @@ import 'package:dimipay/app/data/services/local_auth/service.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 enum PinPageType { pinAuth, onBoarding, changePin }
@@ -20,6 +18,7 @@ class PinPageController extends GetxController with StateMixin {
   final Rx<String> password = "".obs;
   final Rx<String> title = Rx("핀 번호 입력");
   final Rx<String> subTitle = Rx('');
+  final Rx<bool> isPinLocked = Rx(false);
 
   final LocalAuthService _localAuthService = Get.find<LocalAuthService>();
 
@@ -58,11 +57,17 @@ class PinPageController extends GetxController with StateMixin {
     while (true) {
       password.value = '';
       String pin = await _inputPin();
-      bool res = await ApiProvider().checkPin(pin);
-      if (res) {
+      try {
+        await ApiProvider().checkPin(pin);
         return pin;
+      } on IncorrectPinException catch (e) {
+        HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.vibrate);
+        subTitle.value = '핀 번호가 올바르지 않아요.\n남은 시도 횟수 : ${e.left}';
+      } on PinLockException catch (_) {
+        isPinLocked.value = true;
+        HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.vibrate);
+        subTitle.value = '핀 입력 횟수를 초과했어요.';
       }
-      DPErrorSnackBar().open('핀 번호가 올바르지 않아요.');
     }
   }
 
@@ -109,8 +114,14 @@ class PinPageController extends GetxController with StateMixin {
           await authService.onBoardingAuth(pin);
           authService.pin = pin;
           Get.offNamed(redirect ?? Routes.HOME);
-        } on DioError catch (_) {
-          DPErrorSnackBar().open('핀 번호가 올바르지 않아요.');
+        } on IncorrectPinException catch (e) {
+          HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.vibrate);
+          subTitle.value = '핀 번호가 올바르지 않아요.\n남은 시도 횟수 : ${e.left}';
+        } on PinLockException catch (_) {
+          isPinLocked.value = true;
+          isPinLocked.value = true;
+          HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.vibrate);
+          subTitle.value = '핀 입력 횟수를 초과했어요.';
         } on OnboardingTokenException catch (e) {
           DPErrorSnackBar().open(e.message);
           await authService.logout();
@@ -168,13 +179,9 @@ class PinPageController extends GetxController with StateMixin {
       if (password.value.length >= 4) {
         continue;
       }
-
       if (value.isNum) {
         password.value = password.value + value;
       } else if (value == '\b') {
-        if (password.value.isEmpty) {
-          continue;
-        }
         password.value = password.value.substring(0, password.value.length - 1);
       }
       if (password.value.length == 4) {

@@ -9,12 +9,6 @@ class UserController extends GetxController with StateMixin<User> {
   final Rx<User?> _user = Rx(null);
   User? get user => _user.value;
 
-  @override
-  void onInit() {
-    fetchUser();
-    super.onInit();
-  }
-
   Future fetchUser() async {
     try {
       change(user, status: RxStatus.loading());
