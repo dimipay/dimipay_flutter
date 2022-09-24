@@ -7,16 +7,10 @@ class NoticeController extends GetxController with StateMixin<List<Notice>> {
 
   NoticeController(this.repository);
 
-  final Rx<List<Notice>> _notices = Rx([]);
-  List<Notice> get notices => _notices.value;
+  final Rx<List<Notice>?> _notices = Rx(null);
+  List<Notice>? get notices => _notices.value;
 
-  @override
-  void onInit() {
-    getNotice();
-    super.onInit();
-  }
-
-  Future getNotice() async {
+  Future fetchNotices() async {
     try {
       change(notices, status: RxStatus.loading());
       _notices.value = await repository.get();

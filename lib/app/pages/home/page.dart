@@ -169,7 +169,7 @@ class HomePage extends GetView<HomePageController> {
             _noticeArea(),
             Obx(
               () {
-                if (controller.noticeController.notices.isNotEmpty && controller.eventController.events.isNotEmpty) {
+                if (controller.noticeController.notices?.isNotEmpty == true && controller.eventController.events.isNotEmpty) {
                   return _topDivider();
                 } else {
                   return Container();

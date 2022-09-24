@@ -11,6 +11,7 @@ class HomePageController extends GetxController {
   @override
   void onInit() {
     paymentMethodController.fetchPaymentMethods();
+    noticeController.fetchNotices();
     super.onInit();
   }
 }
