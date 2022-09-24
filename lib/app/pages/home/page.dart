@@ -88,72 +88,74 @@ class HomePage extends GetView<HomePageController> {
   }
 
   Widget _buildEvents(List<Event> events) {
-    return Column(
-      children: events
-          .map(
-            (event) => Column(
-              children: [
-                EventItem(title: event.title, description: event.description, expireDate: event.endsAt),
-              ],
-            ),
-          )
-          .toList(),
-    );
+    if (events.isEmpty) {
+      return Container();
+    } else {
+      List<Event> previewingEvents = List.from(events);
+      previewingEvents.sort(_compEvent);
+      previewingEvents = previewingEvents.sublist(0, min(3, previewingEvents.length));
+      return GestureDetector(
+        onTap: () => Get.toNamed(Routes.EVENT),
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      const Text(
+                        '이벤트',
+                        style: DPTextTheme.SECTION_HEADER,
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        '${events.length}개',
+                        style: DPTextTheme.DESCRIPTION,
+                      ),
+                    ],
+                  ),
+                  SvgPicture.asset('asset/images/arrow_right.svg', semanticsLabel: 'arrow_right'),
+                ],
+              ),
+              const SizedBox(height: 24),
+              Column(
+                children: previewingEvents
+                    .map((event) => Column(children: [
+                          EventItem(title: event.title, description: event.description, expireDate: event.endsAt),
+                        ]))
+                    .toList(),
+              )
+            ],
+          ),
+        ),
+      );
+    }
   }
 
   Widget _eventsArea() {
     return controller.eventController.obx(
-      (events) {
-        if (events!.isEmpty) {
-          return Container();
-        } else {
-          List<Event> previewingEvents = List.from(events);
-          previewingEvents.sort(_compEvent);
-          previewingEvents = previewingEvents.sublist(0, min(3, previewingEvents.length));
-          return GestureDetector(
-            onTap: () => Get.toNamed(Routes.EVENT),
-            child: Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          const Text(
-                            '이벤트',
-                            style: DPTextTheme.SECTION_HEADER,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            '${events.length}개',
-                            style: DPTextTheme.DESCRIPTION,
-                          ),
-                        ],
-                      ),
-                      SvgPicture.asset('asset/images/arrow_right.svg', semanticsLabel: 'arrow_right'),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  _buildEvents(previewingEvents),
-                ],
-              ),
-            ),
-          );
-        }
-      },
+      (events) => _buildEvents(events!),
       onLoading: Container(),
     );
   }
 
   Widget _topDivider() {
-    return Column(
-      children: const [
-        SizedBox(height: 36),
-        Divider(color: DPColors.DARK6, height: 1, thickness: 1),
-        SizedBox(height: 36),
-      ],
+    return Obx(
+      () {
+        if (controller.noticeController.notices?.isNotEmpty == true && controller.eventController.events?.isNotEmpty == true) {
+          return Column(
+            children: const [
+              SizedBox(height: 36),
+              Divider(color: DPColors.DARK6, height: 1, thickness: 1),
+              SizedBox(height: 36),
+            ],
+          );
+        } else {
+          return Container();
+        }
+      },
     );
   }
 
@@ -167,15 +169,7 @@ class HomePage extends GetView<HomePageController> {
             _logoArea(),
             const SizedBox(height: 36),
             _noticeArea(),
-            Obx(
-              () {
-                if (controller.noticeController.notices?.isNotEmpty == true && controller.eventController.events?.isNotEmpty == true) {
-                  return _topDivider();
-                } else {
-                  return Container();
-                }
-              },
-            ),
+            _topDivider(),
             _eventsArea(),
           ],
         ),
@@ -184,22 +178,32 @@ class HomePage extends GetView<HomePageController> {
   }
 
   Widget _buildPaymentMethods(List<PaymentMethod> paymentMethods) {
-    return Row(
-      children: [
-        for (PaymentMethod paymentMethod in paymentMethods)
+    return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          const SizedBox(width: 32, height: 81),
           Row(
             children: [
-              DPSmallCardPayment(
-                title: paymentMethod.name ?? '',
-                color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
-                onTap: () {
-                  Get.toNamed(Routes.PAY, arguments: paymentMethod);
-                },
-              ),
-              const SizedBox(width: 12),
+              for (PaymentMethod paymentMethod in paymentMethods)
+                Row(
+                  children: [
+                    DPSmallCardPayment(
+                      title: paymentMethod.name ?? '',
+                      color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
+                      onTap: () {
+                        Get.toNamed(Routes.PAY, arguments: paymentMethod);
+                      },
+                    ),
+                    const SizedBox(width: 12),
+                  ],
+                ),
             ],
           ),
-      ],
+          const SizedBox(width: 20),
+        ],
+      ),
     );
   }
 
@@ -210,21 +214,11 @@ class HomePage extends GetView<HomePageController> {
       ),
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 32),
-      child: Obx(
-        () => SizedBox(
-          height: 81,
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                const SizedBox(width: 32, height: 81),
-                // ignore: unnecessary_cast
-                controller.paymentMethodController.paymentMethods != null ? _buildPaymentMethods(controller.paymentMethodController.paymentMethods!) : Container(),
-                const SizedBox(width: 20),
-              ],
-            ),
-          ),
+      child: SizedBox(
+        height: 81,
+        child: controller.paymentMethodController.obx(
+          (paymentMethods) => _buildPaymentMethods(paymentMethods!),
+          onLoading: Container(),
         ),
       ),
     );

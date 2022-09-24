@@ -25,20 +25,6 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Obx(
-              () {
-                if (controller.paymentMethodController.paymentMethods?.isEmpty == null) {
-                  return Column(
-                    children: const [
-                      Text('등록된 카드가 없어요.', style: DPTextTheme.DESCRIPTION),
-                      SizedBox(height: 8),
-                    ],
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            ),
             Row(
               children: [
                 SvgPicture.asset('asset/images/add.svg', width: 18),
@@ -69,23 +55,18 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 24),
-        Obx(
-          () {
-            if (controller.paymentMethodController.paymentMethods == null) {
-              return Container();
-            } else {
-              return Column(
-                children: [
-                  _registerCardWidget(),
-                  const SizedBox(height: 36),
-                  DividedColumn(
-                    divider: const SizedBox(height: 36),
-                    children: [for (var generalCard in controller.paymentMethodController.paymentMethods!) _generalCard(generalCard)],
-                  ),
-                ],
-              );
-            }
-          },
+        controller.paymentMethodController.obx(
+          (paymentMethods) => Column(
+            children: [
+              _registerCardWidget(),
+              const SizedBox(height: 36),
+              DividedColumn(
+                divider: const SizedBox(height: 36),
+                children: [for (var generalCard in paymentMethods!) _generalCard(generalCard)],
+              ),
+            ],
+          ),
+          onLoading: Container(),
         ),
         const SizedBox(height: 36),
       ],
