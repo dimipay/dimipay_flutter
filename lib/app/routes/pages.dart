@@ -2,6 +2,8 @@ import 'package:dimipay/app/core/middleware/login.dart';
 import 'package:dimipay/app/core/middleware/onboarding.dart';
 import 'package:dimipay/app/core/middleware/pin_auth.dart';
 import 'package:dimipay/app/pages/card_fin/page.dart';
+import 'package:dimipay/app/pages/coupon/binding.dart';
+import 'package:dimipay/app/pages/coupon/page.dart';
 import 'package:dimipay/app/pages/edit_card/binding.dart';
 import 'package:dimipay/app/pages/edit_card/page.dart';
 import 'package:dimipay/app/pages/event/page.dart';
@@ -10,6 +12,7 @@ import 'package:dimipay/app/pages/history/binding.dart';
 import 'package:dimipay/app/pages/history/page.dart';
 import 'package:dimipay/app/pages/home/page.dart';
 import 'package:dimipay/app/pages/home/binding.dart';
+import 'package:dimipay/app/pages/issue_coupon/page.dart';
 import 'package:dimipay/app/pages/login/binding.dart';
 import 'package:dimipay/app/pages/login/page.dart';
 import 'package:dimipay/app/pages/manage_method/binding.dart';
@@ -100,5 +103,13 @@ class AppPages {
     ),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
     GetPage(name: Routes.NOCONNECTION, page: () => const NoConnectionPage(), transition: Transition.noTransition),
+    GetPage(name: Routes.COUPON, page: () => CouponPage(), binding: CouponPageBinding(), middlewares: [
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+    ]),
+    GetPage(name: Routes.ISSUECOUPON, page: () => const IssueCouponPage(), middlewares: [
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+    ]),
   ];
 }

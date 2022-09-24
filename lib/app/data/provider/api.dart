@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:dimipay/app/core/utils/errors.dart';
+import 'package:dimipay/app/data/modules/coupon/model.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
@@ -293,5 +294,14 @@ class ApiProvider implements ApiInterface {
         }
       },
     ));
+  }
+
+  @override
+  Future<List<Coupon>> getCoupons() async {
+    String url = '/coupons';
+
+    Response response = await dio.get(url);
+
+    return (response.data as List).map<Coupon>((model) => Coupon.fromJson(model)).toList();
   }
 }

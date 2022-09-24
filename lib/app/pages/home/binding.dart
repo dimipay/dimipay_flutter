@@ -1,3 +1,5 @@
+import 'package:dimipay/app/data/modules/coupon/controller.dart';
+import 'package:dimipay/app/data/modules/coupon/repository.dart';
 import 'package:dimipay/app/data/modules/notice/controller.dart';
 import 'package:dimipay/app/data/modules/notice/repository.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
@@ -18,5 +20,6 @@ class HomePageBinding implements Bindings {
     Get.put<PaymentMethodController>(PaymentMethodController(PaymentMethodRepository(ApiProvider())));
     Get.put<ConnectivityService>(ConnectivityService());
     Get.lazyPut<NoticeController>(() => NoticeController(NoticeRepository(ApiProvider())));
+    Get.put<CouponController>(CouponController(CouponRepository(ApiProvider())));
   }
 }
