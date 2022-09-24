@@ -10,7 +10,6 @@ import 'package:dimipay/app/data/provider/api_interface.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:developer';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:intl/intl.dart';
