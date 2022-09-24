@@ -18,7 +18,6 @@ abstract class Routes {
   static const ISSUECOUPON = '/issueCoupon';
   static const PIN = "/pin";
   static const FACESIGN = "/faceSign";
-  static const PRINTERSETTING = "/printerSetting";
   static const LOGIN = "/login";
   static const NOCONNECTION = "/noConnection";
 }

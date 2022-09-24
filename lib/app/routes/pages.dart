@@ -98,10 +98,6 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.PRINTERSETTING, page: () => const PrinterSettingPage(), middlewares: [
-      LoginMiddleware(),
-      OnboardingMiddleware(),
-    ]),
     GetPage(
       name: Routes.PAYSUCCESS,
       page: () => PaySuccessPage(),
