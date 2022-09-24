@@ -2,12 +2,10 @@ import 'dart:math';
 
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
-import 'package:dimipay/app/data/modules/event/controller.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
-import 'package:dimipay/app/data/modules/notice/controller.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
-import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/pages/home/controller.dart';
 import 'package:dimipay/app/pages/home/widget/event_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
@@ -15,11 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
-  final NoticeController noticeController = Get.find<NoticeController>();
-  final EventController eventController = Get.find<EventController>();
-  final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
+class HomePage extends GetView<HomePageController> {
+  const HomePage({Key? key}) : super(key: key);
 
   Widget _logoArea() {
     return Row(
@@ -66,7 +61,7 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _noticeArea() {
-    return noticeController.obx(
+    return controller.noticeController.obx(
       (notices) {
         if (notices != null) {
           return Column(
@@ -107,7 +102,7 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _eventsArea() {
-    return eventController.obx(
+    return controller.eventController.obx(
       (events) {
         if (events!.isEmpty) {
           return Container();
@@ -174,7 +169,7 @@ class HomePage extends StatelessWidget {
             _noticeArea(),
             Obx(
               () {
-                if (noticeController.notices.isNotEmpty && eventController.events.isNotEmpty) {
+                if (controller.noticeController.notices.isNotEmpty && controller.eventController.events.isNotEmpty) {
                   return _topDivider();
                 } else {
                   return Container();
@@ -225,7 +220,7 @@ class HomePage extends StatelessWidget {
               children: [
                 const SizedBox(width: 32, height: 81),
                 // ignore: unnecessary_cast
-                paymentMethodController.paymentMethods != null ? _buildPaymentMethods(paymentMethodController.paymentMethods!) : Container(),
+                controller.paymentMethodController.paymentMethods != null ? _buildPaymentMethods(controller.paymentMethodController.paymentMethods!) : Container(),
                 const SizedBox(width: 20),
               ],
             ),

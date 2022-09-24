@@ -8,11 +8,13 @@ import 'package:dimipay/app/data/provider/api.dart';
 import 'package:dimipay/app/data/modules/event/controller.dart';
 import 'package:dimipay/app/data/modules/event/repository.dart';
 import 'package:dimipay/app/data/services/connectivity/service.dart';
+import 'package:dimipay/app/pages/home/controller.dart';
 import 'package:get/get.dart';
 
 class HomePageBinding implements Bindings {
   @override
   void dependencies() {
+    Get.lazyPut<HomePageController>(() => HomePageController());
     Get.put<UserController>(UserController(UserRepository(ApiProvider())));
     Get.put<EventController>(EventController(EventRepository(ApiProvider())));
     Get.put<PaymentMethodController>(PaymentMethodController(PaymentMethodRepository(ApiProvider())));

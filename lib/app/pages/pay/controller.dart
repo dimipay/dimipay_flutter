@@ -22,22 +22,8 @@ class PayPageController extends GetxController with StateMixin {
   int get currentIndex => paymentMethodController.paymentMethods!.indexOf(currentPaymentMethod!);
 
   @override
-  void onInit() {
-    _init();
+  void onInit() async {
     super.onInit();
-  }
-
-  Future<void> _initStream() async {
-    await payStream.init();
-    payStream.onPending = (() {
-      Get.toNamed(Routes.PAYPENDING);
-    });
-    payStream.onApproved = (() {
-      Get.toNamed(Routes.PAYSUCCESS);
-    });
-  }
-
-  Future<void> _init() async {
     if (paymentMethodController.paymentMethods == null) {
       await paymentMethodController.fetchPaymentMethods();
     }
@@ -48,6 +34,16 @@ class PayPageController extends GetxController with StateMixin {
     }
     _initStream();
     setBrightness(1);
+  }
+
+  Future<void> _initStream() async {
+    await payStream.init();
+    payStream.onPending = (() {
+      Get.toNamed(Routes.PAYPENDING);
+    });
+    payStream.onApproved = (() {
+      Get.toNamed(Routes.PAYSUCCESS);
+    });
   }
 
   Future<void> fetchPaymentToken(PaymentMethod paymentMethod) async {

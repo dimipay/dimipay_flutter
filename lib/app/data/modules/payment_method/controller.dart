@@ -9,12 +9,6 @@ class PaymentMethodController extends GetxController with StateMixin<List<Paymen
   final Rx<List<PaymentMethod>?> _paymentMethods = Rx(null);
   List<PaymentMethod>? get paymentMethods => _paymentMethods.value;
 
-  @override
-  void onInit() async {
-    super.onInit();
-    fetchPaymentMethods();
-  }
-
   Future<PaymentMethod> createPaymentMethod({
     required String cardNumber,
     required String password,
