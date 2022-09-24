@@ -15,7 +15,6 @@ abstract class Routes {
   static const EVENT = "/event";
   static const NOTIFICATION = "/notification";
   static const PIN = "/pin";
-  static const FACESIGN = "/faceSign";
   static const LOGIN = "/login";
   static const NOCONNECTION = "/noConnection";
 }
