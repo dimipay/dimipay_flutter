@@ -7,14 +7,9 @@ class EventController extends GetxController with StateMixin<List<Event>> {
 
   EventController(this.repository);
 
-  final Rx<List<Event>> _events = Rx([]);
-  List<Event> get events => _events.value;
+  final Rx<List<Event>?> _events = Rx(null);
+  List<Event>? get events => _events.value;
 
-  @override
-  void onInit() {
-    fetchEvents();
-    super.onInit();
-  }
 
   Future fetchEvents() async {
     try {

@@ -12,6 +12,7 @@ class HomePageController extends GetxController {
   void onInit() {
     paymentMethodController.fetchPaymentMethods();
     noticeController.fetchNotices();
+    eventController.fetchEvents();
     super.onInit();
   }
 }
