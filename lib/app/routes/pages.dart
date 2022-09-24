@@ -4,8 +4,6 @@ import 'package:dimipay/app/core/middleware/pin_auth.dart';
 import 'package:dimipay/app/pages/face_sign/binding.dart';
 import 'package:dimipay/app/pages/face_sign/page.dart';
 import 'package:dimipay/app/pages/card_fin/page.dart';
-import 'package:dimipay/app/pages/coupon/page.dart';
-import 'package:dimipay/app/pages/coupon/binding.dart';
 import 'package:dimipay/app/pages/edit_card/binding.dart';
 import 'package:dimipay/app/pages/edit_card/page.dart';
 import 'package:dimipay/app/pages/event/page.dart';
@@ -14,7 +12,6 @@ import 'package:dimipay/app/pages/history/binding.dart';
 import 'package:dimipay/app/pages/history/page.dart';
 import 'package:dimipay/app/pages/home/page.dart';
 import 'package:dimipay/app/pages/home/binding.dart';
-import 'package:dimipay/app/pages/issue_coupon/page.dart';
 import 'package:dimipay/app/pages/login/binding.dart';
 import 'package:dimipay/app/pages/login/page.dart';
 import 'package:dimipay/app/pages/manage_method/binding.dart';
@@ -27,7 +24,6 @@ import 'package:dimipay/app/pages/pay_pending/page.dart';
 import 'package:dimipay/app/pages/pay_success/page.dart';
 import 'package:dimipay/app/pages/pin/binding.dart';
 import 'package:dimipay/app/pages/pin/page.dart';
-import 'package:dimipay/app/pages/printer_setting/page.dart';
 import 'package:dimipay/app/pages/register_card/page.dart';
 import 'package:dimipay/app/pages/register_card/binding.dart';
 import 'package:dimipay/app/pages/test/page.dart';
@@ -66,10 +62,6 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.COUPON, page: () => CouponPage(), binding: CouponPageBinding(), middlewares: [
-      LoginMiddleware(),
-      OnboardingMiddleware(),
-    ]),
     GetPage(name: Routes.HISTORY, page: () => const HistoryPage(), binding: HistoryPageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
@@ -84,10 +76,6 @@ class AppPages {
       OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.NOTIFICATION, page: () => const NotificationPage(), middlewares: [
-      LoginMiddleware(),
-      OnboardingMiddleware(),
-    ]),
-    GetPage(name: Routes.ISSUECOUPON, page: () => const IssueCouponPage(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),

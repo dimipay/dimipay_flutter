@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:dimipay/app/data/modules/coupon/model.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
@@ -21,7 +19,6 @@ abstract class ApiInterface {
 
   Future<User> getUserInfo();
 
-  Future<List<Coupon>> getCoupons();
 
   Future<List<Notice>> getNotice();
 
