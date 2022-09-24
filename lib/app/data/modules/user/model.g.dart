@@ -13,6 +13,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       isDisabled: json['isDisabled'] as bool?,
       accountName: json['accountName'] as String,
       name: json['name'] as String,
+      faceSignRegistered: json['faceSignRegistered'] as bool,
       profileImage: json['profileImage'] as String?,
     );
 
@@ -24,4 +25,5 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'systemId': instance.systemId,
       'isDisabled': instance.isDisabled,
       'profileImage': instance.profileImage,
+      'faceSignRegistered': instance.faceSignRegistered,
     };

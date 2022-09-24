@@ -6,6 +6,8 @@ import 'package:dimipay/app/pages/edit_card/binding.dart';
 import 'package:dimipay/app/pages/edit_card/page.dart';
 import 'package:dimipay/app/pages/event/page.dart';
 import 'package:dimipay/app/pages/event/binding.dart';
+import 'package:dimipay/app/pages/face_sign/binding.dart';
+import 'package:dimipay/app/pages/face_sign/page.dart';
 import 'package:dimipay/app/pages/history/binding.dart';
 import 'package:dimipay/app/pages/history/page.dart';
 import 'package:dimipay/app/pages/home/page.dart';
@@ -100,5 +102,9 @@ class AppPages {
     ),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
     GetPage(name: Routes.NOCONNECTION, page: () => const NoConnectionPage(), transition: Transition.noTransition),
+		GetPage(name: Routes.FACESIGN, page: () => const FaceSignPage(), binding: FaceSignPageBinding(), middlewares: [
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+    ]),
   ];
 }

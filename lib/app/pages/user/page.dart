@@ -85,6 +85,11 @@ class UserPage extends GetView<UserPageController> {
             onTap: () => Get.toNamed(Routes.HISTORY),
           ),
           UserPageListItem(
+            title: '페이스사인',
+            trailingText: userController.user?.faceSignRegistered == true ? '등록 됨' : '등록 안됨',
+            onTap: () => Get.toNamed(Routes.FACESIGN),
+          ),
+          UserPageListItem(
             title: '핀 변경',
             onTap: () => Get.toNamed(Routes.PIN, arguments: {'pinPageType': PinPageType.changePin}),
           ),
