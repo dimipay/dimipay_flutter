@@ -2,6 +2,7 @@ import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/utils/loader.dart';
 import 'package:dimipay/app/routes/pages.dart';
 import 'package:dimipay/app/routes/routes.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -17,10 +18,11 @@ Future main() async {
   await AppLoader().load();
   FlutterNativeSplash.remove();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+  
   runApp(
     GetMaterialApp(
       title: '디미페이',
-      initialRoute: getInintialRoute(debug: true),
+      initialRoute: getInintialRoute(debug: !kReleaseMode),
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
