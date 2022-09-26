@@ -30,7 +30,7 @@ class UserPageController extends GetxController {
   openKakaoChannelTalk() async {
     try {
       if (await isKakaoTalkInstalled()) {
-        await launchBrowserTab(await TalkApi.instance.channelChatUrl('_Rxanxlxj'));
+        await launchBrowserTab(await TalkApi.instance.channelChatUrl('_gHxlCxj'));
       } else {
         DPErrorSnackBar().open("카카오톡이 현재 깔려있지 않습니다.\n설치 후 다시 시도해주세요.");
       }
