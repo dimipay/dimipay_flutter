@@ -59,6 +59,7 @@ dependencies:
   url_launcher: ^6.1.5
   sensors_plus: ^1.3.4+1
   connectivity_plus: ^2.3.7
+  kakao_flutter_sdk: ^1.2.2
 
 dev_dependencies:
   flutter_test:
