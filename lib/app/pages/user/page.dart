@@ -8,7 +8,6 @@ import 'package:dimipay/app/pages/user/widget/menu_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class UserPage extends GetView<UserPageController> {
   UserPage({Key? key}) : super(key: key);
@@ -88,7 +87,7 @@ class UserPage extends GetView<UserPageController> {
           ),
           UserPageListItem(
             title: '문의',
-            onTap: () => launchUrl(Uri.parse('http://pf.kakao.com/_Rxanxlxj/chat')),
+            onTap: () => controller.openKakaoChannelTalk(),
           ),
           UserPageListItem(
             title: '로그아웃',
