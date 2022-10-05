@@ -30,6 +30,7 @@
 /build/
 
 # Web related
+lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
@@ -48,3 +49,6 @@ google-services.json
 
 #Dimipay Release Key
 /android/app/*.jks
+
+
+lib/app/core/utils/token_reference.dart
