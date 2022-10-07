@@ -98,6 +98,11 @@ class PinPageController extends GetxController with StateMixin {
         try {
           await authService.onBoardingAuth(pin);
           authService.pin = pin;
+
+          if (authService.isFirstVisit) {
+            Get.offNamed(Routes.ONBOARDING_REGISTERCARD, arguments: {'redirect': redirect});
+            return;
+          }
           Get.offNamed(redirect ?? Routes.HOME);
         } on OnboardingTokenException catch (e) {
           DPErrorSnackBar().open(e.message);
