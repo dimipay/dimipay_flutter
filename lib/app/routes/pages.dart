@@ -16,6 +16,7 @@ import 'package:dimipay/app/pages/manage_method/binding.dart';
 import 'package:dimipay/app/pages/manage_method/page.dart';
 import 'package:dimipay/app/pages/no_connection/page.dart';
 import 'package:dimipay/app/pages/notification/page.dart';
+import 'package:dimipay/app/pages/onboarding/page.dart';
 import 'package:dimipay/app/pages/pay/binding.dart';
 import 'package:dimipay/app/pages/pay/page.dart';
 import 'package:dimipay/app/pages/pay_pending/page.dart';
@@ -100,5 +101,10 @@ class AppPages {
     ),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
     GetPage(name: Routes.NOCONNECTION, page: () => const NoConnectionPage(), transition: Transition.noTransition),
+    GetPage(name: Routes.ONBOARDING_REGISTERCARD, page: () => OnboardingRegisterCardPage(), transition: Transition.noTransition, middlewares: [
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+      PinAuthMiddleware(),
+    ]),
   ];
 }
