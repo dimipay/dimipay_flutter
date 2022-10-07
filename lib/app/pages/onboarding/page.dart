@@ -66,7 +66,7 @@ class OnboardingRegisterCardPage extends StatelessWidget {
             DPMediumTextButton(
               text: "다음",
               onTap: () {
-                Get.toNamed(Routes.REGISTERCARD);
+                Get.toNamed(Routes.REGISTERCARD, arguments: {'redirect': redirect});
               },
             ),
           ],
