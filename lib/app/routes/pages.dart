@@ -16,7 +16,7 @@ import 'package:dimipay/app/pages/manage_method/binding.dart';
 import 'package:dimipay/app/pages/manage_method/page.dart';
 import 'package:dimipay/app/pages/no_connection/page.dart';
 import 'package:dimipay/app/pages/notification/page.dart';
-import 'package:dimipay/app/pages/onboarding/page.dart';
+import 'package:dimipay/app/pages/onboarding_register_card/page.dart';
 import 'package:dimipay/app/pages/pay/binding.dart';
 import 'package:dimipay/app/pages/pay/page.dart';
 import 'package:dimipay/app/pages/pay_pending/page.dart';
