@@ -2,7 +2,7 @@ import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
-import 'package:dimipay/app/widgets/payment.dart';
+import 'package:dimipay/app/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,21 +21,23 @@ class OnboardingRegisterCardPage extends StatelessWidget {
           children: [
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text("카드를 가지고 계신가요", style: DPTextTheme.HEADER2),
-                  Text.rich(
+                children: [
+                  const SizedBox(height: 80),
+                  const Text("첫 카드를 등록해보세요", style: DPTextTheme.HEADER2),
+                  const SizedBox(height: 8),
+                  const Text.rich(
                     TextSpan(
                       style: DPTextTheme.DESCRIPTION,
                       children: [
-                        TextSpan(text: "앱에 카드를 등록하면\n"),
-                        TextSpan(text: "결제 단말기에서 사용할 수 있어요"),
+                        TextSpan(text: "등록한 카드를 이용해\n"),
+                        TextSpan(text: "포스에서 QR 결제를 진행할 수 있어요"),
                       ],
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 64),
-                  DPPaymentCard(color: DPColors.MAIN_THEME, cardName: "카드 등록", cardNumber: "카드", isHorizontal: false, width: 153),
+                  Expanded(child: Container()),
+                  const DPCard(cardName: '디미페이', cardNumber: '1234', color: DPColors.MAIN_THEME),
+                  Expanded(child: Container()),
                 ],
               ),
             ),
@@ -56,7 +58,7 @@ class OnboardingRegisterCardPage extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  "나중에 등록할래요",
+                  "카드 등록 건너뛰기",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: DPColors.DARK2, fontFamily: "Pretendard", fontSize: 16, fontWeight: FontWeight.w600),
                 ),
