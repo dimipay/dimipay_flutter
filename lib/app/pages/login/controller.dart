@@ -92,7 +92,7 @@ class GyroScopeController extends GetxController {
 
   @override
   void onInit() async {
-    GetPlatform.isAndroid ? streamSubscription = gyroscopeEvents.listen(handleDataInAndroid) : streamSubscription = gyroscopeEvents.listen(handleDataInIos);
+    streamSubscription = GetPlatform.isAndroid ? gyroscopeEvents.listen(handleDataInAndroid) : gyroscopeEvents.listen(handleDataInIos);
     super.onInit();
   }
 
