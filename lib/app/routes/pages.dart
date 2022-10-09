@@ -101,6 +101,6 @@ class AppPages {
     ),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
     GetPage(name: Routes.NOCONNECTION, page: () => const NoConnectionPage(), transition: Transition.noTransition),
-    GetPage(name: Routes.ONBOARDING_REGISTERCARD, page: () => OnboardingRegisterCardPage(), transition: Transition.noTransition),
+    GetPage(name: Routes.ONBOARDING_REGISTERCARD, page: () => OnboardingRegisterCardPage()),
   ];
 }
