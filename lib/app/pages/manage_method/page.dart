@@ -4,6 +4,7 @@ import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/pages/manage_method/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
+import 'package:dimipay/app/widgets/card.dart';
 import 'package:dimipay/app/widgets/divided_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -46,9 +47,10 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
           for (var paymentMethod in controller.paymentMethodController.paymentMethods!)
             Column(
               children: [
-                GeneralCardWidget(
-                  paymentMethod,
-                  onTap: () => Get.toNamed(Routes.EDITCARD, arguments: {'paymentMethod': paymentMethod}),
+                DPCard(
+                  cardName: paymentMethod.name ?? "",
+                  cardNumber: paymentMethod.last4Digit,
+                  color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
                 ),
                 const SizedBox(height: 24),
               ],
