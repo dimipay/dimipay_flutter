@@ -36,7 +36,9 @@ class EditCardPageController extends GetxController with StateMixin {
       } else {
         Get.back();
       }
-      DPSnackBar.open('${paymentMethod.name}을(를) 결제수단에 추가했어요.', hapticFeedback: HapticPatterns.success);
+      if (creatingCard) {
+        DPSnackBar.open('${paymentMethod.name}을(를) 결제수단에 추가했어요.', hapticFeedback: HapticPatterns.success);
+      }
     } on DioError catch (e) {
       DPErrorSnackBar().open(e.response!.data['message']);
     }
