@@ -108,32 +108,3 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
     );
   }
 }
-
-class GeneralCardWidget extends StatelessWidget {
-  final PaymentMethod card;
-  final void Function()? onTap;
-  const GeneralCardWidget(this.card, {Key? key, this.onTap}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: card.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${card.color}', radix: 16)),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        width: double.infinity,
-        padding: const EdgeInsets.all(18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 16),
-            Text(card.name ?? '', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 48),
-          ],
-        ),
-      ),
-    );
-  }
-}
