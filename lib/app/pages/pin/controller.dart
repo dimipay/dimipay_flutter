@@ -52,14 +52,13 @@ class PinPageController extends GetxController with StateMixin {
     }
   }
 
-  Future<String> _validatePin() async {
+  Future<void> _validatePin() async {
     title.value = '핀 번호 입력';
     while (true) {
       password.value = '';
       String pin = await _inputPin();
       try {
-        await ApiProvider().checkPin(pin);
-        return pin;
+        await authService.validatePin(pin);
       } on IncorrectPinException catch (e) {
         HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.vibrate);
         subTitle.value = '핀 번호가 올바르지 않아요.\n남은 시도 횟수 : ${e.left}';
@@ -74,7 +73,7 @@ class PinPageController extends GetxController with StateMixin {
   Future<void> _pinAuth() async {
     _localAuthService.updateAvailableBiometrics();
     await biometricAuth();
-    authService.pin = await _validatePin();
+    await _validatePin();
     Get.offNamed(redirect ?? Routes.HOME);
   }
 
@@ -97,7 +96,6 @@ class PinPageController extends GetxController with StateMixin {
 
         try {
           await authService.onBoardingAuth(pin);
-          authService.pin = pin;
 
           if (authService.isFirstVisit) {
             Get.offNamed(Routes.ONBOARDING_REGISTERCARD, arguments: {'redirect': redirect});
@@ -117,7 +115,6 @@ class PinPageController extends GetxController with StateMixin {
         String pin = await _inputPin();
         try {
           await authService.onBoardingAuth(pin);
-          authService.pin = pin;
           Get.offNamed(redirect ?? Routes.HOME);
         } on IncorrectPinException catch (e) {
           HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.vibrate);
@@ -137,7 +134,8 @@ class PinPageController extends GetxController with StateMixin {
   }
 
   Future<void> _changePin() async {
-    String originalPin = await _validatePin();
+    await _validatePin();
+    String originalPin = authService.pin!;
     title.value = '새로운 핀 번호';
     while (true) {
       password.value = '';
@@ -154,8 +152,7 @@ class PinPageController extends GetxController with StateMixin {
       }
 
       try {
-        await ApiProvider().changePin(originalPin, newPin);
-        authService.pin = newPin;
+        await authService.changePin(originalPin, newPin);
         Get.back();
         DPSnackBar.open('핀이 변경되었어요.', hapticFeedback: HapticPatterns.success);
         break;
