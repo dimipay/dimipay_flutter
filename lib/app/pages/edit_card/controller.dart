@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class EditCardPageController extends GetxController with StateMixin {
+  final String? redirect = Get.arguments?['redirect'];
   final PaymentMethod paymentMethod = Get.arguments['paymentMethod'];
   final Rx<String> cardName = Rx('');
   final TextEditingController textEditingController = TextEditingController();
@@ -30,7 +31,11 @@ class EditCardPageController extends GetxController with StateMixin {
       change(null, status: RxStatus.loading());
       await paymentMethodController.patchPaymentMethod(paymentMethod);
       change(null, status: RxStatus.success());
-      Get.back();
+      if (redirect is String) {
+        Get.offNamed(redirect!);
+      } else {
+        Get.back();
+      }
       DPSnackBar.open('${paymentMethod.name}을(를) 결제수단에 추가했어요.', hapticFeedback: HapticPatterns.success);
     } on DioError catch (e) {
       DPErrorSnackBar().open(e.response!.data['message']);
