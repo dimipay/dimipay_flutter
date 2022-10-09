@@ -47,10 +47,13 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
           for (var paymentMethod in controller.paymentMethodController.paymentMethods!)
             Column(
               children: [
-                DPCard(
-                  cardName: paymentMethod.name ?? "",
-                  cardNumber: paymentMethod.last4Digit,
-                  color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
+                GestureDetector(
+                  onTap: () => Get.toNamed(Routes.EDITCARD, arguments: {'paymentMethod': paymentMethod}),
+                  child: DPCard(
+                    cardName: paymentMethod.name ?? "",
+                    cardNumber: paymentMethod.last4Digit,
+                    color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
+                  ),
                 ),
                 const SizedBox(height: 24),
               ],
