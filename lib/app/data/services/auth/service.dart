@@ -16,7 +16,7 @@ class AuthService extends GetxService {
   final Rx<String?> _refreshToken = Rx(null);
   final Rx<String?> _onboardingToken = Rx(null); // /auth/login API에서 반환되는 AccessToken
   final Rx<bool> _isFirstVisit = Rx(false);
-  String? pin;
+  String? _pin;
   String? _bioKey;
 
   AuthService(this.repository);
@@ -26,12 +26,12 @@ class AuthService extends GetxService {
 
   /// google sign-in 과정이 완료되었을 경우 true
   bool get isGoogleLoginSuccess => _onboardingToken.value != null;
-
   String? get accessToken => _accessToken.value;
   String? get refreshToken => _refreshToken.value;
   String? get onboardingToken => _onboardingToken.value;
-  String? get bioKey => _bioKey;
   bool get isFirstVisit => _isFirstVisit.value;
+  String? get bioKey => _bioKey;
+  String? get pin => _pin;
 
   Future<AuthService> init() async {
     _accessToken.value = await _storage.read(key: 'accessToken');
@@ -61,6 +61,16 @@ class AuthService extends GetxService {
     _bioKey = await _storage.read(key: 'bioKey');
   }
 
+  Future<void> changePin(String originalPin, String newPin) async {
+    await repository.changePin(originalPin, newPin);
+    _pin = newPin;
+  }
+
+  Future<void> validatePin(String pin) async {
+    await repository.checkPin(pin);
+    _pin = pin;
+  }
+
   Future<void> loginWithGoogle({bool selectAccount = true}) async {
     String idToken = await googleSignInHelper.authenticate();
     Map loginResult = await repository.loginWithGoogle(idToken);
@@ -85,11 +95,13 @@ class AuthService extends GetxService {
     if (GetPlatform.isAndroid || GetPlatform.isIOS) {
       await _setBioKey(bioKey!);
     }
+    _pin = paymentPin;
 
     return _accessToken.value!;
   }
 
-  Future<void> _refreshAccessToken() async {
+  ///Throws exception and route to loginpage if refresh faild
+  Future<void> refreshAcessToken() async {
     // refreshTokenApi의 동시 다발적인 호출을 방지하기 위해 completer를 사용함. 동시 다발적으로 이 함수를 호출해도 api는 1번만 호출 됨.
     if (_refreshTokenApiCompleter == null || _refreshTokenApiCompleter!.isCompleted) {
       //첫 호출(null)이거나 이미 완료된 호출(completed completer)일 경우 새 객체 할당
@@ -111,11 +123,6 @@ class AuthService extends GetxService {
     return _refreshTokenApiCompleter?.future;
   }
 
-  ///Throws exception and route to loginpage if refresh faild
-  Future<void> refreshAcessToken() async {
-    return _refreshAccessToken();
-  }
-
   Future<void> _removeToken() async {
     await _storage.delete(key: 'accessToken');
     await _storage.delete(key: 'refreshToken');
@@ -127,7 +134,7 @@ class AuthService extends GetxService {
     _onboardingToken.value = null;
     _refreshTokenApiCompleter = null;
     _bioKey = null;
-    pin = null;
+    _pin = null;
   }
 
   Future<void> logout() async {
