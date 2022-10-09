@@ -23,7 +23,7 @@ class DPCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: Container(
           color: color,
-          width: 300,
+          width: 320,
           height: 180,
           child: Stack(
             children: [
