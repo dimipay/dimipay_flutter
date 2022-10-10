@@ -49,3 +49,6 @@ google-services.json
 
 #Dimipay Release Key
 /android/app/*.jks
+
+#API Key
+token_reference.dart
