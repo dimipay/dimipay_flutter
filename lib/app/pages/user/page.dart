@@ -1,6 +1,5 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
-import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/user/controller.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/pages/pin/controller.dart';
@@ -9,7 +8,6 @@ import 'package:dimipay/app/pages/user/widget/menu_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class UserPage extends GetView<UserPageController> {
   UserPage({Key? key}) : super(key: key);
@@ -71,23 +69,17 @@ class UserPage extends GetView<UserPageController> {
   }
 
   Widget _menuArea() {
-    PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
     return Obx(
       () => Column(
         children: [
           UserPageListItem(
             title: '카드',
             onTap: () => Get.toNamed(Routes.MANAGEMETHOD),
-            trailingText: '${(paymentMethodController.paymentMethods?.length ?? '').toString()}개',
+            trailingText: '${(controller.paymentMethodController.paymentMethods?.length ?? '').toString()}개',
           ),
           UserPageListItem(
             title: '결제기록',
             onTap: () => Get.toNamed(Routes.HISTORY),
-          ),
-          UserPageListItem(
-            title: '페이스사인',
-            trailingText: userController.user?.faceSignRegistered == true ? '등록 됨' : '등록 안됨',
-            onTap: () => Get.toNamed(Routes.FACESIGN),
           ),
           UserPageListItem(
             title: '핀 변경',
@@ -95,7 +87,7 @@ class UserPage extends GetView<UserPageController> {
           ),
           UserPageListItem(
             title: '문의',
-            onTap: () => launchUrl(Uri.parse('http://pf.kakao.com/_Rxanxlxj/chat')),
+            onTap: () => controller.openKakaoChannelTalk(),
           ),
           UserPageListItem(
             title: '로그아웃',
