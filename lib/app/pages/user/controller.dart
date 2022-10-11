@@ -1,3 +1,4 @@
+import 'package:dimipay/app/data/modules/face_sign/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/user/controller.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +10,7 @@ import '../../widgets/snackbar.dart';
 class UserPageController extends GetxController {
   UserController userController = Get.find<UserController>();
   PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
+  FaceSignController faceSignController = Get.find<FaceSignController>();
 
   @override
   void onInit() {
@@ -17,6 +19,9 @@ class UserPageController extends GetxController {
     }
     if (paymentMethodController.paymentMethods == null) {
       paymentMethodController.fetchPaymentMethods();
+    }
+    if (faceSignController.isFacesignRegistered == null) {
+      faceSignController.fetchIsFacesignRegistered();
     }
     super.onInit();
   }

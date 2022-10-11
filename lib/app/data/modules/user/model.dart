@@ -13,6 +13,7 @@ class User {
   String? systemId;
   bool? isDisabled;
   String? profileImage;
+  bool faceSignRegistered;
 
   User({
     required this.systemId,
@@ -21,6 +22,7 @@ class User {
     required this.isDisabled,
     required this.accountName,
     required this.name,
+    required this.faceSignRegistered,
     this.profileImage,
   });
 
