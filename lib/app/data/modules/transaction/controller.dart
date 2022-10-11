@@ -4,11 +4,13 @@ import 'package:get/get.dart';
 
 class TransactionController extends GetxController with StateMixin<List<Transaction>> {
   final TransactionRepository repository;
-  TransactionController(this.repository);
-  final Rx<List<Transaction>> _transactions = Rx([]);
-  List<Transaction> get transactions => _transactions.value;
 
-  Future fetchTransaction() async {
+  TransactionController(this.repository);
+
+  final Rx<List<Transaction>?> _transactions = Rx(null);
+  List<Transaction>? get transactions => _transactions.value;
+
+  Future fetchTransactions() async {
     try {
       change(transactions, status: RxStatus.loading());
       _transactions.value = await repository.get();

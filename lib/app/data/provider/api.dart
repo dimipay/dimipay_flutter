@@ -251,8 +251,10 @@ class ApiProvider implements ApiInterface {
     Map body = {
       'id': paymentMethod.id,
       'name': paymentMethod.name,
-      'color': paymentMethod.color,
     };
+    if (paymentMethod.color != null) { body.addAll({'color': paymentMethod.color}); }
+
+
     await dio.patch(url, data: body);
   }
 

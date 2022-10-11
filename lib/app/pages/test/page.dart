@@ -39,6 +39,7 @@ class TestPage extends StatelessWidget {
           linkToRoute(Routes.NOCONNECTION),
           linkToRoute(Routes.NOTIFICATION),
           linkToRoute(Routes.FACESIGN),
+          linkToRoute(Routes.ONBOARDING_REGISTERCARD),
         ],
       ),
     );

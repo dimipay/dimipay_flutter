@@ -19,7 +19,7 @@ class HistoryPageController extends GetxController with StateMixin {
 
   Future<void> fetch() async {
     change(null, status: RxStatus.loading());
-    transactionController.fetchTransaction();
+    transactionController.fetchTransactions();
     change(null, status: RxStatus.success());
   }
 }

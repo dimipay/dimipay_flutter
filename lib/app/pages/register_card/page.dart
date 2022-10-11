@@ -11,7 +11,7 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text('Register Card Page')),
+      appBar: AppBar(title: const Text('카드 등록하기')),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

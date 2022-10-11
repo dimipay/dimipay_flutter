@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
 /// TODO getx worker 적용
-class PayPageController extends GetxController with StateMixin {
+class PayPageController extends GetxController with StateMixin<String> {
   PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
   Timer? tokenRefreshTimer;
   AuthService authService = Get.find<AuthService>();
@@ -22,9 +22,17 @@ class PayPageController extends GetxController with StateMixin {
   int get currentIndex => paymentMethodController.paymentMethods!.indexOf(currentPaymentMethod!);
 
   @override
-  void onInit() {
-    _init();
+  void onInit() async {
     super.onInit();
+    if (paymentMethodController.paymentMethods == null) {
+      await paymentMethodController.fetchPaymentMethods();
+    }
+    currentPaymentMethod = Get.arguments ?? paymentMethodController.paymentMethods!.elementAt(0);
+    if (currentPaymentMethod != null) {
+      fetchPaymentToken(currentPaymentMethod!);
+    }
+    _initStream();
+    setBrightness(1);
   }
 
   Future<void> _initStream() async {
@@ -37,26 +45,15 @@ class PayPageController extends GetxController with StateMixin {
     });
   }
 
-  Future<void> _init() async {
-    if (paymentMethodController.paymentMethods == null) {
-      await paymentMethodController.fetchPaymentMethods();
-    }
-    change(null, status: RxStatus.success());
-    currentPaymentMethod = Get.arguments ?? paymentMethodController.paymentMethods!.elementAt(0);
-    if (currentPaymentMethod != null) {
-      fetchPaymentToken(currentPaymentMethod!);
-    }
-    _initStream();
-    setBrightness(1);
-  }
-
   Future<void> fetchPaymentToken(PaymentMethod paymentMethod) async {
     try {
+      change(null, status: RxStatus.loading());
       paymentToken.value = null;
       Map res = await ApiProvider().getPaymentToken(paymentMethod: paymentMethod, pin: authService.pin, bioKey: authService.bioKey);
       paymentToken.value = res['code'];
       DateTime expireAt = DateTime.parse(res['exp']);
       refreshPaymentToken(expireAt);
+      change(paymentToken.value, status: RxStatus.success());
     } on DioError catch (e) {
       log(e.response!.data.toString());
     }
