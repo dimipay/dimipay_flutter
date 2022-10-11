@@ -8,4 +8,6 @@ class FaceSignRepository {
 
   Future<void> register(XFile image) => api.registerFaceSign(image);
   Future<void> delete() => api.deleteFaceSign();
+
+	Future<bool> facesignRegistered() => api.faceSignRegistered();
 }

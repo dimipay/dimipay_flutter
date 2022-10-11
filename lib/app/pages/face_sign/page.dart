@@ -12,7 +12,23 @@ class FaceSignPage extends GetView<FaceSignPageController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => controller.isFacesignRegistered.value ? FaceSignDeletePage(controller: controller) : FaceSignRegisterPage(controller: controller),
+      () {
+        switch (controller.faceSignController.isFacesignRegistered) {
+          case true:
+            return FaceSignDeletePage(controller: controller);
+          case false:
+            return FaceSignRegisterPage(controller: controller);
+          default:
+            return Scaffold(
+              appBar: AppBar(),
+              body: const Center(
+                child: CircularProgressIndicator(
+                  color: DPColors.MAIN_THEME,
+                ),
+              ),
+            );
+        }
+      },
     );
   }
 }
