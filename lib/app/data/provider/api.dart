@@ -252,8 +252,9 @@ class ApiProvider implements ApiInterface {
       'id': paymentMethod.id,
       'name': paymentMethod.name,
     };
-    if (paymentMethod.color != null) { body.addAll({'color': paymentMethod.color}); }
-
+    if (paymentMethod.color != null) {
+      body.addAll({'color': paymentMethod.color});
+    }
 
     await dio.patch(url, data: body);
   }
@@ -310,5 +311,12 @@ class ApiProvider implements ApiInterface {
     String url = "/auth/face";
     Response response = await dio.delete(url);
     return response.data;
+  }
+
+  @override
+  Future<bool> faceSignRegistered() async {
+    String url = "/user/me/face-registered";
+    Response response = await dio.get(url);
+    return response.data['registered'];
   }
 }
