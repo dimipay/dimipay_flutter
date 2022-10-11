@@ -53,4 +53,6 @@ abstract class ApiInterface {
   Future<void> registerFaceSign(XFile image);
 
   Future<void> deleteFaceSign();
+
+  Future<bool> faceSignRegistered();
 }
