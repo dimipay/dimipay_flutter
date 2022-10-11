@@ -18,6 +18,7 @@ import 'package:dimipay/app/pages/manage_method/binding.dart';
 import 'package:dimipay/app/pages/manage_method/page.dart';
 import 'package:dimipay/app/pages/no_connection/page.dart';
 import 'package:dimipay/app/pages/notification/page.dart';
+import 'package:dimipay/app/pages/onboarding_register_card/page.dart';
 import 'package:dimipay/app/pages/pay/binding.dart';
 import 'package:dimipay/app/pages/pay/page.dart';
 import 'package:dimipay/app/pages/pay_pending/page.dart';
@@ -35,7 +36,7 @@ import 'package:get/get.dart';
 class AppPages {
   static final pages = [
     GetPage(name: Routes.TEST, page: () => const TestPage()),
-    GetPage(name: Routes.HOME, page: () => HomePage(), binding: HomePageBinding(), middlewares: [
+    GetPage(name: Routes.HOME, page: () => const HomePage(), binding: HomePageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
@@ -43,7 +44,7 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.MANAGEMETHOD, page: () => ManageMethodPage(), binding: ManageMethodPageBinding(), middlewares: [
+    GetPage(name: Routes.MANAGEMETHOD, page: () => const ManageMethodPage(), binding: ManageMethodPageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
       PinAuthMiddleware(),
@@ -66,7 +67,7 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.PAY, page: () => PayPage(), binding: PayPageBinding(), middlewares: [
+    GetPage(name: Routes.PAY, page: () => const PayPage(), binding: PayPageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
       PinAuthMiddleware(),
@@ -102,9 +103,10 @@ class AppPages {
     ),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
     GetPage(name: Routes.NOCONNECTION, page: () => const NoConnectionPage(), transition: Transition.noTransition),
-		GetPage(name: Routes.FACESIGN, page: () => const FaceSignPage(), binding: FaceSignPageBinding(), middlewares: [
+    GetPage(name: Routes.FACESIGN, page: () => const FaceSignPage(), binding: FaceSignPageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
+    GetPage(name: Routes.ONBOARDING_REGISTERCARD, page: () => OnboardingRegisterCardPage()),
   ];
 }

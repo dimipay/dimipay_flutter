@@ -15,4 +15,8 @@ class AuthRepository {
   ///use ['accessToken'] to get accessToken
   ///use ['refreshToken'] to get refreshToken
   Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String? bioKey) async => api.onBoardingAuth(paymentPin, deviceUid, bioKey);
+
+  Future<void> changePin(String originalPin, String newPin) async => api.changePin(originalPin, newPin);
+
+  Future<void> checkPin(String pin) async => api.checkPin(pin);
 }

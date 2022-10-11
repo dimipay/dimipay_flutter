@@ -1,13 +1,10 @@
 import 'dart:math';
-
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
-import 'package:dimipay/app/data/modules/event/controller.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
-import 'package:dimipay/app/data/modules/notice/controller.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
-import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/pages/home/controller.dart';
 import 'package:dimipay/app/pages/home/widget/event_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
@@ -15,11 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
-  final NoticeController noticeController = Get.find<NoticeController>();
-  final EventController eventController = Get.find<EventController>();
-  final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
+class HomePage extends GetView<HomePageController> {
+  const HomePage({Key? key}) : super(key: key);
 
   Widget _logoArea() {
     return Row(
@@ -40,44 +34,48 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _notice(Notice notice) {
-    return Row(
-      children: [
-        SvgPicture.asset('asset/images/notice.svg', color: DPColors.MAIN_THEME),
-        const SizedBox(width: 24),
-        Flexible(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                notice.title,
-                style: DPTextTheme.REGULAR_IMPORTANT,
-              ),
-              const SizedBox(height: 4),
-              Text(
-                notice.description,
-                style: DPTextTheme.DESCRIPTION,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _noticeArea() {
-    return noticeController.obx(
-      (notices) {
+  Widget _buildNotice() {
+    return Obx(
+      () {
+        List<Notice>? notices = controller.noticeController.notices;
         if (notices != null) {
           return Column(
             children: [
-              for (Notice notice in notices) _notice(notice),
+              for (Notice notice in notices)
+                Row(
+                  children: [
+                    SvgPicture.asset('asset/images/notice.svg', color: DPColors.MAIN_THEME),
+                    const SizedBox(width: 24),
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            notice.title,
+                            style: DPTextTheme.REGULAR_IMPORTANT,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            notice.description,
+                            style: DPTextTheme.DESCRIPTION,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                )
             ],
           );
         } else {
           return Container();
         }
       },
+    );
+  }
+
+  Widget _noticeArea() {
+    return controller.noticeController.obx(
+      (_) => _buildNotice(),
       onLoading: Container(),
     );
   }
@@ -92,73 +90,78 @@ class HomePage extends StatelessWidget {
     return a.endsAt!.isBefore(b.endsAt!) ? 1 : 0;
   }
 
-  Widget _buildEvents(List<Event> events) {
-    return Column(
-      children: events
-          .map(
-            (event) => Column(
+  Widget _buildEvents() {
+    return Obx(() {
+      List<Event> events = controller.eventController.events!;
+      if (events.isEmpty) {
+        return Container();
+      } else {
+        List<Event> previewingEvents = List.from(events);
+        previewingEvents.sort(_compEvent);
+        previewingEvents = previewingEvents.sublist(0, min(3, previewingEvents.length));
+        return GestureDetector(
+          onTap: () => Get.toNamed(Routes.EVENT),
+          child: Container(
+            color: Colors.white,
+            child: Column(
               children: [
-                EventItem(title: event.title, description: event.description, expireDate: event.endsAt),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: [
+                        const Text(
+                          '이벤트',
+                          style: DPTextTheme.SECTION_HEADER,
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          '${events.length}개',
+                          style: DPTextTheme.DESCRIPTION,
+                        ),
+                      ],
+                    ),
+                    SvgPicture.asset('asset/images/arrow_right.svg', semanticsLabel: 'arrow_right'),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                Column(
+                  children: previewingEvents
+                      .map((event) => Column(children: [
+                            EventItem(title: event.title, description: event.description, expireDate: event.endsAt),
+                          ]))
+                      .toList(),
+                )
               ],
             ),
-          )
-          .toList(),
-    );
+          ),
+        );
+      }
+    });
   }
 
   Widget _eventsArea() {
-    return eventController.obx(
-      (events) {
-        if (events!.isEmpty) {
-          return Container();
-        } else {
-          List<Event> previewingEvents = List.from(events);
-          previewingEvents.sort(_compEvent);
-          previewingEvents = previewingEvents.sublist(0, min(3, previewingEvents.length));
-          return GestureDetector(
-            onTap: () => Get.toNamed(Routes.EVENT),
-            child: Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          const Text(
-                            '이벤트',
-                            style: DPTextTheme.SECTION_HEADER,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            '${events.length}개',
-                            style: DPTextTheme.DESCRIPTION,
-                          ),
-                        ],
-                      ),
-                      SvgPicture.asset('asset/images/arrow_right.svg', semanticsLabel: 'arrow_right'),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  _buildEvents(previewingEvents),
-                ],
-              ),
-            ),
-          );
-        }
-      },
+    return controller.eventController.obx(
+      (_) => _buildEvents(),
       onLoading: Container(),
     );
   }
 
   Widget _topDivider() {
-    return Column(
-      children: const [
-        SizedBox(height: 36),
-        Divider(color: DPColors.DARK6, height: 1, thickness: 1),
-        SizedBox(height: 36),
-      ],
+    return Obx(
+      () {
+        if (controller.noticeController.notices?.isNotEmpty == true && controller.eventController.events?.isNotEmpty == true) {
+          return Column(
+            children: const [
+              SizedBox(height: 36),
+              Divider(color: DPColors.DARK6, height: 1, thickness: 1),
+              SizedBox(height: 36),
+            ],
+          );
+        } else {
+          return Container();
+        }
+      },
     );
   }
 
@@ -172,15 +175,7 @@ class HomePage extends StatelessWidget {
             _logoArea(),
             const SizedBox(height: 36),
             _noticeArea(),
-            Obx(
-              () {
-                if (noticeController.notices.isNotEmpty && eventController.events.isNotEmpty) {
-                  return _topDivider();
-                } else {
-                  return Container();
-                }
-              },
-            ),
+            _topDivider(),
             _eventsArea(),
           ],
         ),
@@ -188,23 +183,35 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildPaymentMethods(List<PaymentMethod> paymentMethods) {
-    return Row(
-      children: [
-        for (PaymentMethod paymentMethod in paymentMethods)
-          Row(
-            children: [
-              DPSmallCardPayment(
-                title: paymentMethod.name ?? '',
-                color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
-                onTap: () {
-                  Get.toNamed(Routes.PAY, arguments: paymentMethod);
-                },
-              ),
-              const SizedBox(width: 12),
-            ],
-          ),
-      ],
+  Widget _buildPaymentMethods() {
+    return Obx(
+      () => SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            const SizedBox(width: 32, height: 81),
+            Row(
+              children: [
+                for (PaymentMethod paymentMethod in controller.paymentMethodController.paymentMethods!)
+                  Row(
+                    children: [
+                      DPSmallCardPayment(
+                        title: paymentMethod.name ?? '',
+                        color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
+                        onTap: () {
+                          Get.toNamed(Routes.PAY, arguments: paymentMethod);
+                        },
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+              ],
+            ),
+            const SizedBox(width: 20),
+          ],
+        ),
+      ),
     );
   }
 
@@ -215,21 +222,11 @@ class HomePage extends StatelessWidget {
       ),
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 32),
-      child: Obx(
-        () => SizedBox(
-          height: 81,
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                const SizedBox(width: 32, height: 81),
-                // ignore: unnecessary_cast
-                paymentMethodController.paymentMethods != null ? _buildPaymentMethods(paymentMethodController.paymentMethods!) : Container(),
-                const SizedBox(width: 20),
-              ],
-            ),
-          ),
+      child: SizedBox(
+        height: 81,
+        child: controller.paymentMethodController.obx(
+          (_) => _buildPaymentMethods(),
+          onLoading: Container(),
         ),
       ),
     );

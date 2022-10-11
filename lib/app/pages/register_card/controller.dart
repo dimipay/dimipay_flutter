@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterCardPageController extends GetxController with StateMixin {
+  final String? redirect = Get.arguments?['redirect'];
   final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
 
   final TextEditingController cardNumberFieldController = TextEditingController();
@@ -138,7 +139,7 @@ class RegisterCardPageController extends GetxController with StateMixin {
           expireAt: expiredAt.value!,
         );
 
-        Get.offNamed(Routes.EDITCARD, arguments: {'creatingCard': true, 'paymentMethod': paymentMethod});
+        Get.offNamed(Routes.EDITCARD, arguments: {"redirect": redirect, 'creatingCard': true, 'paymentMethod': paymentMethod});
       }
     } on DioError catch (e) {
       DPErrorSnackBar().open(e.response!.data['message']);

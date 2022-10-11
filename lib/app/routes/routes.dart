@@ -18,4 +18,5 @@ abstract class Routes {
   static const LOGIN = "/login";
   static const NOCONNECTION = "/noConnection";
   static const FACESIGN = "/faceSign";
+  static const ONBOARDING_REGISTERCARD = "/onboarding/registerCard";
 }
