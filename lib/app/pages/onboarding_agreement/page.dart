@@ -1,10 +1,12 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
-import 'package:dimipay/app/widgets/card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class OnboardingAgreementPage extends StatelessWidget {
   OnboardingAgreementPage({Key? key}) : super(key: key);
@@ -15,68 +17,87 @@ class OnboardingAgreementPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text("약관에 동의해주세요", style: DPTextTheme.PAGE_HEADER),
-                  const SizedBox(height: 16),
-                  const Text("박스를 누르면 해당 약관을 볼 수 있어요", style: DPTextTheme.DESCRIPTION),
-                  const SizedBox(height: 32),
-                  GestureDetector(onTap: () => Get.toNamed(Routes.PRIVACYPOLICY), child: _termsBox("개인정보보호약관")),
-                  const SizedBox(height: 12),
-                  GestureDetector(onTap: () => Get.toNamed(Routes.TERMSOFSERVICE), child: _termsBox("서비스 이용약관")),
-                  const SizedBox(height: 32),
-                  Obx(
-                    () => Row(
-                      children: [
-                        Transform.scale(
-                          scale: 1.5,
-                          child: Checkbox(
-                            value: _isAgreed.value,
-                            onChanged: (value) => _isAgreed.value = value ?? false,
-                            activeColor: DPColors.MAIN_THEME,
-                          ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("약관에 동의해주세요", style: DPTextTheme.HEADER1),
+                    Expanded(child: Center(child: LottieBuilder.asset('asset/lottie/acceptment.json'))),
+                    GestureDetector(onTap: () => Get.toNamed(Routes.PRIVACYPOLICY), child: _termsBox("개인정보보호약관")),
+                    const SizedBox(height: 8),
+                    GestureDetector(onTap: () => Get.toNamed(Routes.TERMSOFSERVICE), child: _termsBox("서비스 이용약관")),
+                    const SizedBox(height: 16),
+                    Obx(
+                      () => GestureDetector(
+                        onTap: () {
+                          _isAgreed.value = !_isAgreed.value;
+                          if (_isAgreed.value == true) {
+                            HapticHelper.feedback(HapticPattern([100, 300]));
+                          }
+                        },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 24,
+                              height: 24,
+                              child: Checkbox(
+                                value: _isAgreed.value,
+                                onChanged: (value) => _isAgreed.value = value ?? false,
+                                activeColor: DPColors.MAIN_THEME,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                "나는 디미페이의 개인정보 보호약관과 서비스 이용약관에 동의합니다",
+                                style: _isAgreed.value ? DPTextTheme.DESCRIPTION_IMPORTANT : DPTextTheme.DESCRIPTION,
+                              ),
+                            ),
+                          ],
                         ),
-                        Expanded(
-                          child: Text(
-                            "나는 디미페이의 개인정보 보호약관과 서비스 이용약관에 동의합니다",
-                            style: _isAgreed.value ? DPTextTheme.IREGULAR : DPTextTheme.PAGE_DESCRIPTION,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 32),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            Obx(
-              () => DPKeyboardReactiveButton(
-                disabled: !_isAgreed.value,
-                onTap: () {
-                  Get.offNamed(redirect ?? Routes.HOME);
-                },
-                child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+              Obx(
+                () => DPKeyboardReactiveButton(
+                  disabled: !_isAgreed.value,
+                  onTap: () {
+                    Get.offNamed(redirect ?? Routes.HOME);
+                  },
+                  child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 
   Widget _termsBox(String title) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(color: DPColors.DARK6, borderRadius: BorderRadius.circular(8)),
-      child: Padding(padding: const EdgeInsets.all(16), child: Text(title, style: DPTextTheme.REGULAR)),
+      decoration: BoxDecoration(
+        color: DPColors.DARK6,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [Text(title, style: DPTextTheme.REGULAR), SvgPicture.asset('asset/images/arrow_right.svg', color: DPColors.DARK1)],
+        ),
+      ),
     );
   }
 }
