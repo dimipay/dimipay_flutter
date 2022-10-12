@@ -1,15 +1,8 @@
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
-  PrivacyPolicyPage({super.key});
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    String privacyPolicyText = '''
+  final String privacyPolicyText = '''
       디미고사회적협동조합(이하 '회사'라 한다)은 정보통신망 이용촉진 및 정보보호 등에 관한 법률, 개인정보보호법 등 관련 법령에 따라 이용자의 개인정보를 보호하고, 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보처리방침을 수립합니다. 개인정보처리방침은 이용자가 언제나 쉽게 열람할 수 있도록 서비스 초기화면을 통해 공개하고 있으며, 개인정보 관련법령, 지침, 고시 또는 포인트 서비스 정책의 변경에 따라 달라질 수 있습니다.
       
       개인정보의 수집·이용
@@ -33,25 +26,25 @@ class PrivacyPolicyPage extends StatelessWidget {
             ① 파기절차 회사는 파기 사유가 발생한 개인정보를 개인정보 보호책임자의 승인 절차를 거쳐 파기합니다. 
             ② 파기방법 회사는 전자적 파일형태로 기록·저장된 개인정보는 기록을 재생할 수 없도록 기술적인 방법 또는 물리적인 방법을 이용하여 파기하며, 종이에 출력된 개인정보는 분쇄기로 분쇄하거나 소각 등을 통하여 파기합니다.
     ''';
+  const PrivacyPolicyPage({super.key});
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("개인정보 보호방침"),
+        centerTitle: true,
+      ),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text("개인정보 보호방침", style: DPTextTheme.PAGE_HEADER),
-              SizedBox(height: 20),
-              Expanded(
-                child: SizedBox(
-                  width: Get.width * 0.82,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                      child: Text(privacyPolicyText, style: DPTextTheme.DESCRIPTION_IMPORTANT)
-                  ),
-                ),
-              ),
-            ],
+        child: Scrollbar(
+          interactive: true,
+          thumbVisibility: true,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Text(privacyPolicyText, style: DPTextTheme.DESCRIPTION_IMPORTANT),
+            ),
           ),
         ),
       ),
