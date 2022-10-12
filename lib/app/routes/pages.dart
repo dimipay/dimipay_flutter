@@ -19,6 +19,7 @@ import 'package:dimipay/app/pages/manage_method/page.dart';
 import 'package:dimipay/app/pages/no_connection/page.dart';
 import 'package:dimipay/app/pages/notification/page.dart';
 import 'package:dimipay/app/pages/onboarding_register_card/page.dart';
+import 'package:dimipay/app/pages/onboarding_agreement/page.dart';
 import 'package:dimipay/app/pages/pay/binding.dart';
 import 'package:dimipay/app/pages/pay/page.dart';
 import 'package:dimipay/app/pages/pay_pending/page.dart';
@@ -110,6 +111,7 @@ class AppPages {
       OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.ONBOARDING_REGISTERCARD, page: () => OnboardingRegisterCardPage()),
+    GetPage(name: Routes.ONBOARDING_AGREEMENT, page: () => OnboardingAgreementPage()),
     GetPage(name: Routes.PRIVACYPOLICY, page: () => PrivacyPolicyPage()),
     GetPage(name: Routes.TERMSOFSERVICE, page: () => TermsOfServicePage()),
   ];
