@@ -29,7 +29,7 @@ class OnboardingAgreementPage extends StatelessWidget {
                   children: [
                     const Text("약관에 동의해주세요", style: DPTextTheme.HEADER1),
                     Expanded(child: Center(child: LottieBuilder.asset('asset/lottie/acceptment.json'))),
-                    GestureDetector(onTap: () => Get.toNamed(Routes.PRIVACYPOLICY), child: _termsBox("개인정보보호약관")),
+                    GestureDetector(onTap: () => Get.toNamed(Routes.PRIVACYPOLICY), child: _termsBox("개인정보 보호방침")),
                     const SizedBox(height: 8),
                     GestureDetector(onTap: () => Get.toNamed(Routes.TERMSOFSERVICE), child: _termsBox("서비스 이용약관")),
                     const SizedBox(height: 16),
@@ -56,7 +56,7 @@ class OnboardingAgreementPage extends StatelessWidget {
                             const SizedBox(width: 12),
                             Expanded(
                               child: Text(
-                                "나는 디미페이의 개인정보 보호약관과 서비스 이용약관에 동의합니다",
+                                "나는 디미페이의 개인정보 보호방침과 서비스 이용약관에 동의합니다",
                                 style: _isAgreed.value ? DPTextTheme.DESCRIPTION_IMPORTANT : DPTextTheme.DESCRIPTION,
                               ),
                             ),
@@ -89,13 +89,13 @@ class OnboardingAgreementPage extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: DPColors.DARK6,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Text(title, style: DPTextTheme.REGULAR), SvgPicture.asset('asset/images/arrow_right.svg', color: DPColors.DARK1)],
+          children: [Text(title, style: DPTextTheme.DESCRIPTION_IMPORTANT), SvgPicture.asset('asset/images/arrow_right.svg', color: DPColors.DARK1)],
         ),
       ),
     );
