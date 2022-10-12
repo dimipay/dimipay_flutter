@@ -60,7 +60,9 @@ class OnboardingAgreementPage extends StatelessWidget {
             Obx(
               () => DPKeyboardReactiveButton(
                 disabled: !_isAgreed.value,
-                onTap: () {},
+                onTap: () {
+                  Get.offNamed(redirect ?? Routes.HOME);
+                },
                 child: const Text('다음', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
               ),
             ),
