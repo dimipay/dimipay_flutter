@@ -3,13 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TermsOfServicePage extends StatelessWidget {
-  TermsOfServicePage({super.key});
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    String termsOfServiceText = '''
+  final String termsOfServiceText = '''
       제1조 목적 이 약관은 디미고사회적협동조합(이하 "회사"라 합니다)이 제공하는 디미페이 서비스(이하 "서비스"라 합니다)와 관련하여, 회사와 이용 고객간에 서비스의 이용조건 및 절차, 회사와 이용 고객간의 권리, 의무 및 기타 필요한 사항을 규정함을 목적으로 합니다. 본 약관은 PC통신, 스마트폰(안드로이드폰, 아이폰 등) 앱 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 준용됩니다.
       
       제2조 정의
@@ -145,24 +139,25 @@ class TermsOfServicePage extends StatelessWidget {
       부칙 (시행일) 본 약관은 2022년 10월 14일부터 시행합니다.
     ''';
 
+  const TermsOfServicePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("서비스 이용약관"),
+        centerTitle: true,
+      ),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text("서비스 이용약관", style: DPTextTheme.PAGE_HEADER),
-              SizedBox(height: 20),
-              Expanded(
-                child: SizedBox(
-                  width: Get.width * 0.85,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                      child: Text(termsOfServiceText, style: DPTextTheme.DESCRIPTION_IMPORTANT)
-                  ),
-                ),
-              ),
-            ],
+        child: Scrollbar(
+          interactive: true,
+          thumbVisibility: true,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Text(termsOfServiceText, style: DPTextTheme.DESCRIPTION_IMPORTANT),
+            ),
           ),
         ),
       ),
