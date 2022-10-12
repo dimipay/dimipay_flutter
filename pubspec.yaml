@@ -15,7 +15,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.1+10
+version: 1.0.2+11
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
@@ -108,12 +108,6 @@ flutter:
         - asset: fonts/Montserrat/Montserrat-Black.ttf
     - family: Pretendard
       fonts:
-        - asset: fonts/Pretendard/Pretendard-Thin.ttf
-          weight: 100
-        - asset: fonts/Pretendard/Pretendard-ExtraLight.ttf
-          weight: 200
-        - asset: fonts/Pretendard/Pretendard-Light.ttf
-          weight: 300
         - asset: fonts/Pretendard/Pretendard-Regular.ttf
           weight: 400
         - asset: fonts/Pretendard/Pretendard-Medium.ttf
@@ -121,11 +115,6 @@ flutter:
         - asset: fonts/Pretendard/Pretendard-SemiBold.ttf
           weight: 600
         - asset: fonts/Pretendard/Pretendard-Bold.ttf
-          weight: 700
-        - asset: fonts/Pretendard/Pretendard-ExtraBold.ttf
-          weight: 800
-        - asset: fonts/Pretendard/Pretendard-Black.ttf
-          weight: 900
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
