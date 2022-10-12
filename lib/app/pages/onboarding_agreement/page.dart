@@ -29,9 +29,15 @@ class OnboardingAgreementPage extends StatelessWidget {
                   children: [
                     const Text("약관에 동의해주세요", style: DPTextTheme.HEADER1),
                     Expanded(child: Center(child: LottieBuilder.asset('asset/lottie/acceptment.json'))),
-                    GestureDetector(onTap: () => Get.toNamed(Routes.PRIVACYPOLICY), child: _termsBox("개인정보 보호방침")),
+                    TermsItem(
+                      title: "개인정보 보호방침",
+                      onTap: () => Get.toNamed(Routes.PRIVACYPOLICY),
+                    ),
                     const SizedBox(height: 8),
-                    GestureDetector(onTap: () => Get.toNamed(Routes.TERMSOFSERVICE), child: _termsBox("서비스 이용약관")),
+                    TermsItem(
+                      title: "서비스 이용약관",
+                      onTap: () => Get.toNamed(Routes.TERMSOFSERVICE),
+                    ),
                     const SizedBox(height: 16),
                     Obx(
                       () => GestureDetector(
@@ -83,19 +89,50 @@ class OnboardingAgreementPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _termsBox(String title) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: DPColors.DARK6,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Text(title, style: DPTextTheme.DESCRIPTION_IMPORTANT), SvgPicture.asset('asset/images/arrow_right.svg', color: DPColors.DARK1)],
+class TermsItem extends StatefulWidget {
+  const TermsItem({
+    Key? key,
+    required this.title,
+    this.onTap,
+  }) : super(key: key);
+
+  final String title;
+  final void Function()? onTap;
+
+  @override
+  State<TermsItem> createState() => _TermsItemState();
+}
+
+class _TermsItemState extends State<TermsItem> {
+  Color backgroundColor = DPColors.DARK6;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: widget.onTap,
+      onTapDown: (details) => setState(() {
+        backgroundColor = DPColors.DARK5;
+      }),
+      onTapUp: (details) => setState(() {
+        backgroundColor = DPColors.DARK6;
+      }),
+      onTapCancel: () => setState(() {
+        backgroundColor = DPColors.DARK6;
+      }),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [Text(widget.title, style: DPTextTheme.DESCRIPTION_IMPORTANT), SvgPicture.asset('asset/images/arrow_right.svg', color: DPColors.DARK1)],
+          ),
         ),
       ),
     );
