@@ -62,7 +62,7 @@ class OnboardingAgreementPage extends StatelessWidget {
                             const SizedBox(width: 12),
                             Expanded(
                               child: Text(
-                                "나는 디미페이의 개인정보 보호방침과 서비스 이용약관에 동의합니다",
+                                "디미페이의 개인정보 보호방침과 서비스 이용약관에 동의합니다",
                                 style: _isAgreed.value ? DPTextTheme.DESCRIPTION_IMPORTANT : DPTextTheme.DESCRIPTION,
                               ),
                             ),
