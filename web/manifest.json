@@ -5,7 +5,7 @@
 	"display": "standalone",
 	"background_color": "#ffffff",
 	"theme_color": "#ffffff",
-	"description": "A new Flutter project.",
+	"description": "한국디지털미디어고등학교 교내 무인매점 결제 솔루션",
 	"orientation": "portrait-primary",
 	"prefer_related_applications": false,
 	"icons": [
