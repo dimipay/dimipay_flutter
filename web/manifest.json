@@ -1,6 +1,6 @@
 {
-	"name": "dimipay_flutter",
-	"short_name": "dimipay_flutter",
+	"name": "디미페이",
+	"short_name": "디미페이",
 	"start_url": ".",
 	"display": "standalone",
 	"background_color": "#ffffff",
