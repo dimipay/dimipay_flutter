@@ -36,7 +36,6 @@ class LocalAuthService extends GetxService {
 
   Future<void> updateAvailableBiometrics() async {
     if (!GetPlatform.isWeb) {
-      log('hi');
       availableBiometrics.value = await _localAuth.getAvailableBiometrics();
     }
   }
