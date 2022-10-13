@@ -18,7 +18,7 @@ Future main() async {
   await AppLoader().load();
   FlutterNativeSplash.remove();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-  
+
   runApp(
     GetMaterialApp(
       title: '디미페이',
@@ -27,6 +27,7 @@ Future main() async {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Pretendard',
+        primaryColor: DPColors.MAIN_THEME,
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
           backgroundColor: Colors.transparent,
