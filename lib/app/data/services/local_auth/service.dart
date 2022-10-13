@@ -7,7 +7,7 @@ class LocalAuthService extends GetxService {
   final Rx<List<BiometricType>> availableBiometrics = Rx([]);
 
   Future<LocalAuthService> init() async {
-    if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+    if (!GetPlatform.isWeb) {
       final bool canAuthenticateWithBiometrics = await _localAuth.canCheckBiometrics;
       final bool canAuthenticate = canAuthenticateWithBiometrics || await _localAuth.isDeviceSupported();
       checkAuthenticate.value = canAuthenticate;
@@ -21,7 +21,7 @@ class LocalAuthService extends GetxService {
   Future<bool> localAuth() async {
     bool didAuthenticate = false;
 
-    if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+    if (!GetPlatform.isWeb) {
       didAuthenticate = await _localAuth.authenticate(
         localizedReason: '생체 인증을 사용하세요',
         options: const AuthenticationOptions(
@@ -35,7 +35,7 @@ class LocalAuthService extends GetxService {
   }
 
   Future<void> updateAvailableBiometrics() async {
-    if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+    if (!GetPlatform.isWeb) {
       availableBiometrics.value = await _localAuth.getAvailableBiometrics();
     }
   }
