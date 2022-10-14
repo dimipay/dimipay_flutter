@@ -80,7 +80,7 @@ class LogInterceptor extends Interceptor {
 
 class ApiProvider implements ApiInterface {
   final Dio dio = Dio();
-  final baseUrl = 'https://develop.api.dimipay.io';
+  final baseUrl = 'https://api.dimipay.io';
 
   ApiProvider() {
     dio.options.baseUrl = baseUrl;
