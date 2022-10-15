@@ -4,6 +4,7 @@ import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/pages/manage_method/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
+import 'package:dimipay/app/widgets/card.dart';
 import 'package:dimipay/app/widgets/divided_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -46,9 +47,13 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
           for (var paymentMethod in controller.paymentMethodController.paymentMethods!)
             Column(
               children: [
-                GeneralCardWidget(
-                  paymentMethod,
+                GestureDetector(
                   onTap: () => Get.toNamed(Routes.EDITCARD, arguments: {'paymentMethod': paymentMethod}),
+                  child: DPCard(
+                    cardName: paymentMethod.name ?? "",
+                    cardNumber: paymentMethod.last4Digit,
+                    color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
+                  ),
                 ),
                 const SizedBox(height: 24),
               ],
@@ -98,35 +103,6 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class GeneralCardWidget extends StatelessWidget {
-  final PaymentMethod card;
-  final void Function()? onTap;
-  const GeneralCardWidget(this.card, {Key? key, this.onTap}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: card.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${card.color}', radix: 16)),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        width: double.infinity,
-        padding: const EdgeInsets.all(18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 16),
-            Text(card.name ?? '', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 48),
-          ],
         ),
       ),
     );

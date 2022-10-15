@@ -17,4 +17,9 @@ abstract class Routes {
   static const PIN = "/pin";
   static const LOGIN = "/login";
   static const NOCONNECTION = "/noConnection";
+  static const FACESIGN = "/faceSign";
+  static const ONBOARDING_REGISTERCARD = "/onboarding/registerCard";
+	static const ONBOARDING_AGREEMENT = "/onboarding/agreement";
+  static const PRIVACYPOLICY = "/privacyPolicy";
+  static const TERMSOFSERVICE = "/termsOfService";
 }

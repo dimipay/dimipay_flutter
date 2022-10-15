@@ -10,6 +10,7 @@ import 'package:dimipay/app/data/provider/api_interface.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
+import 'package:image_picker/image_picker.dart';
 import 'dart:developer';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:intl/intl.dart';
@@ -79,7 +80,7 @@ class LogInterceptor extends Interceptor {
 
 class ApiProvider implements ApiInterface {
   final Dio dio = Dio();
-  final baseUrl = 'https://dev.api.dimipay.io';
+  final baseUrl = 'https://develop.api.dimipay.io';
 
   ApiProvider() {
     dio.options.baseUrl = baseUrl;
@@ -250,8 +251,11 @@ class ApiProvider implements ApiInterface {
     Map body = {
       'id': paymentMethod.id,
       'name': paymentMethod.name,
-      'color': paymentMethod.color,
     };
+    if (paymentMethod.color != null) {
+      body.addAll({'color': paymentMethod.color});
+    }
+
     await dio.patch(url, data: body);
   }
 
@@ -293,5 +297,26 @@ class ApiProvider implements ApiInterface {
         }
       },
     ));
+  }
+
+  @override
+  Future<void> registerFaceSign(XFile image) async {
+    String url = "/auth/face";
+    final formData = FormData.fromMap({'image': await MultipartFile.fromFile(image.path)});
+    await dio.post(url, data: formData);
+  }
+
+  @override
+  Future<Map> deleteFaceSign() async {
+    String url = "/auth/face";
+    Response response = await dio.delete(url);
+    return response.data;
+  }
+
+  @override
+  Future<bool> faceSignRegistered() async {
+    String url = "/user/me/face-registered";
+    Response response = await dio.get(url);
+    return response.data['registered'];
   }
 }

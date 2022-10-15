@@ -22,8 +22,12 @@ class LoginPageController extends GetxController with StateMixin {
       change(null, status: RxStatus.loading());
       await authService.loginWithGoogle();
       if (authService.isGoogleLoginSuccess) {
-        final String nextRoute = redirect ?? Routes.HOME;
-        Get.offNamed(nextRoute);
+        if (authService.isFirstVisit) {
+          Get.offNamed(Routes.ONBOARDING_AGREEMENT, arguments: {'redirect': redirect});
+        } else {
+          final String nextRoute = redirect ?? Routes.HOME;
+          Get.offNamed(nextRoute);
+        }
       }
     } on DioError catch (e) {
       DPErrorSnackBar().open(e.response!.data['message']);

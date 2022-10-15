@@ -6,6 +6,8 @@ import 'package:dimipay/app/pages/edit_card/binding.dart';
 import 'package:dimipay/app/pages/edit_card/page.dart';
 import 'package:dimipay/app/pages/event/page.dart';
 import 'package:dimipay/app/pages/event/binding.dart';
+import 'package:dimipay/app/pages/face_sign/binding.dart';
+import 'package:dimipay/app/pages/face_sign/page.dart';
 import 'package:dimipay/app/pages/history/binding.dart';
 import 'package:dimipay/app/pages/history/page.dart';
 import 'package:dimipay/app/pages/home/page.dart';
@@ -16,14 +18,18 @@ import 'package:dimipay/app/pages/manage_method/binding.dart';
 import 'package:dimipay/app/pages/manage_method/page.dart';
 import 'package:dimipay/app/pages/no_connection/page.dart';
 import 'package:dimipay/app/pages/notification/page.dart';
+import 'package:dimipay/app/pages/onboarding_register_card/page.dart';
+import 'package:dimipay/app/pages/onboarding_agreement/page.dart';
 import 'package:dimipay/app/pages/pay/binding.dart';
 import 'package:dimipay/app/pages/pay/page.dart';
 import 'package:dimipay/app/pages/pay_pending/page.dart';
 import 'package:dimipay/app/pages/pay_success/page.dart';
 import 'package:dimipay/app/pages/pin/binding.dart';
 import 'package:dimipay/app/pages/pin/page.dart';
+import 'package:dimipay/app/pages/privacy_policy/page.dart';
 import 'package:dimipay/app/pages/register_card/page.dart';
 import 'package:dimipay/app/pages/register_card/binding.dart';
+import 'package:dimipay/app/pages/terms_of_service/page.dart';
 import 'package:dimipay/app/pages/test/page.dart';
 import 'package:dimipay/app/pages/user/binding.dart';
 import 'package:dimipay/app/pages/user/page.dart';
@@ -100,5 +106,13 @@ class AppPages {
     ),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
     GetPage(name: Routes.NOCONNECTION, page: () => const NoConnectionPage(), transition: Transition.noTransition),
+    GetPage(name: Routes.FACESIGN, page: () => const FaceSignPage(), binding: FaceSignPageBinding(), middlewares: [
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+    ]),
+    GetPage(name: Routes.ONBOARDING_REGISTERCARD, page: () => OnboardingRegisterCardPage()),
+    GetPage(name: Routes.ONBOARDING_AGREEMENT, page: () => OnboardingAgreementPage()),
+    GetPage(name: Routes.PRIVACYPOLICY, page: () => PrivacyPolicyPage()),
+    GetPage(name: Routes.TERMSOFSERVICE, page: () => TermsOfServicePage()),
   ];
 }

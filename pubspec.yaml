@@ -15,7 +15,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.4.0+7
+version: 1.0.3+12
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
@@ -30,9 +30,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
   get: ^4.6.5
   flutter_svg: ^1.0.0
   flutter_keyboard_visibility: ^5.1.1
@@ -59,6 +56,8 @@ dependencies:
   url_launcher: ^6.1.5
   sensors_plus: ^1.3.4+1
   connectivity_plus: ^2.3.7
+  image_picker: ^0.8.5+3
+  kakao_flutter_sdk: ^1.2.2
 
 dev_dependencies:
   flutter_test:
@@ -109,12 +108,6 @@ flutter:
         - asset: fonts/Montserrat/Montserrat-Black.ttf
     - family: Pretendard
       fonts:
-        - asset: fonts/Pretendard/Pretendard-Thin.ttf
-          weight: 100
-        - asset: fonts/Pretendard/Pretendard-ExtraLight.ttf
-          weight: 200
-        - asset: fonts/Pretendard/Pretendard-Light.ttf
-          weight: 300
         - asset: fonts/Pretendard/Pretendard-Regular.ttf
           weight: 400
         - asset: fonts/Pretendard/Pretendard-Medium.ttf
@@ -122,19 +115,6 @@ flutter:
         - asset: fonts/Pretendard/Pretendard-SemiBold.ttf
           weight: 600
         - asset: fonts/Pretendard/Pretendard-Bold.ttf
-          weight: 700
-        - asset: fonts/Pretendard/Pretendard-ExtraBold.ttf
-          weight: 800
-        - asset: fonts/Pretendard/Pretendard-Black.ttf
-          weight: 900
-    - family: NEXON Lv1 Gothic
-      fonts:
-        - asset: fonts/NEXON Lv1 Gothic/NEXONLv1GothicLight.ttf
-          weight: 300
-        - asset: fonts/NEXON Lv1 Gothic/NEXONLv1GothicRegular.ttf
-          weight: 400
-        - asset: fonts/NEXON Lv1 Gothic/NEXONLv1GothicBold.ttf
-          weight: 700
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

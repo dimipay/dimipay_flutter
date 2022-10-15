@@ -8,7 +8,6 @@ import 'package:dimipay/app/pages/user/widget/menu_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class UserPage extends GetView<UserPageController> {
   UserPage({Key? key}) : super(key: key);
@@ -83,12 +82,17 @@ class UserPage extends GetView<UserPageController> {
             onTap: () => Get.toNamed(Routes.HISTORY),
           ),
           UserPageListItem(
+            title: '페이스사인',
+            trailingText: controller.faceSignController.isFacesignRegistered == true ? '등록 됨' : '등록 안됨',
+            onTap: () => Get.toNamed(Routes.FACESIGN),
+          ),
+          UserPageListItem(
             title: '핀 변경',
             onTap: () => Get.toNamed(Routes.PIN, arguments: {'pinPageType': PinPageType.changePin}),
           ),
           UserPageListItem(
             title: '문의',
-            onTap: () => launchUrl(Uri.parse('http://pf.kakao.com/_Rxanxlxj/chat')),
+            onTap: () => controller.openKakaoChannelTalk(),
           ),
           UserPageListItem(
             title: '로그아웃',
