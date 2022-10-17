@@ -29,12 +29,16 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.651609975413-oc56lhd4n8n21nndg1v729esehmljs0u</string>
+				<string>com.googleusercontent.apps.651609975413-qt6ji14n9lu9k14i3mb6d2fdtb5eruo4</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>kakaokompassauth</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBonjourServices</key>
@@ -46,7 +50,7 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>디미페이의 결제 pin을 생체인증으로 해제할 때 사용됩니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-    <string>디미페이의 결제 기능의 정상적인 구동을 위해 사용됩니다.</string>
+	<string>디미페이의 결제 기능의 정상적인 구동을 위해 사용됩니다.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -68,9 +72,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-      <string>kakaokompassauth</string>
-    </array>
 </dict>
 </plist>
