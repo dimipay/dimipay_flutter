@@ -4,7 +4,7 @@
         <title>Dimipay</title>
         <!-- Android -->
         <item>
-            <title>Version 1.0.3</title>
+            <title>Version 1.0.2</title>
             <description>This is Dimipay for Android</description>
             <pubDate>Tue, 13 Oct 2022 12:00:00 +0000</pubDate>
             <enclosure url="https://play.google.com/store/apps/details?id=com.develop.dimipay" sparkle:version="1.0.3" sparkle:os="android" />
