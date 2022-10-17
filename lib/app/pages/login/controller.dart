@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:dimipay/app/data/services/auth/service.dart';
+import 'package:dimipay/app/data/services/upgrader/service.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
@@ -10,6 +11,7 @@ import 'package:sensors_plus/sensors_plus.dart';
 class LoginPageController extends GetxController with StateMixin {
   final String? redirect = Get.arguments?['redirect'];
   AuthService authService = Get.find<AuthService>();
+  final UpgradeService upgradeService = Get.find<UpgradeService>();
 
   @override
   void onInit() {
