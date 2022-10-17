@@ -11,10 +11,10 @@
         </item>
         <!-- IOS -->
         <item>
-            <title>Version 1.0.3</title>
-            <description>This is Dimipay for IOS</description>
+            <title>Version 1.0.4</title>
+            <description>업데이트가 되었어요!</description>
             <pubDate>Tue, 13 Oct 2022 12:00:00 +0000</pubDate>
-            <enclosure url="https://apps.apple.com/app/id1642292289" sparkle:version="1.0.3" sparkle:os="ios" />
+            <enclosure url="https://apps.apple.com/app/id1642292289" sparkle:version="1.0.4" sparkle:os="ios" />
         </item>
 
     </channel>
