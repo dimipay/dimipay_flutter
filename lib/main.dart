@@ -20,6 +20,7 @@ Future main() async {
   FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   FlutterNativeSplash.remove();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+	SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(
     GetMaterialApp(

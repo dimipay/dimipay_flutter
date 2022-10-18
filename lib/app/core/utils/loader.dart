@@ -5,6 +5,7 @@ import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/data/services/config/service.dart';
 import 'package:dimipay/app/data/services/local_auth/service.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:dimipay/app/data/services/upgrader/service.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -16,6 +17,7 @@ class AppLoader {
     await Firebase.initializeApp();
 
     await Future.wait([
+      Get.putAsync<UpgraderService>(() => UpgraderService().init()),
       Get.putAsync<AuthService>(() => AuthService(AuthRepository(ApiProvider())).init()),
       Get.putAsync<AppConfigService>(() => AppConfigService().init()),
       Get.putAsync<LocalAuthService>(() => LocalAuthService().init()),
