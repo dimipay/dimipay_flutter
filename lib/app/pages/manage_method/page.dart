@@ -1,7 +1,6 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
-import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/pages/manage_method/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/card.dart';

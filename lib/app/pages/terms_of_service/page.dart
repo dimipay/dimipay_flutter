@@ -1,6 +1,5 @@
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class TermsOfServicePage extends StatelessWidget {
   final String termsOfServiceText = '''
