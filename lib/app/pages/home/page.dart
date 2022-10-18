@@ -11,6 +11,7 @@ import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:upgrader/upgrader.dart';
 
 class HomePage extends GetView<HomePageController> {
   const HomePage({Key? key}) : super(key: key);
@@ -240,16 +241,19 @@ class HomePage extends GetView<HomePageController> {
         top: false,
         child: Scaffold(
           backgroundColor: Colors.white,
-          body: SafeArea(
-            bottom: false,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: _topArea(),
-                ),
-                _paymentsArea(),
-              ],
+          body: UpgradeAlert(
+            upgrader: controller.upgradeService.upgradeCheck,
+            child: SafeArea(
+              bottom: false,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: _topArea(),
+                  ),
+                  _paymentsArea(),
+                ],
+              ),
             ),
           ),
         ),
