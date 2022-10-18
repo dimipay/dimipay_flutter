@@ -18,6 +18,7 @@ Future main() async {
   await AppLoader().load();
   FlutterNativeSplash.remove();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+	SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(
     GetMaterialApp(
