@@ -2,6 +2,7 @@ import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/utils/loader.dart';
 import 'package:dimipay/app/routes/pages.dart';
 import 'package:dimipay/app/routes/routes.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +17,7 @@ Future main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await AppLoader().load();
+  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   FlutterNativeSplash.remove();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
 	SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -26,6 +28,9 @@ Future main() async {
       initialRoute: getInintialRoute(debug: !kReleaseMode),
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: analytics),
+      ],
       theme: ThemeData(
         fontFamily: 'Pretendard',
         primaryColor: DPColors.MAIN_THEME,
