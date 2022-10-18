@@ -5,6 +5,7 @@ import 'package:dimipay/app/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:upgrader/upgrader.dart';
 
 class LoginPage extends GetView<LoginPageController> {
   LoginPage({Key? key}) : super(key: key);
@@ -15,61 +16,64 @@ class LoginPage extends GetView<LoginPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: DPColors.DARK6,
-      body: Column(
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onPanUpdate: (details) {
-                gyroScopeController.onDrag(details.delta.dx, details.delta.dy);
-              },
-              child: Container(
-                color: Colors.transparent,
-                width: double.infinity,
-                height: double.infinity,
-                child: Center(
-                  child: Obx(
-                    () => Transform(
-                      transform: Matrix4.identity()
-                        ..setEntry(3, 2, 0.001) // perspective
-                        ..rotateX(0.2 * gyroScopeController.v.x)
-                        ..rotateY(-0.2 * gyroScopeController.v.y)
-                        ..rotateX(-0.7)
-                        ..rotateY(0.3)
-                        ..rotateZ(-0.8),
-                      alignment: FractionalOffset.center,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          const DPCard(
-                            cardName: '디미페이',
-                            cardNumber: '1234',
-                            color: DPColors.MAIN_THEME,
-                          ),
-                          Container(
-                            width: 320,
-                            height: 180,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              gradient: RadialGradient(
-                                radius: 3,
-                                colors: [
-                                  Colors.white.withOpacity(0.5),
-                                  Colors.white.withOpacity(0.0),
-                                ],
-                                center: Alignment(0.3 * gyroScopeController.v.x + 0.2, -1 * gyroScopeController.v.y - 2.8),
+      body: UpgradeAlert(
+        upgrader: controller.upgradeService.upgradeCheck,
+        child: Column(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                onPanUpdate: (details) {
+                  gyroScopeController.onDrag(details.delta.dx, details.delta.dy);
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: Center(
+                    child: Obx(
+                      () => Transform(
+                        transform: Matrix4.identity()
+                          ..setEntry(3, 2, 0.001) // perspective
+                          ..rotateX(0.2 * gyroScopeController.v.x)
+                          ..rotateY(-0.2 * gyroScopeController.v.y)
+                          ..rotateX(-0.7)
+                          ..rotateY(0.3)
+                          ..rotateZ(-0.8),
+                        alignment: FractionalOffset.center,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            const DPCard(
+                              cardName: '디미페이',
+                              cardNumber: '1234',
+                              color: DPColors.MAIN_THEME,
+                            ),
+                            Container(
+                              width: 320,
+                              height: 180,
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                gradient: RadialGradient(
+                                  radius: 3,
+                                  colors: [
+                                    Colors.white.withOpacity(0.5),
+                                    Colors.white.withOpacity(0.0),
+                                  ],
+                                  center: Alignment(0.3 * gyroScopeController.v.x + 0.2, -1 * gyroScopeController.v.y - 2.8),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-          BottomArea(controller: controller),
-        ],
+            BottomArea(controller: controller),
+          ],
+        ),
       ),
     );
   }

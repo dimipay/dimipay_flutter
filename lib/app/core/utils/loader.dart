@@ -4,6 +4,7 @@ import 'package:dimipay/app/data/services/auth/repository.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/data/services/config/service.dart';
 import 'package:dimipay/app/data/services/local_auth/service.dart';
+import 'package:dimipay/app/data/services/upgrader/service.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -12,6 +13,7 @@ class AppLoader {
   Future<void> load() async {
     setPathUrlStrategy();
     KakaoSdk.init(nativeAppKey: TokenReference.KAKAO_NATIVE_KEY);
+    Get.lazyPut<UpgradeService>(() => UpgradeService());
 
     await Future.wait([
       Get.putAsync<AuthService>(() => AuthService(AuthRepository(ApiProvider())).init()),
