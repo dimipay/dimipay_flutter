@@ -58,7 +58,6 @@ dependencies:
   connectivity_plus: ^2.3.7
   image_picker: ^0.8.5+3
   kakao_flutter_sdk: ^1.2.2
-  upgrader: ^4.8.0
 
 dev_dependencies:
   flutter_test:
