@@ -112,7 +112,7 @@ class AppPages {
     ]),
     GetPage(name: Routes.ONBOARDING_REGISTERCARD, page: () => OnboardingRegisterCardPage()),
     GetPage(name: Routes.ONBOARDING_AGREEMENT, page: () => OnboardingAgreementPage()),
-    GetPage(name: Routes.PRIVACYPOLICY, page: () => PrivacyPolicyPage()),
-    GetPage(name: Routes.TERMSOFSERVICE, page: () => TermsOfServicePage()),
+    GetPage(name: Routes.PRIVACYPOLICY, page: () => const PrivacyPolicyPage()),
+    GetPage(name: Routes.TERMSOFSERVICE, page: () => const TermsOfServicePage()),
   ];
 }
