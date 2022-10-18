@@ -242,7 +242,7 @@ class HomePage extends GetView<HomePageController> {
         child: Scaffold(
           backgroundColor: Colors.white,
           body: UpgradeAlert(
-            upgrader: controller.upgradeService.upgradeCheck,
+            upgrader: controller.upgradeService.upgrader,
             child: SafeArea(
               bottom: false,
               child: Column(

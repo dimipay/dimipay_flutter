@@ -17,7 +17,7 @@ class LoginPage extends GetView<LoginPageController> {
     return Scaffold(
       backgroundColor: DPColors.DARK6,
       body: UpgradeAlert(
-        upgrader: controller.upgradeService.upgradeCheck,
+        upgrader: controller.upgradeService.upgrader,
         child: Column(
           children: [
             Expanded(

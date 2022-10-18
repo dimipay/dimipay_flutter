@@ -11,7 +11,7 @@ import 'package:sensors_plus/sensors_plus.dart';
 class LoginPageController extends GetxController with StateMixin {
   final String? redirect = Get.arguments?['redirect'];
   AuthService authService = Get.find<AuthService>();
-  final UpgradeService upgradeService = Get.find<UpgradeService>();
+  final UpgraderService upgradeService = Get.find<UpgraderService>();
 
   @override
   void onInit() {
