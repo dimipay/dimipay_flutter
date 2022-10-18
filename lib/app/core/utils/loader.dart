@@ -13,9 +13,9 @@ class AppLoader {
   Future<void> load() async {
     setPathUrlStrategy();
     KakaoSdk.init(nativeAppKey: TokenReference.KAKAO_NATIVE_KEY);
-    Get.lazyPut<UpgradeService>(() => UpgradeService());
 
     await Future.wait([
+      Get.putAsync<UpgraderService>(() => UpgraderService().init()),
       Get.putAsync<AuthService>(() => AuthService(AuthRepository(ApiProvider())).init()),
       Get.putAsync<AppConfigService>(() => AppConfigService().init()),
       Get.putAsync<LocalAuthService>(() => LocalAuthService().init()),

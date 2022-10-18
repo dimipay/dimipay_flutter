@@ -8,7 +8,7 @@ class HomePageController extends GetxController {
   final NoticeController noticeController = Get.find<NoticeController>();
   final EventController eventController = Get.find<EventController>();
   final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
-  final UpgradeService upgradeService = Get.find<UpgradeService>();
+  final UpgraderService upgradeService = Get.find<UpgraderService>();
 
   @override
   void onInit() {
