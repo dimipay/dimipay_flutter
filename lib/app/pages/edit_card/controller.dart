@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/data/modules/payment_method/controller.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
@@ -20,7 +22,6 @@ class EditCardPageController extends GetxController with StateMixin {
     textEditingController.text = paymentMethod.name ?? '';
     textEditingController.addListener(() {
       cardName.value = textEditingController.text;
-      paymentMethod.name = cardName.value;
     });
     textEditingController.selection = TextSelection(baseOffset: 0, extentOffset: textEditingController.text.length);
     super.onInit();
@@ -29,6 +30,7 @@ class EditCardPageController extends GetxController with StateMixin {
   Future<void> submit() async {
     try {
       change(null, status: RxStatus.loading());
+      paymentMethod.name = cardName.value;
       await paymentMethodController.patchPaymentMethod(paymentMethod);
       change(null, status: RxStatus.success());
       if (redirect is String) {
