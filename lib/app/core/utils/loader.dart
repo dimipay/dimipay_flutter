@@ -9,6 +9,7 @@ import 'package:dimipay/app/data/services/upgrader/service.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter/foundation.dart';
 
 class AppLoader {
   Future<void> load() async {
@@ -16,7 +17,7 @@ class AppLoader {
     KakaoSdk.init(nativeAppKey: TokenReference.KAKAO_NATIVE_KEY);
 
     await Future.wait([
-      Firebase.initializeApp(),
+      (kIsWeb ? Firebase.initializeApp(options: TokenReference.FIREBASEOPTION) : Firebase.initializeApp()),
       Get.putAsync<UpgraderService>(() => UpgraderService().init()),
       Get.putAsync<AuthService>(() => AuthService(AuthRepository(ApiProvider())).init()),
       Get.putAsync<AppConfigService>(() => AppConfigService().init()),
