@@ -8,7 +8,7 @@ import 'package:lottie/lottie.dart';
 
 class PayErrorPage extends StatelessWidget {
   PayErrorPage({super.key}) {
-    HapticHelper.feedback(HapticPatterns.error, hapticType: HapticType.heavy);
+    HapticHelper.feedback(HapticPatterns.once, hapticType: HapticType.vibrate);
   }
 
   @override
@@ -24,7 +24,7 @@ class PayErrorPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Lottie.asset('asset/lottie/error.json', height: 240, repeat: false),
-                    Text("${Get.arguments ?? "결제가 취소되었습니다."}", style: DPTextTheme.SECTION_HEADER),
+                    Text("${Get.arguments ?? "결제에 실패했습니다."}", style: DPTextTheme.SECTION_HEADER),
                   ],
                 ),
               ),
