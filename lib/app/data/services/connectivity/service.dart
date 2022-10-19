@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:get/get.dart';
