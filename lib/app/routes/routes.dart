@@ -12,6 +12,7 @@ abstract class Routes {
   static const PAY = "/pay";
   static const PAYSUCCESS = "/pay/success";
   static const PAYPENDING = "/pay/pending";
+  static const PAYERROR = "/pay/error";
   static const EVENT = "/event";
   static const NOTIFICATION = "/notification";
   static const PIN = "/pin";
@@ -19,7 +20,7 @@ abstract class Routes {
   static const NOCONNECTION = "/noConnection";
   static const FACESIGN = "/faceSign";
   static const ONBOARDING_REGISTERCARD = "/onboarding/registerCard";
-	static const ONBOARDING_AGREEMENT = "/onboarding/agreement";
+  static const ONBOARDING_AGREEMENT = "/onboarding/agreement";
   static const PRIVACYPOLICY = "/privacyPolicy";
   static const TERMSOFSERVICE = "/termsOfService";
 }

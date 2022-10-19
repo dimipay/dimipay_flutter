@@ -34,6 +34,7 @@ class TestPage extends StatelessWidget {
           linkToRoute(Routes.PAY),
           linkToRoute(Routes.PAYPENDING),
           linkToRoute(Routes.PAYSUCCESS),
+					linkToRoute(Routes.PAYERROR),
           linkToRoute(Routes.EVENT),
           linkToRoute(Routes.PIN),
           linkToRoute(Routes.NOCONNECTION),
