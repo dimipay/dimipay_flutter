@@ -43,8 +43,8 @@ class PayPageController extends GetxController with StateMixin<String> {
     payStream.onApproved = (() {
       Get.toNamed(Routes.PAYSUCCESS);
     });
-    payStream.onError = ((e) {
-      Get.toNamed(Routes.PAYERROR, arguments: e);
+    payStream.onError = ((errorMessage) {
+      Get.toNamed(Routes.PAYERROR, arguments: errorMessage);
     });
   }
 
