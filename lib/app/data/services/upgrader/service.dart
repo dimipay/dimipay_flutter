@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:upgrader/upgrader.dart';
