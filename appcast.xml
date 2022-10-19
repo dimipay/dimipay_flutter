@@ -16,6 +16,16 @@
             <pubDate>Tue, 13 Oct 2022 12:00:00 +0000</pubDate>
             <enclosure url="https://apps.apple.com/app/id1642292289" sparkle:version="1.0.4" sparkle:os="ios" />	
         </item>	
+        <item>	
+            <title>Version 2.0.0</title>
+            <sparkle:tags>
+                <sparkle:criticalUpdate></sparkle:criticalUpdate>
+            </sparkle:tags>
+            <description>API 서버 변경과 UX 개선이 이루어졌습니다.</description>
+            <pubDate>Tue, 13 Oct 2022 12:00:00 +0000</pubDate>
+            <enclosure url="https://apps.apple.com/app/id1642292289" sparkle:version="2.0.0" sparkle:os="ios" />	
+        </item>	
+
 
     </channel>	
 </rss>	
