@@ -9,7 +9,7 @@ class PayResultSSEController extends GetxController {
   void Function()? onWaiting;
   void Function()? onPending;
   void Function()? onApproved;
-  void Function()? onError;
+  void Function(String)? onError;
 
   bool get streamOpened => _stream != null;
 
@@ -36,7 +36,7 @@ class PayResultSSEController extends GetxController {
         break;
       case 'ERROR':
         if (onError != null) {
-          onError!();
+          onError!(response["message"]);
         }
         break;
     }
