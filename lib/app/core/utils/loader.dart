@@ -17,7 +17,7 @@ class AppLoader {
     KakaoSdk.init(nativeAppKey: TokenReference.KAKAO_NATIVE_KEY);
 
     await Future.wait([
-      (kIsWeb ? Firebase.initializeApp(options: TokenReference.FIREBASEOPTION) : Firebase.initializeApp()),
+      Firebase.initializeApp(options: kIsWeb ? TokenReference.FIREBASEOPTION : null),
       Get.putAsync<UpgraderService>(() => UpgraderService().init()),
       Get.putAsync<AuthService>(() => AuthService(AuthRepository(ApiProvider())).init()),
       Get.putAsync<AppConfigService>(() => AppConfigService().init()),
