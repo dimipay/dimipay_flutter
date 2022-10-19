@@ -20,14 +20,12 @@ class PayErrorPage extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Lottie.asset('asset/lottie/error.json', height: 240, repeat: false),
-                      Text("${Get.arguments ?? "결제가 취소되었습니다."}", style: DPTextTheme.SECTION_HEADER),
-                    ],
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Lottie.asset('asset/lottie/error.json', height: 240, repeat: false),
+                    Text("${Get.arguments ?? "결제가 취소되었습니다."}", style: DPTextTheme.SECTION_HEADER),
+                  ],
                 ),
               ),
               DPMediumTextButton(
