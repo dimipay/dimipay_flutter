@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:upgrader/upgrader.dart';
@@ -27,29 +29,33 @@ class DPForceUpgradeMessages extends DPUpgradeMessages {
 class UpgraderService extends GetxService {
   final Appcast appcast = Appcast();
   late final Upgrader upgrader;
+
   bool shouldForceUpgrade() {
     return appcast.items!.where((appCastItem) => Version.parse(appCastItem.versionString!) > Version.parse(upgrader.currentInstalledVersion()!)).any((element) => element.isCriticalUpdate);
   }
 
   //iOS Simulator 에서는 작동이 안되는 오류가 있는데, 이는 앱스토어가 깔려있지 않아 발생하는 문제로 실제 기기에서는 정상 작동합니다.
-
   Future<UpgraderService> init() async {
-    await appcast.parseAppcastItemsFromUri('https://terrible-termite-17.telebit.io/appcast.xml');
-
     upgrader = Upgrader(
       appcastConfig: AppcastConfiguration(
         supportedOS: ['android', 'ios'],
       ),
       shouldPopScope: () => true,
-      debugDisplayAlways: true,
-      durationUntilAlertAgain: const Duration(days: 1),
       debugLogging: !kReleaseMode, // REMOVE this for release builds
       showIgnore: false,
+      messages: DPUpgradeMessages(),
       dialogStyle: GetPlatform.isAndroid ? UpgradeDialogStyle.material : UpgradeDialogStyle.cupertino,
     );
-    await upgrader.initialize();
-    upgrader.showLater = !shouldForceUpgrade();
-    upgrader.messages = shouldForceUpgrade() ? DPForceUpgradeMessages() : DPUpgradeMessages();
+    await Future.wait([
+      appcast.parseAppcastItemsFromUri('https://raw.githubusercontent.com/dimipay/dimipay_flutter/master/appcast.xml'),
+      upgrader.initialize(),
+    ]);
+
+    //appcast.xml에 올라온 새 버전중에서 criticalUpdate가 포함되어 있을 경우 minAppVersion을 최신 버전으로 올려 업데이트를 강제함
+    if (shouldForceUpgrade()) {
+      upgrader.minAppVersion = appcast.bestItem()!.versionString;
+      upgrader.messages = DPForceUpgradeMessages();
+    }
     return this;
   }
 }
