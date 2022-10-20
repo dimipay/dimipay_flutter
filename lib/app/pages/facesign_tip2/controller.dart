@@ -19,7 +19,7 @@ class FaceSignTip2PageController extends GetxController {
     try {
       await faceSignController.registerFaceSign();
       Get.until((route) => route.isFirst || route.settings.name == '/me');
-      DPSnackBar.open("얼굴 등록에 성공했어요.", hapticFeedback: HapticPatterns.success);
+      DPSnackBar.open("페이스사인을 등록했어요.", hapticFeedback: HapticPatterns.success);
     } on DioError catch (e) {
       DPErrorSnackBar().open(e.response!.data["message"]);
       // ignore: empty_catches
