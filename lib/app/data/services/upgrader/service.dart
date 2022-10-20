@@ -45,7 +45,6 @@ class UpgraderService extends GetxService {
       dialogStyle: GetPlatform.isAndroid ? UpgradeDialogStyle.material : UpgradeDialogStyle.cupertino,
     );
     await Future.wait([
-      Upgrader.clearSavedSettings(),
       appcast.parseAppcastItemsFromUri('https://raw.githubusercontent.com/dimipay/dimipay_flutter/master/appcast.xml'),
       upgrader.initialize(),
     ]);
