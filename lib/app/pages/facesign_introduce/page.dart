@@ -1,46 +1,10 @@
-import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
-import 'package:dimipay/app/pages/face_sign/controller.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
-class FaceSignPage extends GetView<FaceSignPageController> {
-  const FaceSignPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () {
-        switch (controller.faceSignController.isFacesignRegistered) {
-          case true:
-            return FaceSignDeletePage(controller: controller);
-          case false:
-            return FaceSignRegisterPage(controller: controller);
-          default:
-            return Scaffold(
-              appBar: AppBar(),
-              body: const Center(
-                child: CircularProgressIndicator(
-                  color: DPColors.MAIN_THEME,
-                ),
-              ),
-            );
-        }
-      },
-    );
-  }
-}
-
-class FaceSignRegisterPage extends StatelessWidget {
-  const FaceSignRegisterPage({
-    Key? key,
-    required FaceSignPageController controller,
-  })  : _controller = controller,
-        super(key: key);
-
-  final FaceSignPageController _controller;
+class FaceSignIntroducePage extends StatelessWidget {
+  const FaceSignIntroducePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +29,7 @@ class FaceSignRegisterPage extends StatelessWidget {
             child: Column(
               children: [
                 DPMediumTextButton(
-                  onTap: _controller.registerFaceSign,
+                  onTap: () {},
                   text: "Face Sign 등록하기",
                 ),
                 const SizedBox(height: 16),
@@ -137,52 +101,6 @@ class FaceSignRegisterPage extends StatelessWidget {
                 ),
               ),
               Positioned(bottom: 0, left: 0, right: 0, child: buttonArea()),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class FaceSignDeletePage extends StatelessWidget {
-  const FaceSignDeletePage({
-    Key? key,
-    required FaceSignPageController controller,
-  })  : _controller = controller,
-        super(key: key);
-
-  final FaceSignPageController _controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset("asset/images/face_sign.svg", height: 100, width: 100),
-                    const SizedBox(height: 24),
-                    const Text("Face Sign 등록됨", style: DPTextTheme.PAGE_HEADER),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 32),
-              DPMediumTextButton(
-                onTap: _controller.deleteFaceSign,
-                text: "Face Sign 등록 해제",
-                color: DPColors.ERROR,
-              ),
-              const SizedBox(height: 16),
             ],
           ),
         ),

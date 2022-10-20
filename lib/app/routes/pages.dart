@@ -6,8 +6,8 @@ import 'package:dimipay/app/pages/edit_card/binding.dart';
 import 'package:dimipay/app/pages/edit_card/page.dart';
 import 'package:dimipay/app/pages/event/page.dart';
 import 'package:dimipay/app/pages/event/binding.dart';
-import 'package:dimipay/app/pages/face_sign/binding.dart';
-import 'package:dimipay/app/pages/face_sign/page.dart';
+import 'package:dimipay/app/pages/facesign_delete/page.dart';
+import 'package:dimipay/app/pages/facesign_introduce/page.dart';
 import 'package:dimipay/app/pages/history/binding.dart';
 import 'package:dimipay/app/pages/history/page.dart';
 import 'package:dimipay/app/pages/home/page.dart';
@@ -105,17 +105,22 @@ class AppPages {
       ],
       transition: Transition.noTransition,
     ),
-		GetPage(name:Routes.PAYERROR,
-		page:()=> PayErrorPage(),
-		middlewares: [
-			LoginMiddleware(),
-			OnboardingMiddleware(),
-		],
-		transition: Transition.noTransition,
-		),
+    GetPage(
+      name: Routes.PAYERROR,
+      page: () => PayErrorPage(),
+      middlewares: [
+        LoginMiddleware(),
+        OnboardingMiddleware(),
+      ],
+      transition: Transition.noTransition,
+    ),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
     GetPage(name: Routes.NOCONNECTION, page: () => const NoConnectionPage(), transition: Transition.noTransition),
-    GetPage(name: Routes.FACESIGN, page: () => const FaceSignPage(), binding: FaceSignPageBinding(), middlewares: [
+    GetPage(name: Routes.FACESIGN_INTRODUCE, page: () => const FaceSignIntroducePage(), middlewares: [
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+    ]),
+    GetPage(name: Routes.FACESIGN_DELETE, page: () => const FaceSignDeletePage(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
