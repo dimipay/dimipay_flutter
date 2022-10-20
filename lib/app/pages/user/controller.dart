@@ -28,7 +28,11 @@ class UserPageController extends GetxController {
 
   Future<void> refreshData() async {
     HapticFeedback.mediumImpact();
-    await userController.fetchUser();
+    Future.wait([
+      userController.fetchUser(),
+      faceSignController.fetchIsFacesignRegistered(),
+      paymentMethodController.fetchPaymentMethods(),
+    ]);
     HapticFeedback.mediumImpact();
   }
 
