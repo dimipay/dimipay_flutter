@@ -32,7 +32,7 @@ class UpgraderService extends GetxService {
     return appcast.items!.where((appCastItem) => Version.parse(appCastItem.versionString!) > Version.parse(upgrader.currentInstalledVersion()!)).any((element) => element.isCriticalUpdate);
   }
 
-  //iOS Simulator 에서는 작동이 안되는 오류가 있는데, 이는 앱스토어가 깔려있지 않아 발생하는 문제로 실제 기기에서는 정상 작동합니다.
+  //iOS Simulator에서는 앱스토어 실행이 안되는 오류가 있는데, 이는 앱스토어가 깔려있지 않아 발생하는 문제로 실제 기기에서는 정상 작동합니다.
   Future<UpgraderService> init() async {
     upgrader = Upgrader(
       appcastConfig: AppcastConfiguration(
@@ -45,6 +45,7 @@ class UpgraderService extends GetxService {
       dialogStyle: GetPlatform.isAndroid ? UpgradeDialogStyle.material : UpgradeDialogStyle.cupertino,
     );
     await Future.wait([
+      Upgrader.clearSavedSettings(),
       appcast.parseAppcastItemsFromUri('https://raw.githubusercontent.com/dimipay/dimipay_flutter/master/appcast.xml'),
       upgrader.initialize(),
     ]);
