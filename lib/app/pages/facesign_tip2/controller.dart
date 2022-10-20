@@ -4,34 +4,25 @@ import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-class FaceSignPageController extends GetxController {
+class FaceSignTip2PageController extends GetxController {
   FaceSignController faceSignController = Get.find<FaceSignController>();
 
   @override
-  void onInit() async {
+  void onInit() {
     super.onInit();
     if (faceSignController.isFacesignRegistered == null) {
-      await faceSignController.fetchIsFacesignRegistered();
+      faceSignController.fetchIsFacesignRegistered();
     }
   }
 
   void registerFaceSign() async {
     try {
       await faceSignController.registerFaceSign();
-
+      Get.until((route) => route.isFirst || route.settings.name == '/me');
       DPSnackBar.open("얼굴 등록에 성공했어요.", hapticFeedback: HapticPatterns.success);
     } on DioError catch (e) {
       DPErrorSnackBar().open(e.response!.data["message"]);
       // ignore: empty_catches
     } on Exception {}
-  }
-
-  void deleteFaceSign() async {
-    try {
-      await faceSignController.deleteFaceSign();
-      DPSnackBar.open("등록된 얼굴을 삭제했어요.");
-    } on DioError catch (e) {
-      DPErrorSnackBar().open(e.response!.data["message"]);
-    }
   }
 }

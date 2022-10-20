@@ -6,9 +6,12 @@ import 'package:dimipay/app/pages/edit_card/binding.dart';
 import 'package:dimipay/app/pages/edit_card/page.dart';
 import 'package:dimipay/app/pages/event/page.dart';
 import 'package:dimipay/app/pages/event/binding.dart';
+import 'package:dimipay/app/pages/facesign_delete/binding.dart';
 import 'package:dimipay/app/pages/facesign_delete/page.dart';
 import 'package:dimipay/app/pages/facesign_introduce/page.dart';
 import 'package:dimipay/app/pages/facesign_tip1/page.dart';
+import 'package:dimipay/app/pages/facesign_tip2/binding.dart';
+import 'package:dimipay/app/pages/facesign_tip2/page.dart';
 import 'package:dimipay/app/pages/history/binding.dart';
 import 'package:dimipay/app/pages/history/page.dart';
 import 'package:dimipay/app/pages/home/page.dart';
@@ -121,11 +124,15 @@ class AppPages {
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
-    GetPage(name: Routes.FACESIGN_DELETE, page: () => const FaceSignDeletePage(), middlewares: [
+    GetPage(name: Routes.FACESIGN_DELETE, page: () => const FaceSignDeletePage(), binding: FaceSignDeletePageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.FACESIGN_TIP1, page: () => const FaceSignTip1Page(), middlewares: [
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+    ]),
+    GetPage(name: Routes.FACESIGN_TIP2, page: () => const FaceSignTip2Page(), binding: FaceSignTip2PageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),

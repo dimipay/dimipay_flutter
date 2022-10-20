@@ -1,10 +1,12 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/pages/facesign_delete/controller.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
-class FaceSignDeletePage extends StatelessWidget {
+class FaceSignDeletePage extends GetView<FaceSignDeletePageController> {
   const FaceSignDeletePage({super.key});
 
   @override
@@ -31,7 +33,7 @@ class FaceSignDeletePage extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               DPMediumTextButton(
-                onTap: () {},
+                onTap: controller.deleteFaceSign,
                 text: "Face Sign 등록 해제",
                 color: DPColors.ERROR,
               ),

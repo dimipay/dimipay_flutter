@@ -1,7 +1,9 @@
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class FaceSignIntroducePage extends StatelessWidget {
   const FaceSignIntroducePage({super.key});
@@ -29,7 +31,7 @@ class FaceSignIntroducePage extends StatelessWidget {
             child: Column(
               children: [
                 DPMediumTextButton(
-                  onTap: () {},
+                  onTap: () => Get.toNamed(Routes.FACESIGN_TIP1),
                   text: "Face Sign 등록하기",
                 ),
                 const SizedBox(height: 16),
