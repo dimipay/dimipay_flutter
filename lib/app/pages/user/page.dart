@@ -6,6 +6,7 @@ import 'package:dimipay/app/pages/pin/controller.dart';
 import 'package:dimipay/app/pages/user/controller.dart';
 import 'package:dimipay/app/pages/user/widget/menu_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -84,7 +85,16 @@ class UserPage extends GetView<UserPageController> {
           UserPageListItem(
             title: '페이스사인',
             trailingText: controller.faceSignController.isFacesignRegistered == true ? '등록 됨' : '등록 안됨',
-            onTap: () => Get.toNamed(Routes.FACESIGN),
+            onTap: () {
+              switch (controller.faceSignController.isFacesignRegistered) {
+                case true:
+                  Get.toNamed(Routes.FACESIGN_DELETE);
+                  break;
+                case false:
+                  Get.toNamed(Routes.FACESIGN_INTRODUCE);
+                  break;
+              }
+            },
           ),
           UserPageListItem(
             title: '핀 변경',
@@ -98,8 +108,52 @@ class UserPage extends GetView<UserPageController> {
             title: '로그아웃',
             trailing: false,
             onTap: () {
-              Get.find<AuthService>().logout();
-              Get.offAllNamed(Routes.LOGIN);
+              if (GetPlatform.isIOS) {
+                showCupertinoDialog(
+                  context: Get.overlayContext!,
+                  builder: (BuildContext context) => CupertinoAlertDialog(
+                    content: const Text('정말 로그아웃 할까요?'),
+                    actions: <CupertinoDialogAction>[
+                      CupertinoDialogAction(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: const Text('취소'),
+                      ),
+                      CupertinoDialogAction(
+                        isDestructiveAction: true,
+                        onPressed: () {
+                          Get.find<AuthService>().logout();
+                          Get.offAllNamed(Routes.LOGIN);
+                        },
+                        child: const Text('로그아웃'),
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                showDialog<String>(
+                  context: Get.overlayContext!,
+                  builder: (BuildContext context) => AlertDialog(
+                    content: const Text('정말 로그아웃 할까요?'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: const Text('취소'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Get.find<AuthService>().logout();
+                          Get.offAllNamed(Routes.LOGIN);
+                        },
+                        child: const Text('로그아웃', style: TextStyle(color: DPColors.ERROR)),
+                      ),
+                    ],
+                  ),
+                );
+              }
             },
           ),
         ],

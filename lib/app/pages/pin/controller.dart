@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
-import 'package:dimipay/app/data/provider/api.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/data/services/local_auth/service.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 enum PinPageType { pinAuth, onBoarding, changePin }
@@ -44,11 +44,17 @@ class PinPageController extends GetxController with StateMixin {
   }
 
   Future<void> biometricAuth() async {
-    final res = await _localAuthService.localAuth();
+    try {
+      final res = await _localAuthService.localAuth();
 
-    if (res) {
-      await authService.loadBioKey();
-      Get.offNamed(redirect ?? Routes.HOME);
+      if (res) {
+        await authService.loadBioKey();
+        Get.offNamed(redirect ?? Routes.HOME);
+      }
+    } on PlatformException catch (e) {
+      if (e.message!.contains("Biometry is not available")) {
+        DPSnackBar.open("생체인식이 휴대폰에서 설정되지 않아\n생체 인식 대신 핀 입력 화면으로 이동합니다.");
+      }
     }
   }
 

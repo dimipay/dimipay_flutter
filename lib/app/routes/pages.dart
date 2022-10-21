@@ -6,8 +6,12 @@ import 'package:dimipay/app/pages/edit_card/binding.dart';
 import 'package:dimipay/app/pages/edit_card/page.dart';
 import 'package:dimipay/app/pages/event/page.dart';
 import 'package:dimipay/app/pages/event/binding.dart';
-import 'package:dimipay/app/pages/face_sign/binding.dart';
-import 'package:dimipay/app/pages/face_sign/page.dart';
+import 'package:dimipay/app/pages/facesign_delete/binding.dart';
+import 'package:dimipay/app/pages/facesign_delete/page.dart';
+import 'package:dimipay/app/pages/facesign_introduce/page.dart';
+import 'package:dimipay/app/pages/facesign_tip1/page.dart';
+import 'package:dimipay/app/pages/facesign_tip2/binding.dart';
+import 'package:dimipay/app/pages/facesign_tip2/page.dart';
 import 'package:dimipay/app/pages/history/binding.dart';
 import 'package:dimipay/app/pages/history/page.dart';
 import 'package:dimipay/app/pages/home/page.dart';
@@ -24,6 +28,7 @@ import 'package:dimipay/app/pages/pay/binding.dart';
 import 'package:dimipay/app/pages/pay/page.dart';
 import 'package:dimipay/app/pages/pay_pending/page.dart';
 import 'package:dimipay/app/pages/pay_success/page.dart';
+import 'package:dimipay/app/pages/pay_error/page.dart';
 import 'package:dimipay/app/pages/pin/binding.dart';
 import 'package:dimipay/app/pages/pin/page.dart';
 import 'package:dimipay/app/pages/privacy_policy/page.dart';
@@ -104,15 +109,36 @@ class AppPages {
       ],
       transition: Transition.noTransition,
     ),
+    GetPage(
+      name: Routes.PAYERROR,
+      page: () => PayErrorPage(),
+      middlewares: [
+        LoginMiddleware(),
+        OnboardingMiddleware(),
+      ],
+      transition: Transition.noTransition,
+    ),
     GetPage(name: Routes.LOGIN, page: () => LoginPage(), binding: LoginPageBinding()),
     GetPage(name: Routes.NOCONNECTION, page: () => const NoConnectionPage(), transition: Transition.noTransition),
-    GetPage(name: Routes.FACESIGN, page: () => const FaceSignPage(), binding: FaceSignPageBinding(), middlewares: [
+    GetPage(name: Routes.FACESIGN_INTRODUCE, page: () => const FaceSignIntroducePage(), middlewares: [
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+    ]),
+    GetPage(name: Routes.FACESIGN_DELETE, page: () => const FaceSignDeletePage(), binding: FaceSignDeletePageBinding(), middlewares: [
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+    ]),
+    GetPage(name: Routes.FACESIGN_TIP1, page: () => const FaceSignTip1Page(), middlewares: [
+      LoginMiddleware(),
+      OnboardingMiddleware(),
+    ]),
+    GetPage(name: Routes.FACESIGN_TIP2, page: () => const FaceSignTip2Page(), binding: FaceSignTip2PageBinding(), middlewares: [
       LoginMiddleware(),
       OnboardingMiddleware(),
     ]),
     GetPage(name: Routes.ONBOARDING_REGISTERCARD, page: () => OnboardingRegisterCardPage()),
     GetPage(name: Routes.ONBOARDING_AGREEMENT, page: () => OnboardingAgreementPage()),
-    GetPage(name: Routes.PRIVACYPOLICY, page: () => PrivacyPolicyPage()),
-    GetPage(name: Routes.TERMSOFSERVICE, page: () => TermsOfServicePage()),
+    GetPage(name: Routes.PRIVACYPOLICY, page: () => const PrivacyPolicyPage()),
+    GetPage(name: Routes.TERMSOFSERVICE, page: () => const TermsOfServicePage()),
   ];
 }
