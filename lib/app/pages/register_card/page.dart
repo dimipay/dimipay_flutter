@@ -26,10 +26,11 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                       node: controller.formFocusScopeNode,
                       child: Column(
                         children: [
-                          DPSmallTextButton(
-                            text: "스캐너",
-                            onTap: controller.scanCreditCard,
-                          ),
+                          if (!GetPlatform.isWeb)
+                            DPSmallTextButton(
+                              text: "스캐너",
+                              onTap: controller.scanCreditCard,
+                            ),
                           const SizedBox(height: 32),
                           DPTextFormField(
                             enableInteractiveSelection: false,

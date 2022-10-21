@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 class ConnectivityService extends GetxService {
   final RxBool isConnected = true.obs;
   final RxBool once = false.obs;
+  bool first = true;
 
   @override
   void onInit() {
@@ -14,6 +15,10 @@ class ConnectivityService extends GetxService {
   }
 
   void checkConnection(ConnectivityResult result) async {
+    if (first) {
+      first = false;
+      return;
+    }
     if (result == ConnectivityResult.none) {
       isConnected.value = false;
     } else {
