@@ -2,8 +2,9 @@ import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/pages/edit_card/controller.dart';
 import 'package:dimipay/app/widgets/button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
 class EditCardPage extends GetView<EditCardPageController> {
   final FocusNode textFieldFocusNode = FocusNode();
@@ -21,7 +22,53 @@ class EditCardPage extends GetView<EditCardPageController> {
                   onSelected: (value) {
                     switch (value) {
                       case 'delete':
-                        controller.deleteCard();
+                        if (GetPlatform.isIOS) {
+                          showCupertinoDialog(
+                            context: Get.overlayContext!,
+                            builder: (BuildContext context) => CupertinoAlertDialog(
+                              content: Text('${controller.paymentMethod.name}을(를) 삭제할까요?'),
+                              actions: <CupertinoDialogAction>[
+                                CupertinoDialogAction(
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  child: const Text('취소'),
+                                ),
+                                CupertinoDialogAction(
+                                  isDestructiveAction: true,
+                                  onPressed: () {
+                                    Get.back();
+                                    controller.deleteCard();
+                                  },
+                                  child: const Text('삭제'),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          showDialog<String>(
+                            context: Get.overlayContext!,
+                            builder: (BuildContext context) => AlertDialog(
+                              content: Text('${controller.paymentMethod.name}을(를) 삭제할까요?'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  child: const Text('취소'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Get.back();
+                                    controller.deleteCard();
+                                  },
+                                  child: const Text('삭제', style: TextStyle(color: DPColors.ERROR)),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+
                         break;
                     }
                   },
@@ -94,11 +141,13 @@ class EditCardPage extends GetView<EditCardPageController> {
             ),
             const SizedBox(height: 24),
             controller.obx(
-              (_) => DPKeyboardReactiveButton(
-                disabled: controller.cardName.value.isEmpty,
-                onTap: controller.submit,
-                padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
-                child: const Text('확인', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+              (_) => Obx(
+                () => DPKeyboardReactiveButton(
+                  disabled: controller.cardName.value.isEmpty,
+                  onTap: controller.submit,
+                  padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+                  child: const Text('확인', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+                ),
               ),
               onLoading: const DPKeyboardReactiveButton(
                 disabled: true,
