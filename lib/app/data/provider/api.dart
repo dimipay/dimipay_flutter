@@ -9,6 +9,7 @@ import 'package:dimipay/app/data/modules/user/model.dart';
 import 'package:dimipay/app/data/provider/api_interface.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/instance_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:developer';
@@ -80,7 +81,7 @@ class LogInterceptor extends Interceptor {
 
 class ApiProvider implements ApiInterface {
   final Dio dio = Dio();
-  final baseUrl = 'https://dev.api.dimipay.io';
+  final baseUrl = 'https://${kReleaseMode ? "" : "dev."}api.dimipay.io';
 
   ApiProvider() {
     dio.options.baseUrl = baseUrl;
