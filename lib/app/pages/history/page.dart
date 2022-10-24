@@ -99,10 +99,6 @@ class TransactionGroup extends StatelessWidget {
               '${date.month}월 ${date.day}일',
               style: DPTextTheme.REGULAR,
             ),
-            Text(
-              '$sum원',
-              style: DPTextTheme.REGULAR_IMPORTANT,
-            ),
           ],
         ),
         const SizedBox(height: 24),
