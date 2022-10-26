@@ -83,7 +83,7 @@ class AuthService extends GetxService {
     String deviceUid = const Uuid().v4();
 
     String? bioKey;
-    if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+    if (!GetPlatform.isWeb) {
       bioKey = const Uuid().v4();
     }
 
@@ -92,7 +92,7 @@ class AuthService extends GetxService {
     await _setAccessToken(onboardingResult['accessToken']);
     await _setRefreshToken(onboardingResult['refreshToken']);
     await _setDeviceUid(deviceUid);
-    if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+    if (!GetPlatform.isWeb) {
       await _setBioKey(bioKey!);
     }
     _pin = paymentPin;
