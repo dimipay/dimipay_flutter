@@ -20,6 +20,7 @@ class PayPageController extends GetxController with StateMixin<String> {
   Rx<String?> paymentToken = Rx(null);
   PayResultSSEController payStream = Get.find<PayResultSSEController>();
   int get currentIndex => paymentMethodController.paymentMethods!.indexOf(currentPaymentMethod!);
+  double? _screenBrightness;
 
   @override
   void onInit() async {
@@ -76,6 +77,7 @@ class PayPageController extends GetxController with StateMixin<String> {
 
   Future<void> setBrightness(double brightness) async {
     try {
+      _screenBrightness = await ScreenBrightness().system;
       await ScreenBrightness().setScreenBrightness(brightness);
     } catch (e) {
       log(e.toString());
@@ -83,10 +85,12 @@ class PayPageController extends GetxController with StateMixin<String> {
   }
 
   Future<void> resetBrightness() async {
-    try {
-      await ScreenBrightness().resetScreenBrightness();
-    } catch (e) {
-      log(e.toString());
+    if (_screenBrightness != null) {
+      try {
+        await ScreenBrightness().setScreenBrightness(_screenBrightness!);
+      } catch (e) {
+        log(e.toString());
+      }
     }
   }
 
