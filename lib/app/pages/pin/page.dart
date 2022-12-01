@@ -238,7 +238,7 @@ class PinPage extends GetView<PinPageController> {
                     Obx(() {
                       if (controller.isPinLocked.value) {
                         return GestureDetector(
-                          onTap: () => launchUrl(Uri.parse('http://pf.kakao.com/_Rxanxlxj/chat')),
+                          onTap: () => launchUrl(Uri.parse('http://pf.kakao.com/_gHxlCxj/chat')),
                           child: const Text(
                             '핀 복구하기',
                             style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w600, fontSize: 16, height: 1.2, color: DPColors.MAIN_THEME, decoration: TextDecoration.underline),
