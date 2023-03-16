@@ -218,7 +218,7 @@ class ApiProvider implements ApiInterface {
   Future<PaymentMethod> createPaymentMethod({
     required String cardNumber,
     required String password,
-    required DateTime ownerBirthday,
+    required String ownerPersonalNum,
     required DateTime expireAt,
   }) async {
     String url = "/payment/method";
@@ -226,7 +226,7 @@ class ApiProvider implements ApiInterface {
       "number": cardNumber,
       "year": DateFormat('yyyy').format(expireAt).substring(2),
       "month": DateFormat('MM').format(expireAt),
-      "idNo": DateFormat('yyyyMMdd').format(ownerBirthday).substring(2),
+      "idNo": ownerPersonalNum,
       "pw": password,
     };
     Response response = await dio.post(url, data: body);

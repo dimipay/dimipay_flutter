@@ -6,6 +6,7 @@ import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class RegisterCardPageController extends GetxController with StateMixin {
   final String? redirect = Get.arguments?['redirect'];
@@ -13,7 +14,7 @@ class RegisterCardPageController extends GetxController with StateMixin {
 
   final TextEditingController cardNumberFieldController = TextEditingController();
   final TextEditingController expiredDateFieldController = TextEditingController();
-  final TextEditingController birthdayFieldController = TextEditingController();
+  final TextEditingController ownerPersonalNumFieldController = TextEditingController();
   final TextEditingController passwordFieldController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
@@ -21,7 +22,7 @@ class RegisterCardPageController extends GetxController with StateMixin {
 
   final Rx<String?> cardNumber = Rx(null);
   final Rx<DateTime?> expiredAt = Rx(null);
-  final Rx<DateTime?> birthday = Rx(null);
+  final Rx<String?> ownerPersonalNum = Rx(null);
   final Rx<String?> password = Rx(null);
 
   @override
@@ -29,7 +30,7 @@ class RegisterCardPageController extends GetxController with StateMixin {
     change(null, status: RxStatus.success());
     cardNumberFieldController.addListener(onCardNumberChange);
     expiredDateFieldController.addListener(onExpireDateChange);
-    birthdayFieldController.addListener(onBirthdayChange);
+    ownerPersonalNumFieldController.addListener(onBirthdayChange);
     passwordFieldController.addListener(onPasswordChange);
 
     super.onInit();
@@ -92,12 +93,14 @@ class RegisterCardPageController extends GetxController with StateMixin {
   }
 
   void onBirthdayChange() {
-    String data = birthdayFieldController.text;
+    String data = ownerPersonalNumFieldController.text;
     if (data.length == 6) {
-      birthday.value = DateTime.parse("00$data");
+      ownerPersonalNum.value = DateFormat('yyyyMMdd').format(DateTime.parse("00$data")).substring(2);
       formFocusScopeNode.nextFocus();
+    } else if (data.length == 10) {
+      ownerPersonalNum.value = data;
     } else {
-      birthday.value = null;
+      ownerPersonalNum.value = null;
     }
   }
 
@@ -112,7 +115,7 @@ class RegisterCardPageController extends GetxController with StateMixin {
   }
 
   bool get inputValidity {
-    return cardNumber.value != null && expiredAt.value != null && birthday.value != null && password.value != null;
+    return cardNumber.value != null && expiredAt.value != null && ownerPersonalNum.value != null && password.value != null;
   }
 
   Future<void> scanCreditCard() async {
@@ -135,7 +138,7 @@ class RegisterCardPageController extends GetxController with StateMixin {
         PaymentMethod paymentMethod = await paymentMethodController.createPaymentMethod(
           cardNumber: cardNumber.value!,
           password: password.value!,
-          ownerBirthday: birthday.value!,
+          ownerPersonalNum: ownerPersonalNum.value!,
           expireAt: expiredAt.value!,
         );
 
