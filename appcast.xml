@@ -4,6 +4,12 @@
         <title>디미페이</title>
         <!-- Android -->
         <item>
+            <title>v1.0.5</title>
+            <description>법인카드가 등록 가능해졌으며 UX 개선 등이 이루어졌습니다.</description>
+            <pubDate>Fri, 17 Mar 2023 12:00:00 +0000</pubDate>
+            <enclosure url="https://play.google.com/store/apps/details?id=com.develop.dimipay" sparkle:version="1.0.5" sparkle:os="android" />
+        </item>
+        <item>
             <title>v1.0.4</title>
             <description>마이너한 버그 수정과 UX 개선 등이 이루어졌습니다.</description>
             <pubDate>Fri, 21 Oct 2022 12:00:00 +0000</pubDate>
@@ -16,6 +22,12 @@
             <enclosure url="https://play.google.com/store/apps/details?id=com.develop.dimipay" sparkle:version="1.0.3" sparkle:os="android" />	
         </item>	
         <!-- IOS -->
+        <item>
+            <title>v1.0.5</title>
+            <description>법인카드가 등록 가능해졌으며 UX 개선 등이 이루어졌습니다.</description>
+            <pubDate>Fri, 17 Mar 2023 12:00:00 +0000</pubDate>
+            <enclosure url="https://apps.apple.com/app/id1642292289" sparkle:version="1.0.4" sparkle:os="ios" />
+        </item>
         <item>
             <title>v1.0.4</title>
             <description>마이너한 버그 수정과 UX 개선 등이 이루어졌습니다.</description>

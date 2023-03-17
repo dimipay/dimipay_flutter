@@ -30,7 +30,7 @@ abstract class ApiInterface {
   Future<PaymentMethod> createPaymentMethod({
     required String cardNumber,
     required String password,
-    required DateTime ownerBirthday,
+    required String ownerPersonalNum,
     required DateTime expireAt,
   });
 

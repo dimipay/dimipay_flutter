@@ -57,11 +57,11 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                               Flexible(
                                 child: DPTextFormField(
                                   enableInteractiveSelection: false,
-                                  controller: controller.birthdayFieldController,
+                                  controller: controller.ownerPersonalNumFieldController,
                                   textInputType: TextInputType.number,
-                                  label: '생년 월일',
-                                  hintText: '6자리',
-                                  maxLength: 6,
+                                  label: '생년월일 / 사업자번호',
+                                  hintText: '6 / 10자리',
+                                  maxLength: 10,
                                 ),
                               ),
                             ],

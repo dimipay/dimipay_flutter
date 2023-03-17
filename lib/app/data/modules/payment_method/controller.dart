@@ -13,10 +13,10 @@ class PaymentMethodController extends GetxController with StateMixin<List<Paymen
   Future<PaymentMethod> createPaymentMethod({
     required String cardNumber,
     required String password,
-    required DateTime ownerBirthday,
+    required String ownerPersonalNum,
     required DateTime expireAt,
   }) async {
-    PaymentMethod paymentMethod = await repository.createPaymentMethod(cardNumber: cardNumber, password: password, ownerBirthday: ownerBirthday, expireAt: expireAt);
+    PaymentMethod paymentMethod = await repository.createPaymentMethod(cardNumber: cardNumber, password: password, ownerPersonalNum: ownerPersonalNum, expireAt: expireAt);
     _paymentMethods.value?.add(paymentMethod);
     _paymentMethods.refresh();
     return paymentMethod;

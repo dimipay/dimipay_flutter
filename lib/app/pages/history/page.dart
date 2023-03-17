@@ -22,7 +22,7 @@ class HistoryPage extends GetView<HistoryPageController> {
     for (var dailyTransaction in dailyTransactions.entries) {
       children.add(TransactionGroup(date: dailyTransaction.key, transactions: dailyTransaction.value));
     }
-    children.sort((a, b) => a.date.compareTo(b.date));
+    children.sort((a, b) => b.date.compareTo(a.date));
     return Column(children: children);
   }
 
@@ -98,10 +98,6 @@ class TransactionGroup extends StatelessWidget {
             Text(
               '${date.month}월 ${date.day}일',
               style: DPTextTheme.REGULAR,
-            ),
-            Text(
-              '$sum원',
-              style: DPTextTheme.REGULAR_IMPORTANT,
             ),
           ],
         ),
