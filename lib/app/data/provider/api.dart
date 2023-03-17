@@ -80,6 +80,7 @@ class LogInterceptor extends Interceptor {
 
 class ApiProvider implements ApiInterface {
   final Dio dio = Dio();
+  // final baseUrl = kReleaseMode ? 'https://api.dimipay.io' : 'https://dev.api.dimipay.io';
   final baseUrl = 'https://api.dimipay.io';
 
   ApiProvider() {
@@ -217,7 +218,7 @@ class ApiProvider implements ApiInterface {
   Future<PaymentMethod> createPaymentMethod({
     required String cardNumber,
     required String password,
-    required DateTime ownerBirthday,
+    required String ownerPersonalNum,
     required DateTime expireAt,
   }) async {
     String url = "/payment/method";
@@ -225,7 +226,7 @@ class ApiProvider implements ApiInterface {
       "number": cardNumber,
       "year": DateFormat('yyyy').format(expireAt).substring(2),
       "month": DateFormat('MM').format(expireAt),
-      "idNo": DateFormat('yyyyMMdd').format(ownerBirthday).substring(2),
+      "idNo": ownerPersonalNum,
       "pw": password,
     };
     Response response = await dio.post(url, data: body);
