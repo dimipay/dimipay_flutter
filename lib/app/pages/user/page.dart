@@ -83,7 +83,7 @@ class UserPage extends GetView<UserPageController> {
             onTap: () => Get.toNamed(Routes.HISTORY),
           ),
           UserPageListItem(
-            title: '페이스사인',
+            title: 'FaceSign',
             trailingText: controller.faceSignController.isFacesignRegistered == true ? '등록 됨' : '등록 안됨',
             onTap: () {
               switch (controller.faceSignController.isFacesignRegistered) {
