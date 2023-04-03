@@ -86,10 +86,10 @@ class TransactionGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int sum = 0;
+    /*int sum = 0;
     for (var transaction in transactions) {
       sum += transaction.totalPrice;
-    }
+    }*/
     return Column(
       children: [
         Row(

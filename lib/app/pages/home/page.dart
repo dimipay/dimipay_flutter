@@ -95,7 +95,46 @@ class HomePage extends GetView<HomePageController> {
     return Obx(() {
       List<Event> events = controller.eventController.events!;
       if (events.isEmpty) {
-        return Container();
+        return GestureDetector(
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: [
+                        const Text(
+                          '이벤트',
+                          style: DPTextTheme.SECTION_HEADER,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                Container(
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset('asset/images/no_event.svg', semanticsLabel: 'no_event'),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        '진행 중인 이벤트가 없어요!',
+                        style: DPTextTheme.DESCRIPTION,
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
       } else {
         List<Event> previewingEvents = List.from(events);
         previewingEvents.sort(_compEvent);
@@ -151,7 +190,7 @@ class HomePage extends GetView<HomePageController> {
   Widget _topDivider() {
     return Obx(
       () {
-        if (controller.noticeController.notices?.isNotEmpty == true && controller.eventController.events?.isNotEmpty == true) {
+        if (controller.noticeController.notices?.isNotEmpty == true) {
           return Column(
             children: const [
               SizedBox(height: 36),
@@ -198,6 +237,7 @@ class HomePage extends GetView<HomePageController> {
                   Row(
                     children: [
                       DPSmallCardPayment(
+                        subtitle: '카드결제',
                         title: paymentMethod.name ?? '',
                         color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
                         onTap: () {
@@ -280,19 +320,19 @@ class DPSmallCardPayment extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           color: color,
         ),
-        padding: const EdgeInsets.all(18),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             subtitle == null
                 ? Container()
                 : Column(
                     children: [
-                      Text(subtitle!, style: const TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.2, color: Color.fromRGBO(255, 255, 255, 0.4))),
+                      Text(subtitle!, style: const TextStyle(fontFamily: 'Pretendard', fontSize: 14, height: 1.2, color: Color.fromRGBO(255, 255, 255, 0.4), letterSpacing: -0.4)),
                     ],
                   ),
-            Text(title, style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.bold, fontSize: 17, height: 1.2, color: Colors.white)),
+            Text(title, style: const TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w600, fontSize: 18, height: 1.2, color: Colors.white, letterSpacing: -0.4)),
           ],
         ),
       ),
