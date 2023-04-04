@@ -3,6 +3,7 @@ import 'package:dimipay/app/data/modules/event/controller.dart';
 import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/pages/event/controller.dart';
 import 'package:dimipay/app/pages/event/widget/event_item.dart';
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +36,7 @@ class EventPage extends GetView<EventPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('이벤트')),
+      appBar: const DPAppBar(title: '이벤트'),
       body: RefreshIndicator(
         color: DPColors.MAIN_THEME,
         onRefresh: controller.refreshEvents,

@@ -1,4 +1,5 @@
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
 class TermsOfServicePage extends StatelessWidget {
@@ -143,9 +144,8 @@ class TermsOfServicePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("서비스 이용약관"),
-        centerTitle: true,
+      appBar: const DPAppBar(
+        title: "서비스 이용약관",
       ),
       body: SafeArea(
         child: Scrollbar(

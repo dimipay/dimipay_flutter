@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dimipay/app/core/theme/color_theme.dart';
+import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/pages/home/page.dart';
 import 'package:dimipay/app/pages/pay/controller.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class PayPage extends GetView<PayPageController> {
                 items: controller.paymentMethodController.paymentMethods!
                     .map(
                       (paymentMethod) => DPSmallCardPayment(
+                        subtitle: '카드결제',
                         title: paymentMethod.name ?? '',
                         color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
                       ),
@@ -70,7 +72,7 @@ class PayPage extends GetView<PayPageController> {
                       (_) => Obx(
                         () => QrImage(
                           data: controller.paymentToken.value!,
-                          size: 200,
+                          size: 220,
                           version: 1,
                         ),
                       ),
@@ -81,12 +83,23 @@ class PayPage extends GetView<PayPageController> {
                           baseColor: const Color.fromARGB(255, 232, 232, 232),
                           highlightColor: const Color.fromARGB(255, 250, 250, 250),
                           child: Container(
-                            width: 200,
-                            height: 200,
+                            width: 220,
+                            height: 220,
                             color: Colors.black,
                           ),
                         ),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    const Text('결제 단말기에 QR코드를 읽혀주세요', style: DPTextTheme.DESCRIPTION_IMPORTANT),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    const Text(
+                      '반드시 결제가 성공적으로 완료되었는지 확인해주세요!',
+                      style: DPTextTheme.DESCRIPTION,
                     ),
                   ],
                 ),

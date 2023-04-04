@@ -3,6 +3,7 @@ import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/pages/manage_method/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:dimipay/app/widgets/card.dart';
 import 'package:dimipay/app/widgets/divided_column.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
   Widget _buildCards() {
     return Obx(
       () => DividedColumn(
-        divider: const SizedBox(height: 36),
+        divider: const SizedBox(height: 20),
         children: [
           for (var paymentMethod in controller.paymentMethodController.paymentMethods!)
             Column(
@@ -54,7 +55,6 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
                     color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
                   ),
                 ),
-                const SizedBox(height: 24),
               ],
             ),
         ],
@@ -67,7 +67,7 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
       (paymentMethods) => Column(
         children: [
           _registerCardWidget(),
-          const SizedBox(height: 36),
+          const SizedBox(height: 24),
           _buildCards(),
         ],
       ),
@@ -78,8 +78,8 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('카드'),
+      appBar: const DPAppBar(
+        title: "카드",
       ),
       body: RefreshIndicator(
         onRefresh: () async {

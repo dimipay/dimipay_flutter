@@ -6,6 +6,7 @@ import 'package:dimipay/app/pages/pin/controller.dart';
 import 'package:dimipay/app/pages/user/controller.dart';
 import 'package:dimipay/app/pages/user/widget/menu_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -83,7 +84,7 @@ class UserPage extends GetView<UserPageController> {
             onTap: () => Get.toNamed(Routes.HISTORY),
           ),
           UserPageListItem(
-            title: '페이스사인',
+            title: 'FaceSign',
             trailingText: controller.faceSignController.isFacesignRegistered == true ? '등록 됨' : '등록 안됨',
             onTap: () {
               switch (controller.faceSignController.isFacesignRegistered) {
@@ -164,7 +165,7 @@ class UserPage extends GetView<UserPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const DPAppBar(),
       body: SafeArea(
         child: RefreshIndicator(
           color: DPColors.MAIN_THEME,
