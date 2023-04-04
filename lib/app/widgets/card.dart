@@ -20,16 +20,17 @@ class DPCard extends StatelessWidget {
     return Transform.scale(
       scale: width / 320,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(12),
         child: Container(
           color: color,
-          width: 320,
-          height: 180,
+          width: double.infinity,
+          height: 96,
           child: Stack(
+            alignment: AlignmentDirectional.center,
             children: [
               Positioned(
                 left: 24,
-                bottom: 20,
+                bottom: 24,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -37,15 +38,6 @@ class DPCard extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(cardNumber, style: const TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.2, color: Color.fromRGBO(255, 255, 255, 0.4), fontWeight: FontWeight.w500, letterSpacing: -0.4)),
                   ],
-                ),
-              ),
-              Positioned(
-                right: 16,
-                top: 16,
-                child: SvgPicture.asset(
-                  'asset/images/ic_chip.svg',
-                  color: const Color(0xFFD9B966),
-                  width: 64,
                 ),
               ),
             ],

@@ -41,7 +41,7 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
   Widget _buildCards() {
     return Obx(
       () => DividedColumn(
-        divider: const SizedBox(height: 36),
+        divider: const SizedBox(height: 20),
         children: [
           for (var paymentMethod in controller.paymentMethodController.paymentMethods!)
             Column(
@@ -54,7 +54,6 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
                     color: paymentMethod.color?.isEmpty ?? true ? DPColors.MAIN_THEME : Color(int.parse('FF${paymentMethod.color}', radix: 16)),
                   ),
                 ),
-                const SizedBox(height: 24),
               ],
             ),
         ],
@@ -67,7 +66,7 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
       (paymentMethods) => Column(
         children: [
           _registerCardWidget(),
-          const SizedBox(height: 36),
+          const SizedBox(height: 24),
           _buildCards(),
         ],
       ),
