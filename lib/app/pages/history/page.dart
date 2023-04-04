@@ -100,13 +100,13 @@ class TransactionGroup extends StatelessWidget {
               style: DPTextTheme.REGULAR_IMPORTANT,
             ),
             Text(
-              '총 ${sum}원',
+              '총 $sum원',
               style: DPTextTheme.REGULAR_IMPORTANT,
             ),
           ],
         ),
         const SizedBox(height: 12),
-        Container(
+        const SizedBox(
           width: double.infinity,
           child: Divider(color: DPColors.DARK6, thickness: 1.0),
         ),
