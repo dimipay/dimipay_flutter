@@ -16,10 +16,10 @@ class CardFinPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
+              const Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     DPPaymentCard(
                       color: Color(0xFF766C62),
                       cardName: '국민카드',
