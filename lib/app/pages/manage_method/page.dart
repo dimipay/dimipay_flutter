@@ -3,6 +3,7 @@ import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
 import 'package:dimipay/app/pages/manage_method/controller.dart';
 import 'package:dimipay/app/routes/routes.dart';
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:dimipay/app/widgets/card.dart';
 import 'package:dimipay/app/widgets/divided_column.dart';
 import 'package:flutter/material.dart';
@@ -77,8 +78,8 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('카드'),
+      appBar: const DPAppBar(
+        title: "카드",
       ),
       body: RefreshIndicator(
         onRefresh: () async {

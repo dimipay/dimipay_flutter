@@ -3,6 +3,7 @@ import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/pages/pin/controller.dart';
 import 'package:dimipay/app/pages/pin/widget/numberpad_item.dart';
 import 'package:dimipay/app/pages/pin/widget/password_field.dart';
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -209,7 +210,7 @@ class PinPage extends GetView<PinPageController> {
     numList.shuffle();
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const DPAppBar(),
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,

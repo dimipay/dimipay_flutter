@@ -1,6 +1,8 @@
 import 'package:dimipay/app/pages/register_card/controller.dart';
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:dimipay/app/widgets/text_field.dart';
+import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +13,7 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text('카드 등록하기')),
+      appBar: const DPAppBar(),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -19,18 +21,24 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
             Flexible(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Form(
                     key: controller.formKey,
                     child: FocusScope(
                       node: controller.formFocusScopeNode,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if (!GetPlatform.isWeb)
-                            DPSmallTextButton(
-                              text: "스캐너",
-                              onTap: controller.scanCreditCard,
-                            ),
+                          const SizedBox(height: 24),
+                          const Text(
+                            '카드의 기초 정보를 입력해주세요',
+                            style: DPTextTheme.PAGE_HEADER,
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            '결제할 때 필요한 정보들이니 정확하게 입력해주세요',
+                            style: DPTextTheme.DESCRIPTION,
+                          ),
                           const SizedBox(height: 32),
                           DPTextFormField(
                             enableInteractiveSelection: false,
@@ -40,7 +48,7 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                             hintText: '0000-0000-0000-0000',
                             maxLength: 19,
                           ),
-                          const SizedBox(height: 18),
+                          const SizedBox(height: 16),
                           Row(
                             children: [
                               Flexible(
@@ -53,7 +61,7 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                                   maxLength: 5,
                                 ),
                               ),
-                              const SizedBox(width: 18),
+                              const SizedBox(width: 16),
                               Flexible(
                                 child: DPTextFormField(
                                   enableInteractiveSelection: false,
@@ -66,7 +74,7 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 18),
+                          const SizedBox(height: 16),
                           DPTextFormField(
                             enableInteractiveSelection: false,
                             controller: controller.passwordFieldController,
@@ -76,6 +84,12 @@ class RegisterCardPage extends GetView<RegisterCardPageController> {
                             hintText: '앞 2자리',
                             maxLength: 2,
                           ),
+                          const SizedBox(height: 24),
+                          if (!GetPlatform.isWeb)
+                            DPSmallTextButton(
+                              text: "카드 스캔하기",
+                              onTap: controller.scanCreditCard,
+                            ),
                         ],
                       ),
                     ),

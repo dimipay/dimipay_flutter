@@ -1,6 +1,7 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/pages/edit_card/controller.dart';
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class EditCardPage extends GetView<EditCardPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: DPAppBar(
         automaticallyImplyLeading: !controller.creatingCard,
         actions: controller.creatingCard
             ? null
@@ -87,7 +88,7 @@ class EditCardPage extends GetView<EditCardPageController> {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,6 +97,11 @@ class EditCardPage extends GetView<EditCardPageController> {
                     const Text(
                       '카드의 이름을 입력해주세요',
                       style: DPTextTheme.PAGE_HEADER,
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      '이름을 쓰지 않으면, 카드사 명이 기본으로 들어가요',
+                      style: DPTextTheme.DESCRIPTION,
                     ),
                     Expanded(
                       child: Center(

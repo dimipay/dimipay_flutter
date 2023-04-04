@@ -1,3 +1,4 @@
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
 class NotificationPage extends StatelessWidget {
@@ -6,8 +7,8 @@ class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Notifications"),
+      appBar: const DPAppBar(
+        title: "Notifications",
       ),
       body: ListView(
         children: [NotificationComponent(noti: Notification(title: "매장 점검 안내", text: "7월 3일 매점 점검이 예정되어있습니다. 오후 5시부터 오후 7시 까지는 매점을 이용하실 수 없습니다.", date: DateTime.now(), highlighted: false)), NotificationComponent(noti: Notification(title: "매장 점검 안내", text: "7월 3일 매점 점검이 예정되어있습니다. 오후 5시부터 오후 7시 까지는 매점을 이용하실 수 없습니다.", date: DateTime.now(), highlighted: true)), NotificationComponent(noti: Notification(title: "매장 점검 안내", text: "7월 3일 매점 점검이 예정되어있습니다. 오후 5시부터 오후 7시 까지는 매점을 이용하실 수 없습니다.", date: DateTime.now(), highlighted: true)), NotificationComponent(noti: Notification(title: "매장 점검 안내", text: "7월 3일 매점 점검이 예정되어있습니다. 오후 5시부터 오후 7시 까지는 매점을 이용하실 수 없습니다.", date: DateTime.now(), highlighted: true)), NotificationComponent(noti: Notification(title: "매장 점검 안내", text: "7월 3일 매점 점검이 예정되어있습니다. 오후 5시부터 오후 7시 까지는 매점을 이용하실 수 없습니다.", date: DateTime.now(), highlighted: true)), NotificationComponent(noti: Notification(title: "매장 점검 안내", text: "7월 3일 매점 점검이 예정되어있습니다. 오후 5시부터 오후 7시 까지는 매점을 이용하실 수 없습니다.", date: DateTime.now(), highlighted: false)), NotificationComponent(noti: Notification(title: "매장 점검 안내", text: "7월 3일 매점 점검이 예정되어있습니다. 오후 5시부터 오후 7시 까지는 매점을 이용하실 수 없습니다.", date: DateTime.now(), highlighted: true)), NotificationComponent(noti: Notification(title: "매장 점검 안내", text: "7월 3일 매점 점검이 예정되어있습니다. 오후 5시부터 오후 7시 까지는 매점을 이용하실 수 없습니다.", date: DateTime.now(), highlighted: true)), NotificationComponent(noti: Notification(title: "매장 점검 안내", text: "7월 3일 매점 점검이 예정되어있습니다. 오후 5시부터 오후 7시 까지는 매점을 이용하실 수 없습니다.", date: DateTime.now(), highlighted: true)), NotificationComponent(noti: Notification(title: "매장 점검 안내", text: "7월 3일 매점 점검이 예정되어있습니다. 오후 5시부터 오후 7시 까지는 매점을 이용하실 수 없습니다.", date: DateTime.now(), highlighted: true))],

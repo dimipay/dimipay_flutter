@@ -49,8 +49,8 @@ class LoginPage extends GetView<LoginPageController> {
                               color: DPColors.MAIN_THEME,
                             ),
                             Container(
-                              width: 320,
-                              height: 180,
+                              width: double.infinity,
+                              height: 96,
                               decoration: BoxDecoration(
                                 color: Colors.red,
                                 gradient: RadialGradient(

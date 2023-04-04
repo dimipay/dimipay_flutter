@@ -1,5 +1,6 @@
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/routes/routes.dart';
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -43,7 +44,7 @@ class FaceSignIntroducePage extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const DPAppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),

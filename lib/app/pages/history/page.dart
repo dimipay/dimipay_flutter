@@ -2,6 +2,7 @@ import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/pages/history/controller.dart';
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,7 +40,7 @@ class HistoryPage extends GetView<HistoryPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text('결제 기록')),
+      appBar: const DPAppBar(title: '결제 기록'),
       body: SafeArea(
         bottom: false,
         child: RefreshIndicator(
@@ -54,7 +55,7 @@ class HistoryPage extends GetView<HistoryPageController> {
                     padding: const EdgeInsets.symmetric(horizontal: 32),
                     child: Column(
                       children: [
-                        const SizedBox(height: 24, width: double.infinity),
+                        const SizedBox(height: 36, width: double.infinity),
                         _transactionArea(),
                         const SizedBox(height: 36),
                       ],
