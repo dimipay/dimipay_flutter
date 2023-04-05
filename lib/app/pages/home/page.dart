@@ -114,7 +114,7 @@ class HomePage extends GetView<HomePageController> {
                   ],
                 ),
                 const SizedBox(height: 24),
-                SizedBox(
+                Container(
                   width: double.infinity,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,

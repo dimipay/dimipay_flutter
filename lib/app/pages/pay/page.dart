@@ -3,6 +3,7 @@ import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/pages/home/page.dart';
 import 'package:dimipay/app/pages/pay/controller.dart';
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -59,7 +60,7 @@ class PayPage extends GetView<PayPageController> {
       child: SafeArea(
         top: false,
         child: Scaffold(
-          appBar: AppBar(),
+          appBar: const DPAppBar(),
           backgroundColor: Colors.white,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
