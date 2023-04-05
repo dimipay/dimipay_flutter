@@ -100,11 +100,11 @@ class HomePage extends GetView<HomePageController> {
             color: Colors.white,
             child: Column(
               children: [
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Row(
-                      children: [
+                      children: const [
                         Text(
                           '이벤트',
                           style: DPTextTheme.SECTION_HEADER,
@@ -191,8 +191,8 @@ class HomePage extends GetView<HomePageController> {
     return Obx(
       () {
         if (controller.noticeController.notices?.isNotEmpty == true) {
-          return const Column(
-            children: [
+          return Column(
+            children: const [
               SizedBox(height: 36),
               Divider(color: DPColors.DARK6, height: 1, thickness: 1),
               SizedBox(height: 36),
