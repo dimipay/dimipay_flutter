@@ -1,4 +1,5 @@
 import 'package:dimipay/app/core/theme/text_theme.dart';
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
@@ -31,9 +32,8 @@ class PrivacyPolicyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("개인정보 보호방침"),
-        centerTitle: true,
+      appBar: const DPAppBar(
+        title: "개인정보 보호방침",
       ),
       body: SafeArea(
         child: Scrollbar(

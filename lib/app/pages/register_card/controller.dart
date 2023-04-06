@@ -96,9 +96,9 @@ class RegisterCardPageController extends GetxController with StateMixin {
     String data = ownerPersonalNumFieldController.text;
     if (data.length == 6) {
       ownerPersonalNum.value = DateFormat('yyyyMMdd').format(DateTime.parse("00$data")).substring(2);
-      formFocusScopeNode.nextFocus();
     } else if (data.length == 10) {
       ownerPersonalNum.value = data;
+      formFocusScopeNode.nextFocus();
     } else {
       ownerPersonalNum.value = null;
     }

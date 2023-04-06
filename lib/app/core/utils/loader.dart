@@ -19,7 +19,7 @@ class AppLoader {
     setPathUrlStrategy();
     KakaoSdk.init(nativeAppKey: TokenReference.KAKAO_NATIVE_KEY);
 
-    if (Platform.isIOS) { await ScreenBrightness().setAutoReset(false); }
+    if (!kIsWeb) { if (Platform.isIOS) { await ScreenBrightness().setAutoReset(false); } } // Web Platform에선 Platform.isXXX 함수가 동작하지 않아 부득이하게 이중 if문 처리
 
     await Future.wait([
       Firebase.initializeApp(options: kIsWeb ? TokenReference.FIREBASEOPTION : null),

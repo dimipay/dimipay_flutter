@@ -1,6 +1,7 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/pages/facesign_delete/controller.dart';
+import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:dimipay/app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,7 +13,7 @@ class FaceSignDeletePage extends GetView<FaceSignDeletePageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const DPAppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -27,7 +28,7 @@ class FaceSignDeletePage extends GetView<FaceSignDeletePageController> {
                   children: [
                     SvgPicture.asset("asset/images/face_sign.svg", height: 100, width: 100),
                     const SizedBox(height: 24),
-                    const Text("Face Sign 등록됨", style: DPTextTheme.PAGE_HEADER),
+                    const Text("FaceSign 등록됨", style: DPTextTheme.PAGE_HEADER),
                   ],
                 ),
               ),
