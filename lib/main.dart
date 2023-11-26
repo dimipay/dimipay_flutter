@@ -20,7 +20,7 @@ Future main() async {
   FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   FlutterNativeSplash.remove();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-	SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(
     GetMaterialApp(
@@ -32,6 +32,7 @@ Future main() async {
         FirebaseAnalyticsObserver(analytics: analytics),
       ],
       theme: ThemeData(
+        useMaterial3: false,
         fontFamily: 'Pretendard',
         primaryColor: DPColors.MAIN_THEME,
         appBarTheme: const AppBarTheme(

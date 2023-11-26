@@ -58,8 +58,8 @@ dependencies:
   connectivity_plus: ^3.0.3
   image_picker: ^0.8.5+3
   kakao_flutter_sdk: ^1.2.2
-  firebase_core: ^2.9.0
-  firebase_analytics: ^10.2.0
+  firebase_core: ^2.22.0
+  firebase_analytics: ^10.7.0
   upgrader: ^6.2.0
   version: ^3.0.2
 

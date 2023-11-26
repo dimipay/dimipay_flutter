@@ -10,12 +10,12 @@ class PayPendingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               CircularProgressIndicator(color: DPColors.MAIN_THEME),
               SizedBox(height: 24),
               Text('결제를 진행중이에요', style: DPTextTheme.SECTION_HEADER),

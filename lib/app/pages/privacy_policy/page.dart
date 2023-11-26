@@ -31,8 +31,8 @@ class PrivacyPolicyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const DPAppBar(
+    return const Scaffold(
+      appBar: DPAppBar(
         title: "개인정보 보호방침",
       ),
       body: SafeArea(
@@ -42,7 +42,7 @@ class PrivacyPolicyPage extends StatelessWidget {
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(horizontal: 24),
               child: Text(privacyPolicyText, style: DPTextTheme.DESCRIPTION_IMPORTANT),
             ),
           ),
