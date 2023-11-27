@@ -1,5 +1,4 @@
 flutter_native_splash:
-
   # This package generates native code to customize Flutter's default white native splash screen
   # with background color and splash image.
   # Customize the parameters below, and run the following command in the terminal:
@@ -50,10 +49,10 @@ flutter_native_splash:
     # 640 pixels in diameter.
     # App icon without an icon background: This should be 1152×1152 pixels, and fit within a circle
     # 768 pixels in diameter.
-    #image: assets/android12splash.png
+    image: asset/images/splash_android.png
 
     # App icon background color.
-    #icon_background_color: "#111111"
+    color: "#ffffff"
 
     # The image_dark parameter and icon_background_color_dark set the image and icon background
     # color when the device is in dark mode. If they are not specified, the app will use the
@@ -92,8 +91,8 @@ flutter_native_splash:
   #       WidgetsFlutterBinding.ensureInitialized();
   #       SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom, SystemUiOverlay.top]);
   #fullscreen: true
-  
-  # If you have changed the name(s) of your info.plist file(s), you can specify the filename(s) 
+
+  # If you have changed the name(s) of your info.plist file(s), you can specify the filename(s)
   # with the info_plist_files parameter.  Remove only the # characters in the three lines below,
   # do not remove any spaces:
   #info_plist_files:
