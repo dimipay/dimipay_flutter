@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/utils/loader.dart';
 import 'package:dimipay/app/routes/pages.dart';
@@ -6,6 +8,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:get/get.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -21,6 +24,10 @@ Future main() async {
   FlutterNativeSplash.remove();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  if (Platform.isAndroid) {
+    await FlutterDisplayMode.setHighRefreshRate();
+  }
 
   runApp(
     GetMaterialApp(
