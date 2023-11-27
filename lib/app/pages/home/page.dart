@@ -214,9 +214,45 @@ class HomePage extends GetView<HomePageController> {
           children: [
             _logoArea(),
             const SizedBox(height: 36),
-            _noticeArea(),
-            _topDivider(),
-            _eventsArea(),
+            Obx(() {
+              if (controller.isLoading.value) {
+                return const Column(children: [
+                  SizedBox(height: 216),
+                  Center(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 30.0,
+                          width: 30.0,
+                          child: CircularProgressIndicator(
+                            color: DPColors.DARK4,
+                            strokeWidth: 4.0,
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        Text(
+                          '로딩중...',
+                          style: TextStyle(
+                            color: DPColors.DARK4,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ]);
+              } else {
+                return Column(
+                  children: [
+                    _noticeArea(),
+                    _topDivider(),
+                    _eventsArea(),
+                  ],
+                );
+              }
+            }),
           ],
         ),
       ),

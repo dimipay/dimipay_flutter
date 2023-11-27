@@ -10,11 +10,21 @@ class HomePageController extends GetxController {
   final PaymentMethodController paymentMethodController = Get.find<PaymentMethodController>();
   final UpgraderService upgradeService = Get.find<UpgraderService>();
 
+  var isLoading = false.obs;
+
   @override
   void onInit() {
-    paymentMethodController.fetchPaymentMethods();
-    noticeController.fetchNotices();
-    eventController.fetchEvents();
+    isLoading(true);
     super.onInit();
+    fetchData();
+  }
+
+  void fetchData() async {
+    await Future.wait([
+      paymentMethodController.fetchPaymentMethods(),
+      noticeController.fetchNotices(),
+      eventController.fetchEvents(),
+    ]);
+    isLoading(false);
   }
 }

@@ -143,7 +143,7 @@ class TermsOfServicePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       appBar: DPAppBar(
         title: "서비스 이용약관",
       ),
