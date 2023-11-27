@@ -73,6 +73,7 @@ android {
             minifyEnabled true
         }
     }
+    namespace 'com.develop.dimipay'
 }
 
 flutter {
