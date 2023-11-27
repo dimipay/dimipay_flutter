@@ -62,6 +62,7 @@ dependencies:
   firebase_analytics: ^10.7.0
   upgrader: ^6.2.0
   version: ^3.0.2
+  flutter_displaymode: ^0.6.0
 
 dev_dependencies:
   flutter_test:
