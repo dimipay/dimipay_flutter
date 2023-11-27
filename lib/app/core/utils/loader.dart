@@ -8,6 +8,7 @@ import 'package:dimipay/app/data/services/config/service.dart';
 import 'package:dimipay/app/data/services/local_auth/service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:dimipay/app/data/services/upgrader/service.dart';
+import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:screen_brightness/screen_brightness.dart';
@@ -19,7 +20,15 @@ class AppLoader {
     setPathUrlStrategy();
     KakaoSdk.init(nativeAppKey: TokenReference.KAKAO_NATIVE_KEY);
 
-    if (!kIsWeb) { if (Platform.isIOS) { await ScreenBrightness().setAutoReset(false); } } // Web Platform에선 Platform.isXXX 함수가 동작하지 않아 부득이하게 이중 if문 처리
+    if (!kIsWeb) {
+      if (Platform.isIOS) {
+        await ScreenBrightness().setAutoReset(false);
+      }
+    } // Web Platform에선 Platform.isXXX 함수가 동작하지 않아 부득이하게 이중 if문 처리
+
+    if (Platform.isAndroid) {
+      await FlutterDisplayMode.setHighRefreshRate();
+    }
 
     await Future.wait([
       Firebase.initializeApp(options: kIsWeb ? TokenReference.FIREBASEOPTION : null),
