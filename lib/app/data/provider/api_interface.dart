@@ -22,8 +22,6 @@ abstract class ApiInterface {
 
   Future<User> getUserInfo();
 
-  Future<List<Transaction>> getTransaction();
-
   Future<Map> getPaymentToken({required PaymentMethod paymentMethod, String? pin, String? bioKey});
 
   Future<void> createPaymentPin(String paymentPin);

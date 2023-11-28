@@ -13,7 +13,7 @@ class TransactionController extends GetxController with StateMixin<List<Transact
   Future fetchTransactions() async {
     try {
       change(transactions, status: RxStatus.loading());
-      _transactions.value = await repository.get();
+      _transactions.value = await repository.getTransaction();
       change(transactions, status: RxStatus.success());
     } catch (e) {
       change(transactions, status: RxStatus.error());
