@@ -83,25 +83,6 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<void> changePin(String originalPin, String newPin) async {
-    String url = '/payment/pin';
-    Map<String, String> body = {
-      'originalPin': originalPin,
-      'resetPin': newPin,
-    };
-    await dio.put(url, data: body);
-  }
-
-  @override
-  Future<void> createPaymentPin(String paymentPin) async {
-    String url = '/payment/pin';
-    Map<String, String> body = {
-      'paymentPin': paymentPin,
-    };
-    await dio.post(url, data: body);
-  }
-
-  @override
   Future<Response<T>> get<T>(String path, {Map<String, dynamic>? queryParameters, Options? options}) {
     return dio.get<T>(path, queryParameters: queryParameters, options: options);
   }
@@ -119,6 +100,11 @@ class ApiProvider implements ApiInterface {
   @override
   Future<Response<T>> patch<T>(String path, {dynamic data}) {
     return dio.patch<T>(path, data: data);
+  }
+
+  @override
+  Future<Response<T>> put<T>(String path, {dynamic data}) {
+    return dio.put(path, data: data);
   }
 
   @override
@@ -185,25 +171,5 @@ class ApiProvider implements ApiInterface {
     }
     Response response = await dio.post(url, data: body);
     return response.data;
-  }
-
-  @override
-  Future<void> checkPin(String pin) async {
-    String url = "/payment/check";
-    Map<String, String> body = {
-      "pin": pin,
-    };
-    try {
-      await dio.post(url, data: body);
-    } on DioError catch (e) {
-      if (e.response?.statusCode == 400) {
-        switch (e.response?.data['code']) {
-          case 'ERR_PIN_MISMATCH':
-            throw IncorrectPinException(e.response?.data['message'], e.response?.data['left']);
-          case 'PIN_LOCKED':
-            throw PinLockException(e.response?.data['message']);
-        }
-      }
-    }
   }
 }
