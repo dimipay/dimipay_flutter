@@ -7,7 +7,6 @@ class UserRepository {
 
   UserRepository({ApiInterface? api}) : api = api ?? Get.find<ApiInterface>();
 
-  @override
   Future<User> getUserInfo() async {
     String url = '/user/me';
 
