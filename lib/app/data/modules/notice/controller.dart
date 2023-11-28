@@ -13,7 +13,7 @@ class NoticeController extends GetxController with StateMixin<List<Notice>> {
   Future fetchNotices() async {
     try {
       change(notices, status: RxStatus.loading());
-      _notices.value = await repository.get();
+      _notices.value = await repository.getNotice();
       change(notices, status: RxStatus.success());
     } catch (e) {
       change(notices, status: RxStatus.error());

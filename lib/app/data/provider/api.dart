@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:dimipay/app/core/utils/errors.dart';
-import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
@@ -104,14 +103,6 @@ class ApiProvider implements ApiInterface {
       'paymentPin': paymentPin,
     };
     await dio.post(url, data: body);
-  }
-
-  @override
-  Future<List<Notice>> getNotice() async {
-    String url = '/notice/current';
-    Response response = await dio.get(url);
-
-    return (response.data as List).map<Notice>((e) => Notice.fromJson(e)).toList();
   }
 
   @override
