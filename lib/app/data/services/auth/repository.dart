@@ -1,9 +1,12 @@
+import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/data/provider/api_interface.dart';
+import 'package:dio/dio.dart';
+import 'package:get/instance_manager.dart';
 
 class AuthRepository {
   final ApiInterface api;
 
-  AuthRepository(this.api);
+  AuthRepository({ApiInterface? api}) : api = api ?? Get.find<ApiInterface>();
 
   ///returnes Login Result
   Future<Map> loginWithGoogle(idToken) async => api.loginWithGoogle(idToken);
@@ -16,7 +19,31 @@ class AuthRepository {
   ///use ['refreshToken'] to get refreshToken
   Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String? bioKey) async => api.onBoardingAuth(paymentPin, deviceUid, bioKey);
 
-  Future<void> changePin(String originalPin, String newPin) async => api.changePin(originalPin, newPin);
+  Future<void> changePin(String originalPin, String newPin) async {
+    String url = '/payment/pin';
+    Map<String, String> body = {
+      'originalPin': originalPin,
+      'resetPin': newPin,
+    };
+    await api.put(url, data: body);
+  }
 
-  Future<void> checkPin(String pin) async => api.checkPin(pin);
+  Future<void> checkPin(String pin) async {
+    String url = "/payment/check";
+    Map<String, String> body = {
+      "pin": pin,
+    };
+    try {
+      await api.post(url, data: body);
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 400) {
+        switch (e.response?.data['code']) {
+          case 'ERR_PIN_MISMATCH':
+            throw IncorrectPinException(e.response?.data['message'], e.response?.data['left']);
+          case 'PIN_LOCKED':
+            throw PinLockException(e.response?.data['message']);
+        }
+      }
+    }
+  }
 }

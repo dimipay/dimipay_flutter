@@ -7,6 +7,7 @@ abstract class ApiInterface {
   Future<Response<T>> delete<T>(String path, {dynamic data});
   Future<Response<T>> post<T>(String path, {dynamic data, Map<String, dynamic>? queryParameters});
   Future<Response<T>> patch<T>(String path, {dynamic data});
+  Future<Response<T>> put<T>(String path, {dynamic data});
 
   Future<Map> loginWithGoogle(String idToken);
 
@@ -19,10 +20,4 @@ abstract class ApiInterface {
   Future<String> refreshAccessToken(String refreshToken);
 
   Future<Map> getPaymentToken({required PaymentMethod paymentMethod, String? pin, String? bioKey});
-
-  Future<void> createPaymentPin(String paymentPin);
-
-  Future<void> checkPin(String pin);
-
-  Future<void> changePin(String originalPin, String newPin);
 }
