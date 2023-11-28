@@ -9,7 +9,6 @@ import 'package:dimipay/app/data/provider/api_interface.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:developer';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:intl/intl.dart';
@@ -118,6 +117,16 @@ class ApiProvider implements ApiInterface {
   @override
   Future<Response> get(String path, {Map<String, dynamic>? queryParameters}) {
     return dio.get(path, queryParameters: queryParameters);
+  }
+
+  @override
+  Future<Response> delete(String path) {
+    return dio.delete(path);
+  }
+
+  @override
+  Future<Response> post(String path, {dynamic data, Map<String, dynamic>? queryParameters}) {
+    return dio.post(path, data: data, queryParameters: queryParameters);
   }
 
   @override
@@ -294,26 +303,5 @@ class ApiProvider implements ApiInterface {
         }
       },
     ));
-  }
-
-  @override
-  Future<void> registerFaceSign(XFile image) async {
-    String url = "/auth/face";
-    final formData = FormData.fromMap({'image': await MultipartFile.fromFile(image.path)});
-    await dio.post(url, data: formData);
-  }
-
-  @override
-  Future<Map> deleteFaceSign() async {
-    String url = "/auth/face";
-    Response response = await dio.delete(url);
-    return response.data;
-  }
-
-  @override
-  Future<bool> faceSignRegistered() async {
-    String url = "/user/me/face-registered";
-    Response response = await dio.get(url);
-    return response.data['registered'];
   }
 }

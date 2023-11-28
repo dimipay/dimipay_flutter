@@ -13,7 +13,7 @@ class FaceSignController extends GetxController with StateMixin {
   Future<void> fetchIsFacesignRegistered() async {
     try {
       change(isFacesignRegistered, status: RxStatus.loading());
-      _isFacesignRegistered.value = await repository.facesignRegistered();
+      _isFacesignRegistered.value = await repository.faceSignRegistered();
       change(isFacesignRegistered, status: RxStatus.success());
     } catch (e) {
       change(isFacesignRegistered, status: RxStatus.error());
@@ -36,12 +36,12 @@ class FaceSignController extends GetxController with StateMixin {
       throw Exception('선택된 사진이 없어요.');
     }
 
-    await repository.register(image);
+    await repository.registerFaceSign(image);
     _isFacesignRegistered.value = true;
   }
 
   Future<void> deleteFaceSign() async {
-    await repository.delete();
+    await repository.deleteFaceSign();
     _isFacesignRegistered.value = false;
   }
 }
