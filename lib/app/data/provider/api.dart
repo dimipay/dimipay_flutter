@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:dimipay/app/core/utils/errors.dart';
-import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/data/provider/api_interface.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dio/dio.dart';
@@ -156,20 +155,5 @@ class ApiProvider implements ApiInterface {
     };
     Response response = await dio.post(url, options: Options(headers: headers));
     return response.data['accessToken'];
-  }
-
-  @override
-  Future<Map> getPaymentToken({required PaymentMethod paymentMethod, String? pin, String? bioKey}) async {
-    String url = '/payment/token';
-    Map<String, String> body = {
-      'id': paymentMethod.id,
-    };
-    if (pin != null) {
-      body['pin'] = pin;
-    } else if (bioKey != null) {
-      body['bioKey'] = bioKey;
-    }
-    Response response = await dio.post(url, data: body);
-    return response.data;
   }
 }
