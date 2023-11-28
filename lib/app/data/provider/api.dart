@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/data/provider/api_interface.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dio/dio.dart';
@@ -92,8 +91,8 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<Response<T>> post<T>(String path, {dynamic data, Map<String, dynamic>? queryParameters}) {
-    return dio.post<T>(path, data: data, queryParameters: queryParameters);
+  Future<Response<T>> post<T>(String path, {dynamic data, Map<String, dynamic>? queryParameters, Options? options}) {
+    return dio.post<T>(path, data: data, queryParameters: queryParameters, options: options);
   }
 
   @override
@@ -104,16 +103,5 @@ class ApiProvider implements ApiInterface {
   @override
   Future<Response<T>> put<T>(String path, {dynamic data}) {
     return dio.put(path, data: data);
-  }
-
-  @override
-  Future<String> refreshAccessToken(String refreshToken) async {
-    String url = "/auth/refresh";
-
-    Map<String, dynamic> headers = {
-      'Authorization': 'Bearer $refreshToken',
-    };
-    Response response = await dio.post(url, options: Options(headers: headers));
-    return response.data['accessToken'];
   }
 }
