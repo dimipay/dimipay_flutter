@@ -3,10 +3,10 @@ import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dio/dio.dart';
 
 abstract class ApiInterface {
-  Future<Response> get(String path, {Map<String, dynamic>? queryParameters});
-  Future<Response> delete(String path, {dynamic data});
-  Future<Response> post(String path, {dynamic data, Map<String, dynamic>? queryParameters});
-  Future<Response> patch(String path, {dynamic data});
+  Future<Response<T>> get<T>(String path, {Map<String, dynamic>? queryParameters, Options? options});
+  Future<Response<T>> delete<T>(String path, {dynamic data});
+  Future<Response<T>> post<T>(String path, {dynamic data, Map<String, dynamic>? queryParameters});
+  Future<Response<T>> patch<T>(String path, {dynamic data});
 
   Future<Map> loginWithGoogle(String idToken);
 
@@ -25,6 +25,4 @@ abstract class ApiInterface {
   Future<void> checkPin(String pin);
 
   Future<void> changePin(String originalPin, String newPin);
-
-  Future<Stream<String>?> payResult();
 }

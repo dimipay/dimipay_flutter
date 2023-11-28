@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/data/provider/api_interface.dart';
@@ -103,23 +102,23 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<Response> get(String path, {Map<String, dynamic>? queryParameters}) {
-    return dio.get(path, queryParameters: queryParameters);
+  Future<Response<T>> get<T>(String path, {Map<String, dynamic>? queryParameters, Options? options}) {
+    return dio.get<T>(path, queryParameters: queryParameters, options: options);
   }
 
   @override
-  Future<Response> delete(String path, {dynamic data}) {
-    return dio.delete(path, data: data);
+  Future<Response<T>> delete<T>(String path, {dynamic data}) {
+    return dio.delete<T>(path, data: data);
   }
 
   @override
-  Future<Response> post(String path, {dynamic data, Map<String, dynamic>? queryParameters}) {
-    return dio.post(path, data: data, queryParameters: queryParameters);
+  Future<Response<T>> post<T>(String path, {dynamic data, Map<String, dynamic>? queryParameters}) {
+    return dio.post<T>(path, data: data, queryParameters: queryParameters);
   }
 
   @override
-  Future<Response> patch(String path, {dynamic data}) {
-    return dio.patch(path, data: data);
+  Future<Response<T>> patch<T>(String path, {dynamic data}) {
+    return dio.patch<T>(path, data: data);
   }
 
   @override
@@ -206,25 +205,5 @@ class ApiProvider implements ApiInterface {
         }
       }
     }
-  }
-
-  @override
-  Future<Stream<String>?> payResult() async {
-    String url = "/payment/response";
-    Response response = await dio.get<ResponseBody>(
-      url,
-      options: Options(
-        headers: {"Accept": "text/event-stream"},
-        responseType: ResponseType.stream,
-      ),
-    );
-
-    return utf8.decoder.bind(response.data?.stream).transform(StreamTransformer.fromHandlers(
-      handleData: (data, sink) {
-        if (data != ':\n\n') {
-          sink.add(data);
-        }
-      },
-    ));
   }
 }

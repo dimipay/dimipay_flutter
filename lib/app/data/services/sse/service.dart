@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'package:dimipay/app/data/provider/api.dart' as api_provider;
+import 'package:dimipay/app/data/services/sse/repository.dart';
 import 'package:get/state_manager.dart';
 
 class PayResultSSEController extends GetxController {
+  final PayResultSSERepository repository;
+  PayResultSSEController(this.repository);
+
   StreamSubscription<String>? _stream;
   void Function()? onWaiting;
   void Function()? onPending;
@@ -46,7 +49,7 @@ class PayResultSSEController extends GetxController {
     if (_stream != null) {
       return;
     }
-    _stream = (await api_provider.ApiProvider().payResult())?.listen(null);
+    _stream = (await repository.payResult())?.listen(null);
     if (_stream == null) {
       throw Exception();
     }
