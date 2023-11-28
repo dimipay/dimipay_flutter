@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:dimipay/app/core/utils/errors.dart';
-import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
@@ -117,11 +116,8 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<List<Event>> getOngoingEvents() async {
-    String url = '/event/ongoing';
-    Response response = await dio.get(url);
-
-    return (response.data as List).map<Event>((model) => Event.fromJson(model)).toList();
+  Future<Response> get(String path, {Map<String, dynamic>? queryParameters}) {
+    return dio.get(path, queryParameters: queryParameters);
   }
 
   @override
