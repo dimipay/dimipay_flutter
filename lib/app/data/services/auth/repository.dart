@@ -24,7 +24,34 @@ class AuthRepository {
   ///returns map that contains accessToken and refreshToekn
   ///use ['accessToken'] to get accessToken
   ///use ['refreshToken'] to get refreshToken
-  Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String? bioKey) async => api.onBoardingAuth(paymentPin, deviceUid, bioKey);
+  Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String? bioKey) async {
+    String url = '/auth/onBoarding';
+    Map body = {
+      'paymentPin': paymentPin,
+      'deviceUid': deviceUid,
+    };
+    if (bioKey != null) {
+      body['bioKey'] = bioKey;
+    }
+    try {
+      Response response = await api.post(url, data: body);
+      return response.data['tokens'];
+    } on DioError catch (e) {
+      switch (e.response?.statusCode) {
+        case 400:
+          switch (e.response?.data['code']) {
+            case 'ERR_PIN_MISMATCH':
+              throw IncorrectPinException(e.response?.data['message'], e.response?.data['left']);
+            case 'PIN_LOCKED':
+              throw PinLockException(e.response?.data['message']);
+          }
+          break;
+        case 401:
+          throw OnboardingTokenException('구글 로그인을 다시 진행해주세요');
+      }
+    }
+    return {};
+  }
 
   Future<void> changePin(String originalPin, String newPin) async {
     String url = '/payment/pin';
