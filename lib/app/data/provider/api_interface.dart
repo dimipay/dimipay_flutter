@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
-import 'package:dimipay/app/data/modules/user/model.dart';
 import 'package:dio/dio.dart';
 
 abstract class ApiInterface {
@@ -18,8 +17,6 @@ abstract class ApiInterface {
 
   ///returns accessToken
   Future<String> refreshAccessToken(String refreshToken);
-
-  Future<User> getUserInfo();
 
   Future<Map> getPaymentToken({required PaymentMethod paymentMethod, String? pin, String? bioKey});
 

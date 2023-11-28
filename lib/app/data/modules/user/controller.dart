@@ -13,7 +13,7 @@ class UserController extends GetxController with StateMixin<User> {
   Future fetchUser() async {
     try {
       change(user, status: RxStatus.loading());
-      _user.value = await repository.get();
+      _user.value = await repository.getUserInfo();
       change(user, status: RxStatus.success());
     } catch (e) {
       change(user, status: RxStatus.error());
