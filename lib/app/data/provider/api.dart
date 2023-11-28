@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
-import 'package:dimipay/app/data/modules/user/model.dart';
 import 'package:dimipay/app/data/provider/api_interface.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dio/dio.dart';
@@ -121,15 +120,6 @@ class ApiProvider implements ApiInterface {
   @override
   Future<Response> patch(String path, {dynamic data}) {
     return dio.patch(path, data: data);
-  }
-
-  @override
-  Future<User> getUserInfo() async {
-    String url = '/user/me';
-
-    Response response = await dio.get(url);
-
-    return User.fromJson(response.data);
   }
 
   @override
