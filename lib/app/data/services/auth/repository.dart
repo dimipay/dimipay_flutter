@@ -9,7 +9,14 @@ class AuthRepository {
   AuthRepository({ApiInterface? api}) : api = api ?? Get.find<ApiInterface>();
 
   ///returnes Login Result
-  Future<Map> loginWithGoogle(idToken) async => api.loginWithGoogle(idToken);
+  Future<Map> loginWithGoogle(String idToken) async {
+    String url = '/auth/login';
+    Map body = {
+      'idToken': idToken,
+    };
+    Response response = await api.post(url, data: body);
+    return response.data;
+  }
 
   ///returns accessToken
   Future<String> refreshAccessToken(String refreshToken) async => api.refreshAccessToken(refreshToken);
