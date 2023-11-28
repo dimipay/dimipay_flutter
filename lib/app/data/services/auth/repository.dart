@@ -19,7 +19,15 @@ class AuthRepository {
   }
 
   ///returns accessToken
-  Future<String> refreshAccessToken(String refreshToken) async => api.refreshAccessToken(refreshToken);
+  Future<String> refreshAccessToken(String refreshToken) async {
+    String url = "/auth/refresh";
+
+    Map<String, dynamic> headers = {
+      'Authorization': 'Bearer $refreshToken',
+    };
+    Response response = await api.post(url, options: Options(headers: headers));
+    return response.data['accessToken'];
+  }
 
   ///returns map that contains accessToken and refreshToekn
   ///use ['accessToken'] to get accessToken
