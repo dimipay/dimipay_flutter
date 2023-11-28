@@ -19,6 +19,6 @@ class HomePageBinding implements Bindings {
     Get.put<EventController>(EventController(EventRepository()));
     Get.put<PaymentMethodController>(PaymentMethodController(PaymentMethodRepository(ApiProvider())));
     Get.put<ConnectivityService>(ConnectivityService());
-    Get.lazyPut<NoticeController>(() => NoticeController(NoticeRepository(ApiProvider())));
+    Get.lazyPut<NoticeController>(() => NoticeController(NoticeRepository()));
   }
 }

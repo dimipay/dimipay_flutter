@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
@@ -21,8 +20,6 @@ abstract class ApiInterface {
   Future<String> refreshAccessToken(String refreshToken);
 
   Future<User> getUserInfo();
-
-  Future<List<Notice>> getNotice();
 
   Future<List<Transaction>> getTransaction();
 
