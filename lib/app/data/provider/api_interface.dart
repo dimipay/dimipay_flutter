@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
-import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
 import 'package:dio/dio.dart';
 
