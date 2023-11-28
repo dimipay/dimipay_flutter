@@ -72,7 +72,7 @@ class PayPage extends GetView<PayPageController> {
                     controller.obx(
                       (_) => Obx(
                         () => QrImageView(
-                          data: controller.paymentToken.value!,
+                          data: controller.payService.paymentToken.value ?? '',
                           size: 220,
                           version: 1,
                         ),
