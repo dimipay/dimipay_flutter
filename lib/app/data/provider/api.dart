@@ -119,16 +119,9 @@ class ApiProvider implements ApiInterface {
     return dio.post(path, data: data, queryParameters: queryParameters);
   }
 
+  @override
   Future<Response> patch(String path, {dynamic data}) {
     return dio.patch(path, data: data);
-  }
-
-  @override
-  Future<List<Transaction>> getTransaction() async {
-    String url = '/transaction/my';
-    Response response = await dio.get(url);
-
-    return (response.data as List).map<Transaction>((model) => Transaction.fromJson(model)).toList();
   }
 
   @override
