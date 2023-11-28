@@ -123,7 +123,7 @@ class AuthService extends GetxService {
     return _refreshTokenApiCompleter?.future;
   }
 
-  Future<void> _removeToken() async {
+  Future<void> _clearTokens() async {
     await _storage.delete(key: 'accessToken');
     await _storage.delete(key: 'refreshToken');
     await _storage.delete(key: 'bioKey');
@@ -138,6 +138,6 @@ class AuthService extends GetxService {
   }
 
   Future<void> logout() async {
-    await _removeToken();
+    await _clearTokens();
   }
 }
