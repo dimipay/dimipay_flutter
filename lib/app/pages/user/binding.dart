@@ -14,6 +14,6 @@ class UserPageBinding implements Bindings {
     Get.lazyPut<UserController>(() => UserController(UserRepository(ApiProvider())));
     Get.lazyPut<FaceSignController>(() => FaceSignController(FaceSignRepository()));
     Get.lazyPut<UserPageController>(() => UserPageController());
-    Get.lazyPut<PaymentMethodController>(() => PaymentMethodController(PaymentMethodRepository(ApiProvider())));
+    Get.lazyPut<PaymentMethodController>(() => PaymentMethodController(PaymentMethodRepository()));
   }
 }
