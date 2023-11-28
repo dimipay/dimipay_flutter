@@ -6,8 +6,9 @@ import 'package:dio/dio.dart';
 
 abstract class ApiInterface {
   Future<Response> get(String path, {Map<String, dynamic>? queryParameters});
-  Future<Response> delete(String path);
+  Future<Response> delete(String path, {dynamic data});
   Future<Response> post(String path, {dynamic data, Map<String, dynamic>? queryParameters});
+  Future<Response> patch(String path, {dynamic data});
 
   Future<Map> loginWithGoogle(String idToken);
 
@@ -22,21 +23,6 @@ abstract class ApiInterface {
   Future<User> getUserInfo();
 
   Future<List<Transaction>> getTransaction();
-
-  Future<List<PaymentMethod>> getPaymentMethods();
-
-  Future<PaymentMethod> createPaymentMethod({
-    required String cardNumber,
-    required String password,
-    required String ownerPersonalNum,
-    required DateTime expireAt,
-  });
-
-  Future<void> patchPaymentMethod({required PaymentMethod paymentMethod});
-
-  Future<void> deletePaymentMethod({
-    required PaymentMethod paymentMethod,
-  });
 
   Future<Map> getPaymentToken({required PaymentMethod paymentMethod, String? pin, String? bioKey});
 

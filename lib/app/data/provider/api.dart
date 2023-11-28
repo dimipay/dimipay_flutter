@@ -10,7 +10,6 @@ import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
 import 'dart:developer';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:intl/intl.dart';
 
 class JWTInterceptor extends Interceptor {
   final Dio _dioInstance;
@@ -111,13 +110,17 @@ class ApiProvider implements ApiInterface {
   }
 
   @override
-  Future<Response> delete(String path) {
-    return dio.delete(path);
+  Future<Response> delete(String path, {dynamic data}) {
+    return dio.delete(path, data: data);
   }
 
   @override
   Future<Response> post(String path, {dynamic data, Map<String, dynamic>? queryParameters}) {
     return dio.post(path, data: data, queryParameters: queryParameters);
+  }
+
+  Future<Response> patch(String path, {dynamic data}) {
+    return dio.patch(path, data: data);
   }
 
   @override
@@ -201,59 +204,6 @@ class ApiProvider implements ApiInterface {
     }
     Response response = await dio.post(url, data: body);
     return response.data;
-  }
-
-  @override
-  Future<List<PaymentMethod>> getPaymentMethods() async {
-    String url = '/payment/method';
-    Response response = await dio.get(url);
-    return (response.data as List).map<PaymentMethod>((model) => PaymentMethod.fromJson(model)).toList();
-  }
-
-  @override
-  Future<PaymentMethod> createPaymentMethod({
-    required String cardNumber,
-    required String password,
-    required String ownerPersonalNum,
-    required DateTime expireAt,
-  }) async {
-    String url = "/payment/method";
-    Map<String, String> body = {
-      "number": cardNumber,
-      "year": DateFormat('yyyy').format(expireAt).substring(2),
-      "month": DateFormat('MM').format(expireAt),
-      "idNo": ownerPersonalNum,
-      "pw": password,
-    };
-    Response response = await dio.post(url, data: body);
-    return PaymentMethod.fromJson(response.data);
-  }
-
-  @override
-  Future<void> deletePaymentMethod({
-    required PaymentMethod paymentMethod,
-  }) async {
-    String url = "/payment/method/";
-
-    Map<String, String> body = {
-      'id': paymentMethod.id,
-    };
-    await dio.delete(url, data: body);
-  }
-
-  @override
-  Future<void> patchPaymentMethod({required PaymentMethod paymentMethod}) async {
-    String url = "/payment/method/";
-
-    Map body = {
-      'id': paymentMethod.id,
-      'name': paymentMethod.name,
-    };
-    if (paymentMethod.color != null) {
-      body.addAll({'color': paymentMethod.color});
-    }
-
-    await dio.patch(url, data: body);
   }
 
   @override
