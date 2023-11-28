@@ -1,12 +1,14 @@
 import 'dart:async';
-import 'package:dimipay/app/data/modules/event/model.dart';
 import 'package:dimipay/app/data/modules/notice/model.dart';
 import 'package:dimipay/app/data/modules/payment_method/model.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/data/modules/user/model.dart';
+import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
 abstract class ApiInterface {
+  Future<Response> get(String path, {Map<String, dynamic>? queryParameters});
+
   Future<Map> loginWithGoogle(String idToken);
 
   ///returns map that contains accessToken and refreshToekn
@@ -20,8 +22,6 @@ abstract class ApiInterface {
   Future<User> getUserInfo();
 
   Future<List<Notice>> getNotice();
-
-  Future<List<Event>> getOngoingEvents();
 
   Future<List<Transaction>> getTransaction();
 

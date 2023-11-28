@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dimipay/app/core/utils/token_reference.dart';
 import 'package:dimipay/app/data/provider/api.dart';
+import 'package:dimipay/app/data/provider/api_interface.dart';
 import 'package:dimipay/app/data/services/auth/repository.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/data/services/config/service.dart';
@@ -28,6 +29,8 @@ class AppLoader {
         await FlutterDisplayMode.setHighRefreshRate();
       }
     } // Web Platform에선 Platform.isXXX 함수가 동작하지 않아 부득이하게 이중 if문 처리
+
+    Get.put<ApiInterface>(ApiProvider());
 
     await Future.wait([
       Firebase.initializeApp(options: kIsWeb ? TokenReference.FIREBASEOPTION : null),
