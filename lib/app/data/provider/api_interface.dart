@@ -8,11 +8,6 @@ abstract class ApiInterface {
   Future<Response<T>> patch<T>(String path, {dynamic data});
   Future<Response<T>> put<T>(String path, {dynamic data});
 
-  ///returns map that contains accessToken and refreshToekn
-  ///use ['accessToken'] to get accessToken
-  ///use ['refreshToken'] to get refreshToken
-  Future<Map> onBoardingAuth(String paymentPin, String deviceUid, String? bioKey);
-
   ///returns accessToken
   Future<String> refreshAccessToken(String refreshToken);
 }
