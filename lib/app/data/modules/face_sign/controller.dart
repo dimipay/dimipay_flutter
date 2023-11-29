@@ -8,7 +8,7 @@ class FaceSignController extends GetxController with StateMixin {
   final Rx<bool?> _isFacesignRegistered = Rx(null);
   bool? get isFacesignRegistered => _isFacesignRegistered.value;
 
-  FaceSignController(this.repository);
+  FaceSignController({FaceSignRepository? repository}) : repository = repository ?? FaceSignRepository();
 
   Future<void> fetchIsFacesignRegistered() async {
     try {
