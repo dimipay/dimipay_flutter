@@ -19,7 +19,7 @@ class AuthService extends GetxService {
   String? _pin;
   String? _bioKey;
 
-  AuthService(this.repository);
+  AuthService({AuthRepository? repository}) : repository = repository ?? AuthRepository();
 
   /// google sign-in과 onboarding 과정이 완료되었을 경우 true
   bool get isAuthenticated => _accessToken.value != null;

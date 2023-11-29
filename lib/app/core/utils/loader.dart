@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:dimipay/app/core/utils/token_reference.dart';
 import 'package:dimipay/app/data/provider/api.dart';
 import 'package:dimipay/app/data/provider/api_interface.dart';
-import 'package:dimipay/app/data/services/auth/repository.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/data/services/config/service.dart';
 import 'package:dimipay/app/data/services/local_auth/service.dart';
@@ -39,7 +37,7 @@ class AppLoader {
     await Future.wait([
       Firebase.initializeApp(options: kIsWeb ? TokenReference.FIREBASEOPTION : null),
       Get.putAsync<UpgraderService>(() => UpgraderService().init()),
-      Get.putAsync<AuthService>(() => AuthService(AuthRepository()).init()),
+      Get.putAsync(() => AuthService().init()),
       Get.putAsync<AppConfigService>(() => AppConfigService().init()),
       Get.putAsync<LocalAuthService>(() => LocalAuthService().init()),
     ]);
