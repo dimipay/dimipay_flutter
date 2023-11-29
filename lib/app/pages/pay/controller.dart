@@ -53,7 +53,6 @@ class PayPageController extends GetxController with StateMixin<String> {
   Future refreshPaymentToken(DateTime expireAt) async {
     tokenRefreshTimer?.cancel();
     Duration awaitTime = expireAt.difference(DateTime.now());
-    print(awaitTime.inSeconds);
     tokenRefreshTimer = Timer(awaitTime, () async {
       change(null, status: RxStatus.loading());
       await payService.fetchPaymentToken(currentPaymentMethod!);
