@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class TransactionController extends GetxController with StateMixin<List<Transaction>> {
   final TransactionRepository repository;
 
-  TransactionController(this.repository);
+  TransactionController({TransactionRepository? repository}) : repository = repository ?? TransactionRepository();
 
   final Rx<List<Transaction>?> _transactions = Rx(null);
   List<Transaction>? get transactions => _transactions.value;
