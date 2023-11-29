@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class UserController extends GetxController with StateMixin<User> {
   final UserRepository repository;
 
-  UserController(this.repository);
+  UserController({UserRepository? repository}) : repository = repository ?? UserRepository();
 
   final Rx<User?> _user = Rx(null);
   User? get user => _user.value;
