@@ -4,9 +4,9 @@ import 'package:get/instance_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
 class FaceSignRepository {
-  final ApiInterface api;
+  final ApiProvider api;
 
-  FaceSignRepository({ApiInterface? api}) : api = api ?? Get.find<ApiInterface>();
+  FaceSignRepository({ApiProvider? api}) : api = api ?? Get.find<ApiProvider>();
 
   Future<void> registerFaceSign(XFile image) async {
     String url = "/auth/face";

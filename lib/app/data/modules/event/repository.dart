@@ -3,9 +3,9 @@ import 'package:dimipay/app/data/provider/api_interface.dart';
 import 'package:get/get.dart';
 
 class EventRepository {
-  final ApiInterface api;
+  final ApiProvider api;
 
-  EventRepository({ApiInterface? api}) : api = api ?? Get.find<ApiInterface>();
+  EventRepository({ApiProvider? api}) : api = api ?? Get.find<ApiProvider>();
 
   Future<List<Event>> getOngoingEvents() async {
     String url = '/event/ongoing';

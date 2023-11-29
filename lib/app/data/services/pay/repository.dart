@@ -6,9 +6,9 @@ import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
 
 class PayRepository {
-  final ApiInterface api;
+  final ApiProvider api;
 
-  PayRepository({ApiInterface? api}) : api = api ?? Get.find<ApiInterface>();
+  PayRepository({ApiProvider? api}) : api = api ?? Get.find<ApiProvider>();
 
   Future<Stream<String>?> payResultStream() async {
     String url = "/payment/response";

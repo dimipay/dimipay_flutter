@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:dimipay/app/data/provider/api_interface.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dio/dio.dart';
@@ -69,39 +68,22 @@ class LogInterceptor extends Interceptor {
   }
 }
 
-class ApiProvider implements ApiInterface {
-  final Dio dio = Dio();
-  // final baseUrl = kReleaseMode ? 'https://api.dimipay.io' : 'https://dev.api.dimipay.io';
+class ProdApiProvider extends ApiProvider {
   final baseUrl = 'https://api.dimipay.io';
 
-  ApiProvider() {
+  ProdApiProvider() {
     dio.options.baseUrl = baseUrl;
     dio.interceptors.add(LogInterceptor());
     dio.interceptors.add(JWTInterceptor(dio));
   }
+}
 
-  @override
-  Future<Response<T>> get<T>(String path, {Map<String, dynamic>? queryParameters, Options? options}) {
-    return dio.get<T>(path, queryParameters: queryParameters, options: options);
-  }
+class DevApiProvider extends ApiProvider {
+  final baseUrl = 'https://dev.api.dimipay.io';
 
-  @override
-  Future<Response<T>> delete<T>(String path, {dynamic data}) {
-    return dio.delete<T>(path, data: data);
-  }
-
-  @override
-  Future<Response<T>> post<T>(String path, {dynamic data, Map<String, dynamic>? queryParameters, Options? options}) {
-    return dio.post<T>(path, data: data, queryParameters: queryParameters, options: options);
-  }
-
-  @override
-  Future<Response<T>> patch<T>(String path, {dynamic data}) {
-    return dio.patch<T>(path, data: data);
-  }
-
-  @override
-  Future<Response<T>> put<T>(String path, {dynamic data}) {
-    return dio.put(path, data: data);
+  DevApiProvider() {
+    dio.options.baseUrl = baseUrl;
+    dio.interceptors.add(LogInterceptor());
+    dio.interceptors.add(JWTInterceptor(dio));
   }
 }
