@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class FaceSignTip2PageBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<FaceSignTip2PageController>(() => FaceSignTip2PageController());
+    Get.lazyPut(() => FaceSignTip2PageController());
     Get.lazyPut(() => FaceSignController());
   }
 }

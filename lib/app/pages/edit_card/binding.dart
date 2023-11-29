@@ -4,6 +4,6 @@ import 'package:get/get.dart';
 class EditCardPageBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<EditCardPageController>(() => EditCardPageController());
+    Get.lazyPut(() => EditCardPageController());
   }
 }

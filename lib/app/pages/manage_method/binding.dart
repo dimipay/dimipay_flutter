@@ -6,6 +6,6 @@ class ManageMethodPageBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => PaymentMethodController());
-    Get.lazyPut<ManageMethodPageController>(() => ManageMethodPageController());
+    Get.lazyPut(() => ManageMethodPageController());
   }
 }

@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 class LoginPageBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<LoginPageController>(() => LoginPageController());
-    Get.lazyPut<GyroScopeController>(() => GyroScopeController());
-    Get.put<ConnectivityService>(ConnectivityService());
+    Get.lazyPut(() => LoginPageController());
+    Get.lazyPut(() => GyroScopeController());
+    Get.put(ConnectivityService());
   }
 }

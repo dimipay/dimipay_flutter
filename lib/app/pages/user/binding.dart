@@ -9,7 +9,7 @@ class UserPageBinding implements Bindings {
   void dependencies() {
     Get.lazyPut(() => UserController());
     Get.lazyPut(() => FaceSignController());
-    Get.lazyPut<UserPageController>(() => UserPageController());
+    Get.lazyPut(() => UserPageController());
     Get.lazyPut(() => PaymentMethodController());
   }
 }

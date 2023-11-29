@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class FaceSignDeletePageBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<FaceSignDeletePageController>(() => FaceSignDeletePageController());
+    Get.lazyPut(() => FaceSignDeletePageController());
     Get.lazyPut(() => FaceSignController());
   }
 }
