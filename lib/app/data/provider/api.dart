@@ -79,7 +79,7 @@ class ProdApiProvider extends ApiProvider {
 }
 
 class DevApiProvider extends ApiProvider {
-  final baseUrl = 'https://dev.api.dimipay.io';
+  final baseUrl = 'https://dev-api.dimipay.io';
 
   DevApiProvider() {
     dio.options.baseUrl = baseUrl;

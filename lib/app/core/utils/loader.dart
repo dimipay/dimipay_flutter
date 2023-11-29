@@ -30,7 +30,11 @@ class AppLoader {
       }
     } // Web Platform에선 Platform.isXXX 함수가 동작하지 않아 부득이하게 이중 if문 처리
 
-    Get.put<ApiProvider>(DevApiProvider());
+    if (kReleaseMode) {
+      Get.put<ApiProvider>(ProdApiProvider());
+    } else {
+      Get.put<ApiProvider>(DevApiProvider());
+    }
 
     await Future.wait([
       Firebase.initializeApp(options: kIsWeb ? TokenReference.FIREBASEOPTION : null),
