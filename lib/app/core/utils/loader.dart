@@ -36,10 +36,10 @@ class AppLoader {
 
     await Future.wait([
       Firebase.initializeApp(options: kIsWeb ? TokenReference.FIREBASEOPTION : null),
-      Get.putAsync<UpgraderService>(() => UpgraderService().init()),
+      Get.putAsync(() => UpgraderService().init()),
       Get.putAsync(() => AuthService().init()),
-      Get.putAsync<AppConfigService>(() => AppConfigService().init()),
-      Get.putAsync<LocalAuthService>(() => LocalAuthService().init()),
+      Get.putAsync(() => AppConfigService().init()),
+      Get.putAsync(() => LocalAuthService().init()),
     ]);
   }
 }

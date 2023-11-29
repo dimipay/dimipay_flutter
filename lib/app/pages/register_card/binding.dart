@@ -6,6 +6,6 @@ class RegisterCardPageBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => PaymentMethodController());
-    Get.lazyPut<RegisterCardPageController>(() => RegisterCardPageController());
+    Get.lazyPut(() => RegisterCardPageController());
   }
 }

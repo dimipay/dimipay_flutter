@@ -6,6 +6,6 @@ class EventPageBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => EventController());
-    Get.lazyPut<EventPageController>(() => EventPageController());
+    Get.lazyPut(() => EventPageController());
   }
 }

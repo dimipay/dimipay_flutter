@@ -6,6 +6,6 @@ class HistoryPageBinding implements Bindings {
   @override
   void dependencies() {
     Get.put(TransactionController());
-    Get.lazyPut<HistoryPageController>(() => HistoryPageController());
+    Get.lazyPut(() => HistoryPageController());
   }
 }

@@ -9,11 +9,11 @@ import 'package:get/get.dart';
 class HomePageBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<HomePageController>(() => HomePageController());
+    Get.lazyPut(() => HomePageController());
     Get.put(UserController());
     Get.put(EventController());
     Get.put(PaymentMethodController());
-    Get.put<ConnectivityService>(ConnectivityService());
+    Get.put(ConnectivityService());
     Get.lazyPut(() => NoticeController());
   }
 }

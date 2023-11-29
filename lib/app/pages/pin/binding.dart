@@ -4,6 +4,6 @@ import 'package:get/get.dart';
 class PinPageBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<PinPageController>(() => PinPageController());
+    Get.lazyPut(() => PinPageController());
   }
 }
