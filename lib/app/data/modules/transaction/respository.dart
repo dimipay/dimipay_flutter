@@ -3,9 +3,9 @@ import 'package:dimipay/app/data/provider/api_interface.dart';
 import 'package:get/instance_manager.dart';
 
 class TransactionRepository {
-  final ApiInterface api;
+  final ApiProvider api;
 
-  TransactionRepository({ApiInterface? api}) : api = api ?? Get.find<ApiInterface>();
+  TransactionRepository({ApiProvider? api}) : api = api ?? Get.find<ApiProvider>();
 
   Future<List<Transaction>> getTransaction() async {
     String url = '/transaction/my';

@@ -4,9 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
 
 class AuthRepository {
-  final ApiInterface api;
+  final ApiProvider api;
 
-  AuthRepository({ApiInterface? api}) : api = api ?? Get.find<ApiInterface>();
+  AuthRepository({ApiProvider? api}) : api = api ?? Get.find<ApiProvider>();
 
   ///returnes Login Result
   Future<Map> loginWithGoogle(String idToken) async {

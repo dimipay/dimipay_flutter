@@ -3,9 +3,9 @@ import 'package:dimipay/app/data/provider/api_interface.dart';
 import 'package:get/instance_manager.dart';
 
 class NoticeRepository {
-  final ApiInterface api;
+  final ApiProvider api;
 
-  NoticeRepository({ApiInterface? api}) : api = api ?? Get.find<ApiInterface>();
+  NoticeRepository({ApiProvider? api}) : api = api ?? Get.find<ApiProvider>();
 
   Future<List<Notice>> getNotice() async {
     String url = '/notice/current';

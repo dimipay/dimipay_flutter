@@ -4,9 +4,9 @@ import 'package:get/instance_manager.dart';
 import 'package:intl/intl.dart';
 
 class PaymentMethodRepository {
-  final ApiInterface api;
+  final ApiProvider api;
 
-  PaymentMethodRepository({ApiInterface? api}) : api = api ?? Get.find<ApiInterface>();
+  PaymentMethodRepository({ApiProvider? api}) : api = api ?? Get.find<ApiProvider>();
 
   Future<List<PaymentMethod>> getPaymentMethods() async {
     String url = '/payment/method';
