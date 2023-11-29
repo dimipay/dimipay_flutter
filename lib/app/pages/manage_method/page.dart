@@ -89,7 +89,7 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
         },
         color: DPColors.MAIN_THEME,
         child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.only(bottom: 100),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32),

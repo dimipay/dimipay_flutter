@@ -22,6 +22,7 @@ class TestPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: ListView(
+        physics: const BouncingScrollPhysics(),
         children: [
           linkToRoute(Routes.HOME),
           linkToRoute(Routes.LOGIN),

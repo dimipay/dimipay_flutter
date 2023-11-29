@@ -40,7 +40,7 @@ class PayPage extends GetView<PayPageController> {
                   enlargeCenterPage: true,
                   enlargeStrategy: CenterPageEnlargeStrategy.scale,
                   viewportFraction: 0.45,
-                  scrollPhysics: const AlwaysScrollableScrollPhysics(),
+                  scrollPhysics: const BouncingScrollPhysics(),
                   initialPage: controller.currentIndex,
                   onPageChanged: (index, carouselPageChangedReason) => controller.onPaymentMethodChanged(index),
                 ),

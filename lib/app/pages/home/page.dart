@@ -262,7 +262,7 @@ class HomePage extends GetView<HomePageController> {
   Widget _buildPaymentMethods() {
     return Obx(
       () => SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [

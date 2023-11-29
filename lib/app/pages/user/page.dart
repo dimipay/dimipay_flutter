@@ -171,7 +171,7 @@ class UserPage extends GetView<UserPageController> {
           color: DPColors.MAIN_THEME,
           onRefresh: controller.refreshData,
           child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
+            physics: const BouncingScrollPhysics(), // 새로고침이 무조건 필요하면 AlwaysScrollableScrollPhysics()로 바꾸기
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
