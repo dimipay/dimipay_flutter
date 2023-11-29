@@ -10,7 +10,7 @@ import 'package:get/state_manager.dart';
 
 class PayService extends GetxController with StateMixin<String> {
   final PayRepository repository;
-  PayService(this.repository);
+  PayService({PayRepository? repository}) : repository = repository ?? PayRepository();
 
   final AuthService authService = Get.find<AuthService>();
 
