@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class EventController extends GetxController with StateMixin<List<Event>> {
   final EventRepository repository;
 
-  EventController(this.repository);
+  EventController({EventRepository? repository}) : repository = repository ?? EventRepository();
 
   final Rx<List<Event>?> _events = Rx(null);
   List<Event>? get events => _events.value;
