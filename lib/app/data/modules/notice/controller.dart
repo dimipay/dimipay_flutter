@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class NoticeController extends GetxController with StateMixin<List<Notice>> {
   final NoticeRepository repository;
 
-  NoticeController(this.repository);
+  NoticeController({NoticeRepository? repository}) : repository = repository ?? NoticeRepository();
 
   final Rx<List<Notice>?> _notices = Rx(null);
   List<Notice>? get notices => _notices.value;
