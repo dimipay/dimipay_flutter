@@ -30,7 +30,7 @@ class FaceSignTip1Page extends StatelessWidget {
               const SizedBox(height: 16),
               const Text(
                 '정확한 인식을 위해 얼굴을 등록할 때에는 잠시 마스크를 벗어주세요. 포스에선 마스크를 착용하고 Face Sign을 사용할 수 있어요.',
-                style: TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.4, color: DPColors.DARK3),
+                style: TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.4, color: DPColors.DARK300),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 64),

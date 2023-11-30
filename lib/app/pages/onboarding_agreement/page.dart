@@ -107,20 +107,20 @@ class TermsItem extends StatefulWidget {
 }
 
 class _TermsItemState extends State<TermsItem> {
-  Color backgroundColor = DPColors.DARK6;
+  Color backgroundColor = DPColors.DARK600;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onTap,
       onTapDown: (details) => setState(() {
-        backgroundColor = DPColors.DARK5;
+        backgroundColor = DPColors.DARK500;
       }),
       onTapUp: (details) => setState(() {
-        backgroundColor = DPColors.DARK6;
+        backgroundColor = DPColors.DARK600;
       }),
       onTapCancel: () => setState(() {
-        backgroundColor = DPColors.DARK6;
+        backgroundColor = DPColors.DARK600;
       }),
       child: Container(
         width: double.infinity,
@@ -132,7 +132,7 @@ class _TermsItemState extends State<TermsItem> {
           padding: const EdgeInsets.all(16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text(widget.title, style: DPTextTheme.DESCRIPTION_IMPORTANT), SvgPicture.asset('asset/images/arrow_right.svg', color: DPColors.DARK1)],
+            children: [Text(widget.title, style: DPTextTheme.DESCRIPTION_IMPORTANT), SvgPicture.asset('asset/images/arrow_right.svg', color: DPColors.DARK100)],
           ),
         ),
       ),

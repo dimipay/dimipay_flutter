@@ -46,7 +46,7 @@ class PinPage extends GetView<PinPageController> {
                       disabled: controller.isPinLocked.value,
                       child: Text(
                         "${nums[0]}",
-                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK100),
                       ),
                     ),
                   ),
@@ -57,7 +57,7 @@ class PinPage extends GetView<PinPageController> {
                       disabled: controller.isPinLocked.value,
                       child: Text(
                         "${nums[1]}",
-                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK100),
                       ),
                     ),
                   ),
@@ -68,7 +68,7 @@ class PinPage extends GetView<PinPageController> {
                       disabled: controller.isPinLocked.value,
                       child: Text(
                         "${nums[2]}",
-                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK100),
                       ),
                     ),
                   ),
@@ -85,7 +85,7 @@ class PinPage extends GetView<PinPageController> {
                       disabled: controller.isPinLocked.value,
                       child: Text(
                         "${nums[3]}",
-                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK100),
                       ),
                     ),
                   ),
@@ -96,7 +96,7 @@ class PinPage extends GetView<PinPageController> {
                       disabled: controller.isPinLocked.value,
                       child: Text(
                         "${nums[4]}",
-                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK100),
                       ),
                     ),
                   ),
@@ -107,7 +107,7 @@ class PinPage extends GetView<PinPageController> {
                       disabled: controller.isPinLocked.value,
                       child: Text(
                         "${nums[5]}",
-                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK100),
                       ),
                     ),
                   ),
@@ -124,7 +124,7 @@ class PinPage extends GetView<PinPageController> {
                       disabled: controller.isPinLocked.value,
                       child: Text(
                         "${nums[6]}",
-                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK100),
                       ),
                     ),
                   ),
@@ -135,7 +135,7 @@ class PinPage extends GetView<PinPageController> {
                       disabled: controller.isPinLocked.value,
                       child: Text(
                         "${nums[7]}",
-                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK100),
                       ),
                     ),
                   ),
@@ -146,7 +146,7 @@ class PinPage extends GetView<PinPageController> {
                       disabled: controller.isPinLocked.value,
                       child: Text(
                         "${nums[8]}",
-                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK100),
                       ),
                     ),
                   ),
@@ -179,7 +179,7 @@ class PinPage extends GetView<PinPageController> {
                       disabled: controller.isPinLocked.value,
                       child: Text(
                         "${nums[9]}",
-                        style: const TextStyle(fontSize: 30, color: DPColors.DARK1),
+                        style: const TextStyle(fontSize: 30, color: DPColors.DARK100),
                       ),
                     ),
                   ),
@@ -190,7 +190,7 @@ class PinPage extends GetView<PinPageController> {
                       disabled: controller.password.value.isEmpty,
                       child: const Icon(
                         Icons.backspace_outlined,
-                        color: DPColors.DARK1,
+                        color: DPColors.DARK100,
                         size: 22,
                       ),
                     ),

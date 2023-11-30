@@ -42,7 +42,7 @@ class DPIconButton extends StatelessWidget {
         width: 48,
         height: 48,
         decoration: BoxDecoration(
-          color: DPColors.DARK6,
+          color: DPColors.DARK600,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Stack(

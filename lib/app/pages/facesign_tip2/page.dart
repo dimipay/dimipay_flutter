@@ -3,6 +3,7 @@ import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/pages/facesign_tip2/controller.dart';
 import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:dimipay/app/widgets/button.dart';
+import 'package:dimipay/app/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -16,30 +17,7 @@ class FaceSignTip2Page extends GetView<FaceSignTip2PageController> {
       appBar: const DPAppBar(),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 30.0,
-                  width: 30.0,
-                  child: CircularProgressIndicator(
-                    color: DPColors.DARK4,
-                    strokeWidth: 4.0,
-                  ),
-                ),
-                SizedBox(width: 20),
-                Text(
-                  '로딩중...',
-                  style: TextStyle(
-                    color: DPColors.DARK4,
-                    fontSize: 20.0,
-                  ),
-                ),
-              ],
-            ),
-          );
+          return const DPLoading();
         } else {
           return buildContent(context);
         }
@@ -68,7 +46,7 @@ class FaceSignTip2Page extends GetView<FaceSignTip2PageController> {
             const SizedBox(height: 16),
             const Text(
               '평온한 표정으로 카메라를 응시한 채 얼굴을 가운데에 맞추고 사진을 찍으세요. 평소에 자주 하는 머리 스타일과 메이크업을 한 상태로 진행해주세요.',
-              style: TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.4, color: DPColors.DARK3),
+              style: TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.4, color: DPColors.DARK300),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 72),

@@ -31,7 +31,8 @@ class PrivacyPolicyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      // 린트 오류, const 사용 불가
       appBar: DPAppBar(
         title: "개인정보 보호방침",
       ),

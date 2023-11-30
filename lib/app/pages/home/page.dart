@@ -8,6 +8,7 @@ import 'package:dimipay/app/pages/home/controller.dart';
 import 'package:dimipay/app/pages/home/widget/event_item.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/button.dart';
+import 'package:dimipay/app/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -194,7 +195,7 @@ class HomePage extends GetView<HomePageController> {
           return const Column(
             children: [
               SizedBox(height: 36),
-              Divider(color: DPColors.DARK6, height: 1, thickness: 1),
+              Divider(color: DPColors.DARK600, height: 1, thickness: 1),
               SizedBox(height: 36),
             ],
           );
@@ -217,31 +218,7 @@ class HomePage extends GetView<HomePageController> {
             Obx(() {
               if (controller.isLoading.value) {
                 return const Column(children: [
-                  SizedBox(height: 216),
-                  Center(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 30.0,
-                          width: 30.0,
-                          child: CircularProgressIndicator(
-                            color: DPColors.DARK4,
-                            strokeWidth: 4.0,
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                        Text(
-                          '로딩중...',
-                          style: TextStyle(
-                            color: DPColors.DARK4,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
+                  DPLoading(),
                 ]);
               } else {
                 return Column(
@@ -295,7 +272,7 @@ class HomePage extends GetView<HomePageController> {
   Widget _paymentsArea() {
     return Container(
       decoration: const BoxDecoration(
-        color: DPColors.DARK6,
+        color: DPColors.DARK600,
       ),
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 32),
@@ -312,7 +289,7 @@ class HomePage extends GetView<HomePageController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: DPColors.DARK6,
+      color: DPColors.DARK600,
       child: SafeArea(
         top: false,
         child: Scaffold(

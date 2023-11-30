@@ -15,7 +15,7 @@ class LoginPage extends GetView<LoginPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DPColors.DARK6,
+      backgroundColor: DPColors.DARK600,
       body: UpgradeAlert(
         upgrader: controller.upgradeService.upgrader,
         child: Column(
@@ -121,7 +121,7 @@ class BottomArea extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   width: 1,
-                  color: DPColors.DARK5,
+                  color: DPColors.DARK500,
                 ),
               ),
               child: Row(
@@ -131,7 +131,7 @@ class BottomArea extends StatelessWidget {
                   const SizedBox(width: 16),
                   const Text(
                     "디미고 구글 계정으로 로그인",
-                    style: TextStyle(color: DPColors.DARK2, fontFamily: "Pretendard", fontSize: 16, fontWeight: FontWeight.w600),
+                    style: TextStyle(color: DPColors.DARK200, fontFamily: "Pretendard", fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ],
               ),

@@ -3,6 +3,7 @@ import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:dimipay/app/data/modules/transaction/model.dart';
 import 'package:dimipay/app/pages/history/controller.dart';
 import 'package:dimipay/app/widgets/appbar.dart';
+import 'package:dimipay/app/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,7 +33,7 @@ class HistoryPage extends GetView<HistoryPageController> {
       (state) {
         return _buildTransactions(state!);
       },
-      onLoading: const Center(child: CircularProgressIndicator(color: DPColors.MAIN_THEME)),
+      onLoading: const DPLoading(),
     );
   }
 
@@ -109,7 +110,7 @@ class TransactionGroup extends StatelessWidget {
         const SizedBox(height: 12),
         const SizedBox(
           width: double.infinity,
-          child: Divider(color: DPColors.DARK6, thickness: 1.0),
+          child: Divider(color: DPColors.DARK600, thickness: 1.0),
         ),
         _buildTransactions(transactions),
         const SizedBox(height: 48),
