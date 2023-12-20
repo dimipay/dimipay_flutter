@@ -52,6 +52,7 @@ class Vector3 {
 
 class GyroScopeController extends GetxController {
   final Rx<Vector3> _rv = Rx(Vector3());
+
   late StreamSubscription streamSubscription;
   final double fromx = -2;
   final double tox = 2;
@@ -76,13 +77,20 @@ class GyroScopeController extends GetxController {
     return data;
   }
 
-  void handleData(GyroscopeEvent event) {
+  void handleDataInAndroid(GyroscopeEvent event) {
+    Vector3 dv = Vector3(x: -0.5 * 1 * event.x, y: -0.5 * 1 * event.y);
+    Vector3 tv = _rv.value.sub(dv);
+    _rv.value = Vector3(x: rangeData(fromx, tox, tv.x), y: rangeData(fromy, toy, tv.y), z: rangeData(fromz, toz, tv.z));
+  }
+
+  void handleDataInIos(GyroscopeEvent event) {
     Vector3 dv = Vector3(x: -0.05 * event.x, y: -0.05 * event.y);
     Vector3 tv = _rv.value.sub(dv);
     _rv.value = Vector3(x: rangeData(fromx, tox, tv.x), y: rangeData(fromy, toy, tv.y), z: rangeData(fromz, toz, tv.z));
   }
 
   void onDrag(double dx, double dy) {
+    print("${dx} ${dy}");
     Vector3 dv = Vector3(x: -0.05 * dy, y: -0.05 * dx);
     Vector3 tv = _rv.value.sub(dv);
     _rv.value = Vector3(x: rangeData(fromx, tox, tv.x), y: rangeData(fromy, toy, tv.y), z: rangeData(fromz, toz, tv.z));
@@ -90,7 +98,7 @@ class GyroScopeController extends GetxController {
 
   @override
   void onInit() async {
-    streamSubscription = gyroscopeEvents.listen(handleData);
+    streamSubscription = GetPlatform.isAndroid ? gyroscopeEvents.listen(handleDataInAndroid) : gyroscopeEvents.listen(handleDataInIos);
     super.onInit();
   }
 
