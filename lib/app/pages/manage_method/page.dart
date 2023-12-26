@@ -18,7 +18,7 @@ class ManageMethodPage extends GetView<ManageMethodPageController> {
       onTap: () => Get.toNamed(Routes.REGISTERCARD),
       child: Container(
         decoration: BoxDecoration(
-          color: DPColors.DARK600,
+          color: DPColors.DARK6,
           borderRadius: BorderRadius.circular(12),
         ),
         padding: const EdgeInsets.all(24),
