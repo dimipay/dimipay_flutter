@@ -30,7 +30,7 @@ Future main() async {
   runApp(
     GetMaterialApp(
       title: '디미페이',
-      initialRoute: getInintialRoute(debug: !kReleaseMode),
+      initialRoute: getInintialRoute(debug: false),
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
       navigatorObservers: [
@@ -44,7 +44,7 @@ Future main() async {
           systemOverlayStyle: SystemUiOverlayStyle.dark,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          foregroundColor: DPColors.DARK100,
+          foregroundColor: DPColors.DARK1,
           centerTitle: false,
         ),
         scaffoldBackgroundColor: Colors.white,

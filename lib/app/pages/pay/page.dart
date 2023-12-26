@@ -15,7 +15,7 @@ class PayPage extends GetView<PayPageController> {
   Widget _paymentsArea() {
     return Container(
       decoration: const BoxDecoration(
-        color: DPColors.DARK600,
+        color: DPColors.DARK6,
       ),
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 32),
@@ -56,7 +56,7 @@ class PayPage extends GetView<PayPageController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: DPColors.DARK600,
+      color: DPColors.DARK6,
       child: SafeArea(
         top: false,
         child: Scaffold(

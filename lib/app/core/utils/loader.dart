@@ -31,7 +31,7 @@ class AppLoader {
     if (kReleaseMode) {
       Get.put<ApiProvider>(ProdApiProvider());
     } else {
-      Get.put<ApiProvider>(DevApiProvider());
+      Get.put<ApiProvider>(ProdApiProvider());
     }
 
     await Future.wait([

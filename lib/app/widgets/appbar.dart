@@ -28,7 +28,7 @@ class DPAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       automaticallyImplyLeading: automaticallyImplyLeading,
       actions: actions,
-      iconTheme: const IconThemeData(color: DPColors.DARK500, size: 20),
+      iconTheme: const IconThemeData(color: DPColors.DARK5, size: 20),
       leading: Padding(
         padding: const EdgeInsets.only(left: 24),
         child: IconButton(

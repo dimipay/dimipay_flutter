@@ -110,7 +110,7 @@ class TransactionGroup extends StatelessWidget {
         const SizedBox(height: 12),
         const SizedBox(
           width: double.infinity,
-          child: Divider(color: DPColors.DARK600, thickness: 1.0),
+          child: Divider(color: DPColors.DARK6, thickness: 1.0),
         ),
         _buildTransactions(transactions),
         const SizedBox(height: 48),

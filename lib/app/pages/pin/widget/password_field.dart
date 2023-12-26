@@ -14,10 +14,10 @@ class PasswordField extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: filled ? DPColors.MAIN_THEME : Colors.transparent, width: 2),
         borderRadius: BorderRadius.circular(3),
-        color: filled ? Colors.white : DPColors.DARK600,
+        color: filled ? Colors.white : DPColors.DARK6,
       ),
       child: Center(
-        child: (filled ? Container(width: 8, decoration: const BoxDecoration(shape: BoxShape.circle, color: DPColors.DARK200)) : const SizedBox()),
+        child: (filled ? Container(width: 8, decoration: const BoxDecoration(shape: BoxShape.circle, color: DPColors.DARK2)) : const SizedBox()),
       ),
     );
   }
