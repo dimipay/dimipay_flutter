@@ -195,7 +195,7 @@ class HomePage extends GetView<HomePageController> {
           return const Column(
             children: [
               SizedBox(height: 36),
-              Divider(color: DPColors.DARK600, height: 1, thickness: 1),
+              Divider(color: DPColors.DARK6, height: 1, thickness: 1),
               SizedBox(height: 36),
             ],
           );
@@ -272,7 +272,7 @@ class HomePage extends GetView<HomePageController> {
   Widget _paymentsArea() {
     return Container(
       decoration: const BoxDecoration(
-        color: DPColors.DARK600,
+        color: DPColors.DARK6,
       ),
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 32),
@@ -289,7 +289,7 @@ class HomePage extends GetView<HomePageController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: DPColors.DARK600,
+      color: DPColors.DARK6,
       child: SafeArea(
         top: false,
         child: Scaffold(

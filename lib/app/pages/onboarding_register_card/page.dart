@@ -54,13 +54,13 @@ class OnboardingRegisterCardPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     width: 1,
-                    color: DPColors.DARK500,
+                    color: DPColors.DARK5,
                   ),
                 ),
                 child: const Text(
                   "카드 등록 건너뛰기",
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: DPColors.DARK200, fontFamily: "Pretendard", fontSize: 16, fontWeight: FontWeight.w600),
+                  style: TextStyle(color: DPColors.DARK2, fontFamily: "Pretendard", fontSize: 16, fontWeight: FontWeight.w600),
                 ),
               ),
             ),

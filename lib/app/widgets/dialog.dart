@@ -19,7 +19,7 @@ class DPDialogActionButton extends StatelessWidget {
     return DPMediumTextButton(
       text: action.title,
       onTap: action.onTap,
-      color: action.isHighlighted ? DPColors.MAIN_THEME : DPColors.DARK400,
+      color: action.isHighlighted ? DPColors.MAIN_THEME : DPColors.DARK4,
     );
   }
 }

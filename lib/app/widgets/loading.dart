@@ -15,7 +15,7 @@ class DPLoading extends StatelessWidget {
             height: 30.0,
             width: 30.0,
             child: CircularProgressIndicator(
-              color: DPColors.DARK400,
+              color: DPColors.DARK4,
               strokeWidth: 4.0,
             ),
           ),

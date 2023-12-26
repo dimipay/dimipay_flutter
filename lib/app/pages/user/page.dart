@@ -37,12 +37,12 @@ class UserPage extends GetView<UserPageController> {
           (state) {
             String? profileImageUrl = userController.user?.profileImage;
             if (profileImageUrl == null) {
-              return const CircleAvatar(backgroundColor: DPColors.DARK600, radius: 24);
+              return const CircleAvatar(backgroundColor: DPColors.DARK6, radius: 24);
             } else {
-              return CircleAvatar(backgroundImage: NetworkImage(profileImageUrl), backgroundColor: DPColors.DARK600, radius: 24);
+              return CircleAvatar(backgroundImage: NetworkImage(profileImageUrl), backgroundColor: DPColors.DARK6, radius: 24);
             }
           },
-          onLoading: const CircleAvatar(backgroundColor: DPColors.DARK600, radius: 24),
+          onLoading: const CircleAvatar(backgroundColor: DPColors.DARK6, radius: 24),
         ),
         const SizedBox(width: 12),
         Column(
@@ -178,7 +178,7 @@ class UserPage extends GetView<UserPageController> {
                 _topArea(),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 32),
-                  child: Divider(color: DPColors.DARK600, height: 1, thickness: 1),
+                  child: Divider(color: DPColors.DARK6, height: 1, thickness: 1),
                 ),
                 const SizedBox(height: 16),
                 _menuArea(),

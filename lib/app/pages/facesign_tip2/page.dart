@@ -46,7 +46,7 @@ class FaceSignTip2Page extends GetView<FaceSignTip2PageController> {
             const SizedBox(height: 16),
             const Text(
               '평온한 표정으로 카메라를 응시한 채 얼굴을 가운데에 맞추고 사진을 찍으세요. 평소에 자주 하는 머리 스타일과 메이크업을 한 상태로 진행해주세요.',
-              style: TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.4, color: DPColors.DARK300),
+              style: TextStyle(fontFamily: 'Pretendard', fontSize: 16, height: 1.4, color: DPColors.DARK3),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 72),
