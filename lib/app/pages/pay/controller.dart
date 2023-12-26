@@ -33,6 +33,15 @@ class PayPageController extends GetxController with StateMixin<String> {
         refreshPaymentToken(payService.expireAt!);
       });
     }
+
+    ever(payService.paymentToken, (String? token) {
+      if (token == null) {
+        change(null, status: RxStatus.loading());
+      } else {
+        change(null, status: RxStatus.success());
+      }
+    });
+
     _initStream();
     setBrightness(1);
   }
