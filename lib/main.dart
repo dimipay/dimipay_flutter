@@ -44,7 +44,7 @@ Future main() async {
           systemOverlayStyle: SystemUiOverlayStyle.dark,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          foregroundColor: DPColors.DARK100,
+          foregroundColor: DPColors.DARK1,
           centerTitle: false,
         ),
         scaffoldBackgroundColor: Colors.white,
