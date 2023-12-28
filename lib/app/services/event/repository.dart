@@ -1,4 +1,4 @@
-import 'package:dimipay/app/services//event/model.dart';
+import 'package:dimipay/app/services/event/model.dart';
 import 'package:dimipay/app/provider/api_interface.dart';
 import 'package:get/get.dart';
 

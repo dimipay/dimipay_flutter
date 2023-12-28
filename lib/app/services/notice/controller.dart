@@ -1,5 +1,5 @@
-import 'package:dimipay/app/services//notice/model.dart';
-import 'package:dimipay/app/services//notice/repository.dart';
+import 'package:dimipay/app/services/notice/model.dart';
+import 'package:dimipay/app/services/notice/repository.dart';
 import 'package:get/get.dart';
 
 class NoticeController extends GetxController with StateMixin<List<Notice>> {

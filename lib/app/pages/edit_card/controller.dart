@@ -1,6 +1,6 @@
 import 'package:dimipay/app/core/utils/haptic.dart';
-import 'package:dimipay/app/services//payment_method/controller.dart';
-import 'package:dimipay/app/services//payment_method/model.dart';
+import 'package:dimipay/app/services/payment_method/controller.dart';
+import 'package:dimipay/app/services/payment_method/model.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,5 @@
 import 'package:dimipay/app/provider/api_interface.dart';
-import 'package:dimipay/app/services//auth/service.dart';
+import 'package:dimipay/app/services/auth/service.dart';
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
 import 'dart:developer';

@@ -1,6 +1,6 @@
 import 'package:dimipay/app/services/face_sign/controller.dart';
-import 'package:dimipay/app/services//payment_method/controller.dart';
-import 'package:dimipay/app/services//user/controller.dart';
+import 'package:dimipay/app/services/payment_method/controller.dart';
+import 'package:dimipay/app/services/user/controller.dart';
 import 'package:dimipay/app/pages/user/controller.dart';
 import 'package:get/get.dart';
 

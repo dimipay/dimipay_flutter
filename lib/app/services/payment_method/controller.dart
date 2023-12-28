@@ -1,5 +1,5 @@
-import 'package:dimipay/app/services//payment_method/model.dart';
-import 'package:dimipay/app/services//payment_method/repository.dart';
+import 'package:dimipay/app/services/payment_method/model.dart';
+import 'package:dimipay/app/services/payment_method/repository.dart';
 import 'package:get/get.dart';
 
 class PaymentMethodController extends GetxController with StateMixin<List<PaymentMethod>> {

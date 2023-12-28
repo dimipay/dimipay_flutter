@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:dimipay/app/core/utils/token_reference.dart';
 import 'package:dimipay/app/provider/api.dart';
 import 'package:dimipay/app/provider/api_interface.dart';
-import 'package:dimipay/app/services//auth/service.dart';
-import 'package:dimipay/app/services//config/service.dart';
-import 'package:dimipay/app/services//local_auth/service.dart';
+import 'package:dimipay/app/services/auth/service.dart';
+import 'package:dimipay/app/services/config/service.dart';
+import 'package:dimipay/app/services/local_auth/service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:dimipay/app/services/upgrader/service.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
@@ -31,7 +31,7 @@ class AppLoader {
     if (kReleaseMode) {
       Get.put<ApiProvider>(ProdApiProvider());
     } else {
-      Get.put<ApiProvider>(ProdApiProvider());
+      Get.put<ApiProvider>(DevApiProvider());
     }
 
     await Future.wait([

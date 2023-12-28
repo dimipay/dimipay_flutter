@@ -1,6 +1,6 @@
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
-import 'package:dimipay/app/services//transaction/model.dart';
+import 'package:dimipay/app/services/transaction/model.dart';
 import 'package:dimipay/app/pages/history/controller.dart';
 import 'package:dimipay/app/widgets/appbar.dart';
 import 'package:dimipay/app/widgets/loading.dart';

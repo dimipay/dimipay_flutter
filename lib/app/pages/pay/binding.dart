@@ -1,5 +1,5 @@
-import 'package:dimipay/app/services//payment_method/controller.dart';
-import 'package:dimipay/app/services//pay/service.dart';
+import 'package:dimipay/app/services/payment_method/controller.dart';
+import 'package:dimipay/app/services/pay/service.dart';
 import 'package:dimipay/app/pages/pay/controller.dart';
 import 'package:get/get.dart';
 
