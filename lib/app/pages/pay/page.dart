@@ -70,12 +70,10 @@ class PayPage extends GetView<PayPageController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     controller.obx(
-                      (_) => Obx(
-                        () => QrImageView(
-                          data: controller.payService.paymentToken.value ?? '',
-                          size: 220,
-                          version: 1,
-                        ),
+                          (_) => QrImageView(
+                        data: controller.payService.paymentToken.value ?? '',
+                        size: 220,
+                        version: 1,
                       ),
                       onLoading: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
