@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/data/services/payment_method/model.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/data/services/pay/repository.dart';
 import 'package:dio/dio.dart';

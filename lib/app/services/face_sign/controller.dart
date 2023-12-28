@@ -1,4 +1,4 @@
-import 'package:dimipay/app/data/modules/face_sign/repository.dart';
+import 'package:dimipay/app/services/face_sign/repository.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 

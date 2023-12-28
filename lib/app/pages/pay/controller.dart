@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:dimipay/app/core/utils/haptic.dart';
-import 'package:dimipay/app/data/modules/payment_method/controller.dart';
-import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/data/services/payment_method/controller.dart';
+import 'package:dimipay/app/data/services/payment_method/model.dart';
 import 'package:dimipay/app/data/services/auth/service.dart';
 import 'package:dimipay/app/data/services/pay/service.dart';
 import 'package:dimipay/app/routes/routes.dart';

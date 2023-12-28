@@ -1,4 +1,4 @@
-import 'package:dimipay/app/data/provider/api_interface.dart';
+import 'package:dimipay/app/provider/api_interface.dart';
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
 import 'package:image_picker/image_picker.dart';

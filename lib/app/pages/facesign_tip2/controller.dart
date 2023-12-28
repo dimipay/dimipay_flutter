@@ -1,5 +1,5 @@
 import 'package:dimipay/app/core/utils/haptic.dart';
-import 'package:dimipay/app/data/modules/face_sign/controller.dart';
+import 'package:dimipay/app/services/face_sign/controller.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 

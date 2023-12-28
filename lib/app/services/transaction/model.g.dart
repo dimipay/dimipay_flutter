@@ -16,14 +16,11 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
 
 Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
       createdAt: DateTime.parse(json['createdAt'] as String),
-      products: (json['products'] as List<dynamic>)
-          .map((e) => Product.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      products: (json['products'] as List<dynamic>).map((e) => Product.fromJson(e as Map<String, dynamic>)).toList(),
       totalPrice: json['totalPrice'] as int,
     );
 
-Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$TransactionToJson(Transaction instance) => <String, dynamic>{
       'createdAt': instance.createdAt.toIso8601String(),
       'products': instance.products,
       'totalPrice': instance.totalPrice,

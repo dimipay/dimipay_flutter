@@ -1,4 +1,4 @@
-import 'package:dimipay/app/data/modules/face_sign/controller.dart';
+import 'package:dimipay/app/services/face_sign/controller.dart';
 import 'package:dimipay/app/pages/facesign_delete/controller.dart';
 import 'package:get/get.dart';
 

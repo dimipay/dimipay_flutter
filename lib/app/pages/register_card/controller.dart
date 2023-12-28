@@ -1,6 +1,6 @@
 import 'package:credit_card_scanner/credit_card_scanner.dart';
-import 'package:dimipay/app/data/modules/payment_method/controller.dart';
-import 'package:dimipay/app/data/modules/payment_method/model.dart';
+import 'package:dimipay/app/data/services/payment_method/controller.dart';
+import 'package:dimipay/app/data/services/payment_method/model.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';

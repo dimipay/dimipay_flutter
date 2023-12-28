@@ -1,5 +1,5 @@
-import 'package:dimipay/app/data/modules/user/model.dart';
-import 'package:dimipay/app/data/modules/user/repository.dart';
+import 'package:dimipay/app/data/services/user/model.dart';
+import 'package:dimipay/app/data/services/user/repository.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController with StateMixin<User> {

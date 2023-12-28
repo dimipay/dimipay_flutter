@@ -1,5 +1,5 @@
-import 'package:dimipay/app/data/modules/transaction/model.dart';
-import 'package:dimipay/app/data/provider/api_interface.dart';
+import 'package:dimipay/app/data/services/transaction/model.dart';
+import 'package:dimipay/app/provider/api_interface.dart';
 import 'package:get/instance_manager.dart';
 
 class TransactionRepository {

@@ -1,5 +1,5 @@
-import 'package:dimipay/app/data/modules/event/model.dart';
-import 'package:dimipay/app/data/modules/event/repository.dart';
+import 'package:dimipay/app/data/services/event/model.dart';
+import 'package:dimipay/app/data/services/event/repository.dart';
 import 'package:get/get.dart';
 
 class EventController extends GetxController with StateMixin<List<Event>> {
