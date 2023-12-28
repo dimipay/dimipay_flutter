@@ -1,6 +1,5 @@
 import 'package:dimipay/app/core/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dimipay/app/core/theme/color_theme.dart';
 
@@ -9,12 +8,7 @@ class DPAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool automaticallyImplyLeading;
   final List<Widget>? actions;
 
-  const DPAppBar(
-      {Key? key,
-      this.title,
-      this.automaticallyImplyLeading = true,
-      this.actions})
-      : super(key: key);
+  const DPAppBar({Key? key, this.title, this.automaticallyImplyLeading = true, this.actions}) : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);

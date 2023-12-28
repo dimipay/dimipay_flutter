@@ -3,7 +3,6 @@ import 'package:dimipay/app/core/utils/loader.dart';
 import 'package:dimipay/app/routes/pages.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
