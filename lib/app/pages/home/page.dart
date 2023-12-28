@@ -1,9 +1,9 @@
 import 'dart:math';
 import 'package:dimipay/app/core/theme/color_theme.dart';
 import 'package:dimipay/app/core/theme/text_theme.dart';
-import 'package:dimipay/app/data/services/event/model.dart';
-import 'package:dimipay/app/data/services/notice/model.dart';
-import 'package:dimipay/app/data/services/payment_method/model.dart';
+import 'package:dimipay/app/services//event/model.dart';
+import 'package:dimipay/app/services//notice/model.dart';
+import 'package:dimipay/app/services//payment_method/model.dart';
 import 'package:dimipay/app/pages/home/controller.dart';
 import 'package:dimipay/app/pages/home/widget/event_item.dart';
 import 'package:dimipay/app/routes/routes.dart';

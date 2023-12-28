@@ -1,4 +1,4 @@
-import 'package:dimipay/app/data/services/payment_method/controller.dart';
+import 'package:dimipay/app/services//payment_method/controller.dart';
 import 'package:get/get.dart';
 
 class ManageMethodPageController extends GetxController {

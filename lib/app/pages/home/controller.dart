@@ -1,7 +1,7 @@
-import 'package:dimipay/app/data/services/event/controller.dart';
-import 'package:dimipay/app/data/services/notice/controller.dart';
-import 'package:dimipay/app/data/services/payment_method/controller.dart';
-import 'package:dimipay/app/data/services/upgrader/service.dart';
+import 'package:dimipay/app/services//event/controller.dart';
+import 'package:dimipay/app/services//notice/controller.dart';
+import 'package:dimipay/app/services//payment_method/controller.dart';
+import 'package:dimipay/app/services//upgrader/service.dart';
 import 'package:get/get.dart';
 
 class HomePageController extends GetxController {

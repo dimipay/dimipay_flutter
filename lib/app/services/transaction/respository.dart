@@ -1,4 +1,4 @@
-import 'package:dimipay/app/data/services/transaction/model.dart';
+import 'package:dimipay/app/services//transaction/model.dart';
 import 'package:dimipay/app/provider/api_interface.dart';
 import 'package:get/instance_manager.dart';
 

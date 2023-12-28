@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:dimipay/app/core/utils/errors.dart';
 import 'package:dimipay/app/core/utils/haptic.dart';
-import 'package:dimipay/app/data/services/auth/service.dart';
-import 'package:dimipay/app/data/services/local_auth/service.dart';
+import 'package:dimipay/app/services//auth/service.dart';
+import 'package:dimipay/app/services//local_auth/service.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:dimipay/app/widgets/snackbar.dart';
 import 'package:dio/dio.dart';

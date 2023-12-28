@@ -1,4 +1,4 @@
-import 'package:dimipay/app/data/services/event/controller.dart';
+import 'package:dimipay/app/services//event/controller.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 

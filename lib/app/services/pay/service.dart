@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'package:dimipay/app/data/services/payment_method/model.dart';
-import 'package:dimipay/app/data/services/auth/service.dart';
-import 'package:dimipay/app/data/services/pay/repository.dart';
+import 'package:dimipay/app/services//payment_method/model.dart';
+import 'package:dimipay/app/services//auth/service.dart';
+import 'package:dimipay/app/services//pay/repository.dart';
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/state_manager.dart';

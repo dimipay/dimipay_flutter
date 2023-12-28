@@ -1,5 +1,5 @@
-import 'package:dimipay/app/data/services/transaction/model.dart';
-import 'package:dimipay/app/data/services/transaction/respository.dart';
+import 'package:dimipay/app/services//transaction/model.dart';
+import 'package:dimipay/app/services//transaction/respository.dart';
 import 'package:get/get.dart';
 
 class TransactionController extends GetxController with StateMixin<List<Transaction>> {
