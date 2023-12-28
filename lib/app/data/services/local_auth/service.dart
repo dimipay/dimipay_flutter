@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 
-class LocalAuthService extends GetxService {
+class LocalAuthService extends GetxController {
   final LocalAuthentication _localAuth = LocalAuthentication();
   final Rx<bool> checkAuthenticate = false.obs;
   final Rx<List<BiometricType>> availableBiometrics = Rx([]);

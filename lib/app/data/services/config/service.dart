@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class AppConfigService extends GetxService {
+class AppConfigService extends GetxController {
   late Box box;
 
   Future<AppConfigService> init() async {

@@ -7,7 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
-class AuthService extends GetxService {
+class AuthService extends GetxController {
   Completer<void>? _refreshTokenApiCompleter;
   final AuthRepository repository;
   final FlutterSecureStorage _storage = const FlutterSecureStorage();

@@ -24,7 +24,7 @@ class DPForceUpgradeMessages extends DPUpgradeMessages {
   String get prompt => '중대한 버그 수정 및 보안 업데이트를 포함하므로 업데이트 해야합니다.';
 }
 
-class UpgraderService extends GetxService {
+class UpgraderService extends GetxController {
   final Appcast appcast = Appcast();
   late final Upgrader upgrader;
 

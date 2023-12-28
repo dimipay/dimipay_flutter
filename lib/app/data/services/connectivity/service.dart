@@ -2,7 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dimipay/app/routes/routes.dart';
 import 'package:get/get.dart';
 
-class ConnectivityService extends GetxService {
+class ConnectivityService extends GetxController {
   final RxBool isConnected = true.obs;
   final RxBool once = false.obs;
   bool first = true;
